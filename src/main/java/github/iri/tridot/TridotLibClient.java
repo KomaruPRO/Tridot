@@ -63,11 +63,6 @@ public class TridotLibClient{
     public static class RegistryEvents {
 
         @SubscribeEvent
-        public static void registerMusicModifiers(FMLClientSetupEvent event) {
-            MusicHandler.register(new MusicModifier.Dungeon(SoundEvents.MUSIC_DISC_11, BuiltinStructures.VILLAGE_PLAINS));
-        }
-
-        @SubscribeEvent
         public static void registerAttributeModifiers(FMLClientSetupEvent event){
             TooltipModifierHandler.register(new AttributeTooltipModifier(){
                 public boolean isToolBase(AttributeModifier modifier, Player player, TooltipFlag flag){
