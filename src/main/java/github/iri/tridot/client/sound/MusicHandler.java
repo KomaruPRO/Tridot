@@ -1,0 +1,15 @@
+package github.iri.tridot.client.sound;
+
+import java.util.*;
+
+public class MusicHandler{
+    public static List<MusicModifier> modifiers = new ArrayList<>();
+
+    public static void register(MusicModifier modifier){
+        modifiers.add(modifier);
+    }
+
+    public static List<MusicModifier> getModifiers(){
+        return modifiers;
+    }
+}

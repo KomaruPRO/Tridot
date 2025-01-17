@@ -1,0 +1,15 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "github.iri.tridot.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "refmap": "komaru.refmap.json",
+  "mixins": [
+  ],
+  "client": [
+    "client.BossHealthOverlayAccessor"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

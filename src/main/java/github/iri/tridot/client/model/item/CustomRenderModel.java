@@ -1,0 +1,15 @@
+package github.iri.tridot.client.model.item;
+
+import net.minecraft.client.resources.model.*;
+
+public class CustomRenderModel extends CustomModel{
+
+    public CustomRenderModel(BakedModel baseModel, CustomItemOverrides itemOverrides){
+        super(baseModel, itemOverrides);
+    }
+
+    @Override
+    public boolean isCustomRenderer(){
+        return true;
+    }
+}
