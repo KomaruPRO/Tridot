@@ -1,6 +1,7 @@
 package github.iri.tridot;
 
 import github.iri.tridot.client.*;
+import github.iri.tridot.client.gui.components.*;
 import github.iri.tridot.core.config.*;
 import github.iri.tridot.core.network.*;
 import github.iri.tridot.core.proxy.*;
@@ -40,6 +41,7 @@ public class TridotLib{
             TridotLibClient.ClientOnly.clientInit();
             return new Object();
         });
+
 
         eventBus.addListener(this::setup);
         eventBus.addListener(TridotLibClient::clientSetup);

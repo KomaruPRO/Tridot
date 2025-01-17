@@ -1,0 +1,57 @@
+package github.iri.tridot.core.event;
+
+import github.iri.tridot.*;
+import github.iri.tridot.client.gui.components.*;
+import github.iri.tridot.client.gui.components.TridotMenuButton.*;
+import github.iri.tridot.core.config.*;
+import net.minecraft.client.gui.components.*;
+import net.minecraft.client.gui.components.events.*;
+import net.minecraft.client.gui.screens.*;
+import net.minecraftforge.api.distmarker.*;
+import net.minecraftforge.client.event.*;
+import net.minecraftforge.eventbus.api.*;
+import net.minecraftforge.fml.common.*;
+import org.apache.commons.lang3.mutable.*;
+
+@Mod.EventBusSubscriber(modid = TridotLib.ID, bus = Mod.EventBusSubscriber.Bus.FORGE)
+public class ForgeEvents{
+
+    @OnlyIn(Dist.CLIENT)
+    @SubscribeEvent
+    public static void onGuiInit(ScreenEvent.Init event){
+        if(ClientConfig.MENU_BUTTON.get()){
+            Screen gui = event.getScreen();
+            MenuRows menu = null;
+            int rowIdx = 0, offsetX = 0, offsetFreeX = 0, offsetFreeY = 0;
+            if(gui instanceof TitleScreen){
+                menu = MenuRows.MAIN_MENU;
+                rowIdx = ClientConfig.MENU_BUTTON_ROW.get();
+                offsetX = ClientConfig.MENU_BUTTON_ROW_X_OFFSET.get();
+                offsetFreeX = ClientConfig.MENU_BUTTON_X_OFFSET.get();
+                offsetFreeY = ClientConfig.MENU_BUTTON_Y_OFFSET.get();
+            }
+
+            if(rowIdx != 0 && menu != null){
+                boolean onLeft = offsetX < 0;
+                String target = (onLeft ? menu.leftButtons : menu.rightButtons).get(rowIdx - 1);
+
+                int offsetX_ = offsetX;
+                int offsetFreeX_ = offsetFreeX;
+                int offsetFreeY_ = offsetFreeY;
+                MutableObject<GuiEventListener> toAdd = new MutableObject<>(null);
+                event.getListenersList()
+                .stream()
+                .filter(w -> w instanceof AbstractWidget)
+                .map(w -> (AbstractWidget)w)
+                .filter(w -> w.getMessage()
+                .getString()
+                .equals(target))
+                .findFirst()
+                .ifPresent(w -> toAdd
+                .setValue(new TridotMenuButton(w.getX() + offsetX_ + (onLeft ? -20 : w.getWidth()) + offsetFreeX_, w.getY() + offsetFreeY_)));
+                if(toAdd.getValue() != null)
+                    event.addListener(toAdd.getValue());
+            }
+        }
+    }
+}

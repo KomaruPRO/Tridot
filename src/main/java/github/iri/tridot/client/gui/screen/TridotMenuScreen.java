@@ -4,6 +4,7 @@ import com.mojang.blaze3d.systems.*;
 import github.iri.tridot.*;
 import github.iri.tridot.client.gui.components.*;
 import github.iri.tridot.core.config.*;
+import github.iri.tridot.util.client.*;
 import net.minecraft.*;
 import net.minecraft.client.*;
 import net.minecraft.client.gui.*;
@@ -24,7 +25,7 @@ public class TridotMenuScreen extends Screen{
     public TridotLogoRenderer logoRenderer;
     public long fadeInStart;
 
-    private static final ResourceLocation LOGO = new ResourceLocation(TridotLib.ID, "textures/gui/title/fluffy_fur.png");
+    private static final ResourceLocation LOGO = new ResourceLocation(TridotLib.ID, "textures/gui/title/tridot.png");
     public static ResourceLocation BACKGROUND = new ResourceLocation(TridotLib.ID, "textures/gui/menu_background.png");
     public static int ticks = 0;
 
@@ -118,8 +119,8 @@ public class TridotMenuScreen extends Screen{
         TridotMod mod = mods.get(selectedMod);
 
         Font font = Minecraft.getInstance().font;
-        Component component = Component.literal(mod.getName()).withStyle(Style.EMPTY.withColor(ColorUtil.packColor(mod.getNameColor())))
-        .append(" ").append(Component.literal("v" + mod.getVersion()).withStyle(Style.EMPTY.withColor(ColorUtil.packColor(mod.getVersionColor()))));
+        Component component = Component.literal(mod.getName()).withStyle(Style.EMPTY.withColor(Clr.packColor(mod.getNameColor())))
+        .append(" ").append(Component.literal("v" + mod.getVersion()).withStyle(Style.EMPTY.withColor(Clr.packColor(mod.getVersionColor()))));
         drawBlackBackground(gui, x + 80, y - 12, font.width(component) + 8, mouseX, mouseY, partialTicks);
         gui.drawCenteredString(font, component, x + 80, y - 11, 16777215);
 
@@ -155,7 +156,7 @@ public class TridotMenuScreen extends Screen{
         }
 
         Font font = Minecraft.getInstance().font;
-        Component component = Component.translatable("gui.fluffy_fur.menu.panoramas");
+        Component component = Component.translatable("gui.tridot.menu.panoramas");
         drawBlackBackground(gui, x + 60, y - 12, font.width(component) + 8, mouseX, mouseY, partialTicks);
         gui.drawCenteredString(font, component, x + 60, y - 11, 16777215);
 
@@ -177,7 +178,7 @@ public class TridotMenuScreen extends Screen{
                     list.add(panorama.getName());
                     if(panorama.getMod() != null){
                         list.add(Component.empty());
-                        list.add(Component.translatable("gui.fluffy_fur.menu.mod").append(" ").append(Component.literal(panorama.getMod().getName()).withStyle(ChatFormatting.GRAY)));
+                        list.add(Component.translatable("gui.tridot.menu.mod").append(" ").append(Component.literal(panorama.getMod().getName()).withStyle(ChatFormatting.GRAY)));
                     }
                     if(panorama == TridotLibClient.VANILLA_PANORAMA){
                         list.add(Component.empty());
@@ -199,7 +200,7 @@ public class TridotMenuScreen extends Screen{
         }
 
         Font font = Minecraft.getInstance().font;
-        Component component = Component.translatable("gui.fluffy_fur.menu.mods");
+        Component component = Component.translatable("gui.tridot.menu.mods");
         drawBlackBackground(gui, x + 60, y - 12, font.width(component) + 8, mouseX, mouseY, partialTicks);
         gui.drawCenteredString(font, component, x + 60, y - 11, 16777215);
 
@@ -211,10 +212,10 @@ public class TridotMenuScreen extends Screen{
             gui.renderItem(mod.getItem(), x + 2, y + 2 + (i * 20));
             MutableComponent name = Component.empty().append(mod.getName());
             if(mod.getDev().equals("MaxBogomol")){
-                name = name.withStyle(Style.EMPTY.withColor(ColorUtil.packColor(ColorUtil.rainbowColor((ticks + partialTicks) * 0.005f))));
+                name = name.withStyle(Style.EMPTY.withColor(Clr.packColor(Clr.rainbowColor((ticks + partialTicks) * 0.005f))));
             }
             if(mod.getId().equals("implosion")){
-                name = name.withStyle(Style.EMPTY.withColor(ColorUtil.packColor(255, 132, 190, 224)));
+                name = name.withStyle(Style.EMPTY.withColor(Clr.packColor(255, 132, 190, 224)));
             }
             if(selectedMod == index){
                 name.withStyle(ChatFormatting.UNDERLINE);
@@ -226,10 +227,10 @@ public class TridotMenuScreen extends Screen{
                     List<Component> list = new ArrayList<>();
                     list.add(Component.literal(mod.getName()));
                     list.add(Component.empty());
-                    list.add(Component.translatable("gui.fluffy_fur.menu.id").append(" ").append(Component.literal(mod.getId()).withStyle(ChatFormatting.GRAY)));
-                    list.add(Component.translatable("gui.fluffy_fur.menu.version").append(" ").append(Component.literal(mod.getVersion()).withStyle(ChatFormatting.GRAY)));
-                    if(mod.getEdition() > 0) list.add(Component.translatable("gui.fluffy_fur.menu.edition").append(" ").append(Component.literal(String.valueOf(mod.getEdition())).withStyle(ChatFormatting.GRAY)));
-                    list.add(Component.translatable("gui.fluffy_fur.menu.autor").append(" ").append(Component.literal(mod.getDev()).withStyle(ChatFormatting.GRAY)));
+                    list.add(Component.translatable("gui.tridot.menu.id").append(" ").append(Component.literal(mod.getId()).withStyle(ChatFormatting.GRAY)));
+                    list.add(Component.translatable("gui.tridot.menu.version").append(" ").append(Component.literal(mod.getVersion()).withStyle(ChatFormatting.GRAY)));
+                    if(mod.getEdition() > 0) list.add(Component.translatable("gui.tridot.menu.edition").append(" ").append(Component.literal(String.valueOf(mod.getEdition())).withStyle(ChatFormatting.GRAY)));
+                    list.add(Component.translatable("gui.tridot.menu.autor").append(" ").append(Component.literal(mod.getDev()).withStyle(ChatFormatting.GRAY)));
 
                     gui.renderTooltip(Minecraft.getInstance().font, list, Optional.empty(), mouseX, mouseY);
                 }
@@ -280,7 +281,7 @@ public class TridotMenuScreen extends Screen{
         if(!line.isEmpty()) lines.add(Component.literal(line));
         if(mod.getLinks().size() > 0){
             lines.add(Component.empty());
-            lines.add(Component.translatable("gui.fluffy_fur.menu.links").withStyle(ChatFormatting.GRAY));
+            lines.add(Component.translatable("gui.tridot.menu.links").withStyle(ChatFormatting.GRAY));
             for(TridotMod.Link link : mod.getLinks()){
                 lines.add(link.getComponent());
             }

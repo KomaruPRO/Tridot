@@ -16,22 +16,22 @@ import java.util.*;
 @Mixin(ItemStack.class)
 public class ItemStackMixin{
     @Unique
-    public AttributeModifier fluffy_fur$attributeModifier;
+    public AttributeModifier tridot$attributeModifier;
 
     @Unique
-    public List<Component> fluffy_fur$componentList;
+    public List<Component> tridot$componentList;
 
     @ModifyVariable(method = "getTooltipLines", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/ai/attributes/AttributeModifier;getId()Ljava/util/UUID;", ordinal = 0), index = 13)
-    public AttributeModifier fluffy_fur$getTooltip(AttributeModifier value){
-        this.fluffy_fur$attributeModifier = value;
+    public AttributeModifier tridot$getTooltip(AttributeModifier value){
+        this.tridot$attributeModifier = value;
         return value;
     }
 
     @ModifyVariable(method = "getTooltipLines", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/ai/attributes/AttributeModifier;getOperation()Lnet/minecraft/world/entity/ai/attributes/AttributeModifier$Operation;", ordinal = 0), index = 16)
-    public boolean fluffy_fur$getTooltip(boolean value, @Nullable Player player, TooltipFlag flag){
+    public boolean tridot$getTooltip(boolean value, @Nullable Player player, TooltipFlag flag){
         if(player != null){
             for(AttributeTooltipModifier modifier : TooltipModifierHandler.getModifiers()){
-                if(modifier.isToolBase(fluffy_fur$attributeModifier, player, flag)){
+                if(modifier.isToolBase(tridot$attributeModifier, player, flag)){
                     return true;
                 }
             }
@@ -40,7 +40,7 @@ public class ItemStackMixin{
     }
 
     @ModifyVariable(method = "getTooltipLines", at = @At("STORE"))
-    public Multimap<Attribute, AttributeModifier> fluffy_fur$getTooltip(Multimap<Attribute, AttributeModifier> map, @Nullable Player player, TooltipFlag flag){
+    public Multimap<Attribute, AttributeModifier> tridot$getTooltip(Multimap<Attribute, AttributeModifier> map, @Nullable Player player, TooltipFlag flag){
         if(player != null){
             Multimap<Attribute, AttributeModifier> copied = LinkedHashMultimap.create();
             for(Map.Entry<Attribute, AttributeModifier> entry : map.entries()){
@@ -74,13 +74,13 @@ public class ItemStackMixin{
     }
 
     @ModifyVariable(method = "getTooltipLines", at = @At("STORE"))
-    public List<Component> fluffy_fur$getTooltip(List<Component> list, @Nullable Player player, TooltipFlag flag){
-        fluffy_fur$componentList = list;
+    public List<Component> tridot$getTooltip(List<Component> list, @Nullable Player player, TooltipFlag flag){
+        tridot$componentList = list;
         return list;
     }
 
     @Inject(at = @At(value = "INVOKE_ASSIGN", target = "Lnet/minecraft/world/entity/ai/attributes/AttributeModifier;getId()Ljava/util/UUID;"), method = "getTooltipLines")
-    public void fluffy_fur$getTooltip(Player player, TooltipFlag isAdvanced, CallbackInfoReturnable<List<Component>> cir){
-        TooltipModifierHandler.attributeTooltipSize = fluffy_fur$componentList.size();
+    public void tridot$getTooltip(Player player, TooltipFlag isAdvanced, CallbackInfoReturnable<List<Component>> cir){
+        TooltipModifierHandler.attributeTooltipSize = tridot$componentList.size();
     }
 }

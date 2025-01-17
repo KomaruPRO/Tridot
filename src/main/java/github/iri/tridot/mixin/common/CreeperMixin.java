@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.injection.callback.*;
 public abstract class CreeperMixin{
 
     @Inject(method = "mobInteract", at = @At("RETURN"), cancellable = true)
-    private void fluffy_fur$mobInteract(Player player, InteractionHand hand, CallbackInfoReturnable<InteractionResult> cir){
+    private void tridot$mobInteract(Player player, InteractionHand hand, CallbackInfoReturnable<InteractionResult> cir){
         Creeper self = (Creeper)((Object)this);
         for(FireItemModifier modifier : FireItemHandler.getModifiers()){
             if(modifier.isCreeperInteract(self, player, hand)){

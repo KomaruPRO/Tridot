@@ -17,7 +17,7 @@ public abstract class GameRendererMixin{
     public abstract void renderLevel(float pPartialTicks, long pFinishTimeNano, PoseStack pPoseStack);
 
     @Inject(at = @At(value = "RETURN"), method = "renderItemInHand")
-    private void fluffy_fur$renderItemInHand(PoseStack pPoseStack, Camera pActiveRenderInfo, float pPartialTicks, CallbackInfo ci){
+    private void tridot$renderItemInHand(PoseStack pPoseStack, Camera pActiveRenderInfo, float pPartialTicks, CallbackInfo ci){
         for(RenderBuilder builder : TridotRenderTypes.customItemRenderBuilderFirst){
             builder.endBatch();
         }
@@ -25,18 +25,18 @@ public abstract class GameRendererMixin{
     }
 
     @Inject(method = "resize", at = @At(value = "HEAD"))
-    public void fluffy_fur$injectionResizeListener(int width, int height, CallbackInfo ci){
+    public void tridot$injectionResizeListener(int width, int height, CallbackInfo ci){
         LevelRenderHandler.resize(width, height);
         PostProcessHandler.resize(width, height);
     }
 
     @Inject(at = @At(value = "INVOKE", target = "Lcom/mojang/blaze3d/pipeline/RenderTarget;bindWrite(Z)V"), method = "render")
-    public void fluffy_fur$renderScreenPostProcess(float partialTicks, long nanoTime, boolean renderLevel, CallbackInfo ci){
+    public void tridot$renderScreenPostProcess(float partialTicks, long nanoTime, boolean renderLevel, CallbackInfo ci){
         PostProcessHandler.onScreenRender((GameRenderer)(Object)this, partialTicks, nanoTime, renderLevel);
     }
 
     @Inject(at = @At(value = "RETURN"), method = "render")
-    public void fluffy_fur$renderWindowPostProcess(float partialTicks, long nanoTime, boolean renderLevel, CallbackInfo ci){
+    public void tridot$renderWindowPostProcess(float partialTicks, long nanoTime, boolean renderLevel, CallbackInfo ci){
         PostProcessHandler.onWindowRender((GameRenderer)(Object)this, partialTicks, nanoTime, renderLevel);
     }
 }

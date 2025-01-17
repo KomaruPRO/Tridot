@@ -5,11 +5,32 @@
   "compatibilityLevel": "JAVA_8",
   "refmap": "komaru.refmap.json",
   "mixins": [
+    "client.ExplosionMixin",
+    "client.LightningBoltMixin",
+    "common.BlockItemMixin",
+    "common.BlocksMixin",
+    "common.CreeperMixin",
+    "common.ForgeHooksMixin",
+    "common.ItemEntityMixin",
+    "common.ThrownTridentMixin",
+    "common.TntBlockMixin"
   ],
   "client": [
-    "client.BossHealthOverlayAccessor"
-  ],
-  "injectors": {
+    "client.CameraMixin",
+    "client.curios.CurioTooltipMixin",
+    "client.EffectProgramMixin",
+    "client.FoxRendererMixin",
+    "client.GameRendererMixin",
+    "client.GuiGraphicsMixin",
+    "client.HumanoidModelMixin",
+    "client.ItemEntityMixin",
+    "client.ItemInHandLayerMixin",
+    "client.ItemInHandRendererMixin",
+    "client.ItemStackMixin",
+    "client.LightningBoltRendererMixin",
+    "client.MinecraftMixin",
+    "client.SplashManagerMixin"
+  ],  "injectors": {
     "defaultRequire": 1
   }
 }

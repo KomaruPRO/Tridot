@@ -16,7 +16,7 @@ import org.spongepowered.asm.mixin.injection.callback.*;
 public abstract class ItemInHandRendererMixin{
 
     @Inject(at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/ItemInHandRenderer;renderItem(Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/item/ItemDisplayContext;ZLcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;I)V"), method = "renderArmWithItem")
-    public void fluffy_fur$renderArmWithItem(AbstractClientPlayer player, float partialTicks, float pitch, InteractionHand hand, float swingProgress, ItemStack stack, float equippedProgress, PoseStack poseStack, MultiBufferSource buffer, int combinedLight, CallbackInfo ci){
+    public void tridot$renderArmWithItem(AbstractClientPlayer player, float partialTicks, float pitch, InteractionHand hand, float swingProgress, ItemStack stack, float equippedProgress, PoseStack poseStack, MultiBufferSource buffer, int combinedLight, CallbackInfo ci){
         if(stack.getItem() instanceof ICustomAnimationItem item){
             ItemAnimation animation = item.getAnimation(stack);
             if(animation != null){
@@ -28,7 +28,7 @@ public abstract class ItemInHandRendererMixin{
     }
 
     @Inject(at = @At("HEAD"), method = "evaluateWhichHandsToRender", cancellable = true)
-    private static void fluffy_fur$evaluateWhichHandsToRender(LocalPlayer pPlayer, CallbackInfoReturnable<ItemInHandRenderer.HandRenderSelection> cir){
+    private static void tridot$evaluateWhichHandsToRender(LocalPlayer pPlayer, CallbackInfoReturnable<ItemInHandRenderer.HandRenderSelection> cir){
         ItemStack itemStack = pPlayer.getUseItem();
         InteractionHand hand = pPlayer.getUsedItemHand();
         for(Item item : BowHandler.getBows()){

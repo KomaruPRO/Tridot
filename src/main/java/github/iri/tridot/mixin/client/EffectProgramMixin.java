@@ -16,7 +16,7 @@ public class EffectProgramMixin{
     ),
     index = 4
     )
-    private static GlslPreprocessor fluffy_fur$useCustomPreprocessor(GlslPreprocessor org){
+    private static GlslPreprocessor tridot$useCustomPreprocessor(GlslPreprocessor org){
         return TridotGlslPreprocessor.PREPROCESSOR;
     }
 }

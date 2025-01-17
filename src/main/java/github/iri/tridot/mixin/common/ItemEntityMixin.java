@@ -11,7 +11,7 @@ import org.spongepowered.asm.mixin.injection.callback.*;
 public abstract class ItemEntityMixin{
 
     @Inject(at = @At("HEAD"), method = "tick")
-    public void fluffy_fur$tick(CallbackInfo ci){
+    public void tridot$tick(CallbackInfo ci){
         ItemEntity self = (ItemEntity)((Object)this);
         for(ItemEntityModifier modifier : ItemEntityHandler.getModifiers()){
             if(modifier.isItem(self.level(), self, self.getItem())){
@@ -21,7 +21,7 @@ public abstract class ItemEntityMixin{
     }
 
     @Inject(at = @At("HEAD"), method = "hurt", cancellable = true)
-    public void fluffy_fur$hurt(DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir){
+    public void tridot$hurt(DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir){
         ItemEntity self = (ItemEntity)((Object)this);
         for(ItemEntityModifier modifier : ItemEntityHandler.getModifiers()){
             if(modifier.isItem(self.level(), self, self.getItem())){

@@ -16,7 +16,7 @@ import org.spongepowered.asm.mixin.injection.callback.*;
 public abstract class GuiGraphicsMixin{
 
     @Inject(at = @At(value = "TAIL"), method = "renderItem(Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/level/Level;Lnet/minecraft/world/item/ItemStack;IIII)V")
-    private void fluffy_fur$renderItem(LivingEntity entity, Level level, ItemStack stack, int x, int y, int seed, int guiOffset, CallbackInfo ci){
+    private void tridot$renderItem(LivingEntity entity, Level level, ItemStack stack, int x, int y, int seed, int guiOffset, CallbackInfo ci){
         if(ClientConfig.ITEM_GUI_PARTICLE.get()){
             if(stack.getItem() instanceof IGuiParticleItem guiParticleItem){
                 GuiGraphics self = (GuiGraphics)((Object)this);

@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.injection.callback.*;
 public abstract class ItemEntityMixin{
 
     @Inject(at = @At("RETURN"), method = "tick")
-    public void fluffy_fur$addParticles(CallbackInfo ci){
+    public void tridot$addParticles(CallbackInfo ci){
         ItemEntity self = (ItemEntity)((Object)this);
         if(self.level().isClientSide()){
             if(ClientConfig.ITEM_PARTICLE.get()){

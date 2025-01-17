@@ -1,7 +1,7 @@
 package github.iri.tridot.core.proxy;
 
-import com.idark.valoria.*;
-import com.idark.valoria.client.sounds.*;
+import github.iri.tridot.*;
+import github.iri.tridot.client.sound.*;
 import net.minecraft.client.*;
 import net.minecraft.client.sounds.*;
 import net.minecraft.sounds.*;
@@ -27,21 +27,21 @@ public class ClientProxy implements ISidedProxy{
     @OnlyIn(Dist.CLIENT)
     public static void playSound(SoundEvent event){
         SoundManager soundManager = Minecraft.getInstance().getSoundManager();
-        if(ValoriaClient.BOSS_MUSIC != null && soundManager.isActive(ValoriaClient.BOSS_MUSIC)){
+        if(TridotLibClient.BOSS_MUSIC != null && soundManager.isActive(TridotLibClient.BOSS_MUSIC)){
             return;
         }
 
-        ValoriaClient.BOSS_MUSIC = new LoopedSoundInstance(event, Minecraft.getInstance().player);
-        soundManager.play(ValoriaClient.BOSS_MUSIC);
-        if(!soundManager.isActive(ValoriaClient.BOSS_MUSIC)){
-            ValoriaClient.BOSS_MUSIC = null;
+        TridotLibClient.BOSS_MUSIC = new LoopedSoundInstance(event, Minecraft.getInstance().player);
+        soundManager.play(TridotLibClient.BOSS_MUSIC);
+        if(!soundManager.isActive(TridotLibClient.BOSS_MUSIC)){
+            TridotLibClient.BOSS_MUSIC = null;
         }
     }
 
     public void removeBossBarRender(UUID bossBar){
         bossbars.remove(bossBar);
-        if(ValoriaClient.BOSS_MUSIC != null){
-            Minecraft.getInstance().getSoundManager().stop(ValoriaClient.BOSS_MUSIC);
+        if(TridotLibClient.BOSS_MUSIC != null){
+            Minecraft.getInstance().getSoundManager().stop(TridotLibClient.BOSS_MUSIC);
         }
     }
 

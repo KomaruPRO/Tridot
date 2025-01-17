@@ -1,0 +1,83 @@
+{
+  "_comment_1": "Предметы и блоки",
+  "block.tridot.potted_pink_petals": "Розовые лепестки в горшке",
+
+  "item.tridot.music_disc_fluffy": "Пушистая пластинка",
+
+  "item.tridot.test_shrimp": "Тестовая креветка",
+  "item.tridot.thing": "Штуковина",
+  "item.tridot.silly_treat": "Глупенькое лакомство",
+
+  "block.tridot.maxbogomol_plush": "Плюшка MaxBogomol",
+  "block.tridot.onixthecat_plush": "Плюшка OnixTheCat",
+  "block.tridot.unlogicalsamsar_plush": "Плюшка unlogicalSamsar",
+  "block.tridot.sammysemicolon_plush": "Плюшка SammySemicolon",
+  "block.tridot.boykisser_plush": "Плюшка Бойкиссера",
+  "block.tridot.nanachi_plush": "Плюшка Наначи",
+
+  "block.tridot.yonkablock": "ЙонКаБлок",
+
+  "_comment_2": "Лор предметов",
+  "lore.tridot.skin": "Облик:",
+
+  "_comment_3": "Описания предметов",
+  "item.tridot.music_disc_fluffy.desc": "Onjerlay - I learned how to do the biiiiiiiiiiiwiwiwiwiwiwiwiwiwi",
+
+  "_comment_4": "Меню",
+  "mod_description.tridot": "Fluffy Fur - мод библиотека от MaxBogomol. \n Добавляет различные штуки для рендеринга и упрощения разработки. \n \n Мяу :3",
+
+  "panorama.minecraft.vanilla": "Ванилла",
+  "panorama.tridot.fluffy_zone": "Пушистое место",
+
+  "_comment_5": "Интерфейс",
+  "gui.tridot.menu.optifine.0": "ВНИМАНИЕ! Кажется, у вас установлен Optifine",
+  "gui.tridot.menu.optifine.1": "Optifine ломает Fluffy Fur и другие моды",
+  "gui.tridot.menu.optifine.2": "Удалите Optifine :3",
+  "gui.tridot.menu.piracy": "ПИРАТСТВО ЭТО ПЛОХО!!!",
+
+  "gui.tridot.menu.panoramas": "Панорамы",
+  "gui.tridot.menu.mods": "Моды",
+  "gui.tridot.menu.id": "ID:",
+  "gui.tridot.menu.version": "Версия:",
+  "gui.tridot.menu.edition": "Издание:",
+  "gui.tridot.menu.autor": "Автор:",
+  "gui.tridot.menu.links": "Ссылки:",
+  "gui.tridot.menu.mod": "Мод:",
+
+  "gui.tridot.skin_menu.skins": "Облики",
+  "gui.tridot.skin_menu.capes": "Плащи",
+  "gui.tridot.skin_menu.skin_effects": "Эффекты обликов",
+
+  "gui.tridot.skin_menu.standard": "Стандартный",
+  "gui.tridot.skin_menu.empty": "Пустой",
+  "gui.tridot.skin_menu.skin.boykisser": "Бойкиссер",
+  "gui.tridot.skin_menu.skin.nanachi": "Наначи",
+  "gui.tridot.skin_menu.cape.fluffy": "Пушистый",
+  "gui.tridot.skin_menu.effect.pink_hearts": "Розовые сердчеки",
+
+  "_comment_6": "Привязка клавиш",
+  "key.category.tridot.general": "Fluffy Fur",
+  "key.tridot.skin_menu": "Меню обликов",
+
+  "_comment_7": "Конфиги",
+  "config.client.tridot.graphics.screenshakeIntensity": "Интенсивность тряски экрана",
+  "config.client.tridot.graphics.screenshakeIntensity.desc": "Интенсивность тряски экрана",
+  "config.client.tridot.graphics.particles.itemParticle": "Частицы предметов",
+  "config.client.tridot.graphics.particles.itemParticle.desc": "Включает частицы брошенных предметов.",
+  "config.client.tridot.graphics.particles.itemGuiParticle": "GUI частицы предметов",
+  "config.client.tridot.graphics.particles.itemGuiParticle.desc": "Включает частицы предметов в GUI.",
+  "config.client.tridot.graphics.particles.bloodParticle": "Частицы крови",
+  "config.client.tridot.graphics.particles.bloodParticle.desc": "Включает частицы крови при получении урона.",
+  "config.client.tridot.menu.panorama": "Панорама Fluffy Fur",
+  "config.client.tridot.menu.panorama.desc": "Панорама Fluffy Fur.",
+  "config.client.tridot.menu.menuButton": "Кнопка меню",
+  "config.client.tridot.menu.menuButton.desc": "Включает кнопку меню Fluffy Fur.",
+  "config.client.tridot.menu.menuButtonRow": "Ряд кнопки меню",
+  "config.client.tridot.menu.menuButtonRow.desc": "Ряд кнопки меню Fluffy Fur.",
+  "config.client.tridot.menu.menuButtonRowXOffset": "X Offset ряда кнопки меню",
+  "config.client.tridot.menu.menuButtonRowXOffset.desc": "X Offset ряда кнопки меню Fluffy Fur.",
+  "config.client.tridot.menu.menuButtonXOffset": "X Offset кнопки меню",
+  "config.client.tridot.menu.menuButtonXOffset.desc": "X Offset кнопки меню Fluffy Fur.",
+  "config.client.tridot.menu.menuButtonYOffset": "Y Offset кнопки меню",
+  "config.client.tridot.menu.menuButtonYOffset.desc": "Y Offset кнопки меню Fluffy Fur."
+}

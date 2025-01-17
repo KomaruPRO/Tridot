@@ -16,7 +16,7 @@ public abstract class LightningBoltMixin{
     private int life;
 
     @Inject(at = @At("HEAD"), method = "tick")
-    public void fluffy_fur$tick(CallbackInfo ci){
+    public void tridot$tick(CallbackInfo ci){
         LightningBolt self = (LightningBolt)((Object)this);
         Level level = self.level();
         if(level.isClientSide()){

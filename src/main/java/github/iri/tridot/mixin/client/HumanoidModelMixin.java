@@ -15,7 +15,7 @@ import org.spongepowered.asm.mixin.injection.callback.*;
 public abstract class HumanoidModelMixin<T extends LivingEntity>{
 
     @Inject(at = @At("RETURN"), method = "setupAnim")
-    public void fluffy_fur$setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, CallbackInfo ci){
+    public void tridot$setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, CallbackInfo ci){
         HumanoidModel self = (HumanoidModel)((Object)this);
         if(entity instanceof Player player){
             for(InteractionHand hand : InteractionHand.values()){

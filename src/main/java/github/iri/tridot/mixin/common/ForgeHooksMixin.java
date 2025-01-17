@@ -16,7 +16,7 @@ import org.spongepowered.asm.mixin.injection.callback.*;
 public class ForgeHooksMixin{
 
     @Inject(method = "loadLootTable", at = @At("HEAD"), cancellable = true, remap = false)
-    private static void fluffy_fur$loadLootTable(Gson gson, ResourceLocation name, JsonElement data, boolean custom, CallbackInfoReturnable<LootTable> cir){
+    private static void tridot$loadLootTable(Gson gson, ResourceLocation name, JsonElement data, boolean custom, CallbackInfoReturnable<LootTable> cir){
         JsonObject json = data.getAsJsonObject();
         if(json.has(TridotLib.ID + ":conditions")){
             if(!CraftingHelper.processConditions(GsonHelper.getAsJsonArray(json, TridotLib.ID + ":conditions"), ICondition.IContext.EMPTY)){

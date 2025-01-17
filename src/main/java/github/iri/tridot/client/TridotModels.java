@@ -4,7 +4,6 @@ import github.iri.tridot.*;
 import github.iri.tridot.client.model.armor.*;
 import github.iri.tridot.client.model.book.*;
 import github.iri.tridot.client.model.item.*;
-import github.iri.tridot.client.model.playerskin.*;
 import net.minecraft.client.model.geom.*;
 import net.minecraft.client.resources.model.*;
 import net.minecraft.resources.*;
@@ -17,15 +16,7 @@ import java.util.*;
 
 public class TridotModels{
     public static final ModelLayerLocation EMPTY_ARMOR_LAYER = addLayer("empty_armor");
-
     public static final ModelLayerLocation BOOK_LAYER = addLayer("book");
-
-    public static CatEarsModel CAT_EARS = null;
-    public static CatTailModel CAT_TAIL = null;
-    public static FoxEarsModel FOX_EARS = null;
-    public static FoxTailModel FOX_TAIL = null;
-    public static RabbitEarsModel RABBIT_EARS = null;
-    public static NanachiTailModel NANACHI_TAIL = null;
 
     public static EmptyArmorModel EMPTY_ARMOR = null;
 

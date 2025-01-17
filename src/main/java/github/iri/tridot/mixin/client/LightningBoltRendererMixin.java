@@ -14,7 +14,7 @@ import org.spongepowered.asm.mixin.injection.callback.*;
 public abstract class LightningBoltRendererMixin{
 
     @Inject(at = @At("HEAD"), method = "render*", cancellable = true)
-    public void fluffy_fur$render(LightningBolt entity, float entityYaw, float partialTicks, PoseStack poseStack, MultiBufferSource buffer, int packedLight, CallbackInfo ci){
+    public void tridot$render(LightningBolt entity, float entityYaw, float partialTicks, PoseStack poseStack, MultiBufferSource buffer, int packedLight, CallbackInfo ci){
         if(ClientConfig.LIGHTNING_BOLT_EFFECT.get()){
             ci.cancel();
             TridotEffects.lightningBoltRender(entity, entityYaw, partialTicks, poseStack, buffer, packedLight);

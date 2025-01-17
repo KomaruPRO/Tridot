@@ -16,7 +16,7 @@ public abstract class ExplosionMixin{
     private float radius;
 
     @Inject(at = @At("RETURN"), method = "finalizeExplosion")
-    public void fluffy_fur$tick(boolean spawnParticles, CallbackInfo ci){
+    public void tridot$tick(boolean spawnParticles, CallbackInfo ci){
         if(TridotLib.proxy.getLevel().isClientSide()){
             if(ClientConfig.EXPLOSION_EFFECT.get()){
                 if(spawnParticles){

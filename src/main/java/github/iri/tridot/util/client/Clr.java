@@ -8,7 +8,8 @@ public class Clr{
     public float r, g, b, a;
     private static final float[] tmpHSV = new float[3];
 
-    public Clr(){
+    public static Color getColor(int color) {
+        return new Color(getRed(color), getGreen(color), getBlue(color), getAlpha(color));
     }
 
     /**

@@ -66,7 +66,7 @@ public class ItemSkin{
     }
 
     public static Component getSkinComponent(ItemSkin skin){
-        return Component.translatable("lore.fluffy_fur.skin").withStyle(Style.EMPTY.withColor(Clr.packColor(255, 249, 210, 129))).append(" ").append(getSkinName(skin));
+        return Component.translatable("lore.tridot.skin").withStyle(Style.EMPTY.withColor(Clr.packColor(255, 249, 210, 129))).append(" ").append(getSkinName(skin));
     }
 
     public Component getSkinName(){

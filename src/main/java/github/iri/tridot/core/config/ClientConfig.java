@@ -30,7 +30,7 @@ public class ClientConfig{
 
         builder.comment("Menu").push("menu");
         PANORAMA = builder.comment("Tridot Panorama.").define("panorama", "minecraft:vanilla");
-        MENU_BUTTON = builder.comment("Enable Fluffy Fur menu button.").define("menuButton", true);
+        MENU_BUTTON = builder.comment("Enable Tridot menu button.").define("menuButton", false);
         MENU_BUTTON_ROW = builder.comment("Fluffy Fur menu button row.").defineInRange("menuButtonRow", 3, 0, 4);
         MENU_BUTTON_ROW_X_OFFSET = builder.comment("Fluffy Fur menu button X offset with row.").define("menuButtonRowXOffset", 4);
         MENU_BUTTON_X_OFFSET = builder.comment("Tridot menu button X offset.").define("menuButtonXOffset", 0);

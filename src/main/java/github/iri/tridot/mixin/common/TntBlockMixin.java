@@ -16,7 +16,7 @@ import org.spongepowered.asm.mixin.injection.callback.*;
 public abstract class TntBlockMixin{
 
     @Inject(method = "use", at = @At("RETURN"), cancellable = true)
-    private void fluffy_fur$use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit, CallbackInfoReturnable<InteractionResult> cir){
+    private void tridot$use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit, CallbackInfoReturnable<InteractionResult> cir){
         TntBlock self = (TntBlock)((Object)this);
         for(FireItemModifier modifier : FireItemHandler.getModifiers()){
             if(modifier.isTntUse(state, level, pos, player, hand, hit)){

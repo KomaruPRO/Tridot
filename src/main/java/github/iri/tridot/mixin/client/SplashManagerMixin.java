@@ -18,7 +18,7 @@ public abstract class SplashManagerMixin{
     private List<String> splashes;
 
     @Inject(at = @At("RETURN"), method = "apply*")
-    public void fluffy_fur$apply(List<String> object, ResourceManager resourceManager, ProfilerFiller profiler, CallbackInfo ci){
+    public void tridot$apply(List<String> object, ResourceManager resourceManager, ProfilerFiller profiler, CallbackInfo ci){
         this.splashes.addAll(SplashHandler.getSplashes());
     }
 }

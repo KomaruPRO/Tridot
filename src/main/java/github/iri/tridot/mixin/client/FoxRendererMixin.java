@@ -21,7 +21,7 @@ public abstract class FoxRendererMixin{
     private static final ResourceLocation FOXPLANE_SLEEP_LOCATION = new ResourceLocation(TridotLib.ID, "textures/entity/fox/foxplane_sleep.png");
 
     @Inject(at = @At("HEAD"), method = "getTextureLocation*", cancellable = true)
-    public void fluffy_fur$getTextureLocation(Fox entity, CallbackInfoReturnable<ResourceLocation> ci){
+    public void tridot$getTextureLocation(Fox entity, CallbackInfoReturnable<ResourceLocation> ci){
         String s = ChatFormatting.stripFormatting(entity.getName().getString());
         if("MaxBogomol".equals(s)){
             if(entity.isSleeping()){
