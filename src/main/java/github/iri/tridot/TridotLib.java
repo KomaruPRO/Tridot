@@ -42,7 +42,6 @@ public class TridotLib{
             return new Object();
         });
 
-
         eventBus.addListener(this::setup);
         eventBus.addListener(TridotLibClient::clientSetup);
 
