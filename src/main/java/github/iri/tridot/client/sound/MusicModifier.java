@@ -3,21 +3,25 @@ package github.iri.tridot.client.sound;
 import github.iri.tridot.client.gui.screen.*;
 import net.minecraft.client.*;
 import net.minecraft.core.*;
+import net.minecraft.resources.*;
+import net.minecraft.server.level.*;
 import net.minecraft.sounds.*;
 import net.minecraft.tags.*;
+import net.minecraft.world.entity.player.*;
 import net.minecraft.world.level.biome.*;
+import net.minecraft.world.level.levelgen.structure.*;
 
 public class MusicModifier{
 
-    public boolean isCanPlay(Music defaultMisic, Minecraft minecraft){
+    public boolean isCanPlay(Music defaultMusic, Minecraft minecraft){
         return true;
     }
 
-    public Music play(Music defaultMisic, Minecraft minecraft){
+    public Music play(Music defaultMusic, Minecraft minecraft){
         return null;
     }
 
-    public boolean isMenu(Music defaultMisic, Minecraft minecraft){
+    public boolean isMenu(Music defaultMusic, Minecraft minecraft){
         return false;
     }
 
@@ -37,6 +41,22 @@ public class MusicModifier{
         return false;
     }
 
+    public static class Dungeon extends MusicModifier {
+        public SoundEvent music;
+        public ResourceKey<Structure> structureKey;
+
+        public Dungeon(SoundEvent music, ResourceKey<Structure> structureKey){
+            this.music = music;
+            this.structureKey = structureKey;
+        }
+
+        public boolean isPlayerInStructure(Player player, ServerLevel serverLevel) {
+            var structure = serverLevel.structureManager().getStructureWithPieceAt(
+            player.blockPosition(), structureKey);
+            return structure.getStructure() != null && structure.getBoundingBox().isInside(player.getBlockX(), player.getBlockY(), player.getBlockZ());
+        }
+    }
+
     public static class Panorama extends MusicModifier{
         public Music music;
         public TridotPanorama panorama;
@@ -47,18 +67,18 @@ public class MusicModifier{
         }
 
         @Override
-        public boolean isCanPlay(Music defaultMisic, Minecraft minecraft){
+        public boolean isCanPlay(Music defaultMusic, Minecraft minecraft){
             TridotPanorama panorama = TridotModsHandler.getPanorama();
             return panorama != null && panorama == this.panorama;
         }
 
         @Override
-        public Music play(Music defaultMisic, Minecraft minecraft){
+        public Music play(Music defaultMusic, Minecraft minecraft){
             return music;
         }
 
         @Override
-        public boolean isMenu(Music defaultMisic, Minecraft minecraft){
+        public boolean isMenu(Music defaultMusic, Minecraft minecraft){
             return true;
         }
     }

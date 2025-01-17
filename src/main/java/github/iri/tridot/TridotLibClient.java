@@ -12,12 +12,15 @@ import github.iri.tridot.core.config.*;
 import github.iri.tridot.integration.client.*;
 import net.minecraft.client.*;
 import net.minecraft.client.gui.screens.*;
+import net.minecraft.data.worldgen.*;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.*;
+import net.minecraft.sounds.*;
 import net.minecraft.util.*;
 import net.minecraft.world.entity.ai.attributes.*;
 import net.minecraft.world.entity.player.*;
 import net.minecraft.world.item.*;
+import net.minecraft.world.level.levelgen.structure.*;
 import net.minecraftforge.api.distmarker.*;
 import net.minecraftforge.client.event.*;
 import net.minecraftforge.event.*;
@@ -53,10 +56,17 @@ public class TridotLibClient{
 
     public static void setupSplashes(){
         SplashHandler.addSplash("Привет, Россия!");
+        SplashHandler.addSplash("Привіт, Україно!");
     }
 
     @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
     public static class RegistryEvents {
+
+        @SubscribeEvent
+        public static void registerMusicModifiers(FMLClientSetupEvent event) {
+            MusicHandler.register(new MusicModifier.Dungeon(SoundEvents.MUSIC_DISC_11, BuiltinStructures.VILLAGE_PLAINS));
+        }
+
         @SubscribeEvent
         public static void registerAttributeModifiers(FMLClientSetupEvent event){
             TooltipModifierHandler.register(new AttributeTooltipModifier(){

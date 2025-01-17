@@ -3,18 +3,39 @@ package github.iri.tridot.core.event;
 import github.iri.tridot.*;
 import github.iri.tridot.client.gui.components.*;
 import github.iri.tridot.client.gui.components.TridotMenuButton.*;
+import github.iri.tridot.client.sound.*;
+import github.iri.tridot.client.sound.MusicModifier.*;
 import github.iri.tridot.core.config.*;
+import github.iri.tridot.core.network.*;
+import github.iri.tridot.core.network.packets.*;
 import net.minecraft.client.gui.components.*;
 import net.minecraft.client.gui.components.events.*;
 import net.minecraft.client.gui.screens.*;
+import net.minecraft.server.*;
+import net.minecraft.server.level.*;
+import net.minecraft.world.entity.player.*;
 import net.minecraftforge.api.distmarker.*;
 import net.minecraftforge.client.event.*;
+import net.minecraftforge.event.*;
 import net.minecraftforge.eventbus.api.*;
 import net.minecraftforge.fml.common.*;
 import org.apache.commons.lang3.mutable.*;
 
 @Mod.EventBusSubscriber(modid = TridotLib.ID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class ForgeEvents{
+
+    @SubscribeEvent
+    public static void onServerTick(TickEvent.ServerTickEvent event) {
+        MinecraftServer server = event.getServer();
+        if (server.getTickCount() % 100 != 0) return;
+        for (Player player : server.getPlayerList().getPlayers()) {
+            for(MusicModifier modifier : MusicHandler.getModifiers()) {
+                if(modifier instanceof Dungeon dungeonMusic) {
+                    if (dungeonMusic.isPlayerInStructure(player, (ServerLevel) player.level()) && TridotLibClient.DUNGEON_MUSIC_INSTANCE == null) PacketHandler.sendTo(player, new DungeonSoundPacket(dungeonMusic.music, player.getX(), player.getY() + (player.getBbHeight() / 2), player.getZ()));
+                }
+            }
+        }
+    }
 
     @OnlyIn(Dist.CLIENT)
     @SubscribeEvent
