@@ -10,9 +10,7 @@ import net.minecraft.resources.*;
 import net.minecraft.world.item.*;
 import net.minecraftforge.common.*;
 import net.minecraftforge.eventbus.api.*;
-import net.minecraftforge.fml.*;
 import net.minecraftforge.fml.event.lifecycle.*;
-import net.minecraftforge.fml.javafmlmod.*;
 
 import java.awt.*;
 
@@ -20,6 +18,7 @@ public class TridotLibClient{
     public static TridotSoundInstance COOLDOWN_SOUND;
     public static TridotSoundInstance DUNGEON_MUSIC_INSTANCE;
     public static final ResourceLocation VANILLA_LOC = new ResourceLocation("textures/gui/bars.png");
+
     public static class ClientOnly{
         public static void clientInit(){
             IEventBus forgeBus = MinecraftForge.EVENT_BUS;

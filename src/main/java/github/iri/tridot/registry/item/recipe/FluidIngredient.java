@@ -1,24 +1,18 @@
 package github.iri.tridot.registry.item.recipe;
 
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonSyntaxException;
-import net.minecraft.core.Holder;
-import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.core.registries.Registries;
-import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.tags.TagKey;
-import net.minecraft.util.GsonHelper;
-import net.minecraft.world.level.material.Fluid;
-import net.minecraft.world.level.material.Fluids;
-import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.registries.ForgeRegistries;
+import com.google.gson.*;
+import net.minecraft.core.*;
+import net.minecraft.core.registries.*;
+import net.minecraft.network.*;
+import net.minecraft.resources.*;
+import net.minecraft.tags.*;
+import net.minecraft.util.*;
+import net.minecraft.world.level.material.*;
+import net.minecraftforge.fluids.*;
+import net.minecraftforge.registries.*;
 
 import java.util.*;
-import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
+import java.util.stream.*;
 
 //class copied from mantle
 public abstract class FluidIngredient{

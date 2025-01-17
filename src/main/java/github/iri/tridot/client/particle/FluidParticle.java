@@ -1,12 +1,12 @@
 package github.iri.tridot.client.particle;
 
-import github.iri.tridot.client.particle.options.FluidParticleOptions;
-import github.iri.tridot.util.client.RenderUtil;
-import net.minecraft.client.multiplayer.ClientLevel;
-import net.minecraft.client.renderer.texture.TextureAtlasSprite;
-import net.minecraft.world.level.material.Fluids;
-import net.minecraftforge.client.extensions.common.IClientFluidTypeExtensions;
-import net.minecraftforge.fluids.FluidType;
+import github.iri.tridot.client.particle.options.*;
+import github.iri.tridot.util.client.*;
+import net.minecraft.client.multiplayer.*;
+import net.minecraft.client.renderer.texture.*;
+import net.minecraft.world.level.material.*;
+import net.minecraftforge.client.extensions.common.*;
+import net.minecraftforge.fluids.*;
 
 public class FluidParticle extends GenericParticle{
 

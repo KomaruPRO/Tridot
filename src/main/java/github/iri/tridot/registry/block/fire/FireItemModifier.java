@@ -1,17 +1,16 @@
 package github.iri.tridot.registry.block.fire;
 
-import net.minecraft.core.BlockPos;
-import net.minecraft.sounds.SoundEvent;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.stats.Stats;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.core.*;
+import net.minecraft.sounds.*;
+import net.minecraft.stats.*;
+import net.minecraft.world.*;
+import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.player.*;
+import net.minecraft.world.level.*;
+import net.minecraft.world.level.block.state.*;
+import net.minecraft.world.phys.*;
 
-import java.util.Random;
+import java.util.*;
 
 public class FireItemModifier{
 

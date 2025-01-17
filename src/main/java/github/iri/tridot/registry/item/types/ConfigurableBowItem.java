@@ -1,6 +1,6 @@
 package github.iri.tridot.registry.item.types;
 
-import github.iri.tridot.registry.entity.*;
+import github.iri.tridot.registry.entity.projectiles.*;
 import net.minecraft.*;
 import net.minecraft.network.chat.*;
 import net.minecraft.server.level.*;
@@ -18,26 +18,27 @@ import org.jetbrains.annotations.*;
 import java.util.*;
 import java.util.function.*;
 
-public class ConfigurableBowItem extends BowItem {
+public class ConfigurableBowItem extends BowItem{
     public double baseDamage;
     public int arrowBaseDamage;
     public float time = 20;
     public Supplier<? extends EntityType<? extends AbstractArrow>> arrow;
-    public ConfigurableBowItem(double pBaseDamage, Properties pProperties) {
+
+    public ConfigurableBowItem(double pBaseDamage, Properties pProperties){
         super(pProperties);
         this.baseDamage = pBaseDamage;
         this.arrowBaseDamage = 2;
         this.arrow = () -> EntityType.ARROW;
     }
 
-    public ConfigurableBowItem(Supplier<? extends EntityType<? extends AbstractArrow>> arrow, double pBaseDamage, int pArrowBaseDamage, Properties pProperties) {
+    public ConfigurableBowItem(Supplier<? extends EntityType<? extends AbstractArrow>> arrow, double pBaseDamage, int pArrowBaseDamage, Properties pProperties){
         super(pProperties);
         this.baseDamage = pBaseDamage;
         this.arrowBaseDamage = pArrowBaseDamage;
         this.arrow = arrow;
     }
 
-    public ConfigurableBowItem(Supplier<? extends EntityType<? extends AbstractArrow>> arrow, double pBaseDamage, int pArrowBaseDamage, float pTime, Properties pProperties) {
+    public ConfigurableBowItem(Supplier<? extends EntityType<? extends AbstractArrow>> arrow, double pBaseDamage, int pArrowBaseDamage, float pTime, Properties pProperties){
         super(pProperties);
         this.baseDamage = pBaseDamage;
         this.arrowBaseDamage = pArrowBaseDamage;
@@ -45,17 +46,17 @@ public class ConfigurableBowItem extends BowItem {
         time = pTime;
     }
 
-    public @NotNull EntityType<? extends AbstractArrow> getDefaultType() {
+    public @NotNull EntityType<? extends AbstractArrow> getDefaultType(){
         return arrow.get();
     }
 
     /**
      * Gets the velocity of the arrow entity from the bow's charge
      */
-    public static float getPowerForTime(int pCharge, float time) {
+    public static float getPowerForTime(int pCharge, float time){
         float f = (float)pCharge / time;
         f = (f * f + f * 2.0F) / 3.0F;
-        if (f > 1.0F) {
+        if(f > 1.0F){
             f = 1.0F;
         }
 
@@ -63,24 +64,24 @@ public class ConfigurableBowItem extends BowItem {
     }
 
     @Override
-    public void releaseUsing(ItemStack pStack, Level pLevel, LivingEntity pEntityLiving, int pTimeLeft) {
-        if (pEntityLiving instanceof Player player) {
+    public void releaseUsing(ItemStack pStack, Level pLevel, LivingEntity pEntityLiving, int pTimeLeft){
+        if(pEntityLiving instanceof Player player){
             boolean flag = player.getAbilities().instabuild || EnchantmentHelper.getTagEnchantmentLevel(Enchantments.INFINITY_ARROWS, pStack) > 0;
             ItemStack itemstack = player.getProjectile(pStack);
             int i = this.getUseDuration(pStack) - pTimeLeft;
             i = ForgeEventFactory.onArrowLoose(pStack, pLevel, player, i, !itemstack.isEmpty() || flag);
-            if (i < 0) return;
+            if(i < 0) return;
 
-            if (!itemstack.isEmpty() || flag) {
-                if (itemstack.isEmpty()) {
+            if(!itemstack.isEmpty() || flag){
+                if(itemstack.isEmpty()){
                     itemstack = new ItemStack(Items.ARROW);
                 }
 
                 float power = getPowerForTime(i, time);
-                if (!((double) power < 0.1D)) {
-                    boolean infiniteArrows = player.getAbilities().instabuild || (itemstack.getItem() instanceof ArrowItem && ((ArrowItem) itemstack.getItem()).isInfinite(itemstack, pStack, player));
-                    if (pLevel instanceof ServerLevel server) {
-                        ArrowItem arrowitem = (ArrowItem) (itemstack.getItem() instanceof ArrowItem ? itemstack.getItem() : Items.ARROW);
+                if(!((double)power < 0.1D)){
+                    boolean infiniteArrows = player.getAbilities().instabuild || (itemstack.getItem() instanceof ArrowItem && ((ArrowItem)itemstack.getItem()).isInfinite(itemstack, pStack, player));
+                    if(pLevel instanceof ServerLevel server){
+                        ArrowItem arrowitem = (ArrowItem)(itemstack.getItem() instanceof ArrowItem ? itemstack.getItem() : Items.ARROW);
                         AbstractTridotArrow customArrow = new AbstractTridotArrow(arrow.get(), server, player, itemstack, arrowBaseDamage);
                         AbstractArrow abstractarrow = arrowitem == Items.ARROW ? customArrow : arrowitem.createArrow(pLevel, itemstack, player);
                         abstractarrow = customArrow(abstractarrow);
@@ -126,7 +127,7 @@ public class ConfigurableBowItem extends BowItem {
         }
     }
 
-    private double calculateAverageDamage(ItemStack pStack) {
+    private double calculateAverageDamage(ItemStack pStack){
         double baseArrowDamage = this.baseDamage + 2;
         int powerLevel = EnchantmentHelper.getTagEnchantmentLevel(Enchantments.POWER_ARROWS, pStack);
         double powerBonus = powerLevel > 0 ? (powerLevel * 0.5D + 0.5D) : 0.0D;
@@ -137,7 +138,7 @@ public class ConfigurableBowItem extends BowItem {
     public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> pTooltipComponents, TooltipFlag pIsAdvanced){
         super.appendHoverText(pStack, pLevel, pTooltipComponents, pIsAdvanced);
         double damage = calculateAverageDamage(pStack);
-        if(arrow.get() != EntityType.ARROW) {
+        if(arrow.get() != EntityType.ARROW){
             pTooltipComponents.add(Component.translatable("tooltip.valoria.special_arrow").withStyle(ChatFormatting.GRAY)
             .append(Component.literal(getDefaultType().getDescription().getString()).withStyle(pStack.getRarity().getStyleModifier())));
         }

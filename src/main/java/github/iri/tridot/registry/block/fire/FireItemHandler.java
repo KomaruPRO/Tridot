@@ -1,7 +1,6 @@
 package github.iri.tridot.registry.block.fire;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class FireItemHandler{
     public static List<FireItemModifier> modifiers = new ArrayList<>();

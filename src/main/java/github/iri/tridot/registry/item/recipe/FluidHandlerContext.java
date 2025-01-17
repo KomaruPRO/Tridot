@@ -1,9 +1,9 @@
 package github.iri.tridot.registry.item.recipe;
 
-import net.minecraft.world.Container;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.fluids.capability.IFluidHandler;
+import net.minecraft.world.*;
+import net.minecraft.world.entity.player.*;
+import net.minecraft.world.item.*;
+import net.minecraftforge.fluids.capability.*;
 
 public class FluidHandlerContext implements Container{
 

@@ -1,7 +1,7 @@
 package github.iri.tridot.client.particle.options;
 
-import net.minecraft.core.particles.ParticleType;
-import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.core.particles.*;
+import net.minecraft.world.level.block.state.*;
 
 public class BlockParticleOptions extends GenericParticleOptions{
     public final BlockState blockState;

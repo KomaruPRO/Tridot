@@ -4,7 +4,6 @@ import com.mojang.blaze3d.systems.*;
 import com.mojang.blaze3d.vertex.*;
 import com.mojang.math.*;
 import github.iri.tridot.*;
-import github.iri.tridot.util.*;
 import net.minecraft.client.*;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.*;

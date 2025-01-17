@@ -1,20 +1,16 @@
 package github.iri.tridot.client.screenshake;
 
-import github.iri.tridot.TridotLib;
-import github.iri.tridot.client.event.ClientTickHandler;
-import github.iri.tridot.core.math.raycast.RayCast;
-import github.iri.tridot.core.math.raycast.RayCastContext;
-import github.iri.tridot.core.math.raycast.RayHitResult;
-import github.iri.tridot.core.config.ClientConfig;
-import net.minecraft.client.Camera;
-import net.minecraft.client.Minecraft;
-import net.minecraft.util.Mth;
-import net.minecraft.util.RandomSource;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.client.event.ComputeFovModifierEvent;
+import github.iri.tridot.*;
+import github.iri.tridot.client.event.*;
+import github.iri.tridot.core.config.*;
+import github.iri.tridot.core.math.raycast.*;
+import net.minecraft.client.*;
+import net.minecraft.util.*;
+import net.minecraft.world.level.*;
+import net.minecraft.world.phys.*;
+import net.minecraftforge.client.event.*;
 
-import java.util.ArrayList;
+import java.util.*;
 
 public class ScreenshakeHandler{
     public static final ArrayList<ScreenshakeInstance> INSTANCES = new ArrayList<>();

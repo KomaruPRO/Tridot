@@ -8,7 +8,8 @@ import net.minecraftforge.api.distmarker.*;
 @OnlyIn(Dist.CLIENT)
 public class TridotSoundInstance extends AbstractTickableSoundInstance{
     public final LocalPlayer player;
-    public TridotSoundInstance(SoundEvent sound, LocalPlayer pPlayer) {
+
+    public TridotSoundInstance(SoundEvent sound, LocalPlayer pPlayer){
         super(sound, SoundSource.PLAYERS, SoundInstance.createUnseededRandom());
         this.player = pPlayer;
         this.looping = false;
@@ -16,7 +17,7 @@ public class TridotSoundInstance extends AbstractTickableSoundInstance{
         this.volume = 1.10F;
     }
 
-    public TridotSoundInstance(SoundEvent sound, SoundSource source, LocalPlayer pPlayer) {
+    public TridotSoundInstance(SoundEvent sound, SoundSource source, LocalPlayer pPlayer){
         super(sound, source, SoundInstance.createUnseededRandom());
         this.player = pPlayer;
         this.looping = false;
@@ -24,12 +25,12 @@ public class TridotSoundInstance extends AbstractTickableSoundInstance{
         this.volume = 1.10F;
     }
 
-    public void tick() {
-        if (!this.player.isRemoved()) {
-            this.x = (float) this.player.getX();
-            this.y = (float) this.player.getY();
-            this.z = (float) this.player.getZ();
-        } else {
+    public void tick(){
+        if(!this.player.isRemoved()){
+            this.x = (float)this.player.getX();
+            this.y = (float)this.player.getY();
+            this.z = (float)this.player.getZ();
+        }else{
             this.stop();
         }
     }

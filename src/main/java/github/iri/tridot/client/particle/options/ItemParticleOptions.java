@@ -1,7 +1,7 @@
 package github.iri.tridot.client.particle.options;
 
-import net.minecraft.core.particles.ParticleType;
-import net.minecraft.world.item.ItemStack;
+import net.minecraft.core.particles.*;
+import net.minecraft.world.item.*;
 
 public class ItemParticleOptions extends GenericParticleOptions{
     public final ItemStack stack;

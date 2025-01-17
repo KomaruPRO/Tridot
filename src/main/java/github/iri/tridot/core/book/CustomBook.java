@@ -1,20 +1,18 @@
 package github.iri.tridot.core.book;
 
-import com.mojang.blaze3d.vertex.PoseStack;
-import github.iri.tridot.client.model.book.CustomBookModel;
-import github.iri.tridot.client.TridotModels;
-import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.RenderType;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.Mth;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
+import com.mojang.blaze3d.vertex.*;
+import github.iri.tridot.client.*;
+import github.iri.tridot.client.model.book.*;
+import net.minecraft.client.renderer.*;
+import net.minecraft.resources.*;
+import net.minecraft.util.*;
+import net.minecraft.world.entity.player.*;
+import net.minecraft.world.item.*;
+import net.minecraft.world.level.*;
+import net.minecraft.world.phys.*;
+import net.minecraftforge.api.distmarker.*;
 
-import java.util.Random;
+import java.util.*;
 
 public class CustomBook{
 

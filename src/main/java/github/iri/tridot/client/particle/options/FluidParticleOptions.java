@@ -1,7 +1,7 @@
 package github.iri.tridot.client.particle.options;
 
-import net.minecraft.core.particles.ParticleType;
-import net.minecraftforge.fluids.FluidStack;
+import net.minecraft.core.particles.*;
+import net.minecraftforge.fluids.*;
 
 public class FluidParticleOptions extends GenericParticleOptions{
     public final FluidStack fluidStack;

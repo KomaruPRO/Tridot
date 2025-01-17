@@ -13,39 +13,40 @@ import net.minecraftforge.registries.*;
 
 import java.util.function.*;
 
-public class CooldownSoundPacket {
+public class CooldownSoundPacket{
     private final double posX;
     private final double posY;
     private final double posZ;
     private final SoundEvent event;
-    public CooldownSoundPacket(SoundEvent event, double posX, double posY, double posZ) {
+
+    public CooldownSoundPacket(SoundEvent event, double posX, double posY, double posZ){
         this.event = event;
         this.posX = posX;
         this.posY = posY;
         this.posZ = posZ;
     }
 
-    public static CooldownSoundPacket decode(FriendlyByteBuf buf) {
+    public static CooldownSoundPacket decode(FriendlyByteBuf buf){
         ResourceLocation soundID = buf.readResourceLocation();
         SoundEvent event = ForgeRegistries.SOUND_EVENTS.getValue(soundID);
         return new CooldownSoundPacket(event, buf.readDouble(), buf.readDouble(), buf.readDouble());
     }
 
     @OnlyIn(Dist.CLIENT)
-    public static void playSound(SoundEvent event) {
+    public static void playSound(SoundEvent event){
         SoundManager soundManager = Minecraft.getInstance().getSoundManager();
-        if (TridotLibClient.COOLDOWN_SOUND != null && soundManager.isActive(TridotLibClient.COOLDOWN_SOUND)) {
+        if(TridotLibClient.COOLDOWN_SOUND != null && soundManager.isActive(TridotLibClient.COOLDOWN_SOUND)){
             return;
         }
 
         TridotLibClient.COOLDOWN_SOUND = new TridotSoundInstance(event, Minecraft.getInstance().player);
         soundManager.play(TridotLibClient.COOLDOWN_SOUND);
-        if (!soundManager.isActive(TridotLibClient.COOLDOWN_SOUND)) {
+        if(!soundManager.isActive(TridotLibClient.COOLDOWN_SOUND)){
             TridotLibClient.COOLDOWN_SOUND = null;
         }
     }
 
-    public static void handle(CooldownSoundPacket msg, Supplier<NetworkEvent.Context> ctx) {
+    public static void handle(CooldownSoundPacket msg, Supplier<NetworkEvent.Context> ctx){
         ctx.get().enqueueWork(() -> {
             assert ctx.get().getDirection() == NetworkDirection.PLAY_TO_CLIENT;
             playSound(msg.event);
@@ -54,7 +55,7 @@ public class CooldownSoundPacket {
         ctx.get().setPacketHandled(true);
     }
 
-    public void encode(FriendlyByteBuf buf) {
+    public void encode(FriendlyByteBuf buf){
         buf.writeResourceLocation(event.getLocation());
         buf.writeDouble(posX);
         buf.writeDouble(posY);

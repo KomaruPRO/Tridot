@@ -1,11 +1,10 @@
 package github.iri.tridot.client.particle.type;
 
-import com.mojang.brigadier.StringReader;
-import com.mojang.serialization.Codec;
-import github.iri.tridot.client.particle.options.GenericParticleOptions;
-import net.minecraft.core.particles.ParticleOptions;
-import net.minecraft.core.particles.ParticleType;
-import net.minecraft.network.FriendlyByteBuf;
+import com.mojang.brigadier.*;
+import com.mojang.serialization.*;
+import github.iri.tridot.client.particle.options.*;
+import net.minecraft.core.particles.*;
+import net.minecraft.network.*;
 
 public class AbstractParticleType<T extends GenericParticleOptions> extends ParticleType<T>{
 

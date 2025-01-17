@@ -1,4 +1,4 @@
-package github.iri.tridot.registry.entity;
+package github.iri.tridot.registry.entity.misc;
 
 import net.minecraft.core.*;
 import net.minecraft.network.protocol.*;
@@ -13,11 +13,11 @@ import net.minecraftforge.network.*;
 import net.minecraftforge.registries.*;
 import org.jetbrains.annotations.*;
 
-public class CustomBoatEntity extends Boat{
+public class CustomChestBoatEntity extends ChestBoat{
     private final RegistryObject<Item> boatItem;
     private final boolean isRaft;
 
-    public CustomBoatEntity(EntityType<? extends CustomBoatEntity> type, Level level, RegistryObject<Item> boatItem, boolean isRaft){
+    public CustomChestBoatEntity(EntityType<? extends CustomChestBoatEntity> type, Level level, RegistryObject<Item> boatItem, boolean isRaft){
         super(type, level);
         this.boatItem = boatItem;
         this.isRaft = isRaft;

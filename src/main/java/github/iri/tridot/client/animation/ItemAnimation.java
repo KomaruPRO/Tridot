@@ -1,18 +1,14 @@
 package github.iri.tridot.client.animation;
 
-import com.mojang.blaze3d.vertex.PoseStack;
-import net.minecraft.client.model.HumanoidModel;
-import net.minecraft.client.player.AbstractClientPlayer;
-import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.HumanoidArm;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemDisplayContext;
-import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
+import com.mojang.blaze3d.vertex.*;
+import net.minecraft.client.model.*;
+import net.minecraft.client.player.*;
+import net.minecraft.client.renderer.*;
+import net.minecraft.world.*;
+import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.player.*;
+import net.minecraft.world.item.*;
+import net.minecraftforge.api.distmarker.*;
 
 public class ItemAnimation{
     @OnlyIn(Dist.CLIENT)

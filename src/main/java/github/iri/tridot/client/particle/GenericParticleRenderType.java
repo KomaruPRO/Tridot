@@ -1,12 +1,11 @@
 package github.iri.tridot.client.particle;
 
-import com.mojang.blaze3d.systems.RenderSystem;
-import com.mojang.blaze3d.vertex.BufferBuilder;
-import com.mojang.blaze3d.vertex.Tesselator;
-import github.iri.tridot.client.render.LevelRenderHandler;
-import github.iri.tridot.integration.client.ShadersIntegration;
-import net.minecraft.client.particle.ParticleRenderType;
-import net.minecraft.client.renderer.texture.TextureManager;
+import com.mojang.blaze3d.systems.*;
+import com.mojang.blaze3d.vertex.*;
+import github.iri.tridot.client.render.*;
+import github.iri.tridot.integration.client.*;
+import net.minecraft.client.particle.*;
+import net.minecraft.client.renderer.texture.*;
 
 public class GenericParticleRenderType implements ParticleRenderType{
     public static final GenericParticleRenderType INSTANCE = new GenericParticleRenderType();

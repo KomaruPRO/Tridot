@@ -1,10 +1,10 @@
 package github.iri.tridot.core.network.packets;
 
-import net.minecraft.network.FriendlyByteBuf;
-import net.minecraftforge.network.NetworkEvent;
+import net.minecraft.network.*;
+import net.minecraftforge.network.*;
 
-import java.util.Random;
-import java.util.function.Supplier;
+import java.util.*;
+import java.util.function.*;
 
 public abstract class ServerPacket{
     public static final Random random = new Random();

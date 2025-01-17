@@ -1,25 +1,21 @@
 package github.iri.tridot.client.particle;
 
-import com.mojang.blaze3d.vertex.VertexConsumer;
-import github.iri.tridot.client.particle.behavior.ParticleBehavior;
-import github.iri.tridot.client.particle.behavior.component.ParticleBehaviorComponent;
+import com.mojang.blaze3d.vertex.*;
+import github.iri.tridot.client.*;
+import github.iri.tridot.client.particle.behavior.*;
+import github.iri.tridot.client.particle.behavior.component.*;
 import github.iri.tridot.client.particle.data.*;
-import github.iri.tridot.client.particle.options.GenericParticleOptions;
-import github.iri.tridot.client.TridotRenderTypes;
-import net.minecraft.client.Camera;
-import net.minecraft.client.multiplayer.ClientLevel;
-import net.minecraft.client.particle.ParticleEngine;
-import net.minecraft.client.particle.ParticleRenderType;
-import net.minecraft.client.particle.TextureSheetParticle;
-import net.minecraft.client.renderer.RenderType;
-import net.minecraft.util.FastColor;
-import net.minecraft.util.Mth;
-import net.minecraft.world.phys.Vec3;
+import github.iri.tridot.client.particle.options.*;
+import net.minecraft.client.*;
+import net.minecraft.client.multiplayer.*;
+import net.minecraft.client.particle.*;
+import net.minecraft.client.renderer.*;
+import net.minecraft.util.*;
+import net.minecraft.world.phys.*;
 
 import java.awt.*;
-import java.util.Collection;
-import java.util.Random;
-import java.util.function.Consumer;
+import java.util.*;
+import java.util.function.*;
 
 public class GenericParticle extends TextureSheetParticle{
 

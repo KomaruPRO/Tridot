@@ -1,20 +1,17 @@
 package github.iri.tridot.client.particle.options;
 
-import github.iri.tridot.client.particle.GenericParticle;
-import github.iri.tridot.client.particle.GenericParticleRenderType;
-import github.iri.tridot.client.particle.behavior.ParticleBehavior;
+import github.iri.tridot.client.*;
+import github.iri.tridot.client.particle.*;
+import github.iri.tridot.client.particle.behavior.*;
 import github.iri.tridot.client.particle.data.*;
-import github.iri.tridot.client.TridotRenderTypes;
-import net.minecraft.client.particle.ParticleRenderType;
-import net.minecraft.client.renderer.RenderType;
-import net.minecraft.core.particles.ParticleOptions;
-import net.minecraft.core.particles.ParticleType;
-import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.client.particle.*;
+import net.minecraft.client.renderer.*;
+import net.minecraft.core.particles.*;
+import net.minecraft.network.*;
 
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.function.Consumer;
+import java.util.*;
+import java.util.function.*;
 
 public class GenericParticleOptions implements ParticleOptions{
 

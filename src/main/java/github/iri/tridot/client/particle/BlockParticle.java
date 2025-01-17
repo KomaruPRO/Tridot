@@ -1,9 +1,9 @@
 package github.iri.tridot.client.particle;
 
-import github.iri.tridot.client.particle.options.BlockParticleOptions;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.multiplayer.ClientLevel;
-import net.minecraftforge.client.model.data.ModelData;
+import github.iri.tridot.client.particle.options.*;
+import net.minecraft.client.*;
+import net.minecraft.client.multiplayer.*;
+import net.minecraftforge.client.model.data.*;
 
 public class BlockParticle extends GenericParticle{
 

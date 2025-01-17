@@ -1,10 +1,8 @@
 package github.iri.tridot.client.particle.behavior;
 
-import github.iri.tridot.client.particle.data.ColorParticleData;
-import github.iri.tridot.client.particle.data.GenericParticleData;
-import github.iri.tridot.client.particle.data.SpinParticleData;
-import github.iri.tridot.client.particle.options.GenericParticleOptions;
-import net.minecraft.world.phys.Vec3;
+import github.iri.tridot.client.particle.data.*;
+import github.iri.tridot.client.particle.options.*;
+import net.minecraft.world.phys.*;
 
 public class SparkParticleBehaviorBuilder extends ParticleBehaviorBuilder{
 

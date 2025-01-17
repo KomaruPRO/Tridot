@@ -1,6 +1,6 @@
 package github.iri.tridot.client.particle.behavior.component;
 
-import github.iri.tridot.client.render.trail.TrailPointBuilder;
+import github.iri.tridot.client.render.trail.*;
 
 public class TrailParticleBehaviorComponent extends ParticleBehaviorComponent{
     public TrailPointBuilder trailPointBuilder = TrailPointBuilder.create(10);

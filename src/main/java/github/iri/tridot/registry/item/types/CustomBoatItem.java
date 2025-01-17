@@ -1,6 +1,6 @@
 package github.iri.tridot.registry.item.types;
 
-import github.iri.tridot.registry.entity.*;
+import github.iri.tridot.registry.entity.misc.*;
 import net.minecraft.stats.*;
 import net.minecraft.world.*;
 import net.minecraft.world.entity.*;

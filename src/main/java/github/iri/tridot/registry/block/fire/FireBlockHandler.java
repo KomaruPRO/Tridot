@@ -1,14 +1,12 @@
 package github.iri.tridot.registry.block.fire;
 
-import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.BaseFireBlock;
-import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.core.*;
+import net.minecraft.world.entity.*;
+import net.minecraft.world.level.*;
+import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.state.*;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class FireBlockHandler{
     public static List<FireBlockModifier> modifiers = new ArrayList<>();

@@ -11,41 +11,41 @@ import net.minecraftforge.api.distmarker.*;
 
 import java.util.*;
 
-public class ClientProxy implements ISidedProxy {
+public class ClientProxy implements ISidedProxy{
     public static Map<UUID, String> bossbars = new HashMap<>();
 
     @Override
-    public Player getPlayer() {
+    public Player getPlayer(){
         return Minecraft.getInstance().player;
     }
 
     @Override
-    public Level getLevel() {
+    public Level getLevel(){
         return Minecraft.getInstance().level;
     }
 
     @OnlyIn(Dist.CLIENT)
-    public static void playSound(SoundEvent event) {
+    public static void playSound(SoundEvent event){
         SoundManager soundManager = Minecraft.getInstance().getSoundManager();
-        if (ValoriaClient.BOSS_MUSIC != null && soundManager.isActive(ValoriaClient.BOSS_MUSIC)) {
+        if(ValoriaClient.BOSS_MUSIC != null && soundManager.isActive(ValoriaClient.BOSS_MUSIC)){
             return;
         }
 
         ValoriaClient.BOSS_MUSIC = new LoopedSoundInstance(event, Minecraft.getInstance().player);
         soundManager.play(ValoriaClient.BOSS_MUSIC);
-        if (!soundManager.isActive(ValoriaClient.BOSS_MUSIC)) {
+        if(!soundManager.isActive(ValoriaClient.BOSS_MUSIC)){
             ValoriaClient.BOSS_MUSIC = null;
         }
     }
 
-    public void removeBossBarRender(UUID bossBar) {
+    public void removeBossBarRender(UUID bossBar){
         bossbars.remove(bossBar);
-        if(ValoriaClient.BOSS_MUSIC != null) {
+        if(ValoriaClient.BOSS_MUSIC != null){
             Minecraft.getInstance().getSoundManager().stop(ValoriaClient.BOSS_MUSIC);
         }
     }
 
-    public void setBossBarRender(UUID bossBar, String id, SoundEvent bossMusic) {
+    public void setBossBarRender(UUID bossBar, String id, SoundEvent bossMusic){
         bossbars.put(bossBar, id);
         playSound(bossMusic);
     }

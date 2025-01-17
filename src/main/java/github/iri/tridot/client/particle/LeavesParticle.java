@@ -1,9 +1,9 @@
 package github.iri.tridot.client.particle;
 
-import github.iri.tridot.client.particle.data.GenericParticleData;
-import github.iri.tridot.client.particle.options.GenericParticleOptions;
-import net.minecraft.client.multiplayer.ClientLevel;
-import net.minecraft.client.particle.ParticleEngine;
+import github.iri.tridot.client.particle.data.*;
+import github.iri.tridot.client.particle.options.*;
+import net.minecraft.client.multiplayer.*;
+import net.minecraft.client.particle.*;
 
 public class LeavesParticle extends GenericParticle{
 

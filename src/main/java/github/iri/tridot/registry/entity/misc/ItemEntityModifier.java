@@ -1,9 +1,9 @@
-package github.iri.tridot.registry.entity;
+package github.iri.tridot.registry.entity.misc;
 
-import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.entity.item.ItemEntity;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.Level;
+import net.minecraft.world.damagesource.*;
+import net.minecraft.world.entity.item.*;
+import net.minecraft.world.item.*;
+import net.minecraft.world.level.*;
 
 public class ItemEntityModifier{
 

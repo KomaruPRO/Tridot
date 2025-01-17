@@ -11,19 +11,23 @@ import net.minecraft.world.item.*;
 import net.minecraft.world.level.block.*;
 
 public class TagsRegistry{
-    public static TagKey<Item> item(final ResourceLocation name) {
+    public static TagKey<Item> item(final ResourceLocation name){
         return TagKey.create(Registries.ITEM, name);
     }
-    public static TagKey<Block> block(final ResourceLocation name) {
+
+    public static TagKey<Block> block(final ResourceLocation name){
         return TagKey.create(Registries.BLOCK, name);
     }
-    public static TagKey<EntityType<?>> entity(final ResourceLocation name) {
+
+    public static TagKey<EntityType<?>> entity(final ResourceLocation name){
         return TagKey.create(Registries.ENTITY_TYPE, name);
     }
-    public static TagKey<DamageType> damage(final ResourceLocation name) {
+
+    public static TagKey<DamageType> damage(final ResourceLocation name){
         return TagKey.create(Registries.DAMAGE_TYPE, name);
     }
-    public static TagKey<PaintingVariant> painting(final ResourceLocation name) {
+
+    public static TagKey<PaintingVariant> painting(final ResourceLocation name){
         return TagKey.create(Registries.PAINTING_VARIANT, name);
     }
 

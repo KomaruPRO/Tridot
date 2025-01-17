@@ -1,7 +1,7 @@
 package github.iri.tridot.client.particle.behavior;
 
-import github.iri.tridot.client.particle.data.SpinParticleData;
-import github.iri.tridot.client.particle.options.GenericParticleOptions;
+import github.iri.tridot.client.particle.data.*;
+import github.iri.tridot.client.particle.options.*;
 
 public class ParticleBehaviorBuilder{
     public SpinParticleData xSpinData = GenericParticleOptions.DEFAULT_SPIN;

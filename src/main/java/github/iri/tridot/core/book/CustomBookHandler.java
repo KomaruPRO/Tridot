@@ -1,7 +1,6 @@
 package github.iri.tridot.core.book;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class CustomBookHandler{
     public static List<CustomBook> books = new ArrayList<>();

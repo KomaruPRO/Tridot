@@ -1,7 +1,7 @@
 package github.iri.tridot.client.particle;
 
-import github.iri.tridot.client.particle.options.SpriteParticleOptions;
-import net.minecraft.client.multiplayer.ClientLevel;
+import github.iri.tridot.client.particle.options.*;
+import net.minecraft.client.multiplayer.*;
 
 public class SpriteParticle extends GenericParticle{
 

@@ -1,6 +1,6 @@
 package github.iri.tridot.client.particle.behavior;
 
-import github.iri.tridot.client.particle.data.SpinParticleData;
+import github.iri.tridot.client.particle.data.*;
 
 public class CubeParticleBehaviorBuilder extends ParticleBehaviorBuilder{
 

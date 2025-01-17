@@ -14,17 +14,18 @@ public class Bossbar{
     public boolean rainbow = false;
     private final Color color;
     private final ResourceLocation texture;
-    public Bossbar(ResourceLocation tex) {
+
+    public Bossbar(ResourceLocation tex){
         this.texture = tex;
         this.color = new Color(1, 1, 1);
     }
 
-    public Bossbar(Color color) {
+    public Bossbar(Color color){
         this.texture = new ResourceLocation(TridotLib.ID, "textures/gui/bossbars/base.png");
         this.color = color;
     }
 
-    public Bossbar(boolean rainbow) {
+    public Bossbar(boolean rainbow){
         this.texture = new ResourceLocation(TridotLib.ID, "textures/gui/bossbars/base.png"); //todo
         this.color = new Color(1, 1, 1);
         this.rainbow = rainbow;

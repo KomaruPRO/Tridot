@@ -8,26 +8,25 @@ import net.minecraftforge.api.distmarker.*;
 import net.minecraftforge.client.event.*;
 import net.minecraftforge.fml.*;
 
-// todo move to lib
-public interface OverlayRenderItem {
+public interface OverlayRenderItem{
     ResourceLocation getTexture();
 
     @OnlyIn(Dist.CLIENT)
     void render(CompoundTag tag, GuiGraphics gui, int offsetX, int offsetY);
 
-    default boolean toRender() {
-       return !Minecraft.getInstance().player.isSpectator();
+    default boolean toRender(){
+        return !Minecraft.getInstance().player.isSpectator();
     }
 
-    default int mainHandOffset() {
+    default int mainHandOffset(){
         return 0;
     }
 
-    default int offhandOffset() {
+    default int offhandOffset(){
         return 25;
     }
 
-    static boolean isEmbeddiumPlusLoaded() {
+    static boolean isEmbeddiumPlusLoaded(){
         return ModList.get().isLoaded("embeddiumplus");
     }
 

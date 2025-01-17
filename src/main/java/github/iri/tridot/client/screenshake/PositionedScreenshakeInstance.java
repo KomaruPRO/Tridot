@@ -1,9 +1,11 @@
 package github.iri.tridot.client.screenshake;
 
-import github.iri.tridot.core.easing.Easing;
-import net.minecraft.client.Camera;
-import net.minecraft.world.phys.Vec3;
-import org.joml.Vector3f;
+import github.iri.tridot.core.easing.*;
+import net.minecraft.client.*;
+import net.minecraft.world.phys.*;
+import org.joml.*;
+
+import java.lang.Math;
 
 public class PositionedScreenshakeInstance extends ScreenshakeInstance{
     public final Vec3 position;

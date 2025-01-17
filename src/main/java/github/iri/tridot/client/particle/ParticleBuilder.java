@@ -1,24 +1,22 @@
 package github.iri.tridot.client.particle;
 
-import github.iri.tridot.client.particle.behavior.ParticleBehavior;
+import github.iri.tridot.client.particle.behavior.*;
 import github.iri.tridot.client.particle.data.*;
-import github.iri.tridot.client.particle.options.GenericParticleOptions;
-import github.iri.tridot.util.client.RenderUtil;
-import net.minecraft.client.Camera;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.particle.ParticleRenderType;
-import net.minecraft.client.renderer.RenderType;
-import net.minecraft.core.particles.ParticleType;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.phys.Vec3;
-import net.minecraft.world.phys.shapes.VoxelShape;
-import net.minecraftforge.registries.RegistryObject;
+import github.iri.tridot.client.particle.options.*;
+import github.iri.tridot.util.client.*;
+import net.minecraft.client.*;
+import net.minecraft.client.particle.*;
+import net.minecraft.client.renderer.*;
+import net.minecraft.core.particles.*;
+import net.minecraft.world.level.*;
+import net.minecraft.world.phys.*;
+import net.minecraft.world.phys.shapes.*;
+import net.minecraftforge.registries.*;
 import org.joml.Math;
 
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Random;
-import java.util.function.Consumer;
+import java.util.*;
+import java.util.function.*;
 
 public class ParticleBuilder{
 

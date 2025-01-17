@@ -6,14 +6,14 @@ import net.minecraft.world.level.*;
 
 import java.util.*;
 
-public class ServerProxy implements ISidedProxy {
+public class ServerProxy implements ISidedProxy{
     @Override
-    public Player getPlayer() {
+    public Player getPlayer(){
         return null;
     }
 
     @Override
-    public Level getLevel() {
+    public Level getLevel(){
         return null;
     }
 

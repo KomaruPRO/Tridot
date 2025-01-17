@@ -1,17 +1,13 @@
 package github.iri.tridot.client.particle.behavior;
 
-import com.mojang.blaze3d.vertex.DefaultVertexFormat;
-import com.mojang.blaze3d.vertex.VertexConsumer;
-import github.iri.tridot.client.particle.GenericParticle;
-import github.iri.tridot.client.particle.behavior.component.SparkParticleBehaviorComponent;
-import github.iri.tridot.client.particle.data.ColorParticleData;
-import github.iri.tridot.client.particle.data.GenericParticleData;
-import github.iri.tridot.client.particle.data.SpinParticleData;
-import github.iri.tridot.client.render.RenderBuilder;
-import net.minecraft.client.Camera;
-import net.minecraft.util.FastColor;
-import net.minecraft.util.Mth;
-import net.minecraft.world.phys.Vec3;
+import com.mojang.blaze3d.vertex.*;
+import github.iri.tridot.client.particle.*;
+import github.iri.tridot.client.particle.behavior.component.*;
+import github.iri.tridot.client.particle.data.*;
+import github.iri.tridot.client.render.*;
+import net.minecraft.client.*;
+import net.minecraft.util.*;
+import net.minecraft.world.phys.*;
 
 import java.awt.*;
 

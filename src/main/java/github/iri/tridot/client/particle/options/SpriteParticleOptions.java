@@ -1,7 +1,7 @@
 package github.iri.tridot.client.particle.options;
 
-import net.minecraft.client.renderer.texture.TextureAtlasSprite;
-import net.minecraft.core.particles.ParticleType;
+import net.minecraft.client.renderer.texture.*;
+import net.minecraft.core.particles.*;
 
 public class SpriteParticleOptions extends GenericParticleOptions{
     public final TextureAtlasSprite sprite;

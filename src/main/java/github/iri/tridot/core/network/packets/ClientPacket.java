@@ -1,13 +1,12 @@
 package github.iri.tridot.core.network.packets;
 
-import net.minecraft.network.FriendlyByteBuf;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.fml.LogicalSide;
-import net.minecraftforge.network.NetworkEvent;
+import net.minecraft.network.*;
+import net.minecraftforge.api.distmarker.*;
+import net.minecraftforge.fml.*;
+import net.minecraftforge.network.*;
 
-import java.util.Random;
-import java.util.function.Supplier;
+import java.util.*;
+import java.util.function.*;
 
 public abstract class ClientPacket{
     public static final Random random = new Random();

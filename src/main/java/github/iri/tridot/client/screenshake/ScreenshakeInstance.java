@@ -1,11 +1,11 @@
 package github.iri.tridot.client.screenshake;
 
-import github.iri.tridot.core.easing.Easing;
-import net.minecraft.client.Camera;
-import net.minecraft.util.Mth;
-import net.minecraft.world.phys.Vec3;
+import github.iri.tridot.core.easing.*;
+import net.minecraft.client.*;
+import net.minecraft.util.*;
+import net.minecraft.world.phys.*;
 
-import java.util.Random;
+import java.util.*;
 
 public class ScreenshakeInstance{
     public int progress;

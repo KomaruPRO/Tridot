@@ -26,12 +26,12 @@ public class Events{
     public void onBossInfoRender(CustomizeGuiOverlayEvent.BossEventProgress ev){
         Minecraft mc = Minecraft.getInstance();
         if(ev.isCanceled() || mc.level == null || !ClientConfig.CUSTOM_BOSSBARS.get()) return;
-        Map<UUID, LerpingBossEvent> events = ((BossHealthOverlayAccessor) mc.gui.getBossOverlay()).getEvents();
-        if (events.isEmpty()) return;
+        Map<UUID, LerpingBossEvent> events = ((BossHealthOverlayAccessor)mc.gui.getBossOverlay()).getEvents();
+        if(events.isEmpty()) return;
         GuiGraphics pGuiGraphics = ev.getGuiGraphics();
         int screenWidth = pGuiGraphics.guiWidth();
         int offset = 0;
-        for (LerpingBossEvent event : events.values()){
+        for(LerpingBossEvent event : events.values()){
             if(ClientProxy.bossbars.containsKey(ev.getBossEvent().getId())){
                 String id = ClientProxy.bossbars.get(event.getId());
                 Bossbar bossbar = Bossbar.bossbars.getOrDefault(id, null);
@@ -43,7 +43,7 @@ public class Events{
                     pGuiGraphics.drawString(mc.font, event.getName(), nameX, nameY, 16777215);
                 }
 
-                if (bossbar != null){
+                if(bossbar != null){
                     if(ClientConfig.BOSSBAR_TITLE.get()){
                         ev.setIncrement(32);
                         int yOffset = offset + 6;

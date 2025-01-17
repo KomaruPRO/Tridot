@@ -3,7 +3,6 @@ package github.iri.tridot.util.client;
 import net.minecraft.world.phys.*;
 
 import java.awt.*;
-import java.util.*;
 
 public class Clr{
     public float r, g, b, a;
@@ -615,54 +614,54 @@ public class Clr{
         return fromHex(hex).toJavaColor();
     }
 
-    public static int getAlpha(int packedColor) {
+    public static int getAlpha(int packedColor){
         return packedColor >>> 24;
     }
 
-    public static int getRed(int packedColor) {
+    public static int getRed(int packedColor){
         return packedColor >> 16 & 255;
     }
 
-    public static int getGreen(int packedColor) {
+    public static int getGreen(int packedColor){
         return packedColor >> 8 & 255;
     }
 
-    public static int getBlue(int packedColor) {
+    public static int getBlue(int packedColor){
         return packedColor & 255;
     }
 
-    public static int packColor(int alpha, int red, int green, int blue) {
+    public static int packColor(int alpha, int red, int green, int blue){
         return alpha << 24 | red << 16 | green << 8 | blue;
     }
 
-    public static int packColor(float red, float green, float blue) {
-        return ((int) (red * 255.0F) & 255) << 16 | ((int) (green * 255.0F) & 255) << 8 | (int) (blue * 255.0F) & 255;
+    public static int packColor(float red, float green, float blue){
+        return ((int)(red * 255.0F) & 255) << 16 | ((int)(green * 255.0F) & 255) << 8 | (int)(blue * 255.0F) & 255;
     }
 
-    public static int packColor(float alpha, float red, float green, float blue) {
-        return ((int) (alpha * 255.0F) & 255) << 24 | ((int) (red * 255.0F) & 255) << 16 | ((int) (green * 255.0F) & 255) << 8 | (int) (blue * 255.0F) & 255;
+    public static int packColor(float alpha, float red, float green, float blue){
+        return ((int)(alpha * 255.0F) & 255) << 24 | ((int)(red * 255.0F) & 255) << 16 | ((int)(green * 255.0F) & 255) << 8 | (int)(blue * 255.0F) & 255;
     }
 
-    public static int packColor(Color color) {
+    public static int packColor(Color color){
         return (color.getRed() << 16) | (color.getGreen() << 8) | color.getBlue();
     }
 
-    public static Color rainbowColor(float ticks) {
+    public static Color rainbowColor(float ticks){
         int r = (int)(Math.sin((double)ticks) * 127.0 + 128.0);
         int g = (int)(Math.sin((double)ticks + 1.5707963267948966) * 127.0 + 128.0);
         int b = (int)(Math.sin((double)ticks + Math.PI) * 127.0 + 128.0);
         return new Color(r, g, b);
     }
 
-    public static int hexToDecimal(String hex) {
+    public static int hexToDecimal(String hex){
         return Integer.parseInt(hex, 16);
     }
 
-    public static int colorToDecimal(Color color) {
+    public static int colorToDecimal(Color color){
         return Integer.parseInt(hex(color), 16);
     }
 
-    public static Vec3 toVec3(Color color) {
+    public static Vec3 toVec3(Color color){
         return new Vec3((double)color.getRed() / 255, (double)color.getGreen() / 255, (double)color.getBlue() / 255);
     }
 

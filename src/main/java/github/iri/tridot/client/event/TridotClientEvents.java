@@ -3,7 +3,6 @@ package github.iri.tridot.client.event;
 import github.iri.tridot.*;
 import github.iri.tridot.client.bow.*;
 import github.iri.tridot.client.gui.screen.*;
-import github.iri.tridot.client.playerskin.*;
 import github.iri.tridot.client.screenshake.*;
 import github.iri.tridot.client.shader.postprocess.*;
 import github.iri.tridot.core.config.*;

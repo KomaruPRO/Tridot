@@ -1,26 +1,21 @@
 package github.iri.tridot.client.particle.behavior;
 
-import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexConsumer;
-import github.iri.tridot.client.particle.GenericParticle;
-import github.iri.tridot.client.particle.behavior.component.TrailParticleBehaviorComponent;
-import github.iri.tridot.client.particle.data.ColorParticleData;
-import github.iri.tridot.client.particle.data.GenericParticleData;
-import github.iri.tridot.client.particle.data.SpinParticleData;
-import github.iri.tridot.client.render.RenderBuilder;
-import github.iri.tridot.client.render.trail.TrailPoint;
-import github.iri.tridot.client.render.trail.TrailPointBuilder;
-import github.iri.tridot.client.TridotParticles;
-import net.minecraft.client.Camera;
-import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.util.FastColor;
-import net.minecraft.util.Mth;
-import net.minecraft.world.phys.Vec3;
+import com.mojang.blaze3d.vertex.*;
+import github.iri.tridot.client.*;
+import github.iri.tridot.client.particle.*;
+import github.iri.tridot.client.particle.behavior.component.*;
+import github.iri.tridot.client.particle.data.*;
+import github.iri.tridot.client.render.*;
+import github.iri.tridot.client.render.trail.*;
+import net.minecraft.client.*;
+import net.minecraft.client.renderer.*;
+import net.minecraft.util.*;
+import net.minecraft.world.phys.*;
 
 import java.awt.*;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Function;
+import java.util.*;
+import java.util.function.*;
 
 public class TrailParticleBehavior extends ParticleBehavior implements ICustomBehaviorParticleRender{
 

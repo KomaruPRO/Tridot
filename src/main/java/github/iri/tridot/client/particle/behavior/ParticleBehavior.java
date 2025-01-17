@@ -1,15 +1,15 @@
 package github.iri.tridot.client.particle.behavior;
 
-import com.mojang.blaze3d.vertex.VertexConsumer;
-import github.iri.tridot.client.particle.GenericParticle;
-import github.iri.tridot.client.particle.behavior.component.ParticleBehaviorComponent;
-import github.iri.tridot.client.particle.data.SpinParticleData;
-import net.minecraft.client.Camera;
-import net.minecraft.util.Mth;
-import net.minecraft.world.phys.Vec3;
-import org.joml.Quaternionf;
-import org.joml.Vector3f;
+import com.mojang.blaze3d.vertex.*;
+import github.iri.tridot.client.particle.*;
+import github.iri.tridot.client.particle.behavior.component.*;
+import github.iri.tridot.client.particle.data.*;
+import net.minecraft.client.*;
+import net.minecraft.util.*;
+import net.minecraft.world.phys.*;
+import org.joml.*;
 
+import java.lang.Math;
 import java.util.Random;
 
 public class ParticleBehavior{

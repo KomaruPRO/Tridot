@@ -6,7 +6,7 @@ import net.minecraft.world.level.*;
 
 import java.util.*;
 
-public interface ISidedProxy {
+public interface ISidedProxy{
     Player getPlayer();
 
     Level getLevel();

@@ -1,25 +1,23 @@
-package github.iri.tridot.registry.entity;
+package github.iri.tridot.registry.entity.misc;
 
-import net.minecraft.core.BlockPos;
-import net.minecraft.network.protocol.Packet;
-import net.minecraft.network.protocol.game.ClientGamePacketListener;
-import net.minecraft.tags.FluidTags;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.vehicle.ChestBoat;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Items;
-import net.minecraft.world.level.GameRules;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.network.NetworkHooks;
-import net.minecraftforge.registries.RegistryObject;
-import org.jetbrains.annotations.NotNull;
+import net.minecraft.core.*;
+import net.minecraft.network.protocol.*;
+import net.minecraft.network.protocol.game.*;
+import net.minecraft.tags.*;
+import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.vehicle.*;
+import net.minecraft.world.item.*;
+import net.minecraft.world.level.*;
+import net.minecraft.world.level.block.state.*;
+import net.minecraftforge.network.*;
+import net.minecraftforge.registries.*;
+import org.jetbrains.annotations.*;
 
-public class CustomChestBoatEntity extends ChestBoat{
+public class CustomBoatEntity extends Boat{
     private final RegistryObject<Item> boatItem;
     private final boolean isRaft;
 
-    public CustomChestBoatEntity(EntityType<? extends CustomChestBoatEntity> type, Level level, RegistryObject<Item> boatItem, boolean isRaft){
+    public CustomBoatEntity(EntityType<? extends CustomBoatEntity> type, Level level, RegistryObject<Item> boatItem, boolean isRaft){
         super(type, level);
         this.boatItem = boatItem;
         this.isRaft = isRaft;

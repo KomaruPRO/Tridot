@@ -1,11 +1,9 @@
 package github.iri.tridot.client.particle.behavior;
 
-import github.iri.tridot.client.particle.data.ColorParticleData;
-import github.iri.tridot.client.particle.data.GenericParticleData;
-import github.iri.tridot.client.particle.data.SpinParticleData;
-import github.iri.tridot.client.particle.options.GenericParticleOptions;
+import github.iri.tridot.client.particle.data.*;
+import github.iri.tridot.client.particle.options.*;
 
-import java.util.function.Function;
+import java.util.function.*;
 
 public class TrailParticleBehaviorBuilder extends ParticleBehaviorBuilder{
 

@@ -1,7 +1,6 @@
-package github.iri.tridot.registry.entity;
+package github.iri.tridot.registry.entity.misc;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class ItemEntityHandler{
     public static List<ItemEntityModifier> modifiers = new ArrayList<>();
