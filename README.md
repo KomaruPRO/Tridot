@@ -1,3 +1,14 @@
+# Features:
+- Shaders support  
+- Flexible particle and rendering system  
+- Items particles and animations  
+- Screenshake  
+- Custom panoramas  
+- Attribute name modifiers  
+- Music modifiers  
+- Item skin system  
+- ...and many other features to simplify development
+
 # How does Tridot differ from FluffyFur?
 
 ---

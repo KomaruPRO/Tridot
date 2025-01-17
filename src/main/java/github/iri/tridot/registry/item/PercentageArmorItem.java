@@ -18,6 +18,7 @@ import javax.annotation.*;
 import java.text.*;
 import java.util.*;
 
+
 public class PercentageArmorItem extends ArmorItem{
     public ArmorMaterial material;
     public UUID uuid;
