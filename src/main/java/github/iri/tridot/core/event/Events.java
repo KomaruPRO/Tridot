@@ -1,4 +1,4 @@
-package github.iri.tridot.registry.event;
+package github.iri.tridot.core.event;
 
 import com.mojang.blaze3d.systems.*;
 import github.iri.tridot.*;
@@ -6,20 +6,75 @@ import github.iri.tridot.client.render.entity.bossbar.*;
 import github.iri.tridot.core.config.*;
 import github.iri.tridot.core.proxy.*;
 import github.iri.tridot.mixin.client.*;
+import github.iri.tridot.registry.*;
+import github.iri.tridot.util.*;
 import github.iri.tridot.util.client.*;
+import net.minecraft.*;
 import net.minecraft.client.*;
 import net.minecraft.client.gui.*;
 import net.minecraft.client.gui.components.*;
+import net.minecraft.client.gui.screens.*;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.*;
+import net.minecraft.tags.*;
 import net.minecraft.world.*;
+import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.player.*;
+import net.minecraft.world.item.*;
+import net.minecraft.world.level.block.state.*;
 import net.minecraftforge.api.distmarker.*;
 import net.minecraftforge.client.event.*;
+import net.minecraftforge.event.entity.living.*;
+import net.minecraftforge.event.entity.player.*;
 import net.minecraftforge.eventbus.api.*;
 
 import java.awt.*;
 import java.util.*;
+import java.util.stream.*;
 
 public class Events{
+
+    @SubscribeEvent
+    public void disableBlock(ShieldBlockEvent event){
+        if(event.getDamageSource().getDirectEntity() instanceof Player player){
+            LivingEntity mob = event.getEntity();
+            ItemStack weapon = player.getMainHandItem();
+            if(!weapon.isEmpty() && weapon.is(TagsRegistry.CAN_DISABLE_SHIELD) && mob instanceof Player attacked){
+                attacked.disableShield(true);
+            }
+        }
+    }
+
+    @SubscribeEvent
+    public void onTooltip(ItemTooltipEvent e){
+        if(Utils.isIDE){
+            ItemStack itemStack = e.getItemStack();
+            Stream<ResourceLocation> itemTagStream = itemStack.getTags().map(TagKey::location);
+            if(Minecraft.getInstance().options.advancedItemTooltips){
+                if(Screen.hasControlDown()){
+                    if(!itemStack.getTags().toList().isEmpty()){
+                        e.getToolTip().add(net.minecraft.network.chat.Component.empty());
+                        e.getToolTip().add(net.minecraft.network.chat.Component.literal("ItemTags: " + itemTagStream.toList()).withStyle(ChatFormatting.DARK_GRAY));
+                    }
+
+                    if(itemStack.getItem() instanceof BlockItem blockItem){
+                        BlockState blockState = blockItem.getBlock().defaultBlockState();
+                        Stream<ResourceLocation> blockTagStream = blockState.getTags().map(TagKey::location);
+                        if(!blockState.getTags().map(TagKey::location).toList().isEmpty()){
+                            if(itemStack.getTags().toList().isEmpty()){
+                                e.getToolTip().add(net.minecraft.network.chat.Component.empty());
+                            }
+
+                            e.getToolTip().add(net.minecraft.network.chat.Component.literal("BlockTags: " + blockTagStream.toList()).withStyle(ChatFormatting.DARK_GRAY));
+                        }
+                    }
+                }else if(!itemStack.getTags().toList().isEmpty() || itemStack.getItem() instanceof BlockItem blockItem && !blockItem.getBlock().defaultBlockState().getTags().toList().isEmpty()){
+                    e.getToolTip().add(net.minecraft.network.chat.Component.empty());
+                    e.getToolTip().add(Component.literal("Press [Control] to get tags info").withStyle(ChatFormatting.GRAY));
+                }
+            }
+        }
+    }
 
     @SubscribeEvent(priority = EventPriority.HIGHEST)
     @OnlyIn(Dist.CLIENT)

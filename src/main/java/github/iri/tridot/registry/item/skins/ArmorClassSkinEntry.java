@@ -1,4 +1,4 @@
-package github.iri.tridot.registry.item.itemskin;
+package github.iri.tridot.registry.item.skins;
 
 import github.iri.tridot.client.*;
 import github.iri.tridot.client.model.armor.*;
