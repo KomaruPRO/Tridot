@@ -5,7 +5,7 @@ import com.mojang.blaze3d.vertex.VertexConsumer;
 import github.iri.tridot.client.particle.GenericParticle;
 import github.iri.tridot.client.particle.data.SpinParticleData;
 import github.iri.tridot.client.render.RenderBuilder;
-import github.iri.tridot.registry.client.TridotParticles;
+import github.iri.tridot.client.TridotParticles;
 import net.minecraft.client.Camera;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;

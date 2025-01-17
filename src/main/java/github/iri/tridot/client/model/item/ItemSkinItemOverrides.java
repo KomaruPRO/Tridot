@@ -1,6 +1,6 @@
 package github.iri.tridot.client.model.item;
 
-import github.iri.tridot.common.item.itemskin.*;
+import github.iri.tridot.registry.item.itemskin.*;
 import net.minecraft.client.multiplayer.*;
 import net.minecraft.client.resources.model.*;
 import net.minecraft.world.entity.*;

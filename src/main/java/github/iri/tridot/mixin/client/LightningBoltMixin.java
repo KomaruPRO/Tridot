@@ -1,7 +1,7 @@
 package github.iri.tridot.mixin.client;
 
 import github.iri.tridot.client.effect.*;
-import github.iri.tridot.config.*;
+import github.iri.tridot.core.config.*;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.level.*;
 import net.minecraft.world.phys.*;

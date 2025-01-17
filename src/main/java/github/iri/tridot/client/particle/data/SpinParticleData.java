@@ -1,6 +1,6 @@
 package github.iri.tridot.client.particle.data;
 
-import github.iri.tridot.common.easing.*;
+import github.iri.tridot.core.easing.*;
 import net.minecraft.util.*;
 
 public class SpinParticleData extends GenericParticleData{

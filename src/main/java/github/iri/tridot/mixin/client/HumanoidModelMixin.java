@@ -1,7 +1,7 @@
 package github.iri.tridot.mixin.client;
 
 import github.iri.tridot.client.animation.*;
-import github.iri.tridot.common.interfaces.*;
+import github.iri.tridot.core.interfaces.*;
 import net.minecraft.client.model.*;
 import net.minecraft.world.*;
 import net.minecraft.world.entity.*;

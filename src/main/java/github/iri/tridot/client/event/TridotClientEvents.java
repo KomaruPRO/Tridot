@@ -6,7 +6,7 @@ import github.iri.tridot.client.gui.screen.*;
 import github.iri.tridot.client.playerskin.*;
 import github.iri.tridot.client.screenshake.*;
 import github.iri.tridot.client.shader.postprocess.*;
-import github.iri.tridot.config.*;
+import github.iri.tridot.core.config.*;
 import net.minecraft.client.*;
 import net.minecraft.client.gui.screens.*;
 import net.minecraft.util.*;

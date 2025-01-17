@@ -1,8 +1,7 @@
 package github.iri.tridot.util;
 
 import com.google.common.collect.*;
-import github.iri.tridot.*;
-import github.iri.tridot.registry.core.*;
+import github.iri.tridot.registry.*;
 import net.minecraft.core.particles.*;
 import net.minecraft.server.level.*;
 import net.minecraft.sounds.*;

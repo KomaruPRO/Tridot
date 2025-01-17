@@ -1,13 +1,13 @@
 package github.iri.tridot;
 
-import github.iri.tridot.common.event.*;
-import github.iri.tridot.common.item.itemskin.*;
-import github.iri.tridot.common.network.*;
-import github.iri.tridot.common.proxy.*;
-import github.iri.tridot.config.*;
-import github.iri.tridot.registry.client.*;
-import github.iri.tridot.registry.core.*;
-import github.iri.tridot.registry.core.block.*;
+import github.iri.tridot.client.*;
+import github.iri.tridot.core.config.*;
+import github.iri.tridot.registry.*;
+import github.iri.tridot.registry.item.itemskin.*;
+import github.iri.tridot.core.network.*;
+import github.iri.tridot.core.proxy.*;
+import github.iri.tridot.registry.block.*;
+import github.iri.tridot.registry.event.*;
 import net.minecraftforge.api.distmarker.*;
 import net.minecraftforge.common.*;
 import net.minecraftforge.eventbus.api.*;

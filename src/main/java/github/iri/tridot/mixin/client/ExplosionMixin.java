@@ -2,7 +2,7 @@ package github.iri.tridot.mixin.client;
 
 import github.iri.tridot.*;
 import github.iri.tridot.client.effect.*;
-import github.iri.tridot.config.*;
+import github.iri.tridot.core.config.*;
 import net.minecraft.world.level.*;
 import org.spongepowered.asm.mixin.*;
 import org.spongepowered.asm.mixin.injection.*;

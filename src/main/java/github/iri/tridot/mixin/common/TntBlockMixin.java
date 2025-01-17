@@ -1,6 +1,6 @@
 package github.iri.tridot.mixin.common;
 
-import github.iri.tridot.common.block.fire.*;
+import github.iri.tridot.registry.block.fire.*;
 import net.minecraft.core.*;
 import net.minecraft.world.*;
 import net.minecraft.world.entity.player.*;

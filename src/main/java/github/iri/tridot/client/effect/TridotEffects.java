@@ -2,14 +2,14 @@ package github.iri.tridot.client.effect;
 
 import com.mojang.blaze3d.vertex.*;
 import com.mojang.math.*;
+import github.iri.tridot.client.*;
 import github.iri.tridot.client.particle.*;
 import github.iri.tridot.client.particle.behavior.*;
 import github.iri.tridot.client.particle.data.*;
 import github.iri.tridot.client.render.*;
 import github.iri.tridot.client.screenshake.*;
 import github.iri.tridot.client.shader.postprocess.*;
-import github.iri.tridot.common.easing.*;
-import github.iri.tridot.registry.client.*;
+import github.iri.tridot.core.easing.*;
 import github.iri.tridot.util.client.*;
 import net.minecraft.client.renderer.*;
 import net.minecraft.util.*;

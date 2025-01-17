@@ -2,7 +2,7 @@ package github.iri.tridot.mixin.client;
 
 import com.mojang.blaze3d.vertex.*;
 import github.iri.tridot.client.effect.*;
-import github.iri.tridot.config.*;
+import github.iri.tridot.core.config.*;
 import net.minecraft.client.renderer.*;
 import net.minecraft.client.renderer.entity.*;
 import net.minecraft.world.entity.*;

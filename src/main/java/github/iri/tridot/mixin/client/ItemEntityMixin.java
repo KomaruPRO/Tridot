@@ -1,8 +1,8 @@
 package github.iri.tridot.mixin.client;
 
 import github.iri.tridot.*;
-import github.iri.tridot.common.interfaces.*;
-import github.iri.tridot.config.*;
+import github.iri.tridot.core.config.*;
+import github.iri.tridot.core.interfaces.*;
 import net.minecraft.world.entity.item.*;
 import org.spongepowered.asm.mixin.*;
 import org.spongepowered.asm.mixin.injection.*;

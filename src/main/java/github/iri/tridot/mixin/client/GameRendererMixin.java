@@ -1,9 +1,9 @@
 package github.iri.tridot.mixin.client;
 
 import com.mojang.blaze3d.vertex.*;
+import github.iri.tridot.client.*;
 import github.iri.tridot.client.render.*;
 import github.iri.tridot.client.shader.postprocess.*;
-import github.iri.tridot.registry.client.*;
 import net.minecraft.client.*;
 import net.minecraft.client.renderer.*;
 import org.spongepowered.asm.mixin.*;

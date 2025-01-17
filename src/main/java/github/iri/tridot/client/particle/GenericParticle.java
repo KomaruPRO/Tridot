@@ -5,7 +5,7 @@ import github.iri.tridot.client.particle.behavior.ParticleBehavior;
 import github.iri.tridot.client.particle.behavior.component.ParticleBehaviorComponent;
 import github.iri.tridot.client.particle.data.*;
 import github.iri.tridot.client.particle.options.GenericParticleOptions;
-import github.iri.tridot.registry.client.TridotRenderTypes;
+import github.iri.tridot.client.TridotRenderTypes;
 import net.minecraft.client.Camera;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.ParticleEngine;

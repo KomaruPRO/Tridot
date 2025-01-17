@@ -1,6 +1,6 @@
 package github.iri.tridot.client.screenshake;
 
-import github.iri.tridot.common.easing.Easing;
+import github.iri.tridot.core.easing.Easing;
 import net.minecraft.client.Camera;
 import net.minecraft.util.Mth;
 import net.minecraft.world.phys.Vec3;

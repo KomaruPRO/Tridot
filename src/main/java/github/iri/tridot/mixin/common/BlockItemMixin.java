@@ -1,6 +1,6 @@
 package github.iri.tridot.mixin.common;
 
-import github.iri.tridot.common.interfaces.*;
+import github.iri.tridot.core.interfaces.*;
 import net.minecraft.nbt.*;
 import net.minecraft.world.item.*;
 import org.spongepowered.asm.mixin.*;

@@ -1,6 +1,6 @@
 package github.iri.tridot.client.particle.data;
 
-import github.iri.tridot.common.easing.Easing;
+import github.iri.tridot.core.easing.Easing;
 
 public class GenericParticleDataBuilder{
     protected float startingValue, middleValue, endingValue;

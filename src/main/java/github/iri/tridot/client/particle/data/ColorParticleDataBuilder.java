@@ -1,6 +1,6 @@
 package github.iri.tridot.client.particle.data;
 
-import github.iri.tridot.common.easing.Easing;
+import github.iri.tridot.core.easing.Easing;
 
 import java.awt.*;
 

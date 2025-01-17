@@ -1,6 +1,6 @@
 package github.iri.tridot.integration.common.curios;
 
-import github.iri.tridot.common.item.itemskin.*;
+import github.iri.tridot.registry.item.itemskin.*;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.item.*;
 import net.minecraftforge.api.distmarker.*;

@@ -2,8 +2,8 @@ package github.iri.tridot.client.gui.screen;
 
 import com.mojang.blaze3d.platform.*;
 import github.iri.tridot.client.playerskin.*;
-import github.iri.tridot.common.network.*;
-import github.iri.tridot.common.network.playerskin.*;
+import github.iri.tridot.core.network.*;
+import github.iri.tridot.core.network.playerskin.*;
 import net.minecraft.client.*;
 import net.minecraft.client.gui.*;
 import net.minecraft.client.gui.screens.*;

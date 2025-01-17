@@ -2,10 +2,10 @@ package github.iri.tridot.client.screenshake;
 
 import github.iri.tridot.TridotLib;
 import github.iri.tridot.client.event.ClientTickHandler;
-import github.iri.tridot.common.raycast.RayCast;
-import github.iri.tridot.common.raycast.RayCastContext;
-import github.iri.tridot.common.raycast.RayHitResult;
-import github.iri.tridot.config.ClientConfig;
+import github.iri.tridot.core.math.raycast.RayCast;
+import github.iri.tridot.core.math.raycast.RayCastContext;
+import github.iri.tridot.core.math.raycast.RayHitResult;
+import github.iri.tridot.core.config.ClientConfig;
 import net.minecraft.client.Camera;
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.Mth;

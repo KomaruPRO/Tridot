@@ -3,7 +3,7 @@ package github.iri.tridot.client.gui.screen;
 import com.mojang.blaze3d.systems.*;
 import github.iri.tridot.*;
 import github.iri.tridot.client.gui.components.*;
-import github.iri.tridot.config.*;
+import github.iri.tridot.core.config.*;
 import net.minecraft.*;
 import net.minecraft.client.*;
 import net.minecraft.client.gui.*;

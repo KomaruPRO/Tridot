@@ -1,7 +1,7 @@
 package github.iri.tridot.client.gui.components;
 
 import github.iri.tridot.client.gui.screen.*;
-import github.iri.tridot.config.*;
+import github.iri.tridot.core.config.*;
 import net.minecraft.client.*;
 import net.minecraft.client.gui.*;
 import net.minecraft.client.gui.components.*;

@@ -1,6 +1,6 @@
 package github.iri.tridot.mixin.common;
 
-import github.iri.tridot.common.entity.*;
+import github.iri.tridot.registry.entity.*;
 import net.minecraft.world.damagesource.*;
 import net.minecraft.world.entity.item.*;
 import org.spongepowered.asm.mixin.*;

@@ -4,7 +4,7 @@ import github.iri.tridot.client.particle.GenericParticle;
 import github.iri.tridot.client.particle.GenericParticleRenderType;
 import github.iri.tridot.client.particle.behavior.ParticleBehavior;
 import github.iri.tridot.client.particle.data.*;
-import github.iri.tridot.registry.client.TridotRenderTypes;
+import github.iri.tridot.client.TridotRenderTypes;
 import net.minecraft.client.particle.ParticleRenderType;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.particles.ParticleOptions;
