@@ -1,7 +1,6 @@
 package pro.komaru.tridot.mixin.client;
 
 import com.google.common.collect.*;
-import pro.komaru.tridot.client.tooltip.*;
 import net.minecraft.network.chat.*;
 import net.minecraft.world.entity.ai.attributes.*;
 import net.minecraft.world.entity.player.*;
@@ -10,8 +9,8 @@ import org.jetbrains.annotations.*;
 import org.spongepowered.asm.mixin.*;
 import org.spongepowered.asm.mixin.injection.*;
 import org.spongepowered.asm.mixin.injection.callback.*;
-import pro.komaru.tridot.client.tooltip.AttributeTooltipModifier;
-import pro.komaru.tridot.client.tooltip.TooltipModifierHandler;
+import pro.komaru.tridot.client.render.tooltip.AttributeTooltipModifier;
+import pro.komaru.tridot.client.render.tooltip.TooltipModifierHandler;
 
 import java.util.*;
 

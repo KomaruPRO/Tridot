@@ -1,4 +1,4 @@
-package pro.komaru.tridot.client.screenshake;
+package pro.komaru.tridot.client.gui.screenshake;
 
 import pro.komaru.tridot.utilities.math.Interp;
 import net.minecraft.client.*;

@@ -1,9 +1,5 @@
-package pro.komaru.tridot.client.screenshake;
+package pro.komaru.tridot.client.gui.screenshake;
 
-import pro.komaru.tridot.*;
-import pro.komaru.tridot.client.event.*;
-import pro.komaru.tridot.core.config.*;
-import pro.komaru.tridot.core.math.raycast.*;
 import net.minecraft.client.*;
 import net.minecraft.util.*;
 import net.minecraft.world.level.*;

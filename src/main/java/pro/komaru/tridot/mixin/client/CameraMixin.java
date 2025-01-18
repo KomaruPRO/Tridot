@@ -1,13 +1,12 @@
 package pro.komaru.tridot.mixin.client;
 
-import pro.komaru.tridot.client.screenshake.*;
 import net.minecraft.client.*;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.level.*;
 import org.spongepowered.asm.mixin.*;
 import org.spongepowered.asm.mixin.injection.*;
 import org.spongepowered.asm.mixin.injection.callback.*;
-import pro.komaru.tridot.client.screenshake.ScreenshakeHandler;
+import pro.komaru.tridot.client.gui.screenshake.ScreenshakeHandler;
 
 @Mixin(Camera.class)
 public class CameraMixin{

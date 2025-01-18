@@ -1,9 +1,6 @@
 package pro.komaru.tridot.mixin.client;
 
 import com.mojang.blaze3d.vertex.*;
-import pro.komaru.tridot.client.animation.*;
-import pro.komaru.tridot.client.bow.*;
-import pro.komaru.tridot.core.interfaces.*;
 import net.minecraft.client.player.*;
 import net.minecraft.client.renderer.*;
 import net.minecraft.world.*;
@@ -11,8 +8,8 @@ import net.minecraft.world.item.*;
 import org.spongepowered.asm.mixin.*;
 import org.spongepowered.asm.mixin.injection.*;
 import org.spongepowered.asm.mixin.injection.callback.*;
-import pro.komaru.tridot.client.animation.ItemAnimation;
-import pro.komaru.tridot.client.bow.BowHandler;
+import pro.komaru.tridot.client.render.animation.ItemAnimation;
+import pro.komaru.tridot.client.render.item.bow.BowHandler;
 import pro.komaru.tridot.core.interfaces.ICustomAnimationItem;
 
 @Mixin(ItemInHandRenderer.class)

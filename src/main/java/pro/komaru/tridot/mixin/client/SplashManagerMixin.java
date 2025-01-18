@@ -1,13 +1,12 @@
 package pro.komaru.tridot.mixin.client;
 
-import pro.komaru.tridot.client.splash.*;
 import net.minecraft.client.resources.*;
 import net.minecraft.server.packs.resources.*;
 import net.minecraft.util.profiling.*;
 import org.spongepowered.asm.mixin.*;
 import org.spongepowered.asm.mixin.injection.*;
 import org.spongepowered.asm.mixin.injection.callback.*;
-import pro.komaru.tridot.client.splash.SplashHandler;
+import pro.komaru.tridot.client.gui.splash.SplashHandler;
 
 import java.util.*;
 

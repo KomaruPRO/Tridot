@@ -1,4 +1,4 @@
-package pro.komaru.tridot.client.tooltip;
+package pro.komaru.tridot.client.render.tooltip;
 
 import net.minecraft.world.entity.ai.attributes.*;
 import net.minecraft.world.entity.player.*;

@@ -1,4 +1,4 @@
-package pro.komaru.tridot.client.bow;
+package pro.komaru.tridot.client.render.item.bow;
 
 import net.minecraft.world.item.*;
 

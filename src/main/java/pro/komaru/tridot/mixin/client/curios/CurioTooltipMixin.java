@@ -1,15 +1,14 @@
 package pro.komaru.tridot.mixin.client.curios;
 
 import com.google.common.collect.*;
-import pro.komaru.tridot.client.tooltip.*;
 import net.minecraft.world.entity.ai.attributes.*;
 import net.minecraftforge.event.entity.player.*;
 import net.minecraftforge.fml.*;
 import org.spongepowered.asm.mixin.*;
 import org.spongepowered.asm.mixin.extensibility.*;
 import org.spongepowered.asm.mixin.injection.*;
-import pro.komaru.tridot.client.tooltip.AttributeTooltipModifier;
-import pro.komaru.tridot.client.tooltip.TooltipModifierHandler;
+import pro.komaru.tridot.client.render.tooltip.AttributeTooltipModifier;
+import pro.komaru.tridot.client.render.tooltip.TooltipModifierHandler;
 import top.theillusivec4.curios.client.*;
 
 import java.util.*;

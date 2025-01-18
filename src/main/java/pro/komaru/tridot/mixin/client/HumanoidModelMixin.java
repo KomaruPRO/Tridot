@@ -1,7 +1,5 @@
 package pro.komaru.tridot.mixin.client;
 
-import pro.komaru.tridot.client.animation.*;
-import pro.komaru.tridot.core.interfaces.*;
 import net.minecraft.client.model.*;
 import net.minecraft.world.*;
 import net.minecraft.world.entity.*;
@@ -10,7 +8,7 @@ import net.minecraft.world.item.*;
 import org.spongepowered.asm.mixin.*;
 import org.spongepowered.asm.mixin.injection.*;
 import org.spongepowered.asm.mixin.injection.callback.*;
-import pro.komaru.tridot.client.animation.ItemAnimation;
+import pro.komaru.tridot.client.render.animation.ItemAnimation;
 import pro.komaru.tridot.core.interfaces.ICustomAnimationItem;
 
 @Mixin(HumanoidModel.class)

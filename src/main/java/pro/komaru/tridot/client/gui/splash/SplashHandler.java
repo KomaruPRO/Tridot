@@ -1,4 +1,4 @@
-package pro.komaru.tridot.client.splash;
+package pro.komaru.tridot.client.gui.splash;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
@@ -28,8 +28,7 @@ public class SplashHandler{
         languagedSplashes.add(new SplashLanguaged(lang,splash));
     }
     public static void addSplash(int weight, String lang, String splash){
-        for (int i = 0; i < weight; i++)
-            addSplash(lang,splash);
+        for (int i = 0; i < weight; i++) addSplash(lang,splash);
     }
 
     public static List<String> getSplashes(){
@@ -37,6 +36,7 @@ public class SplashHandler{
         DistExecutor.unsafeRunWhenOn(Dist.CLIENT,() -> () -> addLanguaged(all));
         return all;
     }
+
     @OnlyIn(Dist.CLIENT)
     public static void addLanguaged(List<String> all) {
         for (SplashLanguaged languagedSplash : languagedSplashes) {

@@ -1,4 +1,4 @@
-package pro.komaru.tridot.client.animation;
+package pro.komaru.tridot.client.render.animation;
 
 import com.mojang.blaze3d.vertex.*;
 import net.minecraft.client.model.*;

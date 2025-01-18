@@ -1,13 +1,7 @@
 package pro.komaru.tridot.registry.item.types;
 
 import com.google.common.collect.*;
-import pro.komaru.tridot.client.animation.*;
-import pro.komaru.tridot.client.screenshake.*;
 import pro.komaru.tridot.core.interfaces.*;
-import pro.komaru.tridot.registry.*;
-import pro.komaru.tridot.registry.item.*;
-import pro.komaru.tridot.registry.item.builders.*;
-import pro.komaru.tridot.utilities.*;
 import net.minecraft.nbt.*;
 import net.minecraft.sounds.*;
 import net.minecraft.stats.*;
@@ -21,10 +15,9 @@ import net.minecraft.world.level.*;
 import net.minecraftforge.api.distmarker.*;
 import net.minecraftforge.registries.*;
 import org.joml.*;
-import pro.komaru.tridot.client.animation.ItemAnimation;
-import pro.komaru.tridot.client.screenshake.ScreenshakeHandler;
-import pro.komaru.tridot.client.screenshake.ScreenshakeInstance;
-import pro.komaru.tridot.core.interfaces.*;
+import pro.komaru.tridot.client.render.animation.ItemAnimation;
+import pro.komaru.tridot.client.gui.screenshake.ScreenshakeHandler;
+import pro.komaru.tridot.client.gui.screenshake.ScreenshakeInstance;
 import pro.komaru.tridot.registry.ArcRandom;
 import pro.komaru.tridot.registry.EnchantmentsRegistry;
 import pro.komaru.tridot.registry.item.AttributeRegistry;
