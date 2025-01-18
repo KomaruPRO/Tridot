@@ -8,13 +8,15 @@
 - Screenshake  
 - Custom panoramas  
 - Attribute name modifiers  
-- Music modifiers  
-- Item skin system  
+- Music modifiers
+  - Biome Music Modifier
+  - Strcucture Music Modifier
+- Item skin system
+- Dynamic Splashes System
 - ...and many other features to simplify development
 
 # How does Tridot differ from FluffyFur?
 
----
 There are too many things to list, but here are some highlights:
 - Removal of furry things (Actually it's no more fluffy)
 - Merging with Valoria API
