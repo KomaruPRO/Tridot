@@ -1,18 +1,11 @@
 package github.iri.tridot.utilities.client;
 
-import com.skoow.quadlib.utilities.struct.*;
+import github.iri.tridot.utilities.struct.Structs;
 import net.minecraft.network.chat.*;
-import org.apache.commons.text.similarity.*;
 
 import java.util.*;
 
 public class TextUtils {
-    public static float similarity(String a, String b) {
-        CosineSimilarity cosine = new CosineSimilarity();
-        Map<CharSequence, Integer> text1 = tokenizeAndCount(cleanText(a));
-        Map<CharSequence, Integer> text2 = tokenizeAndCount(cleanText(b));
-        return cosine.cosineSimilarity(text1,text2).floatValue();
-    }
     private static String cleanText(String text) {
         return text.replaceAll("[^\\p{L}\\p{N}\\s]+", "").toLowerCase();
     }

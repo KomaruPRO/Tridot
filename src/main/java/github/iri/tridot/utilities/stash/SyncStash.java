@@ -1,8 +1,9 @@
 package github.iri.tridot.utilities.stash;
 
-import com.skoow.quadlib.utilities.*;
-import com.skoow.quadlib.utilities.stash.net.*;
-import com.skoow.quadlib.utilities.struct.*;
+import github.iri.tridot.utilities.MCUtil;
+import github.iri.tridot.utilities.stash.net.SyncStashObjectPacket;
+import github.iri.tridot.utilities.struct.Seq;
+import github.iri.tridot.utilities.struct.Structs;
 import net.minecraft.server.level.*;
 import net.minecraftforge.network.*;
 import net.minecraftforge.network.simple.*;
@@ -36,7 +37,7 @@ public class SyncStash {
         return stashObject.getId();
     }
     public static <T> T get(int obj) {
-        return Structs.safeGet(getStash().getOrNull(obj),a -> (T) a.get());
+        return Structs.safeGet(getStash().getOrNull(obj), a -> (T) a.get());
     }
     public static <T> T getAndDelete(int obj) {
         T stashObject = get(obj);

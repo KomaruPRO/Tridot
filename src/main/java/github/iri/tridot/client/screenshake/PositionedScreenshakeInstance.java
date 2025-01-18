@@ -1,6 +1,6 @@
 package github.iri.tridot.client.screenshake;
 
-import github.iri.tridot.core.easing.*;
+import github.iri.tridot.utilities.math.Interp;
 import net.minecraft.client.*;
 import net.minecraft.world.phys.*;
 import org.joml.*;
@@ -11,9 +11,9 @@ public class PositionedScreenshakeInstance extends ScreenshakeInstance{
     public final Vec3 position;
     public final float falloffDistance;
     public final float maxDistance;
-    public final Easing falloffEasing;
+    public final Interp falloffEasing;
 
-    public PositionedScreenshakeInstance(int duration, Vec3 position, float falloffDistance, float maxDistance, Easing falloffEasing){
+    public PositionedScreenshakeInstance(int duration, Vec3 position, float falloffDistance, float maxDistance, Interp falloffEasing){
         super(duration);
         this.position = position;
         this.falloffDistance = falloffDistance;
@@ -22,7 +22,7 @@ public class PositionedScreenshakeInstance extends ScreenshakeInstance{
     }
 
     public PositionedScreenshakeInstance(int duration, Vec3 position, float falloffDistance, float maxDistance){
-        this(duration, position, falloffDistance, maxDistance, Easing.LINEAR);
+        this(duration, position, falloffDistance, maxDistance, Interp.linear);
     }
 
     @Override

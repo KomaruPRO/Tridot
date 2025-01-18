@@ -6,7 +6,7 @@
 
 package github.iri.tridot.rhino;
 
-import com.skoow.quadlib.rhino.Alias;
+import github.iri.tridot.core.rhino.Alias;
 import github.iri.tridot.rhino.util.Deletable;
 import github.iri.tridot.rhino.util.JavaIteratorWrapper;
 import github.iri.tridot.rhino.util.wrap.TypeWrapperFactory;

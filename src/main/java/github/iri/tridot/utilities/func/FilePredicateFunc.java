@@ -1,7 +1,7 @@
 package github.iri.tridot.utilities.func;
 
 
-import com.skoow.quadlib.utilities.file.*;
+import github.iri.tridot.utilities.file.FilePredicate;
 
 public interface FilePredicateFunc {
     FilePredicate get(FilePredicate f);

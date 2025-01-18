@@ -6,7 +6,7 @@
 
 package github.iri.tridot.rhino;
 
-import com.skoow.quadlib.rhino.Alias;
+import github.iri.tridot.core.rhino.Alias;
 import github.iri.tridot.rhino.util.HideFromJS;
 import github.iri.tridot.rhino.util.RemapForJS;
 import github.iri.tridot.rhino.util.RemapPrefixForJS;

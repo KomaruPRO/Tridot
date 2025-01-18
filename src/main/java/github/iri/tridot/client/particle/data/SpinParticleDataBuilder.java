@@ -1,6 +1,6 @@
 package github.iri.tridot.client.particle.data;
 
-import github.iri.tridot.core.easing.*;
+import github.iri.tridot.utilities.math.Interp;
 import net.minecraft.util.*;
 
 import java.util.*;
@@ -86,12 +86,12 @@ public class SpinParticleDataBuilder extends GenericParticleDataBuilder{
     }
 
     @Override
-    public SpinParticleDataBuilder setEasing(Easing easing){
+    public SpinParticleDataBuilder setEasing(Interp easing){
         return (SpinParticleDataBuilder)super.setEasing(easing);
     }
 
     @Override
-    public SpinParticleDataBuilder setEasing(Easing easing, Easing middleToEndEasing){
+    public SpinParticleDataBuilder setEasing(Interp easing, Interp middleToEndEasing){
         return (SpinParticleDataBuilder)super.setEasing(easing, middleToEndEasing);
     }
 

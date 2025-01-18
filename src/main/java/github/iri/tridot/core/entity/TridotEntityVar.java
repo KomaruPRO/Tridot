@@ -1,6 +1,8 @@
 package github.iri.tridot.core.entity;
 
-import com.skoow.quadlib.utilities.func.*;
+import github.iri.tridot.utilities.func.Cons;
+import github.iri.tridot.utilities.func.Cons2;
+import github.iri.tridot.utilities.func.Func;
 import net.minecraft.network.syncher.*;
 import net.minecraft.world.entity.*;
 

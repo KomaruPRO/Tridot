@@ -102,7 +102,7 @@ public class SparkParticleBehavior extends ParticleBehavior{
         component.xd = particle.xd;
         component.yd = particle.yd;
         component.zd = particle.zd;
-        pickColor(particle, colorData.colorCurveEasing.ease(colorData.getProgress(particle.age, particle.lifetime), 0, 1, 1));
+        pickColor(particle, colorData.colorCurveEasing.apply(colorData.getProgress(particle.age, particle.lifetime)));
         component.a = transparencyData.getValue(particle.age, particle.lifetime, component.st, component.mt, component.et);
         component.size = scaleData.getValue(particle.age, particle.lifetime, component.ss, component.ms, component.es);
     }
@@ -111,7 +111,7 @@ public class SparkParticleBehavior extends ParticleBehavior{
     public void updateRenderTraits(GenericParticle particle, float partialTicks){
         SparkParticleBehaviorComponent component = getSparkComponent(particle);
         float time = particle.age + partialTicks;
-        pickColor(particle, colorData.colorCurveEasing.ease(colorData.getProgress(time, particle.lifetime), 0, 1, 1));
+        pickColor(particle, colorData.colorCurveEasing.apply(colorData.getProgress(time, particle.lifetime)));
         component.a = transparencyData.getValue(time, particle.lifetime, component.st, component.mt, component.et);
         component.size = scaleData.getValue(time, particle.lifetime, component.ss, component.ms, component.es);
     }

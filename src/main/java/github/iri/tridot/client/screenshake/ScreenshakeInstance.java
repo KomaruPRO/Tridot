@@ -1,6 +1,6 @@
 package github.iri.tridot.client.screenshake;
 
-import github.iri.tridot.core.easing.*;
+import github.iri.tridot.utilities.math.Interp;
 import net.minecraft.client.*;
 import net.minecraft.util.*;
 import net.minecraft.world.phys.*;
@@ -11,7 +11,7 @@ public class ScreenshakeInstance{
     public int progress;
     public final int duration;
     public float intensity1, intensity2, intensity3;
-    public Easing intensityCurveStartEasing = Easing.LINEAR, intensityCurveEndEasing = Easing.LINEAR;
+    public Interp intensityCurveStartEasing = Interp.linear, intensityCurveEndEasing = Interp.linear;
 
     public boolean isNormalize = true;
     public boolean isRotation = true;
@@ -43,11 +43,11 @@ public class ScreenshakeInstance{
         return this;
     }
 
-    public ScreenshakeInstance setEasing(Easing easing){
+    public ScreenshakeInstance setEasing(Interp easing){
         return setEasing(easing, easing);
     }
 
-    public ScreenshakeInstance setEasing(Easing intensityCurveStartEasing, Easing intensityCurveEndEasing){
+    public ScreenshakeInstance setEasing(Interp intensityCurveStartEasing, Interp intensityCurveEndEasing){
         this.intensityCurveStartEasing = intensityCurveStartEasing;
         this.intensityCurveEndEasing = intensityCurveEndEasing;
         return this;
@@ -151,12 +151,12 @@ public class ScreenshakeInstance{
         float percentage = progress / (float)duration;
         if(intensity2 != intensity3){
             if(percentage >= 0.5f){
-                return Mth.lerp(intensityCurveEndEasing.ease(percentage - 0.5f, 0, 1, 0.5f), intensity2, intensity1);
+                return Mth.lerp(intensityCurveEndEasing.apply((percentage - 0.5f)/0.5f), intensity2, intensity1);
             }else{
-                return Mth.lerp(intensityCurveStartEasing.ease(percentage, 0, 1, 0.5f), intensity1, intensity2);
+                return Mth.lerp(intensityCurveStartEasing.apply(percentage/0.5f), intensity1, intensity2);
             }
         }else{
-            return Mth.lerp(intensityCurveStartEasing.ease(percentage, 0, 1, 1), intensity1, intensity2);
+            return Mth.lerp(intensityCurveStartEasing.apply(percentage), intensity1, intensity2);
         }
     }
 }

@@ -6,7 +6,7 @@
 
 package github.iri.tridot.rhino;
 
-import com.skoow.quadlib.rhino.Alias;
+import github.iri.tridot.core.rhino.Alias;
 
 import java.lang.reflect.Array;
 import java.lang.reflect.Modifier;

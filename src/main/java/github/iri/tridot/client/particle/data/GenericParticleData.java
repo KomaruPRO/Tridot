@@ -1,18 +1,18 @@
 package github.iri.tridot.client.particle.data;
 
-import github.iri.tridot.core.easing.*;
+import github.iri.tridot.utilities.math.Interp;
 import net.minecraft.util.*;
 
 public class GenericParticleData{
     public final float startingValue, middleValue, endingValue;
     public final float rs1, rs2, rm1, rm2, re1, re2;
     public final float coefficient;
-    public final Easing startToMiddleEasing, middleToEndEasing;
+    public final Interp startToMiddleEasing, middleToEndEasing;
 
     public float valueMultiplier = 1;
     public float coefficientMultiplier = 1;
 
-    protected GenericParticleData(float startingValue, float middleValue, float endingValue, float rs1, float rs2, float rm1, float rm2, float re1, float re2, float coefficient, Easing startToMiddleEasing, Easing middleToEndEasing){
+    protected GenericParticleData(float startingValue, float middleValue, float endingValue, float rs1, float rs2, float rm1, float rm2, float re1, float re2, float coefficient, Interp startToMiddleEasing, Interp middleToEndEasing){
         this.startingValue = startingValue;
         this.middleValue = middleValue;
         this.endingValue = endingValue;
@@ -68,12 +68,12 @@ public class GenericParticleData{
         float result;
         if(isTrinary()){
             if(progress >= 0.5f){
-                result = Mth.lerp(middleToEndEasing.ease(progress - 0.5f, 0, 1, 0.5f), middleValue, endingValue);
+                result = Mth.lerp(middleToEndEasing.apply((progress-0.5f)/0.5f), middleValue, endingValue);
             }else{
-                result = Mth.lerp(startToMiddleEasing.ease(progress, 0, 1, 0.5f), startingValue, middleValue);
+                result = Mth.lerp(startToMiddleEasing.apply(progress/0.5f), startingValue, middleValue);
             }
         }else{
-            result = Mth.lerp(startToMiddleEasing.ease(progress, 0, 1, 1), startingValue, middleValue);
+            result = Mth.lerp(startToMiddleEasing.apply(progress), startingValue, middleValue);
         }
         return result * valueMultiplier;
     }
@@ -109,8 +109,8 @@ public class GenericParticleData{
         float rm2 = data.rm2 == -1 ? -1 : Mth.clamp(data.rm2, 0, 1);
         float re2 = data.re2 == -1 ? -1 : Mth.clamp(data.re2, 0, 1);
         float coefficient = data.coefficient;
-        Easing startToMiddleEasing = data.startToMiddleEasing;
-        Easing middleToEndEasing = data.middleToEndEasing;
+        Interp startToMiddleEasing = data.startToMiddleEasing;
+        Interp middleToEndEasing = data.middleToEndEasing;
         return new GenericParticleData(startingValue, middleValue, endingValue, rs1, rs2, rm1, rm2, re1, re2, coefficient, startToMiddleEasing, middleToEndEasing);
     }
 }
