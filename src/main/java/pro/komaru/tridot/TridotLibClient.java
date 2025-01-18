@@ -67,18 +67,18 @@ public class TridotLibClient{
     }
 
     public static void setupSplashes(){
-        SplashHandler.addSplash("ru_ru", "Привет, Россия!");
-        SplashHandler.addSplash("uk_ua","Привіт, Україно!");
-        SplashHandler.addSplash("kk_kz","Сәлем, Қазақстан!");
-        SplashHandler.addSplash("en_us","Hello, USA!");
-        SplashHandler.addSplash("fr_fr","Bonjour, France!");
-        SplashHandler.addSplash("es_es","Hola, España!");
-        SplashHandler.addSplash("de_de","Hallo, Deutschland!");
-        SplashHandler.addSplash("it_it","Ciao, Italia!");
-        SplashHandler.addSplash("ja_jp","こんにちは、日本!");
-        SplashHandler.addSplash("ko_kr","안녕하세요, 대한민국!");
-        SplashHandler.addSplash("zh_cn","你好, 中国!");
-        SplashHandler.addSplash("ar_sa","مرحبا، العالم العربي!");
+        SplashHandler.addSplash(8,"ru_ru", "Привет, Россия!");
+        SplashHandler.addSplash(8,"uk_ua","Привіт, Україно!");
+        SplashHandler.addSplash(8,"kk_kz","Сәлем, Қазақстан!");
+        SplashHandler.addSplash(8,"en_us","Hello, USA!");
+        SplashHandler.addSplash(8,"fr_fr","Bonjour, France!");
+        SplashHandler.addSplash(8,"es_es","Hola, España!");
+        SplashHandler.addSplash(8,"de_de","Hallo, Deutschland!");
+        SplashHandler.addSplash(8,"it_it","Ciao, Italia!");
+        SplashHandler.addSplash(8,"ja_jp","こんにちは、日本!");
+        SplashHandler.addSplash(8,"ko_kr","안녕하세요, 대한민국!");
+        SplashHandler.addSplash(8,"zh_cn","你好, 中国!");
+        SplashHandler.addSplash(8,"ar_sa","مرحبا، العالم العربي!");
     }
 
     @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)

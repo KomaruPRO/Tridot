@@ -23,6 +23,8 @@ public class Seq<T> implements Iterable<T>, Serializable {
 
     private @Nullable SeqIterable<T> iterable;
 
+
+
     /** Creates an ordered array with a capacity of 16. */
     public Seq(){
         this(true, 16);

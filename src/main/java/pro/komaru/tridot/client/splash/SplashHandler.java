@@ -1,35 +1,39 @@
 package pro.komaru.tridot.client.splash;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.screens.LanguageSelectScreen;
-import net.minecraft.client.resources.language.LanguageManager;
-import net.minecraft.locale.Language;
 import net.minecraft.network.chat.Component;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.DistExecutor;
+import pro.komaru.tridot.utilities.func.Prov;
 import pro.komaru.tridot.utilities.struct.Pair;
+import pro.komaru.tridot.utilities.struct.Seq;
 
 import java.util.*;
 
 public class SplashHandler{
-    public static List<String> splashes = new ArrayList<>();
-    public static List<Component> componentSplashes = new ArrayList<>();
-    public static List<SplashLanguaged> languagedSplashes = new ArrayList<>();
-    public static void addSplash(Component splash){
-        componentSplashes.add(splash);
-    }
+    public static Seq<SplashLanguaged> languagedSplashes = Seq.with();
+    public static Seq<Prov<String>> dynamicSplashes = Seq.with();
+
     public static void addSplash(String splash){
-        splashes.add(splash);
+        addSplash(() -> splash);
+    }
+    public static void addSplash(Component splash){
+        addSplash(splash::getString);
+    }
+    public static void addSplash(Prov<String> splash){
+        dynamicSplashes.add(splash);
     }
     public static void addSplash(String lang, String splash){
         languagedSplashes.add(new SplashLanguaged(lang,splash));
     }
+    public static void addSplash(int weight, String lang, String splash){
+        for (int i = 0; i < weight; i++)
+            addSplash(lang,splash);
+    }
 
     public static List<String> getSplashes(){
-        List<String> all = new ArrayList<>(splashes);
-        for (Component c : componentSplashes)
-            all.add(c.getString());
+        List<String> all = dynamicSplashes.map(Prov::get).list();
         DistExecutor.unsafeRunWhenOn(Dist.CLIENT,() -> () -> addLanguaged(all));
         return all;
     }
