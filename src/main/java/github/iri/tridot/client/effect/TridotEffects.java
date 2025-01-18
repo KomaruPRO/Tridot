@@ -9,8 +9,8 @@ import github.iri.tridot.client.particle.data.*;
 import github.iri.tridot.client.render.*;
 import github.iri.tridot.client.screenshake.*;
 import github.iri.tridot.client.shader.postprocess.*;
-import github.iri.tridot.core.easing.*;
-import github.iri.tridot.util.client.*;
+import github.iri.tridot.utilities.client.*;
+import github.iri.tridot.utilities.math.Interp;
 import net.minecraft.client.renderer.*;
 import net.minecraft.util.*;
 import net.minecraft.world.entity.*;
@@ -32,7 +32,7 @@ public class TridotEffects{
         ParticleBuilder.create(TridotParticles.WISP)
         .setColorData(ColorParticleData.create(lightningBoltPurpleColor).build())
         .setTransparencyData(GenericParticleData.create(0.5f, 0).build())
-        .setScaleData(GenericParticleData.create(0.75f, 1f, 0f).setEasing(Easing.QUARTIC_OUT).build())
+        .setScaleData(GenericParticleData.create(0.75f, 1f, 0f).setEasing(Interp.pow4Out).build())
         .setSpinData(SpinParticleData.create().randomSpin(0.4f).build())
         .setLifetime(50, 10)
         .randomVelocity(0.05f)
@@ -42,7 +42,7 @@ public class TridotEffects{
         ParticleBuilder.create(TridotParticles.WISP)
         .setColorData(ColorParticleData.create(lightningBoltPurpleColor).build())
         .setTransparencyData(GenericParticleData.create(0.5f, 0).build())
-        .setScaleData(GenericParticleData.create(0.5f, 0.75f, 0f).setEasing(Easing.QUARTIC_OUT).build())
+        .setScaleData(GenericParticleData.create(0.5f, 0.75f, 0f).setEasing(Interp.pow4Out).build())
         .setSpinData(SpinParticleData.create().randomSpin(0.4f).build())
         .setLifetime(50, 10)
         .randomVelocity(0.1f)
@@ -51,7 +51,7 @@ public class TridotEffects{
         ParticleBuilder.create(TridotParticles.WISP)
         .setColorData(ColorParticleData.create(Color.WHITE).build())
         .setTransparencyData(GenericParticleData.create(0.5f, 0).build())
-        .setScaleData(GenericParticleData.create(0.4f, 0.5f, 0f).setEasing(Easing.QUARTIC_OUT).build())
+        .setScaleData(GenericParticleData.create(0.4f, 0.5f, 0f).setEasing(Interp.pow4Out).build())
         .setSpinData(SpinParticleData.create().randomSpin(0.4f).build())
         .setLifetime(50, 10)
         .randomVelocity(0.05f)
@@ -61,12 +61,12 @@ public class TridotEffects{
         .setRenderType(TridotRenderTypes.ADDITIVE_PARTICLE_TEXTURE)
         .setBehavior(SphereParticleBehavior.create().disableSecondSide().setSphereSize(8, 4).build())
         .setColorData(ColorParticleData.create(lightningBoltBlueColor).build())
-        .setTransparencyData(GenericParticleData.create(0.25f, 0).setEasing(Easing.QUARTIC_OUT).build())
-        .setScaleData(GenericParticleData.create(0f, 5f).setEasing(Easing.QUARTIC_OUT).build())
+        .setTransparencyData(GenericParticleData.create(0.25f, 0).setEasing(Interp.pow4Out).build())
+        .setScaleData(GenericParticleData.create(0f, 5f).setEasing(Interp.pow4Out).build())
         .setLifetime(100)
         .disableDistanceSpawn()
         .spawn(level, pos);
-        ScreenshakeHandler.addScreenshake(new PositionedScreenshakeInstance(40, pos, 0, 25).setIntensity(0.6f, 0).setEasing(Easing.QUINTIC_IN_OUT).disableNormalize());
+        ScreenshakeHandler.addScreenshake(new PositionedScreenshakeInstance(40, pos, 0, 25).setIntensity(0.6f, 0).setEasing(Interp.pow5).disableNormalize());
         GlowPostProcess.INSTANCE.addInstance(new GlowPostProcessInstance(pos.toVector3f(), new Vector3f(1, 1, 1)).setRadius(10).setIntensity(2).setFadeTime(20));
     }
 
@@ -75,8 +75,8 @@ public class TridotEffects{
         .setRenderType(TridotRenderTypes.ADDITIVE_PARTICLE_TEXTURE)
         .setBehavior(TrailParticleBehavior.create().setTrailSize(5).setWidthFunction(RenderUtil.LINEAR_IN_ROUND_WIDTH_FUNCTION).build())
         .setColorData(ColorParticleData.create(Color.WHITE).build())
-        .setTransparencyData(GenericParticleData.create(0.5f, 0.5f, 0).setEasing(Easing.QUARTIC_OUT).build())
-        .setScaleData(GenericParticleData.create(0.15f, 0.3f, 0).setEasing(Easing.ELASTIC_OUT).build())
+        .setTransparencyData(GenericParticleData.create(0.5f, 0.5f, 0).setEasing(Interp.pow4Out).build())
+        .setScaleData(GenericParticleData.create(0.15f, 0.3f, 0).setEasing(Interp.elasticOut).build())
         .setLifetime(20)
         .randomVelocity(0.75f)
         .addVelocity(0, 0.4f, 0)
@@ -87,8 +87,8 @@ public class TridotEffects{
         .repeat(level, pos, 10, 0.8f);
         ParticleBuilder.create(TridotParticles.SQUARE)
         .setColorData(ColorParticleData.create(lightningBoltBlueColor).build())
-        .setTransparencyData(GenericParticleData.create(0.5f, 0.5f, 0).setEasing(Easing.QUARTIC_OUT).build())
-        .setScaleData(GenericParticleData.create(0.1f, 0.2f, 0).setEasing(Easing.ELASTIC_OUT).build())
+        .setTransparencyData(GenericParticleData.create(0.5f, 0.5f, 0).setEasing(Interp.pow4Out).build())
+        .setScaleData(GenericParticleData.create(0.1f, 0.2f, 0).setEasing(Interp.elasticOut).build())
         .setSpinData(SpinParticleData.create().randomSpin(1f).build())
         .setLifetime(40)
         .randomVelocity(0.7f)
@@ -176,7 +176,7 @@ public class TridotEffects{
         ParticleBuilder.create(TridotParticles.WISP)
         .setColorData(ColorParticleData.create(explosionRedColor, explosionYellowColor).build())
         .setTransparencyData(GenericParticleData.create(0.5f, 0).build())
-        .setScaleData(GenericParticleData.create(0.75f * r, r, 0f).setEasing(Easing.QUARTIC_OUT).build())
+        .setScaleData(GenericParticleData.create(0.75f * r, r, 0f).setEasing(Interp.pow4Out).build())
         .setSpinData(SpinParticleData.create().randomSpin(0.4f).build())
         .setLifetime(20, 5)
         .randomVelocity(0.1f * rr)
@@ -185,7 +185,7 @@ public class TridotEffects{
         ParticleBuilder.create(TridotParticles.WISP)
         .setColorData(ColorParticleData.create(explosionRedColor, explosionYellowColor).build())
         .setTransparencyData(GenericParticleData.create(0.5f, 0).build())
-        .setScaleData(GenericParticleData.create(0.5f * r, 1.5f * r, 0f).setEasing(Easing.QUARTIC_OUT).build())
+        .setScaleData(GenericParticleData.create(0.5f * r, 1.5f * r, 0f).setEasing(Interp.pow4Out).build())
         .setSpinData(SpinParticleData.create().randomSpin(0.8f).build())
         .setLifetime(40, 10)
         .randomVelocity(0.2f * rr)
@@ -194,7 +194,7 @@ public class TridotEffects{
         .setRenderType(TridotRenderTypes.TRANSLUCENT_PARTICLE)
         .setColorData(ColorParticleData.create(Color.BLACK).build())
         .setTransparencyData(GenericParticleData.create(0.7f, 0).build())
-        .setScaleData(GenericParticleData.create(0.25f * r, r, 0f).setEasing(Easing.QUARTIC_OUT).build())
+        .setScaleData(GenericParticleData.create(0.25f * r, r, 0f).setEasing(Interp.pow4Out).build())
         .setSpinData(SpinParticleData.create().randomSpin(0.25f).build())
         .setLifetime(60, 10)
         .randomVelocity(0.2f * rr)
@@ -205,7 +205,7 @@ public class TridotEffects{
         .setRenderType(TridotRenderTypes.TRANSLUCENT_PARTICLE)
         .setColorData(ColorParticleData.create(Color.BLACK).build())
         .setTransparencyData(GenericParticleData.create(0.5f, 0).build())
-        .setScaleData(GenericParticleData.create(0.75f * r, r, 0f).setEasing(Easing.QUARTIC_OUT).build())
+        .setScaleData(GenericParticleData.create(0.75f * r, r, 0f).setEasing(Interp.pow4Out).build())
         .setSpinData(SpinParticleData.create().randomSpin(0.4f).build())
         .setLifetime(80, 30)
         .randomVelocity(0.1f * rr)
@@ -214,8 +214,8 @@ public class TridotEffects{
         ParticleBuilder.create(TridotParticles.CIRCLE)
         .setBehavior(SparkParticleBehavior.create().build())
         .setColorData(ColorParticleData.create(explosionRedColor, explosionYellowColor).build())
-        .setTransparencyData(GenericParticleData.create(0.5f, 0.5f, 0).setEasing(Easing.QUARTIC_OUT).build())
-        .setScaleData(GenericParticleData.create(0.25f, 0).setEasing(Easing.QUARTIC_OUT).build())
+        .setTransparencyData(GenericParticleData.create(0.5f, 0.5f, 0).setEasing(Interp.pow4Out).build())
+        .setScaleData(GenericParticleData.create(0.25f, 0).setEasing(Interp.pow4Out).build())
         .setLifetime(30)
         .randomVelocity(1.5f * rr)
         .addVelocity(0, 0.2f * rr, 0)
@@ -223,6 +223,6 @@ public class TridotEffects{
         .setFriction(0.88f)
         .setGravity(1f)
         .repeat(level, pos, 50, 0.7f);
-        ScreenshakeHandler.addScreenshake(new PositionedScreenshakeInstance(30, pos, 0, 25).setIntensity(0.8f, 0).setEasing(Easing.QUINTIC_IN_OUT).disableNormalize());
+        ScreenshakeHandler.addScreenshake(new PositionedScreenshakeInstance(30, pos, 0, 25).setIntensity(0.8f, 0).setEasing(Interp.pow4Out).disableNormalize());
     }
 }

@@ -3,7 +3,7 @@ package github.iri.tridot.registry.item.skins;
 import github.iri.tridot.*;
 import github.iri.tridot.client.*;
 import github.iri.tridot.client.model.armor.*;
-import github.iri.tridot.util.client.*;
+import github.iri.tridot.utilities.client.*;
 import net.minecraft.client.model.*;
 import net.minecraft.client.player.*;
 import net.minecraft.nbt.*;

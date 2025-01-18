@@ -1,12 +1,12 @@
 package github.iri.tridot.client.particle.data;
 
-import github.iri.tridot.core.easing.*;
+import github.iri.tridot.utilities.math.Interp;
 
 public class GenericParticleDataBuilder{
     protected float startingValue, middleValue, endingValue;
     protected float rs1 = -1, rs2 = -1, rm1 = -1, rm2 = -1, re1 = -1, re2 = -1;
     protected float coefficient = 1f;
-    protected Easing startToMiddleEasing = Easing.LINEAR, middleToEndEasing = Easing.LINEAR;
+    protected Interp startToMiddleEasing = Interp.linear, middleToEndEasing = Interp.linear;
 
     protected GenericParticleDataBuilder(float startingValue, float middleValue, float endingValue){
         this.startingValue = startingValue;
@@ -19,12 +19,12 @@ public class GenericParticleDataBuilder{
         return this;
     }
 
-    public GenericParticleDataBuilder setEasing(Easing easing){
+    public GenericParticleDataBuilder setEasing(Interp easing){
         this.startToMiddleEasing = easing;
         return this;
     }
 
-    public GenericParticleDataBuilder setEasing(Easing easing, Easing middleToEndEasing){
+    public GenericParticleDataBuilder setEasing(Interp easing, Interp middleToEndEasing){
         this.startToMiddleEasing = easing;
         this.middleToEndEasing = easing;
         return this;

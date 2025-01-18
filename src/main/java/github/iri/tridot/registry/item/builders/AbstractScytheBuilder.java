@@ -2,8 +2,8 @@ package github.iri.tridot.registry.item.builders;
 
 import com.google.common.collect.*;
 import github.iri.tridot.client.animation.*;
-import github.iri.tridot.core.easing.*;
 import github.iri.tridot.registry.item.types.*;
+import github.iri.tridot.utilities.math.Interp;
 import net.minecraft.core.particles.*;
 import net.minecraft.sounds.*;
 import net.minecraft.world.effect.*;
@@ -27,7 +27,7 @@ public abstract class AbstractScytheBuilder<T extends ScytheItem> {
     public float screenShakeIntensity = 0.35f;
     public int screenShakeDuration = 4;
     public ItemAnimation animation;
-    public Easing screenShakeEasing = Easing.CIRC_IN_OUT;
+    public Interp screenShakeEasing = Interp.circle;
     public ImmutableList<MobEffectInstance> effects = ImmutableList.of();
     public ParticleOptions particleOptions = ParticleTypes.POOF;
 
@@ -61,7 +61,7 @@ public abstract class AbstractScytheBuilder<T extends ScytheItem> {
         return this;
     }
 
-    public AbstractScytheBuilder<T> setScreenShakeEasing(Easing easing){
+    public AbstractScytheBuilder<T> setScreenShakeEasing(Interp easing){
         this.screenShakeEasing = easing;
         return this;
     }

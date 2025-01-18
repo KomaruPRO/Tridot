@@ -7,7 +7,7 @@ import github.iri.tridot.core.interfaces.*;
 import github.iri.tridot.registry.*;
 import github.iri.tridot.registry.item.*;
 import github.iri.tridot.registry.item.builders.*;
-import github.iri.tridot.util.*;
+import github.iri.tridot.utilities.*;
 import net.minecraft.nbt.*;
 import net.minecraft.sounds.*;
 import net.minecraft.stats.*;

@@ -1,6 +1,6 @@
 package github.iri.tridot.registry.block.entity;
 
-import github.iri.tridot.core.network.packets.*;
+import github.iri.tridot.core.net.packets.*;
 import net.minecraft.core.*;
 import net.minecraft.nbt.*;
 import net.minecraft.network.*;

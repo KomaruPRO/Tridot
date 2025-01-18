@@ -4,7 +4,7 @@ import com.mojang.blaze3d.systems.*;
 import github.iri.tridot.*;
 import github.iri.tridot.client.gui.components.*;
 import github.iri.tridot.core.config.*;
-import github.iri.tridot.util.client.*;
+import github.iri.tridot.utilities.client.*;
 import net.minecraft.*;
 import net.minecraft.client.*;
 import net.minecraft.client.gui.*;

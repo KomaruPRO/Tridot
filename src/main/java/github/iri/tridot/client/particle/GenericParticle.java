@@ -152,7 +152,7 @@ public class GenericParticle extends TextureSheetParticle{
     }
 
     public void updateTraits(){
-        pickColor(colorData.colorCurveEasing.ease(colorData.getProgress(age, lifetime), 0, 1, 1));
+        pickColor(colorData.colorCurveEasing.apply(colorData.getProgress(age, lifetime)));
         quadSize = scaleData.getValue(age, lifetime, ss, ms, es);
         alpha = transparencyData.getValue(age, lifetime, st, mt, et);
         oRoll = roll;
@@ -203,7 +203,7 @@ public class GenericParticle extends TextureSheetParticle{
 
     public void updateRenderTraits(float partialTicks){
         float time = age + partialTicks;
-        pickColor(colorData.colorCurveEasing.ease(colorData.getProgress(time, lifetime), 0, 1, 1));
+        pickColor(colorData.colorCurveEasing.apply(colorData.getProgress(time, lifetime)));
         quadSize = scaleData.getValue(time, lifetime, ss, ms, es);
         alpha = transparencyData.getValue(time, lifetime, st, mt, et);
     }

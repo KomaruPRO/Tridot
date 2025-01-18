@@ -1,6 +1,6 @@
 package github.iri.tridot.client.particle.data;
 
-import github.iri.tridot.core.easing.*;
+import github.iri.tridot.utilities.math.Interp;
 
 import java.awt.*;
 
@@ -10,7 +10,7 @@ public class ColorParticleDataBuilder{
     protected float rr11 = -1, rr12 = -1, rb11 = -1, rb12 = -1, rg11 = -1, rg12 = -1, rr21 = -1, rr22 = -1, rb21 = -1, rb22 = -1, rg21 = -1, rg22 = -1;
     protected float colorCoefficient = 1f;
 
-    protected Easing colorCurveEasing = Easing.LINEAR;
+    protected Interp colorCurveEasing = Interp.linear;
 
     protected ColorParticleDataBuilder(float r1, float g1, float b1, float r2, float g2, float b2){
         this.r1 = r1;
@@ -26,7 +26,7 @@ public class ColorParticleDataBuilder{
         return this;
     }
 
-    public ColorParticleDataBuilder setEasing(Easing easing){
+    public ColorParticleDataBuilder setEasing(Interp easing){
         this.colorCurveEasing = easing;
         return this;
     }

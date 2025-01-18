@@ -1,6 +1,6 @@
 package github.iri.tridot.client.particle.data;
 
-import github.iri.tridot.core.easing.*;
+import github.iri.tridot.utilities.math.Interp;
 import net.minecraft.util.*;
 
 public class SpinParticleData extends GenericParticleData{
@@ -9,7 +9,7 @@ public class SpinParticleData extends GenericParticleData{
     public final float rsp1, rsp2;
     public final float rso1, rso2;
 
-    protected SpinParticleData(float spinOffset, float rsp1, float rsp2, float rso1, float rso2, float startingValue, float middleValue, float endingValue, float rs1, float rs2, float rm1, float rm2, float re1, float re2, float coefficient, Easing startToMiddleEasing, Easing middleToEndEasing){
+    protected SpinParticleData(float spinOffset, float rsp1, float rsp2, float rso1, float rso2, float startingValue, float middleValue, float endingValue, float rs1, float rs2, float rm1, float rm2, float re1, float re2, float coefficient, Interp startToMiddleEasing, Interp middleToEndEasing){
         super(startingValue, middleValue, endingValue, rs1, rs2, rm1, rm2, re1, re2, coefficient, startToMiddleEasing, middleToEndEasing);
         this.spinOffset = spinOffset;
         this.rsp1 = rsp1;

@@ -1,6 +1,6 @@
 package github.iri.tridot.client.particle.data;
 
-import github.iri.tridot.core.easing.*;
+import github.iri.tridot.utilities.math.Interp;
 import net.minecraft.util.*;
 
 import java.awt.*;
@@ -10,11 +10,11 @@ public class ColorParticleData{
     public final float r1, g1, b1, r2, g2, b2;
     public final float rr11, rr12, rb11, rb12, rg11, rg12, rr21, rr22, rb21, rb22, rg21, rg22;
     public final float colorCoefficient;
-    public final Easing colorCurveEasing;
+    public final Interp colorCurveEasing;
 
     public float coefficientMultiplier = 1;
 
-    protected ColorParticleData(float r1, float g1, float b1, float r2, float g2, float b2, float rr11, float rr12, float rb11, float rb12, float rg11, float rg12, float rr21, float rr22, float rb21, float rb22, float rg21, float rg22, float colorCoefficient, Easing colorCurveEasing){
+    protected ColorParticleData(float r1, float g1, float b1, float r2, float g2, float b2, float rr11, float rr12, float rb11, float rb12, float rg11, float rg12, float rr21, float rr22, float rb21, float rb22, float rg21, float rg22, float colorCoefficient, Interp colorCurveEasing){
         this.r1 = r1;
         this.g1 = g1;
         this.b1 = b1;
