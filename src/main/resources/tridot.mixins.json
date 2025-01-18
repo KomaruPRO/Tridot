@@ -1,33 +1,35 @@
 {
   "required": true,
   "minVersion": "0.8",
-  "package": "pro.komaru.tridot.mixin",
+  "package": "pro.komaru.tridot.core.mixin",
   "compatibilityLevel": "JAVA_8",
   "refmap": "komaru.refmap.json",
   "mixins": [
-    "pro.komaru.tridot.core.mixin.common.BlockItemMixin",
-    "pro.komaru.tridot.core.mixin.common.BlocksMixin",
-    "pro.komaru.tridot.core.mixin.common.CreeperMixin",
-    "pro.komaru.tridot.core.mixin.common.ForgeHooksMixin",
-    "pro.komaru.tridot.core.mixin.common.ItemEntityMixin",
-    "pro.komaru.tridot.core.mixin.common.ThrownTridentMixin",
-    "pro.komaru.tridot.core.mixin.common.TntBlockMixin"
+    "common.BlockItemMixin",
+    "common.BlocksMixin",
+    "common.CreeperMixin",
+    "common.ForgeHooksMixin",
+    "common.ItemEntityMixin",
+    "common.ThrownTridentMixin",
+    "common.TntBlockMixin"
   ],
   "client": [
-    "pro.komaru.tridot.core.mixin.client.CameraMixin",
-    "pro.komaru.tridot.core.mixin.client.curios.CurioTooltipMixin",
-    "pro.komaru.tridot.core.mixin.client.EffectProgramMixin",
-    "pro.komaru.tridot.core.mixin.client.FoxRendererMixin",
-    "pro.komaru.tridot.core.mixin.client.GameRendererMixin",
-    "pro.komaru.tridot.core.mixin.client.GuiGraphicsMixin",
-    "pro.komaru.tridot.core.mixin.client.HumanoidModelMixin",
-    "pro.komaru.tridot.core.mixin.client.ItemEntityMixin",
-    "pro.komaru.tridot.core.mixin.client.ItemInHandLayerMixin",
-    "pro.komaru.tridot.core.mixin.client.ItemInHandRendererMixin",
-    "pro.komaru.tridot.core.mixin.client.ItemStackMixin",
-    "pro.komaru.tridot.core.mixin.client.MinecraftMixin",
-    "pro.komaru.tridot.core.mixin.client.SplashManagerMixin"
-  ],  "injectors": {
+    "client.SplashManagerMixin",
+    "client.CameraMixin",
+    "client.EffectProgramMixin",
+    "client.FoxRendererMixin",
+    "client.GameRendererMixin",
+    "client.GuiGraphicsMixin",
+    "client.HumanoidModelMixin",
+    "client.ItemEntityMixin",
+    "client.ItemInHandLayerMixin",
+    "client.ItemInHandRendererMixin",
+    "client.ItemStackMixin",
+    "client.MinecraftMixin",
+    "client.SplashManagerMixin",
+    "client.curios.CurioTooltipMixin"
+  ],
+  "injectors": {
     "defaultRequire": 1
   }
 }
