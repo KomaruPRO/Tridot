@@ -1,6 +1,6 @@
 package github.iri.tridot.core.cap;
 
-import github.iri.tridot.core.cap.net.*;
+import github.iri.tridot.core.net.packets.SynchronizeCapabilityPacket;
 import github.iri.tridot.utilities.func.*;
 import github.iri.tridot.utilities.struct.*;
 import net.minecraft.server.level.*;

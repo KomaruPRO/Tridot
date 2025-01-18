@@ -20,6 +20,7 @@ public class PacketHandler extends AbstractPacketHandler{
         HANDLER.registerMessage(id++, CooldownSoundPacket.class, CooldownSoundPacket::encode, CooldownSoundPacket::decode, CooldownSoundPacket::handle);
         HANDLER.registerMessage(id++, DungeonSoundPacket.class, DungeonSoundPacket::encode, DungeonSoundPacket::decode, DungeonSoundPacket::handle);
         HANDLER.registerMessage(id++, UpdateBossbarPacket.class, UpdateBossbarPacket::encode, UpdateBossbarPacket::decode, UpdateBossbarPacket::handle);
+        HANDLER.registerMessage(id++, SynchronizeCapabilityPacket.class, SynchronizeCapabilityPacket::save, SynchronizeCapabilityPacket::new, SynchronizeCapabilityPacket::handle);
     }
 
     public static SimpleChannel getHandler(){
