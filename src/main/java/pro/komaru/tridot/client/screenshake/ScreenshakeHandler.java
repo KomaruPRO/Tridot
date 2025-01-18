@@ -93,6 +93,14 @@ public class ScreenshakeHandler{
         if(update) event.setNewFovModifier((float)Mth.lerp(Minecraft.getInstance().options.fovEffectScale().get(), 1.0F, fovModifier));
     }
 
+    public static double apply(ScreenshakeInstance instance, double current, double update) {
+        if (instance.isNormalize) {
+            return current + update;
+        } else {
+            return update;
+        }
+    }
+
     public static void clientTick(Camera camera){
         double intensity = ClientConfig.SCREENSHAKE_INTENSITY.get();
         double rotationNormalize = 0;
@@ -106,26 +114,16 @@ public class ScreenshakeHandler{
         for(ScreenshakeInstance instance : INSTANCES){
             double update = instance.updateIntensity(camera);
             if(instance.isRotation){
-                if(instance.isNormalize){
-                    rotationNormalize = rotationNormalize + update;
-                }else{
-                    if(rotation < update) rotation = update;
-                }
+                rotation = apply(instance, rotationNormalize, update);
             }
+
             if(instance.isPosition){
-                if(instance.isNormalize){
-                    positionNormalize = positionNormalize + update;
-                }else{
-                    if(position < update) position = update;
-                }
+                position = apply(instance, positionNormalize, update);
             }
+
             if(instance.isFov){
                 if(instance.isNormalize){
-                    if(instance.isFovNormalize){
-                        if(fovNormalize < update) fovNormalize = fovNormalize + update;
-                    }else{
-                        fovNormalize = fovNormalize + update;
-                    }
+                    fovNormalize = fovNormalize + update;
                 }else{
                     if(instance.isFovNormalize){
                         fovNorm = fovNorm + update;
@@ -134,18 +132,17 @@ public class ScreenshakeHandler{
                     }
                 }
             }
+
             if(instance.isVector){
-                if(instance.isNormalize){
-                    Vec3 newVec = instance.vector.scale(update * intensity);
-                    double dX = newVec.x() - vector.x();
-                    double dY = newVec.y() - vector.y();
-                    double dZ = newVec.z() - vector.z();
-                    vector = new Vec3(dX, dY, dZ);
-                }else{
-                    vector = vector.add(instance.vector.scale(update * intensity));
+                Vec3 scaledVector = instance.vector.scale(update * intensity);
+                if (instance.isNormalize) {
+                    vector = vector.add(scaledVector.subtract(vector));
+                } else {
+                    vector = vector.add(scaledVector);
                 }
             }
         }
+
         rotationNormalize = Math.min(rotationNormalize, intensity);
         positionNormalize = Math.min(positionNormalize, intensity);
         fovNorm = Math.min(fovNorm, intensity);

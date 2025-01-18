@@ -95,7 +95,7 @@ public abstract class PostProcess{
             effects = postChain.passes.stream().map(PostPass::getEffect).toArray(EffectInstance[]::new);
             effectActive = true;
         }catch(IOException | JsonSyntaxException ioexception){
-            TridotLib.LOGGER.error("Failed to load post-processing shader: ", ioexception);
+            Log.error("Failed to load post-processing shader: ", ioexception);
             effectActive = false;
         }
     }

@@ -25,7 +25,7 @@ public class TridotGlslPreprocessor extends GlslPreprocessor{
             Resource resource1 = Minecraft.getInstance().getResourceManager().getResource(resourcelocation1).get();
             return IOUtils.toString(resource1.open(), StandardCharsets.UTF_8);
         }catch(IOException ioexception){
-            TridotLib.LOGGER.error("Could not open GLSL import {}: {}", directory, ioexception.getMessage());
+            Log.error("Could not open GLSL import {}: {}", directory, ioexception.getMessage());
             return "#error " + ioexception.getMessage();
         }
     }

@@ -85,7 +85,7 @@ public class DashParticlePacket {
                         }
                     }
                 } else {
-                    TridotLib.LOGGER.error("Player with UUID {}, not found", msg.id);
+                    Log.error("Player with UUID {}, not found", msg.id);
                 }
 
                 ctx.get().setPacketHandled(true);

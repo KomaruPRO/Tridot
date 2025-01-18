@@ -53,25 +53,9 @@ public class ScreenshakeInstance{
         return this;
     }
 
-    public ScreenshakeInstance enableNormalize(){
-        return setNormalize(true);
-    }
-
-    public ScreenshakeInstance disableNormalize(){
-        return setNormalize(false);
-    }
-
     public ScreenshakeInstance setNormalize(boolean normalize){
         this.isNormalize = normalize;
         return this;
-    }
-
-    public ScreenshakeInstance enableRotation(){
-        return setRotation(true);
-    }
-
-    public ScreenshakeInstance disableRotation(){
-        return setRotation(false);
     }
 
     public ScreenshakeInstance setRotation(boolean rotation){
@@ -79,25 +63,9 @@ public class ScreenshakeInstance{
         return this;
     }
 
-    public ScreenshakeInstance enablePosition(){
-        return setPosition(true);
-    }
-
-    public ScreenshakeInstance disablePosition(){
-        return setPosition(false);
-    }
-
     public ScreenshakeInstance setPosition(boolean position){
         this.isPosition = position;
         return this;
-    }
-
-    public ScreenshakeInstance enableVector(){
-        return setVector(true);
-    }
-
-    public ScreenshakeInstance disableVector(){
-        return setVector(false);
     }
 
     public ScreenshakeInstance setVector(boolean vector){
@@ -120,25 +88,9 @@ public class ScreenshakeInstance{
         return this;
     }
 
-    public ScreenshakeInstance enableFov(){
-        return setFov(true);
-    }
-
-    public ScreenshakeInstance disableFov(){
-        return setFov(false);
-    }
-
     public ScreenshakeInstance setFov(boolean fov){
         this.isFov = fov;
         return this;
-    }
-
-    public ScreenshakeInstance enableFovNormalize(){
-        return setFovNormalize(true);
-    }
-
-    public ScreenshakeInstance disableFovNormalize(){
-        return setFovNormalize(false);
     }
 
     public ScreenshakeInstance setFovNormalize(boolean fovNormalize){
@@ -150,11 +102,8 @@ public class ScreenshakeInstance{
         progress++;
         float percentage = progress / (float)duration;
         if(intensity2 != intensity3){
-            if(percentage >= 0.5f){
-                return Mth.lerp(intensityCurveEndEasing.apply((percentage - 0.5f)/0.5f), intensity2, intensity1);
-            }else{
-                return Mth.lerp(intensityCurveStartEasing.apply(percentage/0.5f), intensity1, intensity2);
-            }
+            float v = percentage >= 0.5f ? (percentage - 0.5f)/0.5f : percentage/0.5f;
+            return Mth.lerp(intensityCurveEndEasing.apply(v), intensity2, intensity1);
         }else{
             return Mth.lerp(intensityCurveStartEasing.apply(percentage), intensity1, intensity2);
         }

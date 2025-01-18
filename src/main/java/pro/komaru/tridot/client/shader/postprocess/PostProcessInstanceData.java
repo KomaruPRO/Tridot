@@ -25,7 +25,7 @@ public abstract class PostProcessInstanceData{
     @Nullable
     public PostProcessInstance addInstance(PostProcessInstance instance){
         if(instances.size() >= getMaxInstances()){
-            TridotLib.LOGGER.warn("Failed to add shader instance to " + this + ": reached max instance count of " + getMaxInstances());
+            Log.warn("Failed to add shader instance to " + this + ": reached max instance count of " + getMaxInstances());
             return null;
         }
         instances.add(instance);

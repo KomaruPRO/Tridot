@@ -81,7 +81,7 @@ public class TridotEffects{
         .setLifetime(100)
         .disableDistanceSpawn()
         .spawn(level, pos);
-        ScreenshakeHandler.addScreenshake(new PositionedScreenshakeInstance(40, pos, 0, 25).setIntensity(0.6f, 0).setEasing(Interp.pow5).disableNormalize());
+        ScreenshakeHandler.addScreenshake(new PositionedScreenshakeInstance(40, pos, 0, 25).setIntensity(0.6f, 0).setEasing(Interp.pow5).setNormalize(false));
         GlowPostProcess.INSTANCE.addInstance(new GlowPostProcessInstance(pos.toVector3f(), new Vector3f(1, 1, 1)).setRadius(10).setIntensity(2).setFadeTime(20));
     }
 
@@ -238,6 +238,6 @@ public class TridotEffects{
         .setFriction(0.88f)
         .setGravity(1f)
         .repeat(level, pos, 50, 0.7f);
-        ScreenshakeHandler.addScreenshake(new PositionedScreenshakeInstance(30, pos, 0, 25).setIntensity(0.8f, 0).setEasing(Interp.pow4Out).disableNormalize());
+        ScreenshakeHandler.addScreenshake(new PositionedScreenshakeInstance(30, pos, 0, 25).setIntensity(0.8f, 0).setEasing(Interp.pow4Out).setNormalize(false));
     }
 }

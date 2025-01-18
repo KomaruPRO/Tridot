@@ -71,7 +71,7 @@ public class ContainerMenuBase extends AbstractContainerMenu{
                 return ItemStack.EMPTY;
             }
         }else{
-            TridotLib.LOGGER.info("Invalid slotIndex: " + index);
+            Log.error("Invalid slotIndex: " + index);
             return ItemStack.EMPTY;
         }
         if(sourceStack.getCount() == 0){

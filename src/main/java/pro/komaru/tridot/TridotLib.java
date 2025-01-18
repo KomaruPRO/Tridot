@@ -1,5 +1,9 @@
 package pro.komaru.tridot;
 
+import net.minecraft.world.item.*;
+import net.minecraftforge.api.distmarker.*;
+import net.minecraftforge.registries.*;
+import org.slf4j.Logger;
 import pro.komaru.tridot.client.*;
 import pro.komaru.tridot.core.config.*;
 import pro.komaru.tridot.core.event.*;
@@ -33,6 +37,7 @@ import pro.komaru.tridot.registry.block.TridotBlocks;
 import pro.komaru.tridot.registry.item.AttributeRegistry;
 import pro.komaru.tridot.registry.item.skins.ItemSkin;
 import pro.komaru.tridot.registry.item.skins.ItemSkinHandler;
+import pro.komaru.tridot.registry.item.types.*;
 
 import java.util.*;
 
@@ -46,10 +51,10 @@ public class TridotLib{
     public static UUID BASE_PROJECTILE_DAMAGE_UUID = UUID.fromString("5334b818-69d4-417e-b4b8-1869d4917e29");
     public static UUID BASE_DASH_DISTANCE_UUID = UUID.fromString("b0e5853a-d071-40db-a585-3ad07100db82");
     public static UUID BASE_ATTACK_RADIUS_UUID = UUID.fromString("49438567-6ad2-41bd-8385-676ad2a1bd5e");
+    public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, ID);
+    public static final RegistryObject<Item> TEST = ITEMS.register("test", () -> new TestItem(new Item.Properties().rarity(Rarity.EPIC)));
 
     public static final ISidedProxy proxy = DistExecutor.unsafeRunForDist(() -> ClientProxy::new, () -> ServerProxy::new);
-    public static final Logger LOGGER = LogManager.getLogger();
-
     public TridotLib(){
         IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
         AttributeRegistry.register(eventBus);
@@ -58,6 +63,14 @@ public class TridotLib{
         TridotBlockEntities.register(eventBus);
         TridotParticles.register(eventBus);
         TridotLootModifier.register(eventBus);
+        ITEMS.register(eventBus);
+
+        DistExecutor.unsafeCallWhenOn(Dist.CLIENT, () -> {
+            return () -> {
+                TridotLibClient.clientInit();
+                return new Object();
+            };
+        });
 
         ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, ClientConfig.SPEC);
         eventBus.addListener(this::setup);

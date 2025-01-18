@@ -75,7 +75,7 @@ public class TridotBlocks{
 
             delegateField.set(WeatheringCopper.NEXT_BY_BLOCK, weatheringMapDelegate);
         }catch(Exception e){
-            TridotLib.LOGGER.error("Failed weathering copper", e);
+            Log.error("Failed weathering copper", e);
         }
     }
 
