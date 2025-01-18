@@ -2,12 +2,12 @@ package github.iri.tridot.registry.item.builders;
 
 import github.iri.tridot.registry.item.skins.*;
 import net.minecraft.*;
-import net.minecraft.network.chat.*;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.*;
 
 import java.awt.*;
-import java.util.*;
 import java.util.List;
+import java.util.*;
 import java.util.function.*;
 
 public class SkinBuilder{

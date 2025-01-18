@@ -5,7 +5,7 @@ import com.mojang.blaze3d.vertex.*;
 import com.mojang.math.*;
 import github.iri.tridot.client.event.*;
 import github.iri.tridot.client.render.trail.*;
-import github.iri.tridot.util.client.*;
+import github.iri.tridot.utilities.client.*;
 import net.minecraft.client.*;
 import net.minecraft.client.renderer.*;
 import net.minecraft.client.renderer.texture.*;

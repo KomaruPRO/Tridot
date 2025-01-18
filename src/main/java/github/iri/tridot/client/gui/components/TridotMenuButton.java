@@ -1,20 +1,12 @@
 package github.iri.tridot.client.gui.components;
 
 import github.iri.tridot.client.gui.screen.*;
-import github.iri.tridot.core.config.*;
 import net.minecraft.client.*;
 import net.minecraft.client.gui.*;
 import net.minecraft.client.gui.components.*;
-import net.minecraft.client.gui.components.events.*;
-import net.minecraft.client.gui.screens.*;
 import net.minecraft.client.resources.language.*;
 import net.minecraft.network.chat.*;
 import net.minecraft.world.item.*;
-import net.minecraftforge.api.distmarker.*;
-import net.minecraftforge.client.event.*;
-import net.minecraftforge.eventbus.api.*;
-import net.minecraftforge.fml.common.Mod.*;
-import org.apache.commons.lang3.mutable.*;
 
 import java.util.*;
 import java.util.stream.*;

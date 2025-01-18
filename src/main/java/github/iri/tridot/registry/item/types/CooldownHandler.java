@@ -1,8 +1,8 @@
 package github.iri.tridot.registry.item.types;
 
 import github.iri.tridot.core.interfaces.*;
-import github.iri.tridot.core.network.*;
-import github.iri.tridot.core.network.packets.*;
+import github.iri.tridot.core.net.*;
+import github.iri.tridot.core.net.packets.*;
 import net.minecraft.server.level.*;
 import net.minecraft.world.item.*;
 

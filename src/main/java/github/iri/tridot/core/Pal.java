@@ -1,6 +1,6 @@
 package github.iri.tridot.core;
 
-import github.iri.tridot.util.client.*;
+import github.iri.tridot.utilities.client.*;
 
 import java.awt.*;
 

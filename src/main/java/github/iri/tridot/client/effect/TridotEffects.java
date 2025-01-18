@@ -10,7 +10,7 @@ import github.iri.tridot.client.render.*;
 import github.iri.tridot.client.screenshake.*;
 import github.iri.tridot.client.shader.postprocess.*;
 import github.iri.tridot.core.easing.*;
-import github.iri.tridot.util.client.*;
+import github.iri.tridot.utilities.client.*;
 import net.minecraft.client.renderer.*;
 import net.minecraft.util.*;
 import net.minecraft.world.entity.*;

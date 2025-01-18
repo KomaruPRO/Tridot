@@ -3,7 +3,7 @@ package github.iri.tridot.client.particle;
 import github.iri.tridot.client.particle.behavior.*;
 import github.iri.tridot.client.particle.data.*;
 import github.iri.tridot.client.particle.options.*;
-import github.iri.tridot.util.client.*;
+import github.iri.tridot.utilities.client.*;
 import net.minecraft.client.*;
 import net.minecraft.client.particle.*;
 import net.minecraft.client.renderer.*;

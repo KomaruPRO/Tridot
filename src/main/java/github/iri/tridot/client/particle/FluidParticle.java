@@ -1,7 +1,7 @@
 package github.iri.tridot.client.particle;
 
 import github.iri.tridot.client.particle.options.*;
-import github.iri.tridot.util.client.*;
+import github.iri.tridot.utilities.client.*;
 import net.minecraft.client.multiplayer.*;
 import net.minecraft.client.renderer.texture.*;
 import net.minecraft.world.level.material.*;

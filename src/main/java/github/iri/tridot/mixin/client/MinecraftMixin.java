@@ -1,6 +1,5 @@
 package github.iri.tridot.mixin.client;
 
-import github.iri.tridot.*;
 import github.iri.tridot.client.sound.*;
 import net.minecraft.client.*;
 import net.minecraft.client.gui.screens.*;
