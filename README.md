@@ -1,3 +1,5 @@
+[![](https://img.shields.io/badge/%20-LICENSE%20GPL--2.0-blue?style=for-the-badge&color=blue&logo=github&logoColor=000000&labelColor=FFFFFF)](https://github.com/KomaruPRO/Tridot/blob/master/LICENSE)
+
 # Features:
 - Shaders support  
 - Percentage Armor, easy and with no any LIMITS (You can ignore up to 100% damage)
