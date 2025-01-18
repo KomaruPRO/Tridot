@@ -1,7 +1,7 @@
 {
   "required": true,
   "minVersion": "0.8",
-  "package": "github.iri.tridot.mixin",
+  "package": "pro.komaru.tridot.mixin",
   "compatibilityLevel": "JAVA_8",
   "refmap": "komaru.refmap.json",
   "mixins": [
