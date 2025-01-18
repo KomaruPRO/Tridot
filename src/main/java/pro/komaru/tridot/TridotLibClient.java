@@ -1,5 +1,6 @@
 package pro.komaru.tridot;
 
+import net.minecraft.locale.Language;
 import pro.komaru.tridot.client.bow.*;
 import pro.komaru.tridot.client.event.*;
 import pro.komaru.tridot.client.gui.screen.*;
@@ -66,8 +67,18 @@ public class TridotLibClient{
     }
 
     public static void setupSplashes(){
-        SplashHandler.addSplash("Привет, Россия!");
-        SplashHandler.addSplash("Привіт, Україно!");
+        SplashHandler.addSplash("ru_ru", "Привет, Россия!");
+        SplashHandler.addSplash("uk_ua","Привіт, Україно!");
+        SplashHandler.addSplash("kk_kz","Сәлем, Қазақстан!");
+        SplashHandler.addSplash("en_us","Hello, USA!");
+        SplashHandler.addSplash("fr_fr","Bonjour, France!");
+        SplashHandler.addSplash("es_es","Hola, España!");
+        SplashHandler.addSplash("de_de","Hallo, Deutschland!");
+        SplashHandler.addSplash("it_it","Ciao, Italia!");
+        SplashHandler.addSplash("ja_jp","こんにちは、日本!");
+        SplashHandler.addSplash("ko_kr","안녕하세요, 대한민국!");
+        SplashHandler.addSplash("zh_cn","你好, 中国!");
+        SplashHandler.addSplash("ar_sa","مرحبا، العالم العربي!");
     }
 
     @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
