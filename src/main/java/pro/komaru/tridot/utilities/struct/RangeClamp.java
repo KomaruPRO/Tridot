@@ -2,6 +2,7 @@ package pro.komaru.tridot.utilities.struct;
 
 import pro.komaru.tridot.utilities.func.*;
 import pro.komaru.tridot.utilities.func.Prov;
+import pro.komaru.tridot.utilities.math.Mathf;
 
 public class RangeClamp {
     public Prov<Integer> min;
@@ -13,7 +14,9 @@ public class RangeClamp {
         this.min = min; this.max = max;
         current = min.get();
     }
-
+    public void update(Func<Integer,Integer> f) {
+        current = Mathf.clamp(f.get(current),min.get(),max.get());
+    }
     public int current() {
         return current;
     }
