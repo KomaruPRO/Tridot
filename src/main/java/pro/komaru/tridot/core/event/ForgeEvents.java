@@ -1,18 +1,5 @@
 package pro.komaru.tridot.core.event;
 
-import pro.komaru.tridot.*;
-import pro.komaru.tridot.client.gui.components.*;
-import pro.komaru.tridot.TridotLib;
-import pro.komaru.tridot.TridotLibClient;
-import pro.komaru.tridot.client.gui.components.TridotMenuButton;
-import pro.komaru.tridot.client.gui.components.TridotMenuButton.*;
-import pro.komaru.tridot.client.sound.*;
-import pro.komaru.tridot.client.sound.MusicHandler;
-import pro.komaru.tridot.client.sound.MusicModifier;
-import pro.komaru.tridot.client.sound.MusicModifier.*;
-import pro.komaru.tridot.core.config.*;
-import pro.komaru.tridot.core.net.*;
-import pro.komaru.tridot.core.net.packets.*;
 import net.minecraft.client.gui.components.*;
 import net.minecraft.client.gui.components.events.*;
 import net.minecraft.client.gui.screens.*;
@@ -25,9 +12,14 @@ import net.minecraftforge.event.*;
 import net.minecraftforge.eventbus.api.*;
 import net.minecraftforge.fml.common.*;
 import org.apache.commons.lang3.mutable.*;
-import pro.komaru.tridot.core.config.ClientConfig;
-import pro.komaru.tridot.core.net.PacketHandler;
-import pro.komaru.tridot.core.net.packets.DungeonSoundPacket;
+import pro.komaru.tridot.*;
+import pro.komaru.tridot.client.graphics.gui.components.*;
+import pro.komaru.tridot.client.graphics.gui.components.TridotMenuButton.*;
+import pro.komaru.tridot.client.sound.*;
+import pro.komaru.tridot.client.sound.MusicModifier.*;
+import pro.komaru.tridot.core.config.*;
+import pro.komaru.tridot.core.net.*;
+import pro.komaru.tridot.core.net.packets.*;
 
 @Mod.EventBusSubscriber(modid = TridotLib.ID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class ForgeEvents{

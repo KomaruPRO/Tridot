@@ -1,6 +1,6 @@
 package pro.komaru.tridot.rhino;
 
-import java.util.Arrays;
+import java.util.*;
 
 public class ResolvedOverload {
 	final Class<?>[] types;

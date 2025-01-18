@@ -8,27 +8,18 @@
 
 package pro.komaru.tridot.rhino;
 
-import pro.komaru.tridot.rhino.ast.AstRoot;
-import pro.komaru.tridot.rhino.ast.ScriptNode;
-import pro.komaru.tridot.rhino.classfile.ClassFileWriter.ClassFileFormatException;
-import pro.komaru.tridot.rhino.regexp.RegExp;
-import pro.komaru.tridot.rhino.util.CustomJavaToJsWrapper;
-import pro.komaru.tridot.rhino.util.CustomJavaToJsWrapperProvider;
-import pro.komaru.tridot.rhino.util.CustomJavaToJsWrapperProviderHolder;
-import pro.komaru.tridot.rhino.util.DefaultRemapper;
-import pro.komaru.tridot.rhino.util.Remapper;
-import pro.komaru.tridot.rhino.util.wrap.TypeWrappers;
-import org.jetbrains.annotations.Nullable;
+import org.jetbrains.annotations.*;
+import pro.komaru.tridot.rhino.ast.*;
+import pro.komaru.tridot.rhino.classfile.ClassFileWriter.*;
+import pro.komaru.tridot.rhino.regexp.*;
+import pro.komaru.tridot.rhino.util.*;
+import pro.komaru.tridot.rhino.util.wrap.*;
 
-import java.io.IOException;
-import java.io.Reader;
-import java.lang.reflect.InvocationTargetException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.function.Predicate;
+import java.io.*;
+import java.lang.reflect.*;
+import java.util.*;
+import java.util.concurrent.*;
+import java.util.function.*;
 
 /**
  * This class represents the runtime context of an executing script.

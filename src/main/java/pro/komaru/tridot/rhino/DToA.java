@@ -25,7 +25,7 @@
 
 package pro.komaru.tridot.rhino;
 
-import java.math.BigInteger;
+import java.math.*;
 
 class DToA {
 	static final int DTOSTR_STANDARD = 0;              /* Either fixed or exponential format; round-trip */

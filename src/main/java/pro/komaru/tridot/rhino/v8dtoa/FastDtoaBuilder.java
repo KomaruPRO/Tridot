@@ -6,7 +6,7 @@
 
 package pro.komaru.tridot.rhino.v8dtoa;
 
-import java.util.Arrays;
+import java.util.*;
 
 public class FastDtoaBuilder {
 

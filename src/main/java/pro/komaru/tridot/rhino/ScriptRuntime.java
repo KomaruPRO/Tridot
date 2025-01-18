@@ -6,18 +6,13 @@
 
 package pro.komaru.tridot.rhino;
 
-import pro.komaru.tridot.rhino.ast.FunctionNode;
-import pro.komaru.tridot.rhino.regexp.NativeRegExp;
-import pro.komaru.tridot.rhino.regexp.RegExp;
-import pro.komaru.tridot.rhino.util.SpecialEquality;
-import pro.komaru.tridot.rhino.v8dtoa.DoubleConversion;
-import pro.komaru.tridot.rhino.v8dtoa.FastDtoa;
+import pro.komaru.tridot.rhino.ast.*;
+import pro.komaru.tridot.rhino.regexp.*;
+import pro.komaru.tridot.rhino.util.*;
+import pro.komaru.tridot.rhino.v8dtoa.*;
 
-import java.text.MessageFormat;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.Locale;
-import java.util.ResourceBundle;
+import java.text.*;
+import java.util.*;
 
 /**
  * This is the class that implements the runtime.

@@ -1,9 +1,5 @@
 package pro.komaru.tridot.registry.item.skins;
 
-import pro.komaru.tridot.*;
-import pro.komaru.tridot.client.*;
-import pro.komaru.tridot.client.model.armor.*;
-import pro.komaru.tridot.utilities.client.*;
 import net.minecraft.client.model.*;
 import net.minecraft.client.player.*;
 import net.minecraft.nbt.*;
@@ -15,7 +11,7 @@ import net.minecraftforge.api.distmarker.*;
 import pro.komaru.tridot.TridotLib;
 import pro.komaru.tridot.client.TridotModels;
 import pro.komaru.tridot.client.model.armor.ArmorModel;
-import pro.komaru.tridot.utilities.client.Clr;
+import pro.komaru.tridot.client.graphics.Clr;
 
 import java.awt.*;
 import java.util.List;

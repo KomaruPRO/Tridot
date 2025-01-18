@@ -1,6 +1,5 @@
 package pro.komaru.tridot.client.sound;
 
-import pro.komaru.tridot.client.gui.screen.*;
 import net.minecraft.client.*;
 import net.minecraft.core.*;
 import net.minecraft.resources.*;
@@ -10,8 +9,8 @@ import net.minecraft.tags.*;
 import net.minecraft.world.entity.player.*;
 import net.minecraft.world.level.biome.*;
 import net.minecraft.world.level.levelgen.structure.*;
-import pro.komaru.tridot.client.gui.screen.TridotModsHandler;
-import pro.komaru.tridot.client.gui.screen.TridotPanorama;
+import pro.komaru.tridot.client.graphics.gui.screen.TridotModsHandler;
+import pro.komaru.tridot.client.graphics.gui.screen.TridotPanorama;
 
 public class MusicModifier{
 

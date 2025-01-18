@@ -1,14 +1,6 @@
 package pro.komaru.tridot.core.event;
 
 import com.mojang.blaze3d.systems.*;
-import pro.komaru.tridot.*;
-import pro.komaru.tridot.client.render.entity.bossbar.*;
-import pro.komaru.tridot.core.config.*;
-import pro.komaru.tridot.core.proxy.*;
-import pro.komaru.tridot.mixin.client.*;
-import pro.komaru.tridot.registry.*;
-import pro.komaru.tridot.utilities.*;
-import pro.komaru.tridot.utilities.client.*;
 import net.minecraft.*;
 import net.minecraft.client.*;
 import net.minecraft.client.gui.*;
@@ -27,15 +19,14 @@ import net.minecraftforge.client.event.*;
 import net.minecraftforge.event.entity.living.*;
 import net.minecraftforge.event.entity.player.*;
 import net.minecraftforge.eventbus.api.*;
-import pro.komaru.tridot.TridotLib;
-import pro.komaru.tridot.TridotLibClient;
-import pro.komaru.tridot.client.render.entity.bossbar.Bossbar;
-import pro.komaru.tridot.core.config.ClientConfig;
-import pro.komaru.tridot.core.proxy.ClientProxy;
-import pro.komaru.tridot.mixin.client.BossHealthOverlayAccessor;
-import pro.komaru.tridot.registry.TagsRegistry;
-import pro.komaru.tridot.utilities.Utils;
-import pro.komaru.tridot.utilities.client.Clr;
+import pro.komaru.tridot.*;
+import pro.komaru.tridot.client.graphics.*;
+import pro.komaru.tridot.client.graphics.render.entity.bossbar.*;
+import pro.komaru.tridot.core.config.*;
+import pro.komaru.tridot.core.mixin.client.*;
+import pro.komaru.tridot.core.proxy.*;
+import pro.komaru.tridot.registry.*;
+import pro.komaru.tridot.utilities.*;
 
 import java.awt.*;
 import java.util.*;

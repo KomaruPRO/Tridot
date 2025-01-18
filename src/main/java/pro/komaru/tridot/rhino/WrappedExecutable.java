@@ -1,8 +1,8 @@
 package pro.komaru.tridot.rhino;
 
-import org.jetbrains.annotations.Nullable;
+import org.jetbrains.annotations.*;
 
-import java.lang.reflect.Executable;
+import java.lang.reflect.*;
 
 public interface WrappedExecutable {
 	Object invoke(Context cx, Scriptable scope, Object self, Object[] args) throws Exception;

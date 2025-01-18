@@ -3,8 +3,6 @@ package pro.komaru.tridot.client;
 import com.mojang.blaze3d.platform.*;
 import com.mojang.blaze3d.systems.*;
 import com.mojang.blaze3d.vertex.*;
-import pro.komaru.tridot.*;
-import pro.komaru.tridot.client.render.*;
 import net.minecraft.client.renderer.*;
 import net.minecraft.client.renderer.texture.*;
 import net.minecraftforge.api.distmarker.*;
@@ -12,9 +10,9 @@ import net.minecraftforge.eventbus.api.*;
 import net.minecraftforge.fml.common.*;
 import net.minecraftforge.fml.event.lifecycle.*;
 import pro.komaru.tridot.TridotLib;
-import pro.komaru.tridot.client.render.LevelRenderHandler;
-import pro.komaru.tridot.client.render.RenderBuilder;
-import pro.komaru.tridot.client.render.TridotRenderType;
+import pro.komaru.tridot.client.graphics.render.LevelRenderHandler;
+import pro.komaru.tridot.client.graphics.render.RenderBuilder;
+import pro.komaru.tridot.client.graphics.render.TridotRenderType;
 
 import java.util.*;
 

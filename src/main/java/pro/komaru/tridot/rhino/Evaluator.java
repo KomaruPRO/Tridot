@@ -6,9 +6,9 @@
 
 package pro.komaru.tridot.rhino;
 
-import pro.komaru.tridot.rhino.ast.ScriptNode;
+import pro.komaru.tridot.rhino.ast.*;
 
-import java.util.List;
+import java.util.*;
 
 /**
  * Abstraction of evaluation, which can be implemented either by an

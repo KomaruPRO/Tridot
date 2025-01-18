@@ -1,7 +1,5 @@
 package pro.komaru.tridot.core.net.packets;
 
-import pro.komaru.tridot.*;
-import pro.komaru.tridot.client.sound.*;
 import net.minecraft.client.*;
 import net.minecraft.client.sounds.*;
 import net.minecraft.network.*;
@@ -10,8 +8,8 @@ import net.minecraft.sounds.*;
 import net.minecraftforge.api.distmarker.*;
 import net.minecraftforge.network.*;
 import net.minecraftforge.registries.*;
-import pro.komaru.tridot.TridotLibClient;
-import pro.komaru.tridot.client.sound.TridotSoundInstance;
+import pro.komaru.tridot.*;
+import pro.komaru.tridot.client.sound.*;
 
 import java.util.function.*;
 

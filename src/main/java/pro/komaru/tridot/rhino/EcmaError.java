@@ -8,7 +8,7 @@
 
 package pro.komaru.tridot.rhino;
 
-import java.io.Serial;
+import java.io.*;
 
 /**
  * The class of exceptions raised by the engine as described in

@@ -1,8 +1,6 @@
 package pro.komaru.tridot.rhino;
 
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.NoSuchElementException;
+import java.util.*;
 
 /**
  * This generic hash table class is used by Set and Map. It uses

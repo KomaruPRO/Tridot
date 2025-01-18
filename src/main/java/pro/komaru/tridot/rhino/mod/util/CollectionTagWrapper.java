@@ -1,11 +1,8 @@
 package pro.komaru.tridot.rhino.mod.util;
 
-import pro.komaru.tridot.rhino.Context;
-import pro.komaru.tridot.rhino.NativeJavaList;
-import pro.komaru.tridot.rhino.Scriptable;
-import pro.komaru.tridot.rhino.util.CustomJavaToJsWrapper;
-import net.minecraft.nbt.CollectionTag;
-import net.minecraft.nbt.Tag;
+import net.minecraft.nbt.*;
+import pro.komaru.tridot.rhino.*;
+import pro.komaru.tridot.rhino.util.*;
 
 public record CollectionTagWrapper(CollectionTag<?> tag) implements CustomJavaToJsWrapper {
 	@Override

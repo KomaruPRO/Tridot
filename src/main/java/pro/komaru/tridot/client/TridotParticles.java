@@ -1,10 +1,6 @@
 package pro.komaru.tridot.client;
 
-import pro.komaru.tridot.*;
-import pro.komaru.tridot.client.particle.*;
-import pro.komaru.tridot.client.particle.behavior.*;
-import pro.komaru.tridot.client.particle.type.*;
-import pro.komaru.tridot.client.render.*;
+import pro.komaru.tridot.client.graphics.particle.type.*;
 import net.minecraft.client.*;
 import net.minecraft.client.particle.*;
 import net.minecraft.core.particles.*;
@@ -14,11 +10,10 @@ import net.minecraftforge.eventbus.api.*;
 import net.minecraftforge.fml.common.*;
 import net.minecraftforge.registries.*;
 import pro.komaru.tridot.TridotLib;
-import pro.komaru.tridot.client.particle.GenericParticle;
-import pro.komaru.tridot.client.particle.ICustomParticleRender;
-import pro.komaru.tridot.client.particle.behavior.ICustomBehaviorParticleRender;
-import pro.komaru.tridot.client.particle.type.*;
-import pro.komaru.tridot.client.render.LevelRenderHandler;
+import pro.komaru.tridot.client.graphics.particle.GenericParticle;
+import pro.komaru.tridot.client.graphics.particle.ICustomParticleRender;
+import pro.komaru.tridot.client.graphics.particle.behavior.ICustomBehaviorParticleRender;
+import pro.komaru.tridot.client.graphics.render.LevelRenderHandler;
 
 public class TridotParticles{
     public static final DeferredRegister<ParticleType<?>> PARTICLES = DeferredRegister.create(ForgeRegistries.PARTICLE_TYPES, TridotLib.ID);

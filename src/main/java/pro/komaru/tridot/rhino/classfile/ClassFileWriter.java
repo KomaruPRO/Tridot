@@ -6,14 +6,10 @@
 
 package pro.komaru.tridot.rhino.classfile;
 
-import pro.komaru.tridot.rhino.ObjArray;
-import pro.komaru.tridot.rhino.UintMap;
+import pro.komaru.tridot.rhino.*;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.io.Serial;
-import java.util.Arrays;
+import java.io.*;
+import java.util.*;
 
 /**
  * ClassFileWriter

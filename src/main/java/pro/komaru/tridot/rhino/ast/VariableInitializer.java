@@ -6,7 +6,7 @@
 
 package pro.komaru.tridot.rhino.ast;
 
-import pro.komaru.tridot.rhino.Token;
+import pro.komaru.tridot.rhino.*;
 
 /**
  * A variable declaration or initializer, part of a {@link VariableDeclaration}

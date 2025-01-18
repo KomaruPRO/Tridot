@@ -1,6 +1,6 @@
 package pro.komaru.tridot.rhino.util;
 
-import org.jetbrains.annotations.Nullable;
+import org.jetbrains.annotations.*;
 
 @SuppressWarnings("unchecked")
 public record Possible<T>(@Nullable Object value) {

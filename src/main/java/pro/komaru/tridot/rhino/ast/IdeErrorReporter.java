@@ -8,8 +8,7 @@
 
 package pro.komaru.tridot.rhino.ast;
 
-import pro.komaru.tridot.rhino.ErrorReporter;
-import pro.komaru.tridot.rhino.Parser;
+import pro.komaru.tridot.rhino.*;
 
 /**
  * This is interface defines a protocol for the reporting of

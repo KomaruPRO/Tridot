@@ -1,7 +1,6 @@
 package pro.komaru.tridot.utilities.stash;
 
-import pro.komaru.tridot.utilities.struct.*;
-import pro.komaru.tridot.utilities.struct.Structs;
+import pro.komaru.tridot.core.struct.Structs;
 
 public class SyncStashObject<T> {
 

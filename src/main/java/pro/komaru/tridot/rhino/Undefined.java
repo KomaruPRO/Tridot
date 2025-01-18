@@ -6,9 +6,8 @@
 
 package pro.komaru.tridot.rhino;
 
-import java.io.Serial;
-import java.io.Serializable;
-import java.lang.reflect.Proxy;
+import java.io.*;
+import java.lang.reflect.*;
 
 /**
  * This class implements the Undefined value in JavaScript.

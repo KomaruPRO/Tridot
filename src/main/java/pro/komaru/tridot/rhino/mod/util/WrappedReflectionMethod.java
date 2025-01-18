@@ -1,13 +1,9 @@
 package pro.komaru.tridot.rhino.mod.util;
 
-import pro.komaru.tridot.rhino.Context;
-import pro.komaru.tridot.rhino.Scriptable;
-import pro.komaru.tridot.rhino.WrappedExecutable;
-import org.jetbrains.annotations.Nullable;
+import org.jetbrains.annotations.*;
+import pro.komaru.tridot.rhino.*;
 
-import java.lang.reflect.Executable;
-import java.lang.reflect.Method;
-import java.lang.reflect.Modifier;
+import java.lang.reflect.*;
 
 public record WrappedReflectionMethod(Method method) implements WrappedExecutable {
 	public static WrappedExecutable of(Method method) {

@@ -6,19 +6,13 @@
 
 package pro.komaru.tridot.rhino;
 
-import pro.komaru.tridot.core.rhino.Alias;
-import pro.komaru.tridot.rhino.util.Deletable;
-import pro.komaru.tridot.rhino.util.JavaIteratorWrapper;
-import pro.komaru.tridot.rhino.util.wrap.TypeWrapperFactory;
-import pro.komaru.tridot.rhino.util.wrap.TypeWrappers;
-import org.jetbrains.annotations.Nullable;
+import org.jetbrains.annotations.*;
+import pro.komaru.tridot.core.rhino.*;
+import pro.komaru.tridot.rhino.util.*;
+import pro.komaru.tridot.rhino.util.wrap.*;
 
-import java.lang.reflect.Array;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+import java.lang.reflect.*;
+import java.util.*;
 
 /**
  * This class reflects non-Array Java objects into the JavaScript environment.  It

@@ -6,11 +6,9 @@
 
 package pro.komaru.tridot.rhino.ast;
 
-import pro.komaru.tridot.rhino.Kit;
-import pro.komaru.tridot.rhino.Node;
-import pro.komaru.tridot.rhino.Token;
+import pro.komaru.tridot.rhino.*;
 
-import java.util.Comparator;
+import java.util.*;
 
 /**
  * Base class for AST node types.  The goal of the AST is to represent the

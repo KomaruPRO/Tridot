@@ -1,8 +1,7 @@
 package pro.komaru.tridot.core.interfaces;
 
-import pro.komaru.tridot.registry.*;
 import net.minecraft.world.item.*;
-import pro.komaru.tridot.registry.EnchantmentsRegistry;
+import pro.komaru.tridot.registry.*;
 
 public interface CooldownReductionItem{
     default int getCooldownReduction(ItemStack stack) {

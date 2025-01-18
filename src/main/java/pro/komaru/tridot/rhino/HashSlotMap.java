@@ -6,8 +6,7 @@
 
 package pro.komaru.tridot.rhino;
 
-import java.util.Iterator;
-import java.util.LinkedHashMap;
+import java.util.*;
 
 /**
  * This class implements the SlotMap interface using a java.util.HashMap. This class has more

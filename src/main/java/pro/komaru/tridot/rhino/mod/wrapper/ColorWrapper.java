@@ -1,15 +1,10 @@
 package pro.komaru.tridot.rhino.mod.wrapper;
 
-import pro.komaru.tridot.rhino.mod.util.color.Color;
-import pro.komaru.tridot.rhino.mod.util.color.NoColor;
-import pro.komaru.tridot.rhino.mod.util.color.SimpleColor;
-import pro.komaru.tridot.rhino.mod.util.color.SimpleColorWithAlpha;
-import net.minecraft.ChatFormatting;
-import net.minecraft.Util;
-import net.minecraft.world.item.DyeColor;
+import net.minecraft.*;
+import net.minecraft.world.item.*;
+import pro.komaru.tridot.rhino.mod.util.color.*;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public interface ColorWrapper {
 	Map<String, Color> MAP = new HashMap<>();

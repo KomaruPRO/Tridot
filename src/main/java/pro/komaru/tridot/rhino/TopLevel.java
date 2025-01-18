@@ -6,7 +6,7 @@
 
 package pro.komaru.tridot.rhino;
 
-import java.util.EnumMap;
+import java.util.*;
 
 /**
  * A top-level scope object that provides special means to cache and preserve

@@ -6,10 +6,9 @@
 
 package pro.komaru.tridot.rhino.ast;
 
-import pro.komaru.tridot.rhino.Token;
+import pro.komaru.tridot.rhino.*;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 /**
  * A labeled statement.  A statement can have more than one label.  In

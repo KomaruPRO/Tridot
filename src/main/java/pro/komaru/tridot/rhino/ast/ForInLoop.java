@@ -6,7 +6,7 @@
 
 package pro.komaru.tridot.rhino.ast;
 
-import pro.komaru.tridot.rhino.Token;
+import pro.komaru.tridot.rhino.*;
 
 /**
  * For-in or for-each-in or for-of statement.  Node type is {@link Token#FOR}.

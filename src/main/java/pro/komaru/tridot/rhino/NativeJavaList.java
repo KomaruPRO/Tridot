@@ -5,17 +5,12 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 package pro.komaru.tridot.rhino;
 
-import pro.komaru.tridot.rhino.util.Deletable;
-import pro.komaru.tridot.rhino.util.ValueUnwrapper;
-import org.jetbrains.annotations.Nullable;
+import org.jetbrains.annotations.*;
+import pro.komaru.tridot.rhino.util.*;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import java.util.function.BinaryOperator;
+import java.util.*;
 import java.util.function.Function;
-import java.util.function.Predicate;
+import java.util.function.*;
 
 @SuppressWarnings({"rawtypes", "unchecked"})
 public class NativeJavaList extends NativeJavaObject {

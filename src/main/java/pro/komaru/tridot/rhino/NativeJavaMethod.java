@@ -6,9 +6,8 @@
 
 package pro.komaru.tridot.rhino;
 
-import java.lang.reflect.Array;
-import java.lang.reflect.Method;
-import java.util.concurrent.CopyOnWriteArrayList;
+import java.lang.reflect.*;
+import java.util.concurrent.*;
 
 /**
  * This class reflects Java methods into the JavaScript environment and

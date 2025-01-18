@@ -1,15 +1,13 @@
 package pro.komaru.tridot.core.proxy;
 
-import pro.komaru.tridot.*;
-import pro.komaru.tridot.client.sound.*;
 import net.minecraft.client.*;
 import net.minecraft.client.sounds.*;
 import net.minecraft.sounds.*;
 import net.minecraft.world.entity.player.*;
 import net.minecraft.world.level.*;
 import net.minecraftforge.api.distmarker.*;
-import pro.komaru.tridot.TridotLibClient;
-import pro.komaru.tridot.client.sound.LoopedSoundInstance;
+import pro.komaru.tridot.*;
+import pro.komaru.tridot.client.sound.*;
 
 import java.util.*;
 

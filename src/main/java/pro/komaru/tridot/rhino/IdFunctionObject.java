@@ -8,7 +8,7 @@
 
 package pro.komaru.tridot.rhino;
 
-import java.util.Objects;
+import java.util.*;
 
 public class IdFunctionObject extends BaseFunction {
 	static boolean equalObjectGraphs(Context cx, IdFunctionObject f1, IdFunctionObject f2, EqualObjectGraphs eq) {

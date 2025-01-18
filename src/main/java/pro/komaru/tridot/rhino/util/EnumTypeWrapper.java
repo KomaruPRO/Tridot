@@ -1,11 +1,10 @@
 package pro.komaru.tridot.rhino.util;
 
-import pro.komaru.tridot.rhino.Context;
-import pro.komaru.tridot.rhino.util.wrap.TypeWrapperFactory;
+import pro.komaru.tridot.rhino.*;
+import pro.komaru.tridot.rhino.util.wrap.*;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.stream.Collectors;
+import java.util.*;
+import java.util.stream.*;
 
 public class EnumTypeWrapper<T> implements TypeWrapperFactory<T> {
 	private static final Map<Class<?>, EnumTypeWrapper<?>> WRAPPERS = new HashMap<>();

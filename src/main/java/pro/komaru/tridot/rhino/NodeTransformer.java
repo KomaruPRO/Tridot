@@ -6,13 +6,9 @@
 
 package pro.komaru.tridot.rhino;
 
-import pro.komaru.tridot.rhino.ast.FunctionNode;
-import pro.komaru.tridot.rhino.ast.Jump;
-import pro.komaru.tridot.rhino.ast.Scope;
-import pro.komaru.tridot.rhino.ast.ScriptNode;
+import pro.komaru.tridot.rhino.ast.*;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 /**
  * This class transforms a tree to a lower-level representation for codegen.

@@ -6,19 +6,7 @@
 
 package pro.komaru.tridot.rhino.regexp;
 
-import pro.komaru.tridot.rhino.Context;
-import pro.komaru.tridot.rhino.Function;
-import pro.komaru.tridot.rhino.IdFunctionObject;
-import pro.komaru.tridot.rhino.IdScriptableObject;
-import pro.komaru.tridot.rhino.Kit;
-import pro.komaru.tridot.rhino.MemberType;
-import pro.komaru.tridot.rhino.ScriptRuntime;
-import pro.komaru.tridot.rhino.Scriptable;
-import pro.komaru.tridot.rhino.ScriptableObject;
-import pro.komaru.tridot.rhino.Symbol;
-import pro.komaru.tridot.rhino.SymbolKey;
-import pro.komaru.tridot.rhino.TopLevel;
-import pro.komaru.tridot.rhino.Undefined;
+import pro.komaru.tridot.rhino.*;
 
 /**
  * This class implements the RegExp native object.

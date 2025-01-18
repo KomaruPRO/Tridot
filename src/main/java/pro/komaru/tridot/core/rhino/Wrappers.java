@@ -1,29 +1,25 @@
 package pro.komaru.tridot.core.rhino;
 
-import com.mojang.brigadier.exceptions.CommandSyntaxException;
-import pro.komaru.tridot.rhino.NativeArray;
-import pro.komaru.tridot.rhino.util.wrap.TypeWrappers;
-import pro.komaru.tridot.utilities.MCUtil;
-import pro.komaru.tridot.utilities.func.Prov;
-import pro.komaru.tridot.utilities.math.Vec3;
-import pro.komaru.tridot.utilities.struct.Pair;
-import pro.komaru.tridot.utilities.struct.Structs;
-import net.minecraft.core.BlockPos;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.TagParser;
-import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.block.Block;
-import net.minecraftforge.registries.ForgeRegistries;
+import com.mojang.brigadier.exceptions.*;
+import net.minecraft.core.*;
+import net.minecraft.nbt.*;
+import net.minecraft.network.chat.*;
+import net.minecraft.resources.*;
+import net.minecraft.server.level.*;
+import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.player.*;
+import net.minecraft.world.item.*;
+import net.minecraft.world.level.block.*;
+import net.minecraftforge.registries.*;
+import pro.komaru.tridot.core.math.*;
+import pro.komaru.tridot.core.struct.*;
+import pro.komaru.tridot.rhino.*;
+import pro.komaru.tridot.rhino.util.wrap.*;
+import pro.komaru.tridot.utilities.*;
+import pro.komaru.tridot.utilities.func.*;
 
-import java.util.HashMap;
-import java.util.UUID;
-import java.util.function.Supplier;
+import java.util.*;
+import java.util.function.*;
 
 public class Wrappers {
     public static void register(TypeWrappers wraps) {

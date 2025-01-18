@@ -6,15 +6,9 @@
 
 package pro.komaru.tridot.rhino.ast;
 
-import pro.komaru.tridot.rhino.NativeCall;
-import pro.komaru.tridot.rhino.Node;
-import pro.komaru.tridot.rhino.Token;
+import pro.komaru.tridot.rhino.*;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * A JavaScript function declaration or expression.

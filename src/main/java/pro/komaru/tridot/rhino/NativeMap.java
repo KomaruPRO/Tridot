@@ -6,7 +6,7 @@
 
 package pro.komaru.tridot.rhino;
 
-import java.util.Iterator;
+import java.util.*;
 
 public class NativeMap extends IdScriptableObject {
 	static final String ITERATOR_TAG = "Map Iterator";

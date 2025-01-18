@@ -6,18 +6,11 @@
 
 package pro.komaru.tridot.rhino;
 
-import pro.komaru.tridot.rhino.regexp.NativeRegExp;
-import pro.komaru.tridot.rhino.util.DataObject;
+import pro.komaru.tridot.rhino.regexp.*;
+import pro.komaru.tridot.rhino.util.*;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Comparator;
-import java.util.Iterator;
-import java.util.List;
-import java.util.ListIterator;
-import java.util.NoSuchElementException;
-import java.util.function.Supplier;
+import java.util.*;
+import java.util.function.*;
 
 /**
  * This class implements the Array native object.

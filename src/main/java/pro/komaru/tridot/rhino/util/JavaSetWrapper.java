@@ -1,9 +1,6 @@
 package pro.komaru.tridot.rhino.util;
 
-import java.util.AbstractList;
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.Set;
+import java.util.*;
 
 public class JavaSetWrapper<T> extends AbstractList<T> {
 	public final Set<T> set;

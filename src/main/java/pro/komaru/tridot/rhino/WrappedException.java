@@ -6,7 +6,7 @@
 
 package pro.komaru.tridot.rhino;
 
-import java.io.Serial;
+import java.io.*;
 
 /**
  * A wrapper for runtime exceptions.

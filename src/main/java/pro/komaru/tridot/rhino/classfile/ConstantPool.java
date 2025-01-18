@@ -6,8 +6,7 @@
 
 package pro.komaru.tridot.rhino.classfile;
 
-import pro.komaru.tridot.rhino.ObjToIntMap;
-import pro.komaru.tridot.rhino.UintMap;
+import pro.komaru.tridot.rhino.*;
 
 final class ConstantPool {
 	static final byte CONSTANT_Class = 7;

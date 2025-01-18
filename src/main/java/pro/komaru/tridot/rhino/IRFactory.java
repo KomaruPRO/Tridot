@@ -6,62 +6,9 @@
 
 package pro.komaru.tridot.rhino;
 
-import pro.komaru.tridot.rhino.ast.ArrayComprehension;
-import pro.komaru.tridot.rhino.ast.ArrayComprehensionLoop;
-import pro.komaru.tridot.rhino.ast.ArrayLiteral;
-import pro.komaru.tridot.rhino.ast.Assignment;
-import pro.komaru.tridot.rhino.ast.AstNode;
-import pro.komaru.tridot.rhino.ast.AstRoot;
-import pro.komaru.tridot.rhino.ast.AstSymbol;
-import pro.komaru.tridot.rhino.ast.Block;
-import pro.komaru.tridot.rhino.ast.CatchClause;
-import pro.komaru.tridot.rhino.ast.ConditionalExpression;
-import pro.komaru.tridot.rhino.ast.ContinueStatement;
-import pro.komaru.tridot.rhino.ast.DestructuringForm;
-import pro.komaru.tridot.rhino.ast.DoLoop;
-import pro.komaru.tridot.rhino.ast.ElementGet;
-import pro.komaru.tridot.rhino.ast.EmptyExpression;
-import pro.komaru.tridot.rhino.ast.ExpressionStatement;
-import pro.komaru.tridot.rhino.ast.ForInLoop;
-import pro.komaru.tridot.rhino.ast.ForLoop;
-import pro.komaru.tridot.rhino.ast.FunctionCall;
-import pro.komaru.tridot.rhino.ast.FunctionNode;
-import pro.komaru.tridot.rhino.ast.GeneratorExpression;
-import pro.komaru.tridot.rhino.ast.GeneratorExpressionLoop;
-import pro.komaru.tridot.rhino.ast.IfStatement;
-import pro.komaru.tridot.rhino.ast.InfixExpression;
-import pro.komaru.tridot.rhino.ast.Jump;
-import pro.komaru.tridot.rhino.ast.Label;
-import pro.komaru.tridot.rhino.ast.LabeledStatement;
-import pro.komaru.tridot.rhino.ast.LetNode;
-import pro.komaru.tridot.rhino.ast.Name;
-import pro.komaru.tridot.rhino.ast.NewExpression;
-import pro.komaru.tridot.rhino.ast.NumberLiteral;
-import pro.komaru.tridot.rhino.ast.ObjectLiteral;
-import pro.komaru.tridot.rhino.ast.ObjectProperty;
-import pro.komaru.tridot.rhino.ast.ParenthesizedExpression;
-import pro.komaru.tridot.rhino.ast.PropertyGet;
-import pro.komaru.tridot.rhino.ast.RegExpLiteral;
-import pro.komaru.tridot.rhino.ast.ReturnStatement;
-import pro.komaru.tridot.rhino.ast.Scope;
-import pro.komaru.tridot.rhino.ast.ScriptNode;
-import pro.komaru.tridot.rhino.ast.StringLiteral;
-import pro.komaru.tridot.rhino.ast.SwitchCase;
-import pro.komaru.tridot.rhino.ast.SwitchStatement;
-import pro.komaru.tridot.rhino.ast.TaggedTemplateLiteral;
-import pro.komaru.tridot.rhino.ast.TemplateCharacters;
-import pro.komaru.tridot.rhino.ast.TemplateLiteral;
-import pro.komaru.tridot.rhino.ast.ThrowStatement;
-import pro.komaru.tridot.rhino.ast.TryStatement;
-import pro.komaru.tridot.rhino.ast.UnaryExpression;
-import pro.komaru.tridot.rhino.ast.VariableDeclaration;
-import pro.komaru.tridot.rhino.ast.VariableInitializer;
-import pro.komaru.tridot.rhino.ast.WhileLoop;
-import pro.komaru.tridot.rhino.ast.WithStatement;
-import pro.komaru.tridot.rhino.ast.Yield;
+import pro.komaru.tridot.rhino.ast.*;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 /**
  * This class rewrites the parse tree into an IR suitable for codegen.

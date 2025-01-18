@@ -8,10 +8,7 @@
 
 package pro.komaru.tridot.rhino;
 
-import java.lang.reflect.Constructor;
-import java.lang.reflect.Member;
-import java.lang.reflect.Method;
-import java.lang.reflect.Modifier;
+import java.lang.reflect.*;
 
 public class FunctionObject extends BaseFunction {
 	public static final int JAVA_UNSUPPORTED_TYPE = 0;

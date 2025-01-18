@@ -5,12 +5,9 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 package pro.komaru.tridot.rhino;
 
-import pro.komaru.tridot.rhino.util.Deletable;
-import pro.komaru.tridot.rhino.util.ValueUnwrapper;
+import pro.komaru.tridot.rhino.util.*;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @SuppressWarnings({"rawtypes", "unchecked"})
 public class NativeJavaMap extends NativeJavaObject {

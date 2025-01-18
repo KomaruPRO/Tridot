@@ -1,12 +1,9 @@
 package pro.komaru.tridot.rhino.mod.util;
 
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.Tag;
+import net.minecraft.nbt.*;
 
-import java.io.DataOutput;
-import java.io.IOException;
-import java.util.LinkedHashMap;
-import java.util.Map;
+import java.io.*;
+import java.util.*;
 
 public class OrderedCompoundTag extends CompoundTag {
 	public final Map<String, Tag> tagMap;

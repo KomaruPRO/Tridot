@@ -6,8 +6,7 @@
 
 package pro.komaru.tridot.rhino.ast;
 
-import pro.komaru.tridot.rhino.Node;
-import pro.komaru.tridot.rhino.Token;
+import pro.komaru.tridot.rhino.*;
 
 /**
  * Used for code generation.  During codegen, the AST is transformed

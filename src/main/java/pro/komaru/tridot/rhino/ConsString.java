@@ -6,7 +6,7 @@
 
 package pro.komaru.tridot.rhino;
 
-import java.util.ArrayDeque;
+import java.util.*;
 
 /**
  * <p>This class represents a string composed of two components, each of which

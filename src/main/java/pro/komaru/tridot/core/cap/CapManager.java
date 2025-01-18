@@ -1,8 +1,6 @@
 package pro.komaru.tridot.core.cap;
 
 import com.mojang.logging.*;
-import pro.komaru.tridot.utilities.func.*;
-import pro.komaru.tridot.utilities.struct.*;
 import net.minecraft.nbt.*;
 import net.minecraft.resources.*;
 import net.minecraft.server.level.*;
@@ -14,11 +12,8 @@ import net.minecraftforge.event.*;
 import net.minecraftforge.event.entity.player.*;
 import net.minecraftforge.eventbus.api.*;
 import net.minecraftforge.fml.common.*;
-import pro.komaru.tridot.utilities.func.Prov;
-import pro.komaru.tridot.utilities.struct.CapImpl;
-import pro.komaru.tridot.utilities.struct.CapProvider;
-import pro.komaru.tridot.utilities.struct.Seq;
-import pro.komaru.tridot.utilities.struct.Var;
+import pro.komaru.tridot.core.struct.*;
+import pro.komaru.tridot.utilities.func.*;
 
 @Mod.EventBusSubscriber()
 public class CapManager {

@@ -1,13 +1,10 @@
 package pro.komaru.tridot.core;
 
-import pro.komaru.tridot.core.entity.*;
-import pro.komaru.tridot.utilities.func.*;
-import pro.komaru.tridot.utilities.struct.*;
 import net.minecraft.nbt.*;
 import net.minecraft.network.syncher.*;
-import pro.komaru.tridot.core.entity.TridotEntityVar;
-import pro.komaru.tridot.utilities.func.Cons2;
-import pro.komaru.tridot.utilities.struct.Seq;
+import pro.komaru.tridot.core.entity.*;
+import pro.komaru.tridot.core.struct.*;
+import pro.komaru.tridot.utilities.func.*;
 
 public interface TridotDataEntity {
     Seq<TridotEntityVar<?>> data();

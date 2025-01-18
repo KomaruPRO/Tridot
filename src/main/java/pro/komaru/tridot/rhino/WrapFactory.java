@@ -8,12 +8,9 @@
 
 package pro.komaru.tridot.rhino;
 
-import pro.komaru.tridot.rhino.util.CustomJavaToJsWrapper;
-import pro.komaru.tridot.rhino.util.JavaSetWrapper;
+import pro.komaru.tridot.rhino.util.*;
 
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Embeddings that wish to provide their own custom wrappings for Java

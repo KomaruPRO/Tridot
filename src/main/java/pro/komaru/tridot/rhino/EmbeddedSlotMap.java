@@ -13,9 +13,7 @@ package pro.komaru.tridot.rhino;
  * to have a measurable performance benefit.
  */
 
-import java.util.Iterator;
-import java.util.NoSuchElementException;
-import java.util.Objects;
+import java.util.*;
 
 public class EmbeddedSlotMap implements SlotMap {
 

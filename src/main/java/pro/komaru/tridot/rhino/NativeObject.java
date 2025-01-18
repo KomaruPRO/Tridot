@@ -6,22 +6,11 @@
 
 package pro.komaru.tridot.rhino;
 
-import pro.komaru.tridot.rhino.util.DataObject;
+import pro.komaru.tridot.rhino.util.*;
 
-import java.lang.reflect.Field;
-import java.lang.reflect.Modifier;
-import java.util.AbstractCollection;
-import java.util.AbstractSet;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.NoSuchElementException;
-import java.util.Objects;
-import java.util.Set;
-import java.util.function.Supplier;
+import java.lang.reflect.*;
+import java.util.*;
+import java.util.function.*;
 
 /**
  * This class implements the Object native object.

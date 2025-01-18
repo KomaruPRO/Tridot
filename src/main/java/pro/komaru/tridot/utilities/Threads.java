@@ -1,10 +1,8 @@
 package pro.komaru.tridot.utilities;
 
 import com.mojang.logging.*;
-import pro.komaru.tridot.utilities.func.*;
-import pro.komaru.tridot.utilities.struct.*;
 import pro.komaru.tridot.utilities.func.Prov;
-import pro.komaru.tridot.utilities.struct.Seq;
+import pro.komaru.tridot.core.struct.Seq;
 
 import javax.annotation.*;
 import java.util.concurrent.*;
@@ -15,12 +13,7 @@ import java.util.concurrent.*;
 public class Threads {
 
     public static <T> ThreadLocal<T> local(Prov<T> prov){
-        return new ThreadLocal<T>(){
-            @Override
-            protected T initialValue(){
-                return prov.get();
-            }
-        };
+        return ThreadLocal.withInitial(prov::get);
     }
 
     public static <T> T await(Future<T> future){

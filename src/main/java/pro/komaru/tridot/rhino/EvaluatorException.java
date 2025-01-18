@@ -7,7 +7,7 @@
 
 package pro.komaru.tridot.rhino;
 
-import java.io.Serial;
+import java.io.*;
 
 /**
  * The class of exceptions thrown by the JavaScript engine.

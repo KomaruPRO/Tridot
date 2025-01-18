@@ -4,7 +4,7 @@
 
 package pro.komaru.tridot.rhino;
 
-import java.util.Comparator;
+import java.util.*;
 
 public final class Sorting {
 	private static final int SMALLSORT = 16;

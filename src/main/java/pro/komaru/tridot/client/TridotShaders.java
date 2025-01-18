@@ -1,8 +1,6 @@
 package pro.komaru.tridot.client;
 
 import com.mojang.blaze3d.vertex.*;
-import pro.komaru.tridot.*;
-import pro.komaru.tridot.client.shader.postprocess.*;
 import net.minecraft.client.renderer.*;
 import net.minecraft.resources.*;
 import net.minecraftforge.api.distmarker.*;
@@ -11,8 +9,8 @@ import net.minecraftforge.eventbus.api.*;
 import net.minecraftforge.fml.common.*;
 import net.minecraftforge.fml.event.lifecycle.*;
 import pro.komaru.tridot.TridotLib;
-import pro.komaru.tridot.client.shader.postprocess.GlowPostProcess;
-import pro.komaru.tridot.client.shader.postprocess.PostProcessHandler;
+import pro.komaru.tridot.client.graphics.shader.postprocess.GlowPostProcess;
+import pro.komaru.tridot.client.graphics.shader.postprocess.PostProcessHandler;
 
 import java.io.*;
 

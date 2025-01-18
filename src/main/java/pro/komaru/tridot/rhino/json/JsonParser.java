@@ -6,13 +6,10 @@
 
 package pro.komaru.tridot.rhino.json;
 
-import pro.komaru.tridot.rhino.Context;
-import pro.komaru.tridot.rhino.ScriptRuntime;
-import pro.komaru.tridot.rhino.Scriptable;
+import pro.komaru.tridot.rhino.*;
 
-import java.io.Serial;
-import java.util.ArrayList;
-import java.util.List;
+import java.io.*;
+import java.util.*;
 
 /**
  * This class converts a stream of JSON tokens into a JSON value.

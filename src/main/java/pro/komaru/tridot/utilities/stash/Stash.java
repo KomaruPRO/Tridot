@@ -1,7 +1,6 @@
 package pro.komaru.tridot.utilities.stash;
 
-import pro.komaru.tridot.utilities.struct.*;
-import pro.komaru.tridot.utilities.struct.Seq;
+import pro.komaru.tridot.core.struct.Seq;
 
 public class Stash {
     private static int lastId = 0;

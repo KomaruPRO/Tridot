@@ -7,14 +7,9 @@
 
 package pro.komaru.tridot.rhino;
 
-import java.io.CharArrayWriter;
-import java.io.PrintStream;
-import java.io.PrintWriter;
-import java.io.Serial;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import java.io.*;
+import java.util.*;
+import java.util.regex.*;
 
 /**
  * The class of exceptions thrown by the JavaScript engine.

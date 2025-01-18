@@ -1,23 +1,16 @@
 package pro.komaru.tridot.core.net.packets;
 
-import pro.komaru.tridot.*;
-import pro.komaru.tridot.client.*;
-import pro.komaru.tridot.client.particle.*;
-import pro.komaru.tridot.client.particle.data.*;
-import pro.komaru.tridot.core.*;
 import net.minecraft.network.*;
 import net.minecraft.util.*;
 import net.minecraft.world.entity.player.*;
 import net.minecraft.world.level.*;
 import net.minecraft.world.phys.*;
 import net.minecraftforge.network.NetworkEvent.*;
-import pro.komaru.tridot.TridotLib;
-import pro.komaru.tridot.client.TridotParticles;
-import pro.komaru.tridot.client.TridotRenderTypes;
-import pro.komaru.tridot.client.particle.ParticleBuilder;
-import pro.komaru.tridot.client.particle.data.ColorParticleData;
-import pro.komaru.tridot.client.particle.data.GenericParticleData;
-import pro.komaru.tridot.core.Pal;
+import pro.komaru.tridot.*;
+import pro.komaru.tridot.client.*;
+import pro.komaru.tridot.client.graphics.*;
+import pro.komaru.tridot.client.graphics.particle.*;
+import pro.komaru.tridot.client.graphics.particle.data.*;
 
 import java.awt.*;
 import java.util.*;

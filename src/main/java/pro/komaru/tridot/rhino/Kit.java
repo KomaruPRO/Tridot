@@ -6,11 +6,8 @@
 
 package pro.komaru.tridot.rhino;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.Reader;
-import java.util.Map;
+import java.io.*;
+import java.util.*;
 
 /**
  * Collection of utilities

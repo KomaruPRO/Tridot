@@ -6,12 +6,9 @@
 
 package pro.komaru.tridot.rhino;
 
-import pro.komaru.tridot.rhino.ast.FunctionNode;
-import pro.komaru.tridot.rhino.ast.ScriptNode;
+import pro.komaru.tridot.rhino.ast.*;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 public final class Interpreter extends Icode implements Evaluator {
 	static final int EXCEPTION_TRY_START_SLOT = 0;

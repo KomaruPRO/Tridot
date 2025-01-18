@@ -1,15 +1,11 @@
 package pro.komaru.tridot.core.rhino;
 
+import pro.komaru.tridot.core.struct.*;
 import pro.komaru.tridot.rhino.*;
-import pro.komaru.tridot.rhino.*;
-import pro.komaru.tridot.rhino.util.wrap.TypeWrappers;
-import pro.komaru.tridot.utilities.struct.Pair;
-import pro.komaru.tridot.utilities.struct.Seq;
+import pro.komaru.tridot.rhino.util.wrap.*;
 
-import java.lang.reflect.Array;
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
-import java.util.HashMap;
+import java.lang.reflect.*;
+import java.util.*;
 
 public class JS {
     public static Pair<Context, ScriptableObject> begin() {

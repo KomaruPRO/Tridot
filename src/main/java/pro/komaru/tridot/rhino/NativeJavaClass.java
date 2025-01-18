@@ -6,11 +6,10 @@
 
 package pro.komaru.tridot.rhino;
 
-import pro.komaru.tridot.core.rhino.Alias;
+import pro.komaru.tridot.core.rhino.*;
 
-import java.lang.reflect.Array;
-import java.lang.reflect.Modifier;
-import java.util.Map;
+import java.lang.reflect.*;
+import java.util.*;
 
 /**
  * This class reflects Java classes into the JavaScript environment, mainly

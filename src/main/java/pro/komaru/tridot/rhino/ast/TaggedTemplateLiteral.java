@@ -4,7 +4,7 @@
 
 package pro.komaru.tridot.rhino.ast;
 
-import pro.komaru.tridot.rhino.Token;
+import pro.komaru.tridot.rhino.*;
 
 /**
  * AST node for a Tagged Template Literal.

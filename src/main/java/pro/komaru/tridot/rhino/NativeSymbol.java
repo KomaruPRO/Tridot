@@ -6,8 +6,7 @@
 
 package pro.komaru.tridot.rhino;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 /**
  * This is an implementation of the standard "Symbol" type that implements

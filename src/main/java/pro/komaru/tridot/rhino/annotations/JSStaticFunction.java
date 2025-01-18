@@ -4,15 +4,9 @@
 
 package pro.komaru.tridot.rhino.annotations;
 
-import pro.komaru.tridot.rhino.Scriptable;
-import pro.komaru.tridot.rhino.ScriptableObject;
-import pro.komaru.tridot.rhino.Context;
+import pro.komaru.tridot.rhino.*;
 
-import java.lang.annotation.Documented;
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+import java.lang.annotation.*;
 
 /**
  * An annotation that marks a Java method as JavaScript static function. This can

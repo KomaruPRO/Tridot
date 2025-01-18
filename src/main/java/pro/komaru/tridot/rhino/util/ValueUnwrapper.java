@@ -1,7 +1,6 @@
 package pro.komaru.tridot.rhino.util;
 
-import pro.komaru.tridot.rhino.Context;
-import pro.komaru.tridot.rhino.Scriptable;
+import pro.komaru.tridot.rhino.*;
 
 @FunctionalInterface
 public interface ValueUnwrapper {

@@ -1,6 +1,6 @@
 package pro.komaru.tridot.rhino.util.wrap;
 
-import pro.komaru.tridot.rhino.Context;
+import pro.komaru.tridot.rhino.*;
 
 /**
  * @author LatvianModder

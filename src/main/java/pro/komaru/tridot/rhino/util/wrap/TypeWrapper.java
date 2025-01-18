@@ -1,6 +1,6 @@
 package pro.komaru.tridot.rhino.util.wrap;
 
-import java.util.function.Predicate;
+import java.util.function.*;
 
 /**
  * @author LatvianModder

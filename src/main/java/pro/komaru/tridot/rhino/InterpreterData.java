@@ -6,7 +6,7 @@
 
 package pro.komaru.tridot.rhino;
 
-import java.util.Arrays;
+import java.util.*;
 
 final class InterpreterData {
 	static final int INITIAL_MAX_ICODE_LENGTH = 1024;

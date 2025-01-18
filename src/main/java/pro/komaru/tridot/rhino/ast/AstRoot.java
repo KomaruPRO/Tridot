@@ -6,13 +6,9 @@
 
 package pro.komaru.tridot.rhino.ast;
 
-import pro.komaru.tridot.rhino.CompilerEnvirons;
-import pro.komaru.tridot.rhino.ErrorReporter;
-import pro.komaru.tridot.rhino.Parser;
-import pro.komaru.tridot.rhino.Token;
+import pro.komaru.tridot.rhino.*;
 
-import java.util.SortedSet;
-import java.util.TreeSet;
+import java.util.*;
 
 /**
  * Node for the root of a parse tree.  It contains the statements and functions

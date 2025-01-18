@@ -1,12 +1,11 @@
 package pro.komaru.tridot.rhino.util.wrap;
 
-import pro.komaru.tridot.rhino.util.EnumTypeWrapper;
-import org.jetbrains.annotations.Nullable;
+import org.jetbrains.annotations.*;
+import pro.komaru.tridot.rhino.util.*;
 
-import java.lang.reflect.Array;
-import java.util.LinkedHashMap;
-import java.util.Map;
-import java.util.function.Predicate;
+import java.lang.reflect.*;
+import java.util.*;
+import java.util.function.*;
 
 /**
  * @author LatvianModder

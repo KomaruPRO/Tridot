@@ -6,14 +6,9 @@
 
 package pro.komaru.tridot.rhino;
 
-import pro.komaru.tridot.rhino.ast.Comment;
-import pro.komaru.tridot.rhino.ast.Jump;
-import pro.komaru.tridot.rhino.ast.Name;
-import pro.komaru.tridot.rhino.ast.NumberLiteral;
-import pro.komaru.tridot.rhino.ast.Scope;
+import pro.komaru.tridot.rhino.ast.*;
 
-import java.util.Iterator;
-import java.util.NoSuchElementException;
+import java.util.*;
 
 /**
  * This class implements the root of the intermediate representation.

@@ -1,7 +1,5 @@
 package pro.komaru.tridot.core.net;
 
-import pro.komaru.tridot.*;
-import pro.komaru.tridot.core.net.packets.*;
 import net.minecraft.core.*;
 import net.minecraft.resources.*;
 import net.minecraft.server.level.*;
@@ -9,7 +7,7 @@ import net.minecraft.world.entity.player.*;
 import net.minecraft.world.level.*;
 import net.minecraftforge.network.*;
 import net.minecraftforge.network.simple.*;
-import pro.komaru.tridot.TridotLib;
+import pro.komaru.tridot.*;
 import pro.komaru.tridot.core.net.packets.*;
 
 public class PacketHandler extends AbstractPacketHandler{

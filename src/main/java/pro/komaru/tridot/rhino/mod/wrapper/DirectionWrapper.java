@@ -1,12 +1,10 @@
 package pro.komaru.tridot.rhino.mod.wrapper;
 
-import net.minecraft.core.Direction;
+import net.minecraft.core.*;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Map;
-import java.util.function.Function;
-import java.util.stream.Collectors;
+import java.util.*;
+import java.util.function.*;
+import java.util.stream.*;
 
 /**
  * @author LatvianModder

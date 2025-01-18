@@ -6,13 +6,9 @@
 
 package pro.komaru.tridot.rhino.ast;
 
-import pro.komaru.tridot.rhino.CompilerEnvirons;
-import pro.komaru.tridot.rhino.Context;
-import pro.komaru.tridot.rhino.ErrorReporter;
-import pro.komaru.tridot.rhino.EvaluatorException;
+import pro.komaru.tridot.rhino.*;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 /**
  * An error reporter that gathers the errors and warnings for later display.

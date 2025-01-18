@@ -1,6 +1,6 @@
 package pro.komaru.tridot.rhino;
 
-import java.util.function.Consumer;
+import java.util.function.*;
 
 /**
  * This is the enumeration needed by the for..in statement.

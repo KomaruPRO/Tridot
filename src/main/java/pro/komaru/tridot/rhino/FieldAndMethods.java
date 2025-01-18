@@ -1,6 +1,6 @@
 package pro.komaru.tridot.rhino;
 
-import java.lang.reflect.Field;
+import java.lang.reflect.*;
 
 public class FieldAndMethods extends NativeJavaMethod {
 	public transient Field field;

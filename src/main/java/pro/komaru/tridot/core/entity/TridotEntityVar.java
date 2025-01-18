@@ -1,10 +1,8 @@
 package pro.komaru.tridot.core.entity;
 
-import pro.komaru.tridot.utilities.func.Cons;
-import pro.komaru.tridot.utilities.func.Cons2;
-import pro.komaru.tridot.utilities.func.Func;
 import net.minecraft.network.syncher.*;
 import net.minecraft.world.entity.*;
+import pro.komaru.tridot.utilities.func.*;
 
 import java.lang.reflect.*;
 

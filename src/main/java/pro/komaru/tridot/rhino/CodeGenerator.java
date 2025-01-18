@@ -6,18 +6,10 @@
 
 package pro.komaru.tridot.rhino;
 
-import pro.komaru.tridot.rhino.ast.AstNode;
-import pro.komaru.tridot.rhino.ast.AstRoot;
-import pro.komaru.tridot.rhino.ast.Block;
-import pro.komaru.tridot.rhino.ast.FunctionNode;
-import pro.komaru.tridot.rhino.ast.Jump;
-import pro.komaru.tridot.rhino.ast.Scope;
-import pro.komaru.tridot.rhino.ast.ScriptNode;
-import pro.komaru.tridot.rhino.ast.TemplateCharacters;
-import pro.komaru.tridot.rhino.ast.VariableInitializer;
-import pro.komaru.tridot.rhino.regexp.RegExp;
+import pro.komaru.tridot.rhino.ast.*;
+import pro.komaru.tridot.rhino.regexp.*;
 
-import java.util.List;
+import java.util.*;
 
 /**
  * Generates bytecode for the Interpreter.

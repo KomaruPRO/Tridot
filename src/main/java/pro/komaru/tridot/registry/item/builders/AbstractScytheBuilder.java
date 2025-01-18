@@ -1,9 +1,9 @@
 package pro.komaru.tridot.registry.item.builders;
 
 import com.google.common.collect.*;
-import pro.komaru.tridot.client.render.animation.ItemAnimation;
+import pro.komaru.tridot.client.graphics.render.animation.ItemAnimation;
 import pro.komaru.tridot.registry.item.types.ScytheItem;
-import pro.komaru.tridot.utilities.math.Interp;
+import pro.komaru.tridot.core.math.Interp;
 import net.minecraft.core.particles.*;
 import net.minecraft.sounds.*;
 import net.minecraft.world.effect.*;

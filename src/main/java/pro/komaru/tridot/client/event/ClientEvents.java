@@ -9,10 +9,10 @@ import net.minecraftforge.client.event.*;
 import net.minecraftforge.event.*;
 import net.minecraftforge.eventbus.api.*;
 import pro.komaru.tridot.*;
-import pro.komaru.tridot.client.gui.screen.*;
-import pro.komaru.tridot.client.gui.screenshake.*;
-import pro.komaru.tridot.client.render.item.bow.*;
-import pro.komaru.tridot.client.shader.postprocess.*;
+import pro.komaru.tridot.client.graphics.gui.screen.*;
+import pro.komaru.tridot.client.graphics.gui.screenshake.*;
+import pro.komaru.tridot.client.graphics.render.item.bow.*;
+import pro.komaru.tridot.client.graphics.shader.postprocess.*;
 import pro.komaru.tridot.core.config.*;
 
 public class ClientEvents{

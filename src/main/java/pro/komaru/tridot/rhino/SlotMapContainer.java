@@ -6,10 +6,9 @@
 
 package pro.komaru.tridot.rhino;
 
-import pro.komaru.tridot.rhino.ScriptableObject.Slot;
-import pro.komaru.tridot.rhino.ScriptableObject.SlotAccess;
+import pro.komaru.tridot.rhino.ScriptableObject.*;
 
-import java.util.Iterator;
+import java.util.*;
 
 /**
  * This class holds the various SlotMaps of various types, and knows how to atomically

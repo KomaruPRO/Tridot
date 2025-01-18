@@ -6,12 +6,10 @@
 
 package pro.komaru.tridot.rhino;
 
-import pro.komaru.tridot.rhino.regexp.NativeRegExp;
-import pro.komaru.tridot.rhino.regexp.RegExp;
+import pro.komaru.tridot.rhino.regexp.*;
 
-import java.text.Collator;
-import java.text.Normalizer;
-import java.util.Locale;
+import java.text.*;
+import java.util.*;
 
 /**
  * This class implements the String native object.

@@ -1,18 +1,12 @@
 package pro.komaru.tridot.core.net.packets;
 
-import pro.komaru.tridot.core.cap.*;
-import pro.komaru.tridot.core.net.*;
-import pro.komaru.tridot.utilities.*;
-import pro.komaru.tridot.utilities.struct.*;
 import net.minecraft.nbt.*;
 import net.minecraft.network.*;
 import net.minecraftforge.common.capabilities.*;
-import pro.komaru.tridot.core.cap.CapEntry;
-import pro.komaru.tridot.core.cap.CapManager;
-import pro.komaru.tridot.core.net.Packet;
-import pro.komaru.tridot.utilities.MCUtil;
-import pro.komaru.tridot.utilities.struct.CapImpl;
-import pro.komaru.tridot.utilities.struct.Structs;
+import pro.komaru.tridot.core.cap.*;
+import pro.komaru.tridot.core.net.*;
+import pro.komaru.tridot.core.struct.*;
+import pro.komaru.tridot.utilities.*;
 
 public class SynchronizeCapabilityPacket implements Packet {
     CompoundTag nbt;

@@ -8,28 +8,14 @@
 
 package pro.komaru.tridot.rhino;
 
-import pro.komaru.tridot.rhino.annotations.JSConstructor;
-import pro.komaru.tridot.rhino.annotations.JSFunction;
-import pro.komaru.tridot.rhino.annotations.JSGetter;
-import pro.komaru.tridot.rhino.annotations.JSSetter;
-import pro.komaru.tridot.rhino.annotations.JSStaticFunction;
-import pro.komaru.tridot.rhino.mod.util.WrappedReflectionMethod;
-import pro.komaru.tridot.rhino.util.Deletable;
+import pro.komaru.tridot.rhino.annotations.*;
+import pro.komaru.tridot.rhino.mod.util.*;
+import pro.komaru.tridot.rhino.util.*;
 
-import java.io.Serial;
-import java.io.Serializable;
-import java.lang.annotation.Annotation;
-import java.lang.reflect.AccessibleObject;
-import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Member;
-import java.lang.reflect.Method;
-import java.lang.reflect.Modifier;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
+import java.io.*;
+import java.lang.annotation.*;
+import java.lang.reflect.*;
+import java.util.*;
 
 /**
  * This is the default implementation of the Scriptable interface. This

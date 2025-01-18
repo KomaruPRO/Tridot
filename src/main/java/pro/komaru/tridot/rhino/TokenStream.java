@@ -6,7 +6,7 @@
 
 package pro.komaru.tridot.rhino;
 
-import java.io.IOException;
+import java.io.*;
 
 /**
  * This class implements the JavaScript scanner.

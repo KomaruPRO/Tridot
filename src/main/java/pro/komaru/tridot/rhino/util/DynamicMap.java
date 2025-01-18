@@ -1,7 +1,7 @@
 package pro.komaru.tridot.rhino.util;
 
-import java.util.HashMap;
-import java.util.function.Function;
+import java.util.*;
+import java.util.function.*;
 
 /**
  * @author LatvianModder

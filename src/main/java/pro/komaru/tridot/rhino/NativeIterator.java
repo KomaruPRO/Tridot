@@ -6,7 +6,7 @@
 
 package pro.komaru.tridot.rhino;
 
-import java.util.Iterator;
+import java.util.*;
 
 /**
  * This class implements iterator objects. See

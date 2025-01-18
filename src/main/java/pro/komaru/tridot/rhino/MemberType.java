@@ -1,6 +1,6 @@
 package pro.komaru.tridot.rhino;
 
-import org.jetbrains.annotations.Nullable;
+import org.jetbrains.annotations.*;
 
 public enum MemberType {
 	UNDEFINED("undefined"),

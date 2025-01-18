@@ -1,9 +1,7 @@
 package pro.komaru.tridot.utilities.sort;
 
-import pro.komaru.tridot.utilities.*;
-import pro.komaru.tridot.utilities.struct.*;
 import pro.komaru.tridot.utilities.Threads;
-import pro.komaru.tridot.utilities.struct.Seq;
+import pro.komaru.tridot.core.struct.Seq;
 
 import java.util.*;
 

@@ -1,6 +1,6 @@
 package pro.komaru.tridot.utilities.client;
 
-import pro.komaru.tridot.utilities.struct.Structs;
+import pro.komaru.tridot.core.struct.Structs;
 import net.minecraft.network.chat.*;
 
 import java.util.*;

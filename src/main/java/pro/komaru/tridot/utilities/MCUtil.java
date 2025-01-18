@@ -1,8 +1,6 @@
 package pro.komaru.tridot.utilities;
 
 import com.mojang.brigadier.exceptions.*;
-import pro.komaru.tridot.utilities.func.*;
-import pro.komaru.tridot.utilities.struct.*;
 import net.minecraft.client.*;
 import net.minecraft.client.player.*;
 import net.minecraft.commands.*;
@@ -15,7 +13,7 @@ import net.minecraft.world.entity.player.*;
 import net.minecraft.world.item.*;
 import net.minecraftforge.server.*;
 import pro.komaru.tridot.utilities.func.Cons;
-import pro.komaru.tridot.utilities.struct.Seq;
+import pro.komaru.tridot.core.struct.Seq;
 
 import java.util.*;
 

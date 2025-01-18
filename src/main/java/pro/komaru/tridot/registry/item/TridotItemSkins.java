@@ -1,8 +1,5 @@
 package pro.komaru.tridot.registry.item;
 
-import pro.komaru.tridot.*;
-import pro.komaru.tridot.client.model.item.*;
-import pro.komaru.tridot.client.render.item.*;
 import net.minecraft.client.resources.model.*;
 import net.minecraft.resources.*;
 import net.minecraftforge.api.distmarker.*;
@@ -13,7 +10,7 @@ import pro.komaru.tridot.TridotLib;
 import pro.komaru.tridot.client.model.item.CustomModel;
 import pro.komaru.tridot.client.model.item.ItemSkinItemOverrides;
 import pro.komaru.tridot.client.model.item.ItemSkinModels;
-import pro.komaru.tridot.client.render.item.LargeItemRenderer;
+import pro.komaru.tridot.client.graphics.render.item.LargeItemRenderer;
 
 import java.util.*;
 

@@ -8,7 +8,7 @@
 
 package pro.komaru.tridot.rhino;
 
-import java.util.function.Consumer;
+import java.util.function.*;
 
 /**
  * This is interface that all objects in JavaScript must implement.

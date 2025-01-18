@@ -1,10 +1,9 @@
 package pro.komaru.tridot.core.net.packets;
 
-import pro.komaru.tridot.*;
 import net.minecraft.network.*;
 import net.minecraft.sounds.*;
 import net.minecraftforge.network.NetworkEvent.*;
-import pro.komaru.tridot.TridotLib;
+import pro.komaru.tridot.*;
 
 import java.util.*;
 import java.util.function.*;

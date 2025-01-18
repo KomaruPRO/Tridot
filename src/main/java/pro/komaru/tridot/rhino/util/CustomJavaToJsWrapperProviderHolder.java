@@ -1,8 +1,8 @@
 package pro.komaru.tridot.rhino.util;
 
-import org.jetbrains.annotations.Nullable;
+import org.jetbrains.annotations.*;
 
-import java.util.function.Predicate;
+import java.util.function.*;
 
 public record CustomJavaToJsWrapperProviderHolder<T>(Predicate<T> predicate, CustomJavaToJsWrapperProvider<T> provider) {
 	public record PredicateFromClass<T>(Class<T> type) implements Predicate<T> {

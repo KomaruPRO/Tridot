@@ -1,6 +1,6 @@
 package pro.komaru.tridot.rhino;
 
-import java.io.Serial;
+import java.io.*;
 
 public class GeneratorState {
 	public static final int GENERATOR_SEND = 0;

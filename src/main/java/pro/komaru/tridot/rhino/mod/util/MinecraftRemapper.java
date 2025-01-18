@@ -1,16 +1,11 @@
 package pro.komaru.tridot.rhino.mod.util;
 
-import pro.komaru.tridot.rhino.util.Remapper;
-import org.jetbrains.annotations.Nullable;
+import org.jetbrains.annotations.*;
+import pro.komaru.tridot.rhino.util.*;
 
-import java.io.InputStream;
-import java.lang.reflect.Array;
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
-import java.util.Optional;
+import java.io.*;
+import java.lang.reflect.*;
+import java.util.*;
 
 public class MinecraftRemapper implements Remapper {
 	private static final class RemappedClass {

@@ -1,9 +1,7 @@
 package pro.komaru.tridot.rhino.util;
 
-import pro.komaru.tridot.rhino.BaseFunction;
-import pro.komaru.tridot.rhino.Context;
-import pro.komaru.tridot.rhino.Scriptable;
-import org.jetbrains.annotations.Nullable;
+import org.jetbrains.annotations.*;
+import pro.komaru.tridot.rhino.*;
 
 /**
  * @author LatvianModder

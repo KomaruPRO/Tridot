@@ -2,8 +2,8 @@ package pro.komaru.tridot.utilities.stash;
 
 import pro.komaru.tridot.utilities.MCUtil;
 import pro.komaru.tridot.utilities.stash.net.SyncStashObjectPacket;
-import pro.komaru.tridot.utilities.struct.Seq;
-import pro.komaru.tridot.utilities.struct.Structs;
+import pro.komaru.tridot.core.struct.Seq;
+import pro.komaru.tridot.core.struct.Structs;
 import net.minecraft.server.level.*;
 import net.minecraftforge.network.*;
 import net.minecraftforge.network.simple.*;

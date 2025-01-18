@@ -6,8 +6,7 @@
 
 package pro.komaru.tridot.rhino;
 
-import java.lang.reflect.Method;
-import java.lang.reflect.Modifier;
+import java.lang.reflect.*;
 
 /**
  * Adapter to use JS function as implementation of Java interfaces with

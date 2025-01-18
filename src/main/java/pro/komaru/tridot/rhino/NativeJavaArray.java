@@ -6,7 +6,7 @@
 
 package pro.komaru.tridot.rhino;
 
-import java.lang.reflect.Array;
+import java.lang.reflect.*;
 
 /**
  * This class reflects Java arrays into the JavaScript environment.

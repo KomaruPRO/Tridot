@@ -1,10 +1,9 @@
 package pro.komaru.tridot.rhino.util.wrap;
 
-import pro.komaru.tridot.rhino.Context;
+import pro.komaru.tridot.rhino.*;
 
-import java.lang.reflect.Array;
-import java.util.Arrays;
-import java.util.Collection;
+import java.lang.reflect.*;
+import java.util.*;
 
 /**
  * @author LatvianModder

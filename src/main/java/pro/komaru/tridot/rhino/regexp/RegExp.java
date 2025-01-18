@@ -6,13 +6,7 @@
 
 package pro.komaru.tridot.rhino.regexp;
 
-import pro.komaru.tridot.rhino.Context;
-import pro.komaru.tridot.rhino.Function;
-import pro.komaru.tridot.rhino.Kit;
-import pro.komaru.tridot.rhino.ScriptRuntime;
-import pro.komaru.tridot.rhino.Scriptable;
-import pro.komaru.tridot.rhino.ScriptableObject;
-import pro.komaru.tridot.rhino.Undefined;
+import pro.komaru.tridot.rhino.*;
 
 /**
  *

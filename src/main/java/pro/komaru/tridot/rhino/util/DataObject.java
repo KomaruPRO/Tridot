@@ -1,9 +1,9 @@
 package pro.komaru.tridot.rhino.util;
 
-import pro.komaru.tridot.rhino.Context;
+import pro.komaru.tridot.rhino.*;
 
-import java.util.List;
-import java.util.function.Supplier;
+import java.util.*;
+import java.util.function.*;
 
 /**
  * @author LatvianModder

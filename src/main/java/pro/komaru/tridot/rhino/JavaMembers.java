@@ -6,25 +6,11 @@
 
 package pro.komaru.tridot.rhino;
 
-import pro.komaru.tridot.core.rhino.Alias;
-import pro.komaru.tridot.rhino.util.HideFromJS;
-import pro.komaru.tridot.rhino.util.RemapForJS;
-import pro.komaru.tridot.rhino.util.RemapPrefixForJS;
+import pro.komaru.tridot.core.rhino.*;
+import pro.komaru.tridot.rhino.util.*;
 
-import java.lang.reflect.Constructor;
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
-import java.lang.reflect.Modifier;
-import java.util.ArrayDeque;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.lang.reflect.*;
+import java.util.*;
 
 /**
  * @author Mike Shaver

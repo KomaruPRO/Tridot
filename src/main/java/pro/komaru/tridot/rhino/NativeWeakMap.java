@@ -6,7 +6,7 @@
 
 package pro.komaru.tridot.rhino;
 
-import java.util.WeakHashMap;
+import java.util.*;
 
 /**
  * This is an implementation of the ES6 WeakMap class. As per the spec, keys must be

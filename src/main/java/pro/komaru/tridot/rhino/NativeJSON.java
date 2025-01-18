@@ -6,25 +6,15 @@
 
 package pro.komaru.tridot.rhino;
 
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonNull;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonPrimitive;
-import com.google.gson.internal.Streams;
-import com.google.gson.stream.JsonWriter;
+import com.google.gson.*;
+import com.google.gson.internal.*;
+import com.google.gson.stream.*;
 import pro.komaru.tridot.rhino.json.JsonParser;
-import pro.komaru.tridot.rhino.util.HideFromJS;
-import pro.komaru.tridot.rhino.util.Remapper;
+import pro.komaru.tridot.rhino.util.*;
 
-import java.io.StringWriter;
-import java.lang.reflect.Constructor;
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
-import java.lang.reflect.Modifier;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Map;
+import java.io.*;
+import java.lang.reflect.*;
+import java.util.*;
 
 /**
  * This class implements the JSON native object.

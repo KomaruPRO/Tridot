@@ -6,12 +6,7 @@
 
 package pro.komaru.tridot.rhino.regexp;
 
-import pro.komaru.tridot.rhino.BaseFunction;
-import pro.komaru.tridot.rhino.Context;
-import pro.komaru.tridot.rhino.ScriptRuntime;
-import pro.komaru.tridot.rhino.Scriptable;
-import pro.komaru.tridot.rhino.TopLevel;
-import pro.komaru.tridot.rhino.Undefined;
+import pro.komaru.tridot.rhino.*;
 
 /**
  * This class implements the RegExp constructor native object.

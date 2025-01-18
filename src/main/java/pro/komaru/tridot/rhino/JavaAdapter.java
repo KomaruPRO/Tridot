@@ -6,17 +6,10 @@
 
 package pro.komaru.tridot.rhino;
 
-import pro.komaru.tridot.rhino.classfile.ByteCode;
-import pro.komaru.tridot.rhino.classfile.ClassFileWriter;
+import pro.komaru.tridot.rhino.classfile.*;
 
-import java.lang.reflect.Constructor;
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
-import java.lang.reflect.Modifier;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Map;
+import java.lang.reflect.*;
+import java.util.*;
 
 public final class JavaAdapter implements IdFunctionCall {
 	private static final Object FTAG = "JavaAdapter";

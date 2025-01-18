@@ -1,8 +1,6 @@
 package pro.komaru.tridot.core.book;
 
 import com.mojang.blaze3d.vertex.*;
-import pro.komaru.tridot.client.*;
-import pro.komaru.tridot.client.model.book.*;
 import net.minecraft.client.renderer.*;
 import net.minecraft.resources.*;
 import net.minecraft.util.*;
@@ -11,8 +9,8 @@ import net.minecraft.world.item.*;
 import net.minecraft.world.level.*;
 import net.minecraft.world.phys.*;
 import net.minecraftforge.api.distmarker.*;
-import pro.komaru.tridot.client.TridotModels;
-import pro.komaru.tridot.client.model.book.CustomBookModel;
+import pro.komaru.tridot.client.*;
+import pro.komaru.tridot.client.model.book.*;
 
 import java.util.*;
 

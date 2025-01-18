@@ -1,6 +1,6 @@
 package pro.komaru.tridot.rhino.util;
 
-import pro.komaru.tridot.rhino.Wrapper;
+import pro.komaru.tridot.rhino.*;
 
 public interface Deletable {
 	static void deleteObject(Object o) {
