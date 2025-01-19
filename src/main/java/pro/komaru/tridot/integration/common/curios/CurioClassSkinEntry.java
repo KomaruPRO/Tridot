@@ -4,7 +4,6 @@ import pro.komaru.tridot.registry.item.skins.*;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.item.*;
 import net.minecraftforge.api.distmarker.*;
-import pro.komaru.tridot.registry.item.skins.ItemClassSkinEntry;
 
 public class CurioClassSkinEntry extends ItemClassSkinEntry {
 

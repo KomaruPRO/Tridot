@@ -23,7 +23,7 @@ public class CapManager {
 
     public static Seq<CapEntry<?>> caps = Seq.with();
 
-    private static Var<String> tempMod = new Var<>("");
+    private static final Var<String> tempMod = new Var<>("");
     public static void begin(String modId) {
         tempMod.var = modId;
     }
@@ -55,7 +55,7 @@ public class CapManager {
     public static void onPlayerCloned(PlayerEvent.Clone event) {
         for (CapEntry<?> cap : caps) {
             Capability<?> CAP = cap.instance.get();
-            event.getOriginal().reviveCaps();;
+            event.getOriginal().reviveCaps();
             event.getEntity().getCapability(CAP).ifPresent(k -> {
                 event.getOriginal().getCapability(CAP).ifPresent(o -> {
                     INBTSerializable<CompoundTag> kSer = (INBTSerializable<CompoundTag>) k;

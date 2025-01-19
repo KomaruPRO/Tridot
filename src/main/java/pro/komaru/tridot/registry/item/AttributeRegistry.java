@@ -4,7 +4,6 @@ import pro.komaru.tridot.*;
 import net.minecraft.world.entity.ai.attributes.*;
 import net.minecraftforge.eventbus.api.*;
 import net.minecraftforge.registries.*;
-import pro.komaru.tridot.TridotLib;
 
 public class AttributeRegistry {
     private static final DeferredRegister<Attribute> ATTRIBUTES = DeferredRegister.create(ForgeRegistries.Keys.ATTRIBUTES, TridotLib.ID);

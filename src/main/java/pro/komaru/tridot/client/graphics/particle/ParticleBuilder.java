@@ -12,9 +12,7 @@ import net.minecraftforge.registries.*;
 import org.joml.Math;
 import pro.komaru.tridot.client.graphics.particle.behavior.ParticleBehavior;
 import pro.komaru.tridot.client.graphics.particle.options.GenericParticleOptions;
-import pro.komaru.tridot.utilities.Utils;
 
-import java.util.Random;
 import java.util.*;
 import java.util.function.*;
 

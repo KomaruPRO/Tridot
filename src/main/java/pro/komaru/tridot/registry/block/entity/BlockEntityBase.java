@@ -8,7 +8,6 @@ import net.minecraft.network.protocol.game.*;
 import net.minecraft.world.level.block.entity.*;
 import net.minecraft.world.level.block.state.*;
 import org.jetbrains.annotations.*;
-import pro.komaru.tridot.core.net.packets.BlockEntityUpdate;
 
 import java.util.*;
 

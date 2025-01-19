@@ -19,7 +19,6 @@ import pro.komaru.tridot.snakeyaml.constructor.Constructor;
 import pro.komaru.tridot.snakeyaml.error.YAMLException;
 import pro.komaru.tridot.snakeyaml.introspector.Property;
 import pro.komaru.tridot.snakeyaml.nodes.*;
-import pro.komaru.tridot.snakeyaml.nodes.*;
 
 import java.util.*;
 import java.util.regex.Matcher;

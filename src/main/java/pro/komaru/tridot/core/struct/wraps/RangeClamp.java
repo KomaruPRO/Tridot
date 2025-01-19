@@ -30,7 +30,8 @@ public class RangeClamp {
     }
     public boolean peekBack() {
         return current-1 >= min.get();
-    };
+    }
+
     public boolean back() {
         if(!peekBack()) return false;
         current--;

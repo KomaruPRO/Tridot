@@ -14,7 +14,6 @@ import net.minecraft.world.item.enchantment.*;
 import net.minecraft.world.level.*;
 import net.minecraftforge.event.*;
 import org.jetbrains.annotations.*;
-import pro.komaru.tridot.registry.entity.projectiles.AbstractTridotArrow;
 
 import java.util.*;
 import java.util.function.*;

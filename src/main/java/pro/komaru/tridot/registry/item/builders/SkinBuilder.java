@@ -4,9 +4,6 @@ import pro.komaru.tridot.registry.item.skins.*;
 import net.minecraft.*;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.*;
-import pro.komaru.tridot.registry.item.skins.AuthoredItemSkin;
-import pro.komaru.tridot.registry.item.skins.ItemSkin;
-import pro.komaru.tridot.registry.item.skins.ItemSkinEntry;
 
 import java.awt.*;
 import java.util.List;

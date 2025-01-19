@@ -25,7 +25,6 @@ import net.minecraft.world.level.*;
 import net.minecraft.world.phys.*;
 import net.minecraftforge.network.*;
 import org.jetbrains.annotations.*;
-import pro.komaru.tridot.registry.item.AttributeRegistry;
 
 import javax.annotation.Nullable;
 import java.util.*;

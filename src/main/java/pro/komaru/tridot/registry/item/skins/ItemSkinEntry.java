@@ -7,9 +7,6 @@ import net.minecraft.client.model.*;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.item.*;
 import net.minecraftforge.api.distmarker.*;
-import pro.komaru.tridot.TridotLib;
-import pro.komaru.tridot.client.TridotModels;
-import pro.komaru.tridot.client.model.armor.ArmorModel;
 
 public class ItemSkinEntry{
 

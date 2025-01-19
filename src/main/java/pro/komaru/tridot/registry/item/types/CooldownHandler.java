@@ -5,9 +5,6 @@ import pro.komaru.tridot.core.net.*;
 import pro.komaru.tridot.core.net.packets.*;
 import net.minecraft.server.level.*;
 import net.minecraft.world.item.*;
-import pro.komaru.tridot.core.interfaces.CooldownNotifyItem;
-import pro.komaru.tridot.core.net.PacketHandler;
-import pro.komaru.tridot.core.net.packets.CooldownSoundPacket;
 
 public class CooldownHandler{
     public static void onCooldownEnd(ServerPlayer player, Item item){

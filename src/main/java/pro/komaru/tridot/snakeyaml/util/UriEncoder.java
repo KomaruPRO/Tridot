@@ -13,11 +13,9 @@
  */
 package pro.komaru.tridot.snakeyaml.util;
 
-import pro.komaru.tridot.snakeyaml.error.YAMLException;
 import pro.komaru.tridot.snakeyaml.external.com.google.gdata.util.common.base.Escaper;
 import pro.komaru.tridot.snakeyaml.external.com.google.gdata.util.common.base.PercentEscaper;
 
-import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.nio.ByteBuffer;
 import java.nio.CharBuffer;
@@ -59,10 +57,6 @@ public abstract class UriEncoder {
   }
 
   public static String decode(String buff) {
-    try {
-      return URLDecoder.decode(buff, "UTF-8");
-    } catch (UnsupportedEncodingException e) {
-      throw new YAMLException(e);
-    }
+      return URLDecoder.decode(buff, StandardCharsets.UTF_8);
   }
 }

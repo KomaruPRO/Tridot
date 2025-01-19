@@ -3,7 +3,6 @@ package pro.komaru.tridot.core.struct.stash.net;
 import pro.komaru.tridot.core.struct.stash.*;
 import net.minecraft.network.*;
 import pro.komaru.tridot.core.net.Packet;
-import pro.komaru.tridot.core.struct.stash.SyncStash;
 
 public class SyncStashObjectPacket implements Packet {
     int id;

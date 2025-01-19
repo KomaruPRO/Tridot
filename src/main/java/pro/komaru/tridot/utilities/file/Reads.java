@@ -5,7 +5,7 @@ import java.io.*;
 
 /** A wrapper for DataInput with more concise method names and no IOExceptions. */
 public class Reads implements Closeable{
-    private static Reads instance = new Reads(null);
+    private static final Reads instance = new Reads(null);
 
     public DataInput input;
 

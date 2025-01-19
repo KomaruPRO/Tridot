@@ -6,9 +6,6 @@ import pro.komaru.tridot.registry.loot.*;
 import net.minecraftforge.common.loot.*;
 import net.minecraftforge.eventbus.api.*;
 import net.minecraftforge.registries.*;
-import pro.komaru.tridot.TridotLib;
-import pro.komaru.tridot.registry.loot.AddItemListModifier;
-import pro.komaru.tridot.registry.loot.AddItemModifier;
 
 public class TridotLootModifier{
     public static final DeferredRegister<Codec<? extends IGlobalLootModifier>> LOOT_MODIFIERS = DeferredRegister.create(ForgeRegistries.Keys.GLOBAL_LOOT_MODIFIER_SERIALIZERS, TridotLib.ID);

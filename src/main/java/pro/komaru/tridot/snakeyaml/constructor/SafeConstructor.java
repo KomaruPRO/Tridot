@@ -16,7 +16,6 @@ package pro.komaru.tridot.snakeyaml.constructor;
 import pro.komaru.tridot.snakeyaml.LoaderOptions;
 import pro.komaru.tridot.snakeyaml.error.YAMLException;
 import pro.komaru.tridot.snakeyaml.nodes.*;
-import pro.komaru.tridot.snakeyaml.nodes.*;
 
 import java.math.BigInteger;
 import java.util.*;

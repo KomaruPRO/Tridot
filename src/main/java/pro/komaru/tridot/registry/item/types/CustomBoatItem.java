@@ -9,7 +9,6 @@ import net.minecraft.world.item.*;
 import net.minecraft.world.level.*;
 import net.minecraft.world.phys.*;
 import net.minecraftforge.registries.*;
-import pro.komaru.tridot.registry.entity.misc.CustomBoatEntity;
 
 import java.util.*;
 import java.util.function.*;

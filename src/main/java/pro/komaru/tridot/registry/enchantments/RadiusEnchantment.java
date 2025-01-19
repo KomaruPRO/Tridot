@@ -4,7 +4,6 @@ import pro.komaru.tridot.registry.*;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.item.enchantment.*;
 import org.jetbrains.annotations.*;
-import pro.komaru.tridot.registry.EnchantmentsRegistry;
 
 public class RadiusEnchantment extends Enchantment {
 

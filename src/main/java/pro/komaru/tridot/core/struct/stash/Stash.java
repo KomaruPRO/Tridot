@@ -25,7 +25,8 @@ public class Stash {
 
     public static int nextId() {
         return lastId++;
-    };
+    }
+
     public static Seq<StashObject<?>> getStash() {
         return stash;
     }

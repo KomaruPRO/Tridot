@@ -8,7 +8,6 @@ import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.level.*;
 import net.minecraft.world.level.pathfinder.*;
-import pro.komaru.tridot.registry.entity.ai.AttackRegistry;
 
 import javax.annotation.*;
 import java.util.*;

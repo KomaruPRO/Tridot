@@ -42,5 +42,5 @@ public class TridotEntityVar<T> {
             }
         }
         return null;
-    };
+    }
 }
