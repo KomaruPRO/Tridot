@@ -11,7 +11,7 @@ import net.minecraft.client.gui.components.events.GuiEventListener;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
-import pro.komaru.tridot.utilities.Util;
+import pro.komaru.tridot.utilities.Utils;
 
 import java.util.List;
 
@@ -111,7 +111,7 @@ public abstract class TridotScreen extends Screen {
     }
 
     public Minecraft mc() {
-        return Util.mc();
+        return Utils.mc();
     }
     public int w() {
         return mc().getWindow().getGuiScaledWidth();

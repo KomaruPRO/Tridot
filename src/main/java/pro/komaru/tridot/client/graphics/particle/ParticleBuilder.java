@@ -12,7 +12,7 @@ import net.minecraftforge.registries.*;
 import org.joml.Math;
 import pro.komaru.tridot.client.graphics.particle.behavior.ParticleBehavior;
 import pro.komaru.tridot.client.graphics.particle.options.GenericParticleOptions;
-import pro.komaru.tridot.utilities.Util;
+import pro.komaru.tridot.utilities.Utils;
 
 import java.util.Random;
 import java.util.*;
@@ -424,7 +424,7 @@ public class ParticleBuilder{
     public ParticleBuilder spawnBoykisser(Level level, Vec3 pos, int xSize, int ySize, float size, float lineSize, float smallLineSize, float eyebrowsLineSize, float mouthLineSize, float blushLineSize){
         for(int y = 0; y < ySize; y++){
             for(int x = 0; x < ySize; x++){
-                if(Util.RenderUtil.boykisserPos((float)x / xSize, (float)y / ySize, lineSize, smallLineSize, eyebrowsLineSize, mouthLineSize, blushLineSize)){
+                if(Utils.RenderUtil.boykisserPos((float)x / xSize, (float)y / ySize, lineSize, smallLineSize, eyebrowsLineSize, mouthLineSize, blushLineSize)){
                     spawn(level, pos.x() + (((xSize / 2f) - x) * size), pos.y() - (((ySize / 2f) - y) * size), pos.z());
                 }
             }
@@ -435,10 +435,10 @@ public class ParticleBuilder{
     public ParticleBuilder spawnBoykisser(Level level, Vec3 pos, int xSize, int ySize, float size, ParticleBuilder blushBuilder, float lineSize, float smallLineSize, float eyebrowsLineSize, float mouthLineSize, float blushLineSize){
         for(int y = 0; y < ySize; y++){
             for(int x = 0; x < ySize; x++){
-                if(Util.RenderUtil.boykisserBlushlessPos((float)x / xSize, (float)y / ySize, lineSize, smallLineSize, eyebrowsLineSize, mouthLineSize)){
+                if(Utils.RenderUtil.boykisserBlushlessPos((float)x / xSize, (float)y / ySize, lineSize, smallLineSize, eyebrowsLineSize, mouthLineSize)){
                     spawn(level, pos.x() + (((xSize / 2f) - x) * size), pos.y() - (((ySize / 2f) - y) * size), pos.z());
                 }
-                if(Util.RenderUtil.boykisserBlushPos((float)x / xSize, (float)y / ySize, blushLineSize)){
+                if(Utils.RenderUtil.boykisserBlushPos((float)x / xSize, (float)y / ySize, blushLineSize)){
                     blushBuilder.spawn(level, pos.x() + (((xSize / 2f) - x) * size), pos.y() - (((ySize / 2f) - y) * size), pos.z());
                 }
             }

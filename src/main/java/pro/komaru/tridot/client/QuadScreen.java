@@ -11,7 +11,7 @@ import net.minecraft.client.gui.screens.*;
 import net.minecraft.network.chat.*;
 import net.minecraft.resources.*;
 import pro.komaru.tridot.core.struct.func.Cons;
-import pro.komaru.tridot.utilities.Util;
+import pro.komaru.tridot.utilities.Utils;
 
 import java.util.*;
 
@@ -114,7 +114,7 @@ public abstract class QuadScreen extends Screen {
     }
 
     public Minecraft mc() {
-        return Util.mc();
+        return Utils.mc();
     }
     public int w() {
         return mc().getWindow().getGuiScaledWidth();

@@ -22,7 +22,7 @@ import pro.komaru.tridot.registry.ArcRandom;
 import pro.komaru.tridot.registry.EnchantmentsRegistry;
 import pro.komaru.tridot.registry.item.AttributeRegistry;
 import pro.komaru.tridot.registry.item.builders.AbstractScytheBuilder;
-import pro.komaru.tridot.utilities.Util;
+import pro.komaru.tridot.utilities.Utils;
 
 import java.util.*;
 
@@ -107,7 +107,7 @@ public class ScytheItem extends SwordItem implements ICustomAnimationItem, Coold
         usageCount++;
         tag.putInt("usageCount", usageCount);
         stack.setTag(tag);
-        Util.Hit.circularHit(level, stack, player, builder.particleOptions, hitEntities, pos, 0, player.getRotationVector().y, radius);
+        Utils.Hit.circularHit(level, stack, player, builder.particleOptions, hitEntities, pos, 0, player.getRotationVector().y, radius);
         if(usageCount > builder.attackUsages - 1){
             int cooldown = hitEntities.isEmpty() ? builder.minCooldownTime : builder.cooldownTime;
             applyCooldown(player, cooldown - getCooldownReduction(stack));
@@ -120,7 +120,7 @@ public class ScytheItem extends SwordItem implements ICustomAnimationItem, Coold
         for (LivingEntity entity : hitEntities) {
             entity.hurt(level.damageSources().playerAttack(player), (damage + EnchantmentHelper.getDamageBonus(stack, entity.getMobType())) * 1.35f);
             performEffects(entity, player);
-            Util.Entities.applyWithChance(entity, builder.effects, builder.chance, arcRandom);
+            Utils.Entities.applyWithChance(entity, builder.effects, builder.chance, arcRandom);
             if (!player.isCreative()) {
                 stack.hurtAndBreak(hitEntities.size(), player, (p_220045_0_) -> p_220045_0_.broadcastBreakEvent(EquipmentSlot.MAINHAND));
             }

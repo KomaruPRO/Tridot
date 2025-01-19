@@ -31,7 +31,7 @@ public class SynchronizeCapabilityPacket implements Packet {
 
     @Override
     public void doOnClient() {
-        Structs.safeRun(Util.player(), p -> {
+        Structs.safeRun(Utils.player(), p -> {
             CapEntry<?> entry = CapManager.caps.get(id);
             Capability<?> inst = entry.instance.get();
             p.getCapability(inst).ifPresent(a -> {

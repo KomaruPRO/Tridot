@@ -83,7 +83,7 @@ import java.util.function.*;
 
 import static net.minecraft.util.Mth.sqrt;
 
-public class Util {
+public class Utils {
 
     /**
      * Checks if the game was started in IDE

@@ -6,7 +6,7 @@ import pro.komaru.tridot.core.struct.data.Seq;
 import net.minecraft.server.level.*;
 import net.minecraftforge.network.*;
 import net.minecraftforge.network.simple.*;
-import pro.komaru.tridot.utilities.Util;
+import pro.komaru.tridot.utilities.Utils;
 
 public class SyncStash {
     private static int lastId = 0;
@@ -52,7 +52,7 @@ public class SyncStash {
             SyncStashObject<?> toSync = stash.get(i);
             int id = toSync.getId();
             byte[] bytes = toSync.toBytes();
-            for (ServerPlayer player : Util.players())
+            for (ServerPlayer player : Utils.players())
                 CHANNEL.send(PacketDistributor.PLAYER.with(() -> player), new SyncStashObjectPacket(id,bytes));
         }
     }

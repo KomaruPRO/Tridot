@@ -44,17 +44,17 @@ public class Wrappers {
             return null;
         });
         wraps.register(Player.class,(ctx,obj) -> {
-            if(obj == null) return Util.players().first();
+            if(obj == null) return Utils.players().first();
             if(obj instanceof Player p) return p;
-            if(obj instanceof String str) return Util.players().find(e -> e.getName().getString().equals(str));
+            if(obj instanceof String str) return Utils.players().find(e -> e.getName().getString().equals(str));
             if(obj instanceof Prov<?> prov) return (Player) prov.get();
             if(obj instanceof Supplier<?> supp) return (Player) supp.get();
             return null;
         });
         wraps.register(ServerPlayer.class,(ctx, obj) -> {
-            if(obj == null) return Util.players().first();
+            if(obj == null) return Utils.players().first();
             if(obj instanceof ServerPlayer p) return p;
-            if(obj instanceof String str) return Util.players().find(e -> e.getName().getString().equals(str));
+            if(obj instanceof String str) return Utils.players().find(e -> e.getName().getString().equals(str));
             if(obj instanceof Prov<?> prov) return (ServerPlayer) prov.get();
             if(obj instanceof Supplier<?> supp) return (ServerPlayer) supp.get();
             return null;

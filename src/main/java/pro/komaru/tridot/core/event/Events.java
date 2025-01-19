@@ -26,7 +26,7 @@ import pro.komaru.tridot.core.config.*;
 import pro.komaru.tridot.core.mixin.client.BossHealthOverlayAccessor;
 import pro.komaru.tridot.core.proxy.*;
 import pro.komaru.tridot.registry.*;
-import pro.komaru.tridot.utilities.Util;
+import pro.komaru.tridot.utilities.Utils;
 
 import java.awt.*;
 import java.util.*;
@@ -47,7 +47,7 @@ public class Events{
 
     @SubscribeEvent
     public void onTooltip(ItemTooltipEvent e){
-        if(Util.isDevelopment){
+        if(Utils.isDevelopment){
             ItemStack itemStack = e.getItemStack();
             Stream<ResourceLocation> itemTagStream = itemStack.getTags().map(TagKey::location);
             if(Minecraft.getInstance().options.advancedItemTooltips){
