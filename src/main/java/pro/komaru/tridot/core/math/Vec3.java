@@ -31,6 +31,9 @@ public class Vec3 implements Serializable {
         tag.putFloat("z",z);
         return tag;
     }
+    public net.minecraft.world.phys.Vec3 mcVec() {
+        return new net.minecraft.world.phys.Vec3(x,y,z);
+    }
     public static Vec3 from(CompoundTag tag) {
         return new Vec3(
                 tag.getFloat("x"),
@@ -45,7 +48,9 @@ public class Vec3 implements Serializable {
     }
     public Vec3 angles() {
         Vec3 normalized = cpy().nor();
-        return new Vec3(Math.acos(normalized.x),Math.acos(normalized.y),Math.acos(normalized.z));
+        double yaw = Math.atan2(normalized.z, normalized.x);
+        double pitch = Math.asin(normalized.y);
+        return new Vec3(pitch, yaw, 0);
     }
     public Vec3 fixAngles() {
         float x = x();
@@ -98,6 +103,28 @@ public class Vec3 implements Serializable {
 
     public Vec3 set(float x, float y, float z) {
         x(x); y(y); z(z);
+        return this;
+    }
+    public Vec3 constraintMin(Vec3 to, float constraint) {
+        return constraintMin(to,constraint,1f);
+    }
+    public Vec3 constraintMin(Vec3 to, float constraint,float speed) {
+        return constraint(to,constraint,true,false,speed);
+    }
+    public Vec3 constraintMax(Vec3 to, float constraint) {
+        return constraintMax(to,constraint,1f);
+    }
+    public Vec3 constraintMax(Vec3 to, float constraint,float speed) {
+        return constraint(to,constraint,false,true,speed);
+    }
+    public Vec3 constraint(Vec3 to, float constraint,boolean min,boolean max,float speed) {
+        Vec3 vec = to.cpy().sub(this);
+        float len = vec.len();
+        if((max && len > constraint) || (min && len < constraint)) {
+            float step = (len-constraint)*speed;
+            Vec3 norVec = vec.cpy().nor().scale(step);
+            add(norVec);
+        }
         return this;
     }
 
