@@ -43,6 +43,22 @@ public class Vec3 implements Serializable {
                 (float) entity.getX(), (float) entity.getY(), (float) entity.getZ()
         );
     }
+    public Vec3 angles() {
+        Vec3 normalized = cpy().nor();
+        return new Vec3(Math.acos(normalized.x),Math.acos(normalized.y),Math.acos(normalized.z));
+    }
+    public Vec3 fixAngles() {
+        float x = x();
+        float y = y();
+        float z = z();
+        if(x > 180) x -= 360;
+        if(y > 180) y -= 360;
+        if(z > 180) z -= 360;
+        return set(x,y,z);
+    }
+    public Vec3 anglesBetween(Vec3 orig, Vec3 end) {
+        return end.cpy().sub(orig).angles();
+    }
 
     public static Vec3 zero() {
         return new Vec3(0,0,0);
@@ -122,6 +138,10 @@ public class Vec3 implements Serializable {
     public Vec3 z(float z) {
         this.z = z;
         return this;
+    }
+
+    public Vec3 nor() {
+        return scale(1/len());
     }
 
     public Vec3 add(float x, float y, float z) {
