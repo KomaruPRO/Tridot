@@ -1,6 +1,8 @@
 package pro.komaru.tridot.utilities;
 
 import com.google.common.collect.*;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonSyntaxException;
 import com.mojang.blaze3d.platform.Lighting;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -22,6 +24,7 @@ import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.core.*;
 import net.minecraft.core.particles.*;
 import net.minecraft.nbt.*;
+import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.*;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -41,6 +44,8 @@ import net.minecraft.world.item.enchantment.*;
 import net.minecraft.world.level.*;
 import net.minecraft.world.level.block.state.*;
 import net.minecraft.world.level.block.state.properties.*;
+import net.minecraft.world.level.material.Fluid;
+import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
@@ -883,6 +888,71 @@ public class Util {
                         itementity.setTarget(player.getUUID());
                     }
                 }
+            }
+        }
+
+        public static FluidStack deserializeFluidStack(JsonObject json){
+            String fluidName = GsonHelper.getAsString(json, "fluid");
+            Fluid fluid = ForgeRegistries.FLUIDS.getValue(new ResourceLocation(fluidName));
+            if(fluid == null || fluid == Fluids.EMPTY){
+                throw new JsonSyntaxException("Unknown fluid " + fluidName);
+            }
+            int amount = GsonHelper.getAsInt(json, "amount");
+            return new FluidStack(fluid, amount);
+        }
+
+        public static MobEffectInstance deserializeMobEffect(JsonObject json){
+            String effectName = GsonHelper.getAsString(json, "effect");
+            MobEffect mobEffect = ForgeRegistries.MOB_EFFECTS.getValue(new ResourceLocation(effectName));
+            if(mobEffect == null){
+                throw new JsonSyntaxException("Unknown effect " + effectName);
+            }
+            int duration = GsonHelper.getAsInt(json, "duration");
+            int amplifier = GsonHelper.getAsInt(json, "amplifier");
+            return new MobEffectInstance(mobEffect, duration, amplifier);
+        }
+
+        public static MobEffectInstance mobEffectFromNetwork(FriendlyByteBuf buffer){
+            if(buffer.readBoolean()){
+                MobEffect mobEffect = buffer.readRegistryId();
+                int duration = buffer.readInt();
+                int amplifier = buffer.readInt();
+                return new MobEffectInstance(mobEffect, duration, amplifier);
+            }
+            return null;
+        }
+
+        public static void mobEffectToNetwork(MobEffectInstance effect, FriendlyByteBuf buffer){
+            if(effect == null){
+                buffer.writeBoolean(false);
+            }else{
+                buffer.writeBoolean(true);
+                buffer.writeRegistryId(ForgeRegistries.MOB_EFFECTS, effect.getEffect());
+                buffer.writeInt(effect.getDuration());
+                buffer.writeInt(effect.getAmplifier());
+            }
+
+        }
+
+        public static Enchantment deserializeEnchantment(JsonObject json){
+            String enchantmentName = GsonHelper.getAsString(json, "enchantment");
+            Enchantment enchantment = ForgeRegistries.ENCHANTMENTS.getValue(new ResourceLocation(enchantmentName));
+            if(enchantment == null){
+                throw new JsonSyntaxException("Unknown enchantment " + enchantmentName);
+            }
+            return enchantment;
+        }
+
+        public static Enchantment enchantmentFromNetwork(FriendlyByteBuf buffer){
+            return !buffer.readBoolean() ? null : buffer.readRegistryId();
+        }
+
+        public static void enchantmentToNetwork(Enchantment enchantment, FriendlyByteBuf buffer){
+            if(enchantment == null){
+                buffer.writeBoolean(false);
+            }else{
+                buffer.writeBoolean(true);
+                buffer.writeRegistryId(ForgeRegistries.ENCHANTMENTS, enchantment);
             }
         }
     }
