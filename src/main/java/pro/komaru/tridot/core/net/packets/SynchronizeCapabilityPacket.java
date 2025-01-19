@@ -5,7 +5,8 @@ import net.minecraft.network.*;
 import net.minecraftforge.common.capabilities.*;
 import pro.komaru.tridot.core.cap.*;
 import pro.komaru.tridot.core.net.*;
-import pro.komaru.tridot.core.struct.*;
+import pro.komaru.tridot.core.struct.Structs;
+import pro.komaru.tridot.core.struct.capability.CapImpl;
 import pro.komaru.tridot.utilities.*;
 
 public class SynchronizeCapabilityPacket implements Packet {
@@ -30,7 +31,7 @@ public class SynchronizeCapabilityPacket implements Packet {
 
     @Override
     public void doOnClient() {
-        Structs.safeRun(MCUtil.player(), p -> {
+        Structs.safeRun(Util.player(), p -> {
             CapEntry<?> entry = CapManager.caps.get(id);
             Capability<?> inst = entry.instance.get();
             p.getCapability(inst).ifPresent(a -> {

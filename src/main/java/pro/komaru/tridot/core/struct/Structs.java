@@ -1,14 +1,13 @@
 package pro.komaru.tridot.core.struct;
 
-import pro.komaru.tridot.utilities.func.*;
-import pro.komaru.tridot.utilities.func.Cons;
-import pro.komaru.tridot.utilities.func.Func;
-import pro.komaru.tridot.utilities.func.Prov;
+
+import pro.komaru.tridot.core.struct.func.Cons;
+import pro.komaru.tridot.core.struct.func.Func;
+import pro.komaru.tridot.core.struct.func.Prov;
 
 import java.io.*;
 import java.util.*;
 
-//todo translate, pls
 public class Structs {
 
     public static <A> Prov<A> nil(){
@@ -64,11 +63,11 @@ public class Structs {
     /** Объект в массив байтов */
     public static byte[] obj(Object obj) {
         if (obj == null) {
-            throw new IllegalArgumentException("Объект не может быть null");
+            throw new IllegalArgumentException("Object is null");
         }
 
         if (!(obj instanceof Serializable)) {
-            throw new IllegalArgumentException("Объект не сериализуем");
+            throw new IllegalArgumentException("Object is not Serializable");
         }
 
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
@@ -85,7 +84,7 @@ public class Structs {
     /** Массив байтов в объект */
     public static <K> K obj(Class<K> cast, byte[] bytes) {
         if (bytes == null) {
-            throw new IllegalArgumentException("Массив байтов не может быть null");
+            throw new IllegalArgumentException("Bytes can't be null");
         }
 
         ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(bytes);

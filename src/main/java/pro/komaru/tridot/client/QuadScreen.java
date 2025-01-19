@@ -3,8 +3,6 @@ package pro.komaru.tridot.client;
 import com.mojang.blaze3d.systems.*;
 import com.mojang.blaze3d.vertex.*;
 import com.mojang.math.*;
-import pro.komaru.tridot.utilities.*;
-import pro.komaru.tridot.utilities.func.*;
 import net.minecraft.client.*;
 import net.minecraft.client.gui.*;
 import net.minecraft.client.gui.components.*;
@@ -12,8 +10,8 @@ import net.minecraft.client.gui.components.events.*;
 import net.minecraft.client.gui.screens.*;
 import net.minecraft.network.chat.*;
 import net.minecraft.resources.*;
-import pro.komaru.tridot.utilities.MCUtil;
-import pro.komaru.tridot.utilities.func.Cons;
+import pro.komaru.tridot.core.struct.func.Cons;
+import pro.komaru.tridot.utilities.Util;
 
 import java.util.*;
 
@@ -39,6 +37,13 @@ public abstract class QuadScreen extends Screen {
     }
     public void pop() {
         localPose.popPose();
+    }
+
+    public void scissorsOn(int x, int y, int w, int h) {
+        localG.enableScissor(x,y,x+w,y+h);
+    }
+    public void scissorsOff() {
+        localG.disableScissor();
     }
 
     public void blit(String texture,int x,int y,int cutx,int cuty,int cutw,int cuth,int tw, int th) {
@@ -109,7 +114,7 @@ public abstract class QuadScreen extends Screen {
     }
 
     public Minecraft mc() {
-        return MCUtil.mc();
+        return Util.mc();
     }
     public int w() {
         return mc().getWindow().getGuiScaledWidth();

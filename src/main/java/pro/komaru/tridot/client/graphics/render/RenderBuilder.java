@@ -12,7 +12,7 @@ import org.joml.*;
 import pro.komaru.tridot.client.event.ClientTickHandler;
 import pro.komaru.tridot.client.graphics.render.trail.TrailPoint;
 import pro.komaru.tridot.client.graphics.render.trail.TrailRenderPoint;
-import pro.komaru.tridot.utilities.client.RenderUtil;
+import pro.komaru.tridot.utilities.Util;
 
 import javax.annotation.*;
 import java.awt.*;
@@ -26,9 +26,9 @@ public class RenderBuilder{
     public float r1 = 1, g1 = 1, b1 = 1, a1 = 1;
     public float r2 = 1, g2 = 1, b2 = 1, a2 = 1;
     public float r3 = 1, g3 = 1, b3 = 1, a3 = 1;
-    public int l1 = RenderUtil.FULL_BRIGHT;
-    public int l2 = RenderUtil.FULL_BRIGHT;
-    public int l3 = RenderUtil.FULL_BRIGHT;
+    public int l1 = Util.RenderUtil.FULL_BRIGHT;
+    public int l2 = Util.RenderUtil.FULL_BRIGHT;
+    public int l3 = Util.RenderUtil.FULL_BRIGHT;
     public float u0 = 0, v0 = 0, u1 = 1, v1 = 1;
     public float u2 = 0, v2 = 0, u3 = 1, v3 = 1;
     public float u4 = 0, v4 = 0, u5 = 1, v5 = 1;
@@ -627,12 +627,12 @@ public class RenderBuilder{
 
     public RenderBuilder renderWavyQuad(PoseStack stack, float width, float height, float strength, float time){
         Vector3f[] positions = new Vector3f[]{new Vector3f(-1, 1, 0), new Vector3f(1, 1, 0), new Vector3f(1, -1, 0), new Vector3f(-1, -1, 0)};
-        RenderUtil.applyWobble(positions, strength, time);
+        Util.RenderUtil.applyWobble(positions, strength, time);
         return renderQuad(stack, positions, width, height);
     }
 
     public RenderBuilder renderWavyQuad(PoseStack stack, Vector3f[] positions, float width, float height, float strength, float time){
-        RenderUtil.applyWobble(positions, strength, time);
+        Util.RenderUtil.applyWobble(positions, strength, time);
         return renderQuad(stack, positions, width, height);
     }
 
@@ -647,7 +647,7 @@ public class RenderBuilder{
         for(Vector3f position : positions){
             position.mul(width, height, length);
         }
-        RenderUtil.applyWobble(positions, strength, time);
+        Util.RenderUtil.applyWobble(positions, strength, time);
         return renderCube(stack.last().pose(), positions);
     }
 
@@ -709,10 +709,10 @@ public class RenderBuilder{
             Vector4f previous = positions.get(i - 1);
             Vector4f current = positions.get(i);
             Vector4f next = positions.get(i + 1);
-            points[i] = new TrailRenderPoint(current, RenderUtil.perpendicularTrailPoints(previous, next, width));
+            points[i] = new TrailRenderPoint(current, Util.RenderUtil.perpendicularTrailPoints(previous, next, width));
         }
-        points[0] = new TrailRenderPoint(positions.get(0), RenderUtil.perpendicularTrailPoints(positions.get(0), positions.get(1), widthFunc.apply(0f)));
-        points[count] = new TrailRenderPoint(positions.get(count), RenderUtil.perpendicularTrailPoints(positions.get(count - 1), positions.get(count), widthFunc.apply(1f)));
+        points[0] = new TrailRenderPoint(positions.get(0), Util.RenderUtil.perpendicularTrailPoints(positions.get(0), positions.get(1), widthFunc.apply(0f)));
+        points[count] = new TrailRenderPoint(positions.get(count), Util.RenderUtil.perpendicularTrailPoints(positions.get(count - 1), positions.get(count), widthFunc.apply(1f)));
         return renderPoints(points, u0, v0, u1, v1, vfxOperator);
     }
 
@@ -729,10 +729,10 @@ public class RenderBuilder{
             Vector4f previous = positions.get(i - 1);
             Vector4f current = positions.get(i);
             Vector4f next = positions.get(i + 1);
-            points[i] = new TrailRenderPoint(current, RenderUtil.perpendicularTrailPoints(previous, next, width));
+            points[i] = new TrailRenderPoint(current, Util.RenderUtil.perpendicularTrailPoints(previous, next, width));
         }
-        points[0] = new TrailRenderPoint(positions.get(0), RenderUtil.perpendicularTrailPoints(positions.get(0), positions.get(1), widthFunc.apply(0f)));
-        points[count] = new TrailRenderPoint(positions.get(count), RenderUtil.perpendicularTrailPoints(positions.get(count - 1), positions.get(count), widthFunc.apply(1f)));
+        points[0] = new TrailRenderPoint(positions.get(0), Util.RenderUtil.perpendicularTrailPoints(positions.get(0), positions.get(1), widthFunc.apply(0f)));
+        points[count] = new TrailRenderPoint(positions.get(count), Util.RenderUtil.perpendicularTrailPoints(positions.get(count - 1), positions.get(count), widthFunc.apply(1f)));
         return renderPoints(points, u0, v0, u1, v1, vfxOperator);
     }
 
@@ -814,10 +814,10 @@ public class RenderBuilder{
                 float v = j * stepV + startV;
                 float un = (i + 1 == longs) ? endU : (i + 1) * stepU + startU;
                 float vn = (j + 1 == lats) ? endV : (j + 1) * stepV + startV;
-                Vector3f p0 = RenderUtil.parametricSphere(u, v, radius);
-                Vector3f p1 = RenderUtil.parametricSphere(u, vn, radius);
-                Vector3f p2 = RenderUtil.parametricSphere(un, v, radius);
-                Vector3f p3 = RenderUtil.parametricSphere(un, vn, radius);
+                Vector3f p0 = Util.RenderUtil.parametricSphere(u, v, radius);
+                Vector3f p1 = Util.RenderUtil.parametricSphere(u, vn, radius);
+                Vector3f p2 = Util.RenderUtil.parametricSphere(un, v, radius);
+                Vector3f p3 = Util.RenderUtil.parametricSphere(un, vn, radius);
 
                 float textureU = u0;
                 float textureV = v0;

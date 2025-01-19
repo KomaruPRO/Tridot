@@ -3,8 +3,7 @@ package pro.komaru.tridot.client.graphics.gui.screen;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
-import pro.komaru.tridot.utilities.MCUtil;
-import pro.komaru.tridot.utilities.func.Cons;
+import pro.komaru.tridot.core.struct.func.Cons;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Renderable;
@@ -12,6 +11,7 @@ import net.minecraft.client.gui.components.events.GuiEventListener;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import pro.komaru.tridot.utilities.Util;
 
 import java.util.List;
 
@@ -111,7 +111,7 @@ public abstract class TridotScreen extends Screen {
     }
 
     public Minecraft mc() {
-        return MCUtil.mc();
+        return Util.mc();
     }
     public int w() {
         return mc().getWindow().getGuiScaledWidth();

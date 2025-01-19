@@ -20,13 +20,13 @@ import net.minecraftforge.event.entity.living.*;
 import net.minecraftforge.event.entity.player.*;
 import net.minecraftforge.eventbus.api.*;
 import pro.komaru.tridot.*;
-import pro.komaru.tridot.client.graphics.*;
-import pro.komaru.tridot.client.graphics.render.entity.bossbar.*;
+import pro.komaru.tridot.client.graphics.Clr;
+import pro.komaru.tridot.client.graphics.render.entity.bossbar.Bossbar;
 import pro.komaru.tridot.core.config.*;
-import pro.komaru.tridot.core.mixin.client.*;
+import pro.komaru.tridot.core.mixin.client.BossHealthOverlayAccessor;
 import pro.komaru.tridot.core.proxy.*;
 import pro.komaru.tridot.registry.*;
-import pro.komaru.tridot.utilities.*;
+import pro.komaru.tridot.utilities.Util;
 
 import java.awt.*;
 import java.util.*;
@@ -47,7 +47,7 @@ public class Events{
 
     @SubscribeEvent
     public void onTooltip(ItemTooltipEvent e){
-        if(Utils.isIDE){
+        if(Util.isDevelopment){
             ItemStack itemStack = e.getItemStack();
             Stream<ResourceLocation> itemTagStream = itemStack.getTags().map(TagKey::location);
             if(Minecraft.getInstance().options.advancedItemTooltips){

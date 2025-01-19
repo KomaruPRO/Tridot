@@ -1,6 +1,8 @@
 package pro.komaru.tridot.core.rhino;
 
 import pro.komaru.tridot.core.struct.*;
+import pro.komaru.tridot.core.struct.data.Pair;
+import pro.komaru.tridot.core.struct.data.Seq;
 import pro.komaru.tridot.rhino.*;
 import pro.komaru.tridot.rhino.util.wrap.*;
 

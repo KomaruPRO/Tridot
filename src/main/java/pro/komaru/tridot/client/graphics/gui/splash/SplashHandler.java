@@ -5,9 +5,9 @@ import net.minecraft.network.chat.Component;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.DistExecutor;
-import pro.komaru.tridot.utilities.func.Prov;
-import pro.komaru.tridot.core.struct.Pair;
-import pro.komaru.tridot.core.struct.Seq;
+import pro.komaru.tridot.core.struct.data.Pair;
+import pro.komaru.tridot.core.struct.data.Seq;
+import pro.komaru.tridot.core.struct.func.Prov;
 
 import java.util.*;
 

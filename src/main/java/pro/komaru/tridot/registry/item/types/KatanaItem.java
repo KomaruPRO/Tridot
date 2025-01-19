@@ -27,7 +27,7 @@ import pro.komaru.tridot.core.net.packets.DashParticlePacket;
 import pro.komaru.tridot.registry.ArcRandom;
 import pro.komaru.tridot.registry.item.AttributeRegistry;
 import pro.komaru.tridot.registry.item.builders.AbstractKatanaBuilder;
-import pro.komaru.tridot.utilities.Utils;
+import pro.komaru.tridot.utilities.Util;
 
 import java.lang.Math;
 import java.util.*;
@@ -92,7 +92,7 @@ public class KatanaItem extends SwordItem implements CooldownNotifyItem, DashIte
 
         Vec3 pos = new Vec3(player.getX(), player.getY() + player.getEyeHeight(), player.getZ());
         Vec3 EndPos = (player.getViewVector(0.0f).scale(2.0d));
-        HitResult hitresult = Utils.getHitResult(player.getEyePosition(), player, (e) -> true, EndPos, level);
+        HitResult hitresult = Util.Hit.hitResult(player.getEyePosition(), player, (e) -> true, EndPos, level);
         if (hitresult != null) {
             switch (hitresult.getType()) {
                 case BLOCK, MISS:
@@ -178,7 +178,7 @@ public class KatanaItem extends SwordItem implements CooldownNotifyItem, DashIte
                         if(!entity.equals(player)){
                             entity.hurt(level.damageSources().playerAttack(player), (float)((player.getAttributeValue(Attributes.ATTACK_DAMAGE) * ii) + EnchantmentHelper.getSweepingDamageRatio(player) + EnchantmentHelper.getDamageBonus(stack, entity.getMobType())) * 1.35f);
                             performEffects(entity, player);
-                            Utils.chanceEffect(entity, builder.effects, builder.chance, arcRandom);
+                            Util.Entities.applyWithChance(entity, builder.effects, builder.chance, arcRandom);
                             if(!player.isCreative()){
                                 stack.hurtAndBreak(getHurtAmount(detectedEntities), player, (plr) -> plr.broadcastBreakEvent(EquipmentSlot.MAINHAND));
                             }

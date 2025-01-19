@@ -6,7 +6,7 @@ import net.minecraft.world.level.material.*;
 import net.minecraftforge.client.extensions.common.*;
 import net.minecraftforge.fluids.*;
 import pro.komaru.tridot.client.graphics.particle.options.FluidParticleOptions;
-import pro.komaru.tridot.utilities.client.RenderUtil;
+import pro.komaru.tridot.utilities.Util;
 
 public class FluidParticle extends GenericParticle{
 
@@ -15,12 +15,12 @@ public class FluidParticle extends GenericParticle{
         if(!options.fluidStack.isEmpty()){
             FluidType type = options.fluidStack.getFluid().getFluidType();
             IClientFluidTypeExtensions clientType = IClientFluidTypeExtensions.of(type);
-            TextureAtlasSprite sprite = RenderUtil.getSprite(clientType.getStillTexture(options.fluidStack));
-            if(options.flowing) sprite = RenderUtil.getSprite(clientType.getFlowingTexture(options.fluidStack));
+            TextureAtlasSprite sprite = Util.RenderUtil.getSprite(clientType.getStillTexture(options.fluidStack));
+            if(options.flowing) sprite = Util.RenderUtil.getSprite(clientType.getFlowingTexture(options.fluidStack));
             this.setSprite(sprite);
         }else{
             IClientFluidTypeExtensions clientType = IClientFluidTypeExtensions.of(Fluids.WATER);
-            TextureAtlasSprite sprite = RenderUtil.getSprite(clientType.getStillTexture());
+            TextureAtlasSprite sprite = Util.RenderUtil.getSprite(clientType.getStillTexture());
             this.setSprite(sprite);
         }
     }

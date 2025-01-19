@@ -12,8 +12,11 @@ import net.minecraftforge.event.*;
 import net.minecraftforge.event.entity.player.*;
 import net.minecraftforge.eventbus.api.*;
 import net.minecraftforge.fml.common.*;
-import pro.komaru.tridot.core.struct.*;
-import pro.komaru.tridot.utilities.func.*;
+import pro.komaru.tridot.core.struct.capability.CapImpl;
+import pro.komaru.tridot.core.struct.capability.CapProvider;
+import pro.komaru.tridot.core.struct.data.Seq;
+import pro.komaru.tridot.core.struct.data.Var;
+import pro.komaru.tridot.core.struct.func.Prov;
 
 @Mod.EventBusSubscriber()
 public class CapManager {
