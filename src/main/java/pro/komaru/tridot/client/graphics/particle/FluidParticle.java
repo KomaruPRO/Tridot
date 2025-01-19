@@ -15,12 +15,12 @@ public class FluidParticle extends GenericParticle{
         if(!options.fluidStack.isEmpty()){
             FluidType type = options.fluidStack.getFluid().getFluidType();
             IClientFluidTypeExtensions clientType = IClientFluidTypeExtensions.of(type);
-            TextureAtlasSprite sprite = Utils.RenderUtil.getSprite(clientType.getStillTexture(options.fluidStack));
-            if(options.flowing) sprite = Utils.RenderUtil.getSprite(clientType.getFlowingTexture(options.fluidStack));
+            TextureAtlasSprite sprite = Utils.Render.getSprite(clientType.getStillTexture(options.fluidStack));
+            if(options.flowing) sprite = Utils.Render.getSprite(clientType.getFlowingTexture(options.fluidStack));
             this.setSprite(sprite);
         }else{
             IClientFluidTypeExtensions clientType = IClientFluidTypeExtensions.of(Fluids.WATER);
-            TextureAtlasSprite sprite = Utils.RenderUtil.getSprite(clientType.getStillTexture());
+            TextureAtlasSprite sprite = Utils.Render.getSprite(clientType.getStillTexture());
             this.setSprite(sprite);
         }
     }

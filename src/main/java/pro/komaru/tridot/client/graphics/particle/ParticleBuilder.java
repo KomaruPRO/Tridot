@@ -421,31 +421,6 @@ public class ParticleBuilder{
         return spawnVoxelShape(level, new Vec3(x, y, z), voxelShape, 5, 1);
     }
 
-    public ParticleBuilder spawnBoykisser(Level level, Vec3 pos, int xSize, int ySize, float size, float lineSize, float smallLineSize, float eyebrowsLineSize, float mouthLineSize, float blushLineSize){
-        for(int y = 0; y < ySize; y++){
-            for(int x = 0; x < ySize; x++){
-                if(Utils.RenderUtil.boykisserPos((float)x / xSize, (float)y / ySize, lineSize, smallLineSize, eyebrowsLineSize, mouthLineSize, blushLineSize)){
-                    spawn(level, pos.x() + (((xSize / 2f) - x) * size), pos.y() - (((ySize / 2f) - y) * size), pos.z());
-                }
-            }
-        }
-        return this;
-    }
-
-    public ParticleBuilder spawnBoykisser(Level level, Vec3 pos, int xSize, int ySize, float size, ParticleBuilder blushBuilder, float lineSize, float smallLineSize, float eyebrowsLineSize, float mouthLineSize, float blushLineSize){
-        for(int y = 0; y < ySize; y++){
-            for(int x = 0; x < ySize; x++){
-                if(Utils.RenderUtil.boykisserBlushlessPos((float)x / xSize, (float)y / ySize, lineSize, smallLineSize, eyebrowsLineSize, mouthLineSize)){
-                    spawn(level, pos.x() + (((xSize / 2f) - x) * size), pos.y() - (((ySize / 2f) - y) * size), pos.z());
-                }
-                if(Utils.RenderUtil.boykisserBlushPos((float)x / xSize, (float)y / ySize, blushLineSize)){
-                    blushBuilder.spawn(level, pos.x() + (((xSize / 2f) - x) * size), pos.y() - (((ySize / 2f) - y) * size), pos.z());
-                }
-            }
-        }
-        return this;
-    }
-
     public static ParticleBuilder create(ParticleType<?> type){
         return new ParticleBuilder(new GenericParticleOptions(type));
     }
