@@ -18,7 +18,7 @@ import org.joml.*;
 import pro.komaru.tridot.client.graphics.render.animation.ItemAnimation;
 import pro.komaru.tridot.client.graphics.gui.screenshake.ScreenshakeHandler;
 import pro.komaru.tridot.client.graphics.gui.screenshake.ScreenshakeInstance;
-import pro.komaru.tridot.registry.ArcRandom;
+import pro.komaru.tridot.core.math.ArcRandom;
 import pro.komaru.tridot.registry.EnchantmentsRegistry;
 import pro.komaru.tridot.registry.item.AttributeRegistry;
 import pro.komaru.tridot.registry.item.builders.AbstractScytheBuilder;

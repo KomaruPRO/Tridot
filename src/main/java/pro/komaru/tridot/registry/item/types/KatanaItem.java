@@ -24,7 +24,7 @@ import pro.komaru.tridot.core.interfaces.CooldownReductionItem;
 import pro.komaru.tridot.core.interfaces.DashItem;
 import pro.komaru.tridot.core.net.PacketHandler;
 import pro.komaru.tridot.core.net.packets.DashParticlePacket;
-import pro.komaru.tridot.registry.ArcRandom;
+import pro.komaru.tridot.core.math.ArcRandom;
 import pro.komaru.tridot.registry.item.AttributeRegistry;
 import pro.komaru.tridot.registry.item.builders.AbstractKatanaBuilder;
 import pro.komaru.tridot.utilities.Utils;

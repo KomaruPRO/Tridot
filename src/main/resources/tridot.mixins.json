@@ -17,7 +17,6 @@
     "client.SplashManagerMixin",
     "client.CameraMixin",
     "client.EffectProgramMixin",
-    "client.FoxRendererMixin",
     "client.GameRendererMixin",
     "client.GuiGraphicsMixin",
     "client.HumanoidModelMixin",

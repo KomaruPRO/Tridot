@@ -1,4 +1,4 @@
-package pro.komaru.tridot.registry;
+package pro.komaru.tridot.core.math;
 
 import java.util.*;
 

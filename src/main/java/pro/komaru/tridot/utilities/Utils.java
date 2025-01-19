@@ -67,7 +67,7 @@ import pro.komaru.tridot.core.struct.Structs;
 import pro.komaru.tridot.core.struct.data.Seq;
 import pro.komaru.tridot.core.struct.func.Boolf;
 import pro.komaru.tridot.core.struct.func.Cons;
-import pro.komaru.tridot.registry.ArcRandom;
+import pro.komaru.tridot.core.math.ArcRandom;
 import pro.komaru.tridot.registry.EnchantmentsRegistry;
 import pro.komaru.tridot.registry.item.skins.AuthoredItemSkin;
 import pro.komaru.tridot.registry.item.skins.ItemSkin;
