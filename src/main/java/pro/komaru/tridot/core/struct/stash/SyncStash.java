@@ -59,7 +59,8 @@ public class SyncStash {
 
     public static int nextId() {
         return lastId++;
-    };
+    }
+
     public static Seq<SyncStashObject<?>> getStash() {
         return stash;
     }

@@ -292,37 +292,6 @@ public class Utils {
         }
 
         /**
-         * Spawns particles line to attacked mob position
-         *
-         * @param pPlayer   Player pos for calculating Attacked mob and positions
-         * @param pType     Particle that will spawn line
-         * @param pDuration cooldown
-         */
-        public static void lineToAttacked(Level pLevel, Player pPlayer, ParticleOptions pType, int pDuration) {
-            LivingEntity lastHurtMob = pPlayer.getLastAttacker();
-            if (!pLevel.isClientSide() && pLevel instanceof ServerLevel pServer) {
-                if (lastHurtMob == null) {
-                    return;
-                }
-
-                Vec3 pos = new Vec3(pPlayer.getX(), pPlayer.getY() + 0.5f, pPlayer.getZ());
-                Vec3 EndPos = new Vec3(lastHurtMob.getX(), lastHurtMob.getY() + 0.5f, lastHurtMob.getZ());
-                double distance = pos.distanceTo(EndPos);
-                double distanceInBlocks = Math.floor(distance);
-                for (pDuration = 0; pDuration < distanceInBlocks; pDuration++) {
-                    double dX = pos.x - EndPos.x;
-                    double dY = pos.y - EndPos.y;
-                    double dZ = pos.z - EndPos.z;
-                    float x = (float) (dX / distanceInBlocks);
-                    float y = (float) (dY / distanceInBlocks);
-                    float z = (float) (dZ / distanceInBlocks);
-
-                    pServer.sendParticles(pType, pos.x - (x * pDuration), pos.y - (y * pDuration), pos.z - (z * pDuration), 1, 0, 0, 0, 0);
-                }
-            }
-        }
-
-        /**
          * Spawns particle lines to nearby Mobs
          *
          * @param pPlayer     Player for reciving pos from

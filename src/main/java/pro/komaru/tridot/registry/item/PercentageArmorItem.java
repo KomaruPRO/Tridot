@@ -13,7 +13,6 @@ import net.minecraft.world.item.ItemStack.*;
 import net.minecraft.world.item.enchantment.*;
 import net.minecraft.world.level.*;
 import net.minecraftforge.api.distmarker.*;
-import pro.komaru.tridot.core.config.ServerConfig;
 
 import javax.annotation.*;
 import java.text.*;

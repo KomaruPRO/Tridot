@@ -1,7 +1,6 @@
 package pro.komaru.tridot.registry.entity.ai;
 
 import pro.komaru.tridot.*;
-import pro.komaru.tridot.TridotLib;
 
 import java.awt.*;
 import java.util.*;

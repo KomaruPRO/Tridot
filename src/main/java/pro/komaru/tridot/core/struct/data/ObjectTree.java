@@ -9,7 +9,7 @@ public class ObjectTree<T>  {
     protected Seq<ObjectTree<T>> childTrees = Seq.with();
 
     private ObjectTree() {
-    };
+    }
 
     public Seq<T> allDeep() {
         Seq<T> all = Seq.with(children());
@@ -27,7 +27,8 @@ public class ObjectTree<T>  {
     }
     public Seq<T> children() {
         return childObjects;
-    };
+    }
+
     public Seq<T> deepChildren() {
         Seq<T> thisChildren = children().copy();
         Seq<T> treesChildren = Seq.with();

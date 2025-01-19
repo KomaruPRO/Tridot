@@ -8,7 +8,6 @@ import net.minecraft.sounds.*;
 import net.minecraft.world.effect.*;
 import net.minecraft.world.item.Item.*;
 import net.minecraft.world.item.*;
-import pro.komaru.tridot.registry.item.types.KatanaItem;
 
 import java.awt.*;
 

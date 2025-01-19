@@ -94,10 +94,12 @@ public abstract class TridotScreen extends Screen {
     }
     public void renderBefore(GuiGraphics g, int mouseX, int mouseY, float partial) {
 
-    };
+    }
+
     public void renderAfter(GuiGraphics g, int mouseX, int mouseY, float partial) {
 
-    };
+    }
+
     public void renderChildren(GuiGraphics g, int mouseX, int mouseY, float partial) {
         for (Renderable renderable : renderables) renderChild(renderable,g,mouseX,mouseY,partial);
     }
