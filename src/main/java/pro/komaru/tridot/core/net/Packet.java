@@ -12,10 +12,11 @@ import java.util.function.*;
 public interface Packet {
     default void save(FriendlyByteBuf buf) {
 
-    };
+    }
+
     default void handle(NetworkEvent.Context ctx, ServerPlayer sender) {
 
-    };
+    }
 
     default void handle(Supplier<NetworkEvent.Context> ctx) {
         ctx.get().enqueueWork(() -> {
@@ -27,5 +28,5 @@ public interface Packet {
     @OnlyIn(Dist.CLIENT)
     default void doOnClient() {
 
-    };
+    }
 }

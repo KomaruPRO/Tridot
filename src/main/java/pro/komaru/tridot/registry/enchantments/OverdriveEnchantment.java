@@ -3,7 +3,6 @@ package pro.komaru.tridot.registry.enchantments;
 import pro.komaru.tridot.registry.*;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.item.enchantment.*;
-import pro.komaru.tridot.registry.EnchantmentsRegistry;
 
 public class OverdriveEnchantment extends Enchantment {
 

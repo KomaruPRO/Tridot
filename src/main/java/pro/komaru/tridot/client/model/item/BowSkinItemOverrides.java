@@ -5,7 +5,6 @@ import net.minecraft.client.multiplayer.*;
 import net.minecraft.client.resources.model.*;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.item.*;
-import pro.komaru.tridot.registry.item.skins.ItemSkin;
 
 import javax.annotation.*;
 

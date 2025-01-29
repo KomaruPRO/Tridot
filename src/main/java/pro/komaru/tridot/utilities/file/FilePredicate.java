@@ -1,8 +1,7 @@
 package pro.komaru.tridot.utilities.file;
 
-import pro.komaru.tridot.utilities.func.*;
-import pro.komaru.tridot.utilities.func.Cons2Func;
-import pro.komaru.tridot.utilities.func.FilePredicateFunc;
+import pro.komaru.tridot.core.struct.func.Cons2Func;
+import pro.komaru.tridot.core.struct.func.FilePredicateFunc;
 
 import java.io.*;
 import java.util.function.*;

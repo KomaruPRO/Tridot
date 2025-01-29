@@ -1,7 +1,6 @@
 package pro.komaru.tridot.registry.block;
 
 import pro.komaru.tridot.*;
-import pro.komaru.tridot.registry.block.sign.*;
 import net.minecraft.client.renderer.blockentity.*;
 import net.minecraft.world.level.block.entity.*;
 import net.minecraftforge.api.distmarker.*;
@@ -9,7 +8,6 @@ import net.minecraftforge.client.event.*;
 import net.minecraftforge.eventbus.api.*;
 import net.minecraftforge.fml.common.*;
 import net.minecraftforge.registries.*;
-import pro.komaru.tridot.TridotLib;
 import pro.komaru.tridot.registry.block.sign.*;
 
 public class TridotBlockEntities{

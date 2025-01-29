@@ -4,7 +4,6 @@ import pro.komaru.tridot.client.model.block.*;
 import net.minecraft.client.model.geom.*;
 import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.util.*;
-import pro.komaru.tridot.client.model.block.CustomBlockModel;
 
 public class CustomBookModel extends CustomBlockModel {
     public ModelPart leftLid;

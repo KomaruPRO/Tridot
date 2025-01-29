@@ -1,7 +1,7 @@
 package pro.komaru.tridot.core.math;
 
-import pro.komaru.tridot.core.struct.Seq;
 import pro.komaru.tridot.core.struct.Structs;
+import pro.komaru.tridot.core.struct.data.Seq;
 
 import java.io.*;
 import java.util.*;

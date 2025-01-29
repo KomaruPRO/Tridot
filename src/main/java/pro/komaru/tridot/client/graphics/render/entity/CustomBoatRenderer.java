@@ -20,7 +20,6 @@ public class CustomBoatRenderer extends BoatRenderer{
     public CustomBoatRenderer(EntityRendererProvider.Context context, String modId, String texture, boolean chest, boolean raft){
         super(context, chest);
         String path = chest ? "textures/entity/chest_boat/" + texture + ".png" : "textures/entity/boat/" + texture + ".png";
-        ;
         this.boatTexture = new ResourceLocation(modId, path);
         createModels(chest, raft);
     }

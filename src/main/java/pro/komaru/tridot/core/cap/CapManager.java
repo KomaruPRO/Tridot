@@ -12,15 +12,18 @@ import net.minecraftforge.event.*;
 import net.minecraftforge.event.entity.player.*;
 import net.minecraftforge.eventbus.api.*;
 import net.minecraftforge.fml.common.*;
-import pro.komaru.tridot.core.struct.*;
-import pro.komaru.tridot.utilities.func.*;
+import pro.komaru.tridot.core.struct.capability.CapImpl;
+import pro.komaru.tridot.core.struct.capability.CapProvider;
+import pro.komaru.tridot.core.struct.data.Seq;
+import pro.komaru.tridot.core.struct.data.Var;
+import pro.komaru.tridot.core.struct.func.Prov;
 
 @Mod.EventBusSubscriber()
 public class CapManager {
 
     public static Seq<CapEntry<?>> caps = Seq.with();
 
-    private static Var<String> tempMod = new Var<>("");
+    private static final Var<String> tempMod = new Var<>("");
     public static void begin(String modId) {
         tempMod.var = modId;
     }
@@ -52,7 +55,7 @@ public class CapManager {
     public static void onPlayerCloned(PlayerEvent.Clone event) {
         for (CapEntry<?> cap : caps) {
             Capability<?> CAP = cap.instance.get();
-            event.getOriginal().reviveCaps();;
+            event.getOriginal().reviveCaps();
             event.getEntity().getCapability(CAP).ifPresent(k -> {
                 event.getOriginal().getCapability(CAP).ifPresent(o -> {
                     INBTSerializable<CompoundTag> kSer = (INBTSerializable<CompoundTag>) k;

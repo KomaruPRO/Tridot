@@ -3,22 +3,22 @@ package pro.komaru.tridot.core;
 import net.minecraft.nbt.*;
 import net.minecraft.network.syncher.*;
 import pro.komaru.tridot.core.entity.*;
-import pro.komaru.tridot.core.struct.*;
-import pro.komaru.tridot.utilities.func.*;
+import pro.komaru.tridot.core.struct.data.Seq;
+import pro.komaru.tridot.core.struct.func.Cons2;
 
 public interface TridotDataEntity {
     Seq<TridotEntityVar<?>> data();
     SynchedEntityData synchedData();
 
-    default TridotEntityVar<?> getVar(String name) {
-        return data().find(e -> e.name.equals(name));
+    default <T> TridotEntityVar<T> getVar(String name) {
+        return (TridotEntityVar<T>) data().find(e -> e.name.equals(name));
     }
 
     default <T> T get(String name) {
         return (T) getVar(name).get.get(synchedData());
     }
     default <T> void set(String name, T val) {
-        ((TridotEntityVar<T>) getVar(name)).set.get(synchedData(),val);
+        getVar(name).set.get(synchedData(),val);
     }
 
     default void writeData(CompoundTag tag) {

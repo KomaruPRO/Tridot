@@ -18,7 +18,6 @@ import pro.komaru.tridot.snakeyaml.DumperOptions.FlowStyle;
 import pro.komaru.tridot.snakeyaml.DumperOptions.ScalarStyle;
 import pro.komaru.tridot.snakeyaml.introspector.PropertyUtils;
 import pro.komaru.tridot.snakeyaml.nodes.*;
-import pro.komaru.tridot.snakeyaml.nodes.*;
 
 import java.util.*;
 

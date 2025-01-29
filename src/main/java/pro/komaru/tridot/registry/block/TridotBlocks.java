@@ -8,9 +8,6 @@ import net.minecraft.world.item.*;
 import net.minecraft.world.level.block.*;
 import net.minecraftforge.eventbus.api.*;
 import net.minecraftforge.registries.*;
-import pro.komaru.tridot.TridotLib;
-import pro.komaru.tridot.registry.block.fire.FireBlockHandler;
-import pro.komaru.tridot.registry.block.fire.FireBlockModifier;
 
 import java.lang.reflect.*;
 import java.util.*;

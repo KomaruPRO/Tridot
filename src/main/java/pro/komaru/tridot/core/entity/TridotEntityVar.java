@@ -2,7 +2,9 @@ package pro.komaru.tridot.core.entity;
 
 import net.minecraft.network.syncher.*;
 import net.minecraft.world.entity.*;
-import pro.komaru.tridot.utilities.func.*;
+import pro.komaru.tridot.core.struct.func.Cons;
+import pro.komaru.tridot.core.struct.func.Cons2;
+import pro.komaru.tridot.core.struct.func.Func;
 
 import java.lang.reflect.*;
 
@@ -40,5 +42,5 @@ public class TridotEntityVar<T> {
             }
         }
         return null;
-    };
+    }
 }

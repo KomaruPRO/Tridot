@@ -19,7 +19,6 @@ import pro.komaru.tridot.snakeyaml.TypeDescription;
 import pro.komaru.tridot.snakeyaml.introspector.Property;
 import pro.komaru.tridot.snakeyaml.introspector.PropertyUtils;
 import pro.komaru.tridot.snakeyaml.nodes.*;
-import pro.komaru.tridot.snakeyaml.nodes.*;
 
 import java.util.*;
 

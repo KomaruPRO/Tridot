@@ -12,11 +12,12 @@ import net.minecraft.world.item.*;
 import net.minecraft.world.level.block.*;
 import net.minecraftforge.registries.*;
 import pro.komaru.tridot.core.math.*;
-import pro.komaru.tridot.core.struct.*;
+import pro.komaru.tridot.core.struct.Structs;
+import pro.komaru.tridot.core.struct.data.Pair;
+import pro.komaru.tridot.core.struct.func.Prov;
 import pro.komaru.tridot.rhino.*;
 import pro.komaru.tridot.rhino.util.wrap.*;
 import pro.komaru.tridot.utilities.*;
-import pro.komaru.tridot.utilities.func.*;
 
 import java.util.*;
 import java.util.function.*;
@@ -43,17 +44,17 @@ public class Wrappers {
             return null;
         });
         wraps.register(Player.class,(ctx,obj) -> {
-            if(obj == null) return MCUtil.players().first();
+            if(obj == null) return Utils.players().first();
             if(obj instanceof Player p) return p;
-            if(obj instanceof String str) return MCUtil.players().find(e -> e.getName().getString().equals(str));
+            if(obj instanceof String str) return Utils.players().find(e -> e.getName().getString().equals(str));
             if(obj instanceof Prov<?> prov) return (Player) prov.get();
             if(obj instanceof Supplier<?> supp) return (Player) supp.get();
             return null;
         });
         wraps.register(ServerPlayer.class,(ctx, obj) -> {
-            if(obj == null) return MCUtil.players().first();
+            if(obj == null) return Utils.players().first();
             if(obj instanceof ServerPlayer p) return p;
-            if(obj instanceof String str) return MCUtil.players().find(e -> e.getName().getString().equals(str));
+            if(obj instanceof String str) return Utils.players().find(e -> e.getName().getString().equals(str));
             if(obj instanceof Prov<?> prov) return (ServerPlayer) prov.get();
             if(obj instanceof Supplier<?> supp) return (ServerPlayer) supp.get();
             return null;
@@ -96,7 +97,8 @@ public class Wrappers {
                 } catch (Exception ex) {
                     return null;
                 }
-            HashMap<String,Object> tag = Structs.map(String.class,Object.class,(Object[]) obj);
+            HashMap<String,Object> tag =
+                    Structs.map(String.class,Object.class,(Object[]) obj);
             CompoundTag nbt = new CompoundTag();
             tag.forEach((k,v) -> {
                 try {

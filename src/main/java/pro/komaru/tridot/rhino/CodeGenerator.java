@@ -19,7 +19,7 @@ class CodeGenerator extends Icode {
 	private static final int MIN_LABEL_TABLE_SIZE = 32;
 	private static final int MIN_FIXUP_TABLE_SIZE = 40;
 	// ECF_ or Expression Context Flags constants: for now only TAIL
-	private static final int ECF_TAIL = 1 << 0;
+	private static final int ECF_TAIL = 1;
 
 	private static RuntimeException badTree(Node node) {
 		throw new RuntimeException(node.toString());

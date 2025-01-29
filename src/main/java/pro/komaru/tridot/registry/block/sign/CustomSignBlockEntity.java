@@ -4,7 +4,6 @@ import pro.komaru.tridot.registry.block.*;
 import net.minecraft.core.*;
 import net.minecraft.world.level.block.entity.*;
 import net.minecraft.world.level.block.state.*;
-import pro.komaru.tridot.registry.block.TridotBlockEntities;
 
 public class CustomSignBlockEntity extends SignBlockEntity{
 

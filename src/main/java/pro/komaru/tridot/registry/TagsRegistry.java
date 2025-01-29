@@ -9,7 +9,6 @@ import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.decoration.*;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.block.*;
-import pro.komaru.tridot.TridotLib;
 
 public class TagsRegistry{
     public static TagKey<Item> item(final ResourceLocation name){

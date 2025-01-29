@@ -1,6 +1,6 @@
 package pro.komaru.tridot.core.math;
 
-import pro.komaru.tridot.core.struct.Seq;
+import pro.komaru.tridot.core.struct.data.Seq;
 
 public class Mathf {
     public static final int[] signs = {-1, 1};

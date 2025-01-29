@@ -79,7 +79,7 @@ public abstract class BaseSpawner{
 
     public boolean skipSpawnReason(ServerLevel pServerLevel) {
         return getEntityType().getCategory().isFriendly() && pServerLevel.getDifficulty() == Difficulty.PEACEFUL;
-    };
+    }
 
     /**
      * Called on configuration of the Entity

@@ -19,8 +19,6 @@ import pro.komaru.tridot.snakeyaml.comments.CommentLine;
 import pro.komaru.tridot.snakeyaml.emitter.Emitable;
 import pro.komaru.tridot.snakeyaml.events.*;
 import pro.komaru.tridot.snakeyaml.nodes.*;
-import pro.komaru.tridot.snakeyaml.events.*;
-import pro.komaru.tridot.snakeyaml.nodes.*;
 import pro.komaru.tridot.snakeyaml.resolver.Resolver;
 import pro.komaru.tridot.snakeyaml.util.MergeUtils;
 

@@ -22,8 +22,6 @@ import pro.komaru.tridot.snakeyaml.error.Mark;
 import pro.komaru.tridot.snakeyaml.error.YAMLException;
 import pro.komaru.tridot.snakeyaml.events.*;
 import pro.komaru.tridot.snakeyaml.nodes.*;
-import pro.komaru.tridot.snakeyaml.events.*;
-import pro.komaru.tridot.snakeyaml.nodes.*;
 import pro.komaru.tridot.snakeyaml.parser.Parser;
 import pro.komaru.tridot.snakeyaml.resolver.Resolver;
 import pro.komaru.tridot.snakeyaml.util.MergeUtils;

@@ -2,10 +2,6 @@ package pro.komaru.tridot.client.graphics.shader.postprocess;
 
 import net.minecraft.client.renderer.*;
 
-import static org.lwjgl.opengl.GL11.*;
-import static org.lwjgl.opengl.GL13.*;
-import static org.lwjgl.opengl.GL15.*;
-import static org.lwjgl.opengl.GL30.GL_R32F;
 import static org.lwjgl.opengl.GL31.*;
 
 public class ShaderDataBuffer{

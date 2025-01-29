@@ -1,3 +1,6 @@
+import java.nio.file.Files
+import java.nio.file.Paths
+
 buildscript{
     repositories{
         mavenLocal()
@@ -21,13 +24,78 @@ plugins{
     id 'net.minecraftforge.gradle' version '[6.0,6.2)'
     id 'org.spongepowered.mixin' version '[0.7,0.8)'
     id 'org.parchmentmc.librarian.forgegradle' version '1.+'
+    id "com.modrinth.minotaur" version "2+"
 }
+/*def loadEnv(String key) {
+    def path = Paths.get(".env")
+    if (Files.exists(path)) {
+        def env = Files.readAllLines(path).find { it.startsWith("${key}=") }
+        return env?.split("=")?.getAt(1)
+    }
+    return null
+}
+def modFile() {
+    def modFile = "build/libs/${project.name}-${mod_version}.jar"
+    return rootProject.file(modFile)
+}
+def modChangelog() {
+    return rootProject.file("changelog.md").text;
+}
+def modrinthToken = loadEnv("MODRINTH_TOKEN")
+def curseforgeToken = loadEnv("CURSEFORGE_TOKEN")
+def modrinthProjectId = loadEnv("MODRINTH_PROJECT")
+def curseforgeProjectId = loadEnv("CURSEFORGE_PROJECT")
+
+modrinth {
+    token = modrinthToken
+    projectId = modrinthProjectId
+    versionNumber = mod_version
+    uploadFile = modFile()
+    changelog = modChangelog()
+    loaders = ["forge"]
+    gameVersions = [minecraft_version]
+    versionType = mod_type
+}
+task beforeUpload {
+    doLast {
+        println "Введите версию мода: "
+        def vers = new Scanner(System.in).nextLine().trim()
+        println "Введите тип мода (alpha,beta,release): "
+        def type = new Scanner(System.in).nextLine().trim()
+
+        println "Замена версии мода..."
+        modrinth.versionNumber = vers
+        modrinth.versionType = type
+
+        mod_version = vers
+        version = vers
+
+        println "Билд мода..."
+    }
+}
+task prepareSettings {
+    tasks.build.mustRunAfter(beforeUpload)
+    dependsOn(beforeUpload,build)
+    doLast {
+        modrinth.uploadFile = modFile()
+    }
+}
+task modrinthUpload {
+    tasks.modrinth.mustRunAfter(prepareSettings)
+    dependsOn prepareSettings,tasks.modrinth
+    doLast {
+
+    }
+}*/
 
 group = mod_group_id
 version = mod_version
 base{
     archivesName = mod_id
 }
+
+
+
 
 repositories{
     mavenLocal()

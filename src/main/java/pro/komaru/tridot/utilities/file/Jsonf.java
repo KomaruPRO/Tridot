@@ -1,10 +1,9 @@
 package pro.komaru.tridot.utilities.file;
 
 import com.google.gson.*;
-import pro.komaru.tridot.utilities.func.*;
 import net.minecraft.resources.*;
 import net.minecraft.world.item.*;
-import pro.komaru.tridot.utilities.func.Cons;
+import pro.komaru.tridot.core.struct.func.Cons;
 
 import java.io.*;
 import java.lang.reflect.*;

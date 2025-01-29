@@ -21,7 +21,9 @@ build
 eclipse
 run
 run-data
+.env
 
 # Files from Forge MDK
 forge*changelog.txt
 /src/generated/
+.env

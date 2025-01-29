@@ -1,8 +1,8 @@
 package pro.komaru.tridot.utilities.file;
 
-import pro.komaru.tridot.utilities.func.Cons2;
-import pro.komaru.tridot.core.struct.Pair;
-import pro.komaru.tridot.core.struct.Seq;
+import pro.komaru.tridot.core.struct.func.Cons2;
+import pro.komaru.tridot.core.struct.data.Pair;
+import pro.komaru.tridot.core.struct.data.Seq;
 
 import java.io.*;
 import java.nio.charset.*;
@@ -50,10 +50,12 @@ public class Files {
                 .replace("\\","/");
         id = removeExtension(id);
         return id;
-    };
+    }
+
     public static Pair<String,String> idExt(FilePredicate rootPredicate, File file) {
         return new Pair<>(id(rootPredicate,file), ext(file.getName()));
-    };
+    }
+
     public static String removeExtension(String name) {
         int dotIndex = name.lastIndexOf(".");
         if (dotIndex != -1) name = name.substring(0, dotIndex);

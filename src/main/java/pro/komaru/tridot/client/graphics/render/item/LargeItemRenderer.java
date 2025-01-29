@@ -12,7 +12,6 @@ import net.minecraft.world.item.*;
 import net.minecraft.world.level.block.state.*;
 import net.minecraftforge.api.distmarker.*;
 import net.minecraftforge.client.*;
-import pro.komaru.tridot.client.model.item.CustomItemOverrides;
 
 import javax.annotation.*;
 import java.util.*;

@@ -1,6 +1,7 @@
 package pro.komaru.tridot.core.rhino;
 
-import pro.komaru.tridot.core.struct.*;
+import pro.komaru.tridot.core.struct.data.Pair;
+import pro.komaru.tridot.core.struct.data.Seq;
 import pro.komaru.tridot.rhino.*;
 import pro.komaru.tridot.rhino.util.wrap.*;
 
@@ -14,7 +15,8 @@ public class JS {
         Wrappers.register(wraps);
         ScriptableObject scope = context.initStandardObjects(new TopLevel());
         return new Pair<>(context,scope);
-    };
+    }
+
     public static void run(Context context, ScriptableObject scope, String body, String filename) {
         context.evaluateString(scope,body,filename,1,null);
     }

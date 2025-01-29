@@ -11,13 +11,6 @@ import net.minecraftforge.api.distmarker.*;
 import net.minecraftforge.client.event.*;
 import net.minecraftforge.eventbus.api.*;
 import net.minecraftforge.fml.common.*;
-import pro.komaru.tridot.TridotLib;
-import pro.komaru.tridot.client.model.armor.EmptyArmorModel;
-import pro.komaru.tridot.client.model.book.CustomBookModel;
-import pro.komaru.tridot.client.model.item.BowItemOverrides;
-import pro.komaru.tridot.client.model.item.CustomItemOverrides;
-import pro.komaru.tridot.client.model.item.CustomModel;
-import pro.komaru.tridot.client.model.item.CustomRenderModel;
 
 import java.util.*;
 
@@ -67,7 +60,7 @@ public class TridotModels{
         CustomModel customModel = new CustomModel(model, itemOverrides);
 
         for(int i = 0; i < 3; i++){
-            BakedModel pullModel = map.get(new ModelResourceLocation(new ResourceLocation(item.toString() + "_pulling_" + String.valueOf(i)), "inventory"));
+            BakedModel pullModel = map.get(new ModelResourceLocation(new ResourceLocation(item + "_pulling_" + String.valueOf(i)), "inventory"));
             itemOverrides.models.add(pullModel);
         }
 

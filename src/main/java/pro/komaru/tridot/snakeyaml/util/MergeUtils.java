@@ -14,7 +14,6 @@
 package pro.komaru.tridot.snakeyaml.util;
 
 import pro.komaru.tridot.snakeyaml.nodes.*;
-import pro.komaru.tridot.snakeyaml.nodes.*;
 
 import java.util.ArrayList;
 import java.util.HashSet;

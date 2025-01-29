@@ -1,8 +1,8 @@
 package pro.komaru.tridot.core.cap;
 
 import net.minecraftforge.common.capabilities.*;
-import pro.komaru.tridot.core.struct.*;
-import pro.komaru.tridot.utilities.func.*;
+import pro.komaru.tridot.core.struct.capability.CapProvider;
+import pro.komaru.tridot.core.struct.func.Prov;
 
 public class CapEntry<T> {
     public Prov<CapProvider> prov;

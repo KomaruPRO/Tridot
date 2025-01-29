@@ -3,8 +3,9 @@ package pro.komaru.tridot.core.cap;
 import net.minecraft.server.level.*;
 import net.minecraft.world.entity.player.*;
 import pro.komaru.tridot.core.net.packets.*;
-import pro.komaru.tridot.core.struct.*;
-import pro.komaru.tridot.utilities.func.*;
+import pro.komaru.tridot.core.struct.capability.CapImpl;
+import pro.komaru.tridot.core.struct.data.Var;
+import pro.komaru.tridot.core.struct.func.Cons;
 
 public class CapUtil {
     public static SynchronizeCapabilityPacket syncPacket(ServerPlayer player, CapEntry<?> entry) {
