@@ -1,23 +1,22 @@
 package pro.komaru.tridot.registry.item.types;
 
-import pro.komaru.tridot.registry.entity.projectiles.*;
-import net.minecraft.*;
-import net.minecraft.network.chat.*;
-import net.minecraft.server.level.*;
-import net.minecraft.sounds.*;
-import net.minecraft.stats.*;
-import net.minecraft.world.entity.*;
-import net.minecraft.world.entity.player.*;
-import net.minecraft.world.entity.projectile.*;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.stats.Stats;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.item.*;
-import net.minecraft.world.item.enchantment.*;
-import net.minecraft.world.level.*;
-import net.minecraftforge.event.*;
-import org.jetbrains.annotations.*;
-import pro.komaru.tridot.registry.entity.projectiles.AbstractTridotArrow;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
+import net.minecraft.world.item.enchantment.Enchantments;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.event.ForgeEventFactory;
+import org.jetbrains.annotations.NotNull;
+import pro.komaru.tridot.registry.entity.projectiles.*;
 
-import java.util.*;
-import java.util.function.*;
+import java.util.function.Supplier;
 
 public class ConfigurableBowItem extends BowItem{
     public double baseDamage;
@@ -30,6 +29,11 @@ public class ConfigurableBowItem extends BowItem{
         this.baseDamage = pBaseDamage;
         this.arrowBaseDamage = 2;
         this.arrow = () -> EntityType.ARROW;
+    }
+
+    public ConfigurableBowItem(double pBaseDamage, float pTime, Properties pProperties){
+        this(pBaseDamage, pProperties);
+        time = pTime;
     }
 
     public ConfigurableBowItem(Supplier<? extends EntityType<? extends AbstractArrow>> arrow, double pBaseDamage, int pArrowBaseDamage, Properties pProperties){
@@ -64,6 +68,27 @@ public class ConfigurableBowItem extends BowItem{
         return f;
     }
 
+    public void doPreSpawn(AbstractArrow abstractarrow, Player player, ItemStack itemstack, float power, boolean infiniteArrows){
+        abstractarrow = customArrow(abstractarrow);
+        abstractarrow.setBaseDamage(abstractarrow.getBaseDamage() + baseDamage);
+        abstractarrow.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0F, power * 3.0F, 1.0F);
+        if(power == 1.0F){
+            abstractarrow.setCritArrow(true);
+        }
+
+        abstractarrow.setOwner(player);
+        if(infiniteArrows || player.getAbilities().instabuild && (itemstack.is(Items.SPECTRAL_ARROW) || itemstack.is(Items.TIPPED_ARROW))){
+            abstractarrow.pickup = AbstractArrow.Pickup.CREATIVE_ONLY;
+        }
+    }
+
+    public AbstractArrow createArrow(Level pLevel, Player player){
+        AbstractArrow customArrow = arrow.get().create(pLevel);
+        customArrow.moveTo(new Vec3(player.getEyePosition().x, player.getEyePosition().y - 0.1f, player.getEyePosition().z));
+        if(customArrow instanceof AbstractTridotArrow valor) valor.doPostSpawn();
+        return customArrow;
+    }
+
     @Override
     public void releaseUsing(ItemStack pStack, Level pLevel, LivingEntity pEntityLiving, int pTimeLeft){
         if(pEntityLiving instanceof Player player){
@@ -81,17 +106,10 @@ public class ConfigurableBowItem extends BowItem{
                 float power = getPowerForTime(i, time);
                 if(!((double)power < 0.1D)){
                     boolean infiniteArrows = player.getAbilities().instabuild || (itemstack.getItem() instanceof ArrowItem && ((ArrowItem)itemstack.getItem()).isInfinite(itemstack, pStack, player));
-                    if(pLevel instanceof ServerLevel server){
+                    if(!pLevel.isClientSide()){
                         ArrowItem arrowitem = (ArrowItem)(itemstack.getItem() instanceof ArrowItem ? itemstack.getItem() : Items.ARROW);
-                        AbstractTridotArrow customArrow = new AbstractTridotArrow(arrow.get(), server, player, itemstack, arrowBaseDamage);
-                        AbstractArrow abstractarrow = arrowitem == Items.ARROW ? customArrow : arrowitem.createArrow(pLevel, itemstack, player);
-                        abstractarrow = customArrow(abstractarrow);
-                        abstractarrow.setBaseDamage(abstractarrow.getBaseDamage() + baseDamage);
-                        abstractarrow.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0F, power * 3.0F, 1.0F);
-                        if(power == 1.0F){
-                            abstractarrow.setCritArrow(true);
-                        }
-
+                        AbstractArrow abstractarrow = arrowitem == Items.ARROW && arrow.get() != EntityType.ARROW ? createArrow(pLevel, player) : arrowitem.createArrow(pLevel, itemstack, player);
+                        doPreSpawn(abstractarrow, player, itemstack, power, infiniteArrows);
                         int enchantmentPower = EnchantmentHelper.getTagEnchantmentLevel(Enchantments.POWER_ARROWS, pStack);
                         if(enchantmentPower > 0){
                             abstractarrow.setBaseDamage(abstractarrow.getBaseDamage() + (double)enchantmentPower * 0.5D + 0.5D);
@@ -107,11 +125,7 @@ public class ConfigurableBowItem extends BowItem{
                         }
 
                         pStack.hurtAndBreak(1, player, (p_289501_) -> p_289501_.broadcastBreakEvent(player.getUsedItemHand()));
-                        if(infiniteArrows || player.getAbilities().instabuild && (itemstack.is(Items.SPECTRAL_ARROW) || itemstack.is(Items.TIPPED_ARROW))){
-                            abstractarrow.pickup = AbstractArrow.Pickup.CREATIVE_ONLY;
-                        }
-
-                        server.addFreshEntity(abstractarrow);
+                        pLevel.addFreshEntity(abstractarrow);
                     }
 
                     pLevel.playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.ARROW_SHOOT, SoundSource.PLAYERS, 1.0F, 1.0F / (pLevel.getRandom().nextFloat() * 0.4F + 1.2F) + power * 0.5F);
@@ -126,24 +140,5 @@ public class ConfigurableBowItem extends BowItem{
                 }
             }
         }
-    }
-
-    private double calculateAverageDamage(ItemStack pStack){
-        double baseArrowDamage = this.baseDamage + 2;
-        int powerLevel = EnchantmentHelper.getTagEnchantmentLevel(Enchantments.POWER_ARROWS, pStack);
-        double powerBonus = powerLevel > 0 ? (powerLevel * 0.5D + 0.5D) : 0.0D;
-        return (baseArrowDamage + powerBonus) * (2 * 2.0F) - 2;
-    }
-
-    @Override
-    public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> pTooltipComponents, TooltipFlag pIsAdvanced){
-        super.appendHoverText(pStack, pLevel, pTooltipComponents, pIsAdvanced);
-        double damage = calculateAverageDamage(pStack);
-        if(arrow.get() != EntityType.ARROW){
-            pTooltipComponents.add(Component.translatable("tooltip.valoria.special_arrow").withStyle(ChatFormatting.GRAY)
-            .append(Component.literal(getDefaultType().getDescription().getString()).withStyle(pStack.getRarity().getStyleModifier())));
-        }
-
-        pTooltipComponents.add(Component.translatable("tooltip.valoria.bow_damage", damage).withStyle(ChatFormatting.GRAY));
     }
 }

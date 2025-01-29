@@ -1,6 +1,5 @@
 package pro.komaru.tridot.registry.entity;
 
-import pro.komaru.tridot.registry.entity.ai.*;
 import net.minecraft.nbt.*;
 import net.minecraft.network.syncher.*;
 import net.minecraft.sounds.*;
@@ -8,7 +7,7 @@ import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.level.*;
 import net.minecraft.world.level.pathfinder.*;
-import pro.komaru.tridot.registry.entity.ai.AttackRegistry;
+import pro.komaru.tridot.registry.entity.ai.*;
 
 import javax.annotation.*;
 import java.util.*;
@@ -22,68 +21,64 @@ public abstract class MultiAttackMob extends PathfinderMob{
         super(pEntityType, pLevel);
     }
 
-    protected void defineSynchedData() {
+    protected void defineSynchedData(){
         super.defineSynchedData();
         this.entityData.define(DATA_ID, AttackRegistry.NONE.toString());
     }
 
-    public void readAdditionalSaveData(CompoundTag pCompound) {
+    public void readAdditionalSaveData(CompoundTag pCompound){
         super.readAdditionalSaveData(pCompound);
         this.preparingTickCount = pCompound.getInt("PrepareTicks");
     }
 
-    public void addAdditionalSaveData(CompoundTag pCompound) {
+    public void addAdditionalSaveData(CompoundTag pCompound){
         super.addAdditionalSaveData(pCompound);
         pCompound.putInt("PrepareTicks", this.preparingTickCount);
     }
 
-    public boolean isPreparingAttack() {
-        if (this.level().isClientSide) {
+    public boolean isPreparingAttack(){
+        if(this.level().isClientSide){
             return !this.entityData.get(DATA_ID).equals("none");
-        } else {
+        }else{
             return this.preparingTickCount > 0;
         }
     }
 
-    public boolean hasTarget() {
+    public boolean hasTarget(){
         return MultiAttackMob.this.getTarget() != null;
     }
 
-    public int getPreparingTime() {
+    public int getPreparingTime(){
         return this.preparingTickCount;
     }
 
-    public SoundEvent getPreparingSound() {
-        return SoundEvents.EVOKER_CAST_SPELL;
-    }
-
-    public AttackRegistry getCurrentAttack() {
+    public AttackRegistry getCurrentAttack(){
         return !this.level().isClientSide ? this.currentAttack : AttackRegistry.byId(this.entityData.get(DATA_ID));
     }
 
-    protected void customServerAiStep() {
+    protected void customServerAiStep(){
         super.customServerAiStep();
-        if (this.preparingTickCount > 0) {
+        if(this.preparingTickCount > 0){
             --this.preparingTickCount;
         }
     }
 
-    public void setCurrentAttack(AttackRegistry pCurrentAttack) {
+    public void setCurrentAttack(AttackRegistry pCurrentAttack){
         this.currentAttack = pCurrentAttack;
         this.entityData.set(DATA_ID, pCurrentAttack.getId());
     }
 
-    public boolean isFleeing(Mob mob, float dist) {
+    public boolean isFleeing(Mob mob, float dist){
         return mob.getNavigation().getPath() != null && mob.getNavigation().getPath().getDistToTarget() > dist;
     }
 
-    public boolean cantReachTarget(LivingEntity target) {
+    public boolean cantReachTarget(LivingEntity target){
         Path path = navigation.createPath(target, 1);
         return path == null;
     }
 
     public class PrepareGoal extends Goal{
-        public PrepareGoal() {
+        public PrepareGoal(){
             this.setFlags(EnumSet.of(Goal.Flag.MOVE, Goal.Flag.LOOK));
         }
 
@@ -91,14 +86,14 @@ public abstract class MultiAttackMob extends PathfinderMob{
          * Returns whether execution should begin. You can also read and cache any state necessary for execution in this
          * method as well.
          */
-        public boolean canUse() {
+        public boolean canUse(){
             return getPreparingTime() > 0;
         }
 
         /**
          * Execute a one shot task or start executing a continuous task
          */
-        public void start() {
+        public void start(){
             super.start();
             MultiAttackMob.this.navigation.stop();
         }
@@ -106,7 +101,7 @@ public abstract class MultiAttackMob extends PathfinderMob{
         /**
          * Reset the task's internal state. Called when this task is interrupted by another one
          */
-        public void stop() {
+        public void stop(){
             super.stop();
             MultiAttackMob.this.setCurrentAttack(AttackRegistry.NONE);
         }
@@ -114,14 +109,14 @@ public abstract class MultiAttackMob extends PathfinderMob{
         /**
          * Keep ticking a continuous task that has already been started
          */
-        public void tick() {
-            if (MultiAttackMob.this.getTarget() != null) {
-                MultiAttackMob.this.getLookControl().setLookAt(MultiAttackMob.this.getTarget(), (float) MultiAttackMob.this.getMaxHeadYRot(), (float) MultiAttackMob.this.getMaxHeadXRot());
+        public void tick(){
+            if(MultiAttackMob.this.getTarget() != null){
+                MultiAttackMob.this.getLookControl().setLookAt(MultiAttackMob.this.getTarget(), (float)MultiAttackMob.this.getMaxHeadYRot(), (float)MultiAttackMob.this.getMaxHeadXRot());
             }
         }
     }
 
-    public abstract class AttackGoal extends Goal {
+    public abstract class AttackGoal extends Goal{
         protected int attackWarmupDelay;
         protected int nextAttackTickCount;
 
@@ -129,15 +124,15 @@ public abstract class MultiAttackMob extends PathfinderMob{
          * Returns whether execution should begin. You can also read and cache any state necessary for execution in this
          * method as well.
          */
-        public boolean canUse() {
+        public boolean canUse(){
             LivingEntity livingentity = MultiAttackMob.this.getTarget();
-            if (MultiAttackMob.this.hasTarget() && livingentity.isAlive()) {
-                if (MultiAttackMob.this.isPreparingAttack()) {
+            if(MultiAttackMob.this.hasTarget() && livingentity.isAlive()){
+                if(MultiAttackMob.this.isPreparingAttack()){
                     return false;
-                } else {
+                }else{
                     return MultiAttackMob.this.tickCount >= this.nextAttackTickCount;
                 }
-            } else {
+            }else{
                 return false;
             }
         }
@@ -145,7 +140,7 @@ public abstract class MultiAttackMob extends PathfinderMob{
         /**
          * Returns whether an in-progress EntityAIBase should continue executing
          */
-        public boolean canContinueToUse() {
+        public boolean canContinueToUse(){
             LivingEntity livingentity = MultiAttackMob.this.getTarget();
             return livingentity != null && livingentity.isAlive() && this.attackWarmupDelay > 0;
         }
@@ -153,7 +148,7 @@ public abstract class MultiAttackMob extends PathfinderMob{
         /**
          * Execute a one shot task or start executing a continuous task
          */
-        public void start() {
+        public void start(){
             MultiAttackMob.this.setAggressive(true);
             MultiAttackMob.this.setCurrentAttack(this.getAttack());
             this.attackWarmupDelay = this.adjustedTickDelay(this.getPreparingTime());
@@ -161,7 +156,7 @@ public abstract class MultiAttackMob extends PathfinderMob{
             this.nextAttackTickCount = MultiAttackMob.this.tickCount + this.getAttackInterval();
             SoundEvent soundevent = this.getPrepareSound();
             this.onPrepare();
-            if (soundevent != null) {
+            if(soundevent != null){
                 MultiAttackMob.this.playSound(soundevent, 1.0F, 1.0F);
             }
         }
@@ -175,11 +170,11 @@ public abstract class MultiAttackMob extends PathfinderMob{
         /**
          * Keep ticking a continuous task that has already been started
          */
-        public void tick() {
+        public void tick(){
             --this.attackWarmupDelay;
-            if (this.attackWarmupDelay == 0) {
+            if(this.attackWarmupDelay == 0){
                 this.performAttack();
-                MultiAttackMob.this.playSound(MultiAttackMob.this.getPreparingSound(), 1.0F, 1.0F);
+                MultiAttackMob.this.playSound(this.getAttackSound(), 1.0F, 1.0F);
             }
         }
 
@@ -199,6 +194,10 @@ public abstract class MultiAttackMob extends PathfinderMob{
 
         @Nullable
         public abstract SoundEvent getPrepareSound();
+
+        public SoundEvent getAttackSound(){
+            return SoundEvents.EVOKER_CAST_SPELL;
+        }
 
         /**
          * Used to indicate which attack is used to delay it
