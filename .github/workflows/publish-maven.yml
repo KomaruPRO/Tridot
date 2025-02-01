@@ -9,7 +9,7 @@ jobs:
       contents: write
 
     runs-on: ubuntu-latest
-  
+
     steps:
       - uses: actions/checkout@v4
       - name: Set up JDK 17
@@ -52,7 +52,7 @@ jobs:
           echo "New version: $new_version"
           
           # Update the version line in gradle.properties
-          sed -i "s/^\version=.*/version=$new_version/" gradle.properties
+          sed -i "s/^version=.*/version=$new_version/" gradle.properties
           cat gradle.properties
       - name: Commit and Push Version Change
         if: ${{ env.shouldPublish == 'true' && github.repository == 'KomaruPRO/Tridot' }}
@@ -66,6 +66,6 @@ jobs:
         env:
           maventoken: ${{ secrets.MAVEN_PASSWORD }}
         if: ${{ env.shouldPublish == 'true' && github.repository == 'KomaruPRO/Tridot' }}
-        run: |    
+        run: |
           ./gradlew clean
           ./gradlew publish
