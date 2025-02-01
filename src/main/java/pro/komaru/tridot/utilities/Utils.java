@@ -71,6 +71,7 @@ import pro.komaru.tridot.core.math.ArcRandom;
 import pro.komaru.tridot.registry.EnchantmentsRegistry;
 import pro.komaru.tridot.registry.item.skins.AuthoredItemSkin;
 import pro.komaru.tridot.registry.item.skins.ItemSkin;
+import top.theillusivec4.curios.api.*;
 
 import javax.annotation.*;
 import java.awt.*;
@@ -264,6 +265,37 @@ public class Utils {
         /**
          * Spawns particles line to attacked mob position
          *
+         * @param pPlayer   Player pos for calculating Attacked mob and positions
+         * @param pType     Particle that will spawn line
+         * @param pDuration cooldown
+         */
+        public static void lineToAttacked(Level pLevel, Player pPlayer, ParticleOptions pType, int pDuration){
+            LivingEntity lastHurtMob = pPlayer.getLastAttacker();
+            if(!pLevel.isClientSide() && pLevel instanceof ServerLevel pServer){
+                if(lastHurtMob == null){
+                    return;
+                }
+
+                Vec3 pos = new Vec3(pPlayer.getX(), pPlayer.getY() + 0.5f, pPlayer.getZ());
+                Vec3 EndPos = new Vec3(lastHurtMob.getX(), lastHurtMob.getY() + 0.5f, lastHurtMob.getZ());
+                double distance = pos.distanceTo(EndPos);
+                double distanceInBlocks = Math.floor(distance);
+                for(pDuration = 0; pDuration < distanceInBlocks; pDuration++){
+                    double dX = pos.x - EndPos.x;
+                    double dY = pos.y - EndPos.y;
+                    double dZ = pos.z - EndPos.z;
+                    float x = (float)(dX / distanceInBlocks);
+                    float y = (float)(dY / distanceInBlocks);
+                    float z = (float)(dZ / distanceInBlocks);
+
+                    pServer.sendParticles(pType, pos.x - (x * pDuration), pos.y - (y * pDuration), pos.z - (z * pDuration), 1, 0, 0, 0, 0);
+                }
+            }
+        }
+
+        /**
+         * Spawns particles line to attacked mob position
+         *
          * @param pPlayer Player pos for calculating Attacked mob and positions
          * @param pType   Particle that will spawn line
          */
@@ -420,6 +452,41 @@ public class Utils {
     }
     /**Attacking, hitting utils*/
     public static class Hit {
+
+        /**
+         * Calculates power though a seen percent, used in TNT's, and Necromancer Boss to define power of knockback
+         */
+        public static float seenPercent(Vec3 pVector, Entity pEntity, float pStrength){
+            AABB aabb = pEntity.getBoundingBox();
+            double d0 = 1.0D / ((aabb.maxX - aabb.minX) * 2.0D + 1.0D);
+            double d1 = 1.0D / ((aabb.maxY - aabb.minY) * 2.0D + 1.0D);
+            double d2 = 1.0D / ((aabb.maxZ - aabb.minZ) * 2.0D + 1.0D);
+            double d3 = (1.0D - Math.floor(1.0D / d0) * d0) / 2.0D;
+            double d4 = (1.0D - Math.floor(1.0D / d2) * d2) / 2.0D;
+            if(!(d0 < 0.0D) && !(d1 < 0.0D) && !(d2 < 0.0D)){
+                int i = 0;
+                int j = 0;
+                for(double d5 = 0.0D; d5 <= 1.0D; d5 += d0){
+                    for(double d6 = 0.0D; d6 <= 1.0D; d6 += d1){
+                        for(double d7 = 0.0D; d7 <= 1.0D; d7 += d2){
+                            double d8 = Mth.lerp(d5, aabb.minX, aabb.maxX);
+                            double d9 = Mth.lerp(d6, aabb.minY, aabb.maxY);
+                            double d10 = Mth.lerp(d7, aabb.minZ, aabb.maxZ);
+                            Vec3 vec3 = new Vec3(d8 + d3, d9, d10 + d4);
+                            if(pEntity.level().clip(new ClipContext(vec3, pVector, ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, pEntity)).getType() == HitResult.Type.MISS){
+                                ++i;
+                            }
+
+                            ++j;
+                        }
+                    }
+                }
+
+                return ((float)i / (float)j) * pStrength;
+            }else{
+                return pStrength;
+            }
+        }
 
         /**
          * Performs a spin attack with checking a collision with targets
@@ -691,7 +758,7 @@ public class Utils {
         /**
          * @param stack being checked
          * @return 0.5 per level if true
-         * @see Hit#circularHit
+         * @see  Hit#circularHit
          */
         public static float enchantmentRadius(ItemStack stack) {
             int i = stack.getEnchantmentLevel(EnchantmentsRegistry.RADIUS.get());

@@ -4,6 +4,7 @@ import net.minecraft.client.multiplayer.*;
 import net.minecraft.client.resources.model.*;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.item.*;
+import pro.komaru.tridot.registry.item.types.*;
 
 import javax.annotation.*;
 import java.util.*;
@@ -31,7 +32,8 @@ public class BowItemOverrides extends CustomItemOverrides{
         if(entity == null){
             return 0.0F;
         }else{
-            return entity.getUseItem() != stack ? 0.0F : (float)(stack.getUseDuration() - entity.getUseItemRemainingTicks()) / 20.0F;
+            float time = stack.getItem() instanceof ConfigurableBowItem bow ? bow.time : 20.0F;
+            return entity.getUseItem() != stack ? 0.0F : (float)(stack.getUseDuration() - entity.getUseItemRemainingTicks()) / time;
         }
     }
 
