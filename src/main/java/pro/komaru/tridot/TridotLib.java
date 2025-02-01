@@ -2,6 +2,7 @@ package pro.komaru.tridot;
 
 import net.minecraft.world.item.*;
 import net.minecraftforge.api.distmarker.*;
+import net.minecraftforge.fml.config.ModConfig.*;
 import net.minecraftforge.registries.*;
 import pro.komaru.tridot.client.*;
 import pro.komaru.tridot.core.config.*;
@@ -51,7 +52,8 @@ public class TridotLib{
             };
         });
 
-        ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, ClientConfig.SPEC);
+        ModLoadingContext.get().registerConfig(Type.SERVER, ServerConfig.SPEC);
+        ModLoadingContext.get().registerConfig(Type.CLIENT, ClientConfig.SPEC);
         eventBus.addListener(this::setup);
         eventBus.addListener(TridotLibClient::clientSetup);
 
