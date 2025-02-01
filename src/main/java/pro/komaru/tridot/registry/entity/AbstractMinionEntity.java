@@ -135,4 +135,30 @@ public abstract class AbstractMinionEntity extends Monster implements TraceableE
         this.hasLimitedLife = true;
         this.limitedLifeTicks = pLimitedLifeTicks;
     }
+
+    public class CopyOwnerTargetGoal extends TargetGoal{
+        private final TargetingConditions copyOwnerTargeting = TargetingConditions.forNonCombat().ignoreLineOfSight().ignoreInvisibilityTesting();
+
+        public CopyOwnerTargetGoal(PathfinderMob pMob){
+            super(pMob, false);
+        }
+
+        private LivingEntity getOwnerTarget(){
+            LivingEntity lastHurt = AbstractMinionEntity.this.owner.getLastHurtByMob();
+            if(lastHurt != null){
+                return lastHurt;
+            }
+
+            return AbstractMinionEntity.this.owner.getLastHurtMob();
+        }
+
+        public boolean canUse(){
+            return AbstractMinionEntity.this.owner != null && getOwnerTarget() != null && this.canAttack(getOwnerTarget(), this.copyOwnerTargeting);
+        }
+
+        public void start(){
+            AbstractMinionEntity.this.setTarget(getOwnerTarget());
+            super.start();
+        }
+    }
 }
