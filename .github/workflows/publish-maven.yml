@@ -30,7 +30,7 @@ jobs:
           shouldPublish=$(grep '^shouldPublish=' gradle.properties | cut -d'=' -f2)
           echo "shouldPublish=${shouldPublish}" >> $GITHUB_ENV
       - name: Increment version
-        if: ${{ env.shouldPublish == 'true' && github.repository == 'IriDark/Valoria' }}
+        if: ${{ env.shouldPublish == 'true' && github.repository == 'KomaruPRO/Tridot' }}
         run: |
           # Read the current version
           current_version=$(grep '^version=' gradle.properties | cut -d'=' -f2)
