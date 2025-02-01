@@ -3,12 +3,10 @@
 # Features:
 - Shaders support  
 - Percentage Armor, easy and with no any LIMITS (You can ignore up to 100% damage)
-- Unique weapon's used in Valoria and OmegaRPG such as Scythe's and Katana's
 - Flexible weapon and armor building system
 - Flexible particle and rendering system  
 - Items particles and animations  
 - Screenshake  
-- Custom panoramas  
 - Attribute name modifiers  
 - Music modifiers
   - Biome Music Modifier
