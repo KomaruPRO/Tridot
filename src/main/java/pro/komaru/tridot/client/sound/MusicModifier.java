@@ -9,8 +9,6 @@ import net.minecraft.tags.*;
 import net.minecraft.world.entity.player.*;
 import net.minecraft.world.level.biome.*;
 import net.minecraft.world.level.levelgen.structure.*;
-import pro.komaru.tridot.client.graphics.gui.screen.TridotModsHandler;
-import pro.komaru.tridot.client.graphics.gui.screen.TridotPanorama;
 
 public class MusicModifier{
 
@@ -20,10 +18,6 @@ public class MusicModifier{
 
     public Music play(Music defaultMusic, Minecraft minecraft){
         return null;
-    }
-
-    public boolean isMenu(Music defaultMusic, Minecraft minecraft){
-        return false;
     }
 
     public boolean isBiome(Biome biome, Minecraft minecraft){
@@ -55,32 +49,6 @@ public class MusicModifier{
             var structure = serverLevel.structureManager().getStructureWithPieceAt(
             player.blockPosition(), structureKey);
             return structure.getStructure() != null && structure.getBoundingBox().isInside(player.getBlockX(), player.getBlockY(), player.getBlockZ());
-        }
-    }
-
-    public static class Panorama extends MusicModifier{
-        public Music music;
-        public TridotPanorama panorama;
-
-        public Panorama(Music music, TridotPanorama panorama){
-            this.music = music;
-            this.panorama = panorama;
-        }
-
-        @Override
-        public boolean isCanPlay(Music defaultMusic, Minecraft minecraft){
-            TridotPanorama panorama = TridotModsHandler.getPanorama();
-            return panorama != null && panorama == this.panorama;
-        }
-
-        @Override
-        public Music play(Music defaultMusic, Minecraft minecraft){
-            return music;
-        }
-
-        @Override
-        public boolean isMenu(Music defaultMusic, Minecraft minecraft){
-            return true;
         }
     }
 }

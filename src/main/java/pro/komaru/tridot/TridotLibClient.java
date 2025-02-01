@@ -1,24 +1,19 @@
 package pro.komaru.tridot;
 
-import net.minecraftforge.common.*;
-import pro.komaru.tridot.client.event.*;
-import net.minecraft.network.chat.Component;
-import net.minecraft.resources.*;
 import net.minecraft.world.entity.ai.attributes.*;
 import net.minecraft.world.entity.player.*;
 import net.minecraft.world.item.*;
 import net.minecraftforge.api.distmarker.*;
-import net.minecraftforge.eventbus.api.*;
+import net.minecraftforge.common.*;
 import net.minecraftforge.fml.common.*;
+import pro.komaru.tridot.client.event.*;
+import net.minecraft.resources.*;
+import net.minecraftforge.eventbus.api.*;
 import net.minecraftforge.fml.event.lifecycle.*;
-import pro.komaru.tridot.client.graphics.gui.screen.TridotMod;
-import pro.komaru.tridot.client.graphics.gui.screen.TridotModsHandler;
-import pro.komaru.tridot.client.graphics.gui.screen.TridotPanorama;
+import pro.komaru.tridot.client.graphics.tooltip.*;
 import pro.komaru.tridot.client.sound.LoopedSoundInstance;
 import pro.komaru.tridot.client.sound.TridotSoundInstance;
 import pro.komaru.tridot.client.graphics.gui.splash.SplashHandler;
-import pro.komaru.tridot.client.graphics.tooltip.AttributeTooltipModifier;
-import pro.komaru.tridot.client.graphics.tooltip.TooltipModifierHandler;
 import pro.komaru.tridot.integration.client.ShadersIntegration;
 
 import java.awt.*;
@@ -32,7 +27,6 @@ public class TridotLibClient{
     public static final ResourceLocation VANILLA_LOC = new ResourceLocation("textures/gui/bars.png");
 
     public static void clientSetup(final FMLClientSetupEvent event){
-        setupMenu();
         setupSplashes();
         ShadersIntegration.init();
     }
@@ -40,16 +34,6 @@ public class TridotLibClient{
     public static void clientInit() {
         IEventBus forgeBus = MinecraftForge.EVENT_BUS;
         forgeBus.register(new ClientEvents());
-    }
-
-    public static TridotMod MOD_INSTANCE;
-    public static TridotPanorama VANILLA_PANORAMA;
-    public static void setupMenu(){
-        MOD_INSTANCE = new TridotMod(TridotLib.ID, TridotLib.NAME, TridotLib.VERSION).setDev("-").setItem(new ItemStack(Items.PINK_PETALS))
-        .setEdition(TridotLib.VERSION_NUMBER).setNameColor(new Color(254, 200, 207)).setVersionColor(new Color(92, 72, 90));
-
-        VANILLA_PANORAMA = new TridotPanorama("minecraft:vanilla", Component.translatable("panorama.minecraft.vanilla")).setItem(new ItemStack(Items.GRASS_BLOCK));
-        TridotModsHandler.registerPanorama(VANILLA_PANORAMA);
     }
 
     public static void setupSplashes(){
@@ -74,25 +58,7 @@ public class TridotLibClient{
         public static void registerAttributeModifiers(FMLClientSetupEvent event){
             TooltipModifierHandler.register(new AttributeTooltipModifier(){
                 public boolean isToolBase(AttributeModifier modifier, Player player, TooltipFlag flag){
-                    return modifier.getId().equals(BASE_ENTITY_REACH_UUID);
-                }
-            });
-
-            TooltipModifierHandler.register(new AttributeTooltipModifier(){
-                public boolean isToolBase(AttributeModifier modifier, Player player, TooltipFlag flag){
                     return modifier.getId().equals(BASE_PROJECTILE_DAMAGE_UUID);
-                }
-            });
-
-            TooltipModifierHandler.register(new AttributeTooltipModifier(){
-                public boolean isToolBase(AttributeModifier modifier, Player player, TooltipFlag flag){
-                    return modifier.getId().equals(BASE_DASH_DISTANCE_UUID);
-                }
-            });
-
-            TooltipModifierHandler.register(new AttributeTooltipModifier(){
-                public boolean isToolBase(AttributeModifier modifier, Player player, TooltipFlag flag){
-                    return modifier.getId().equals(BASE_ATTACK_RADIUS_UUID);
                 }
             });
         }

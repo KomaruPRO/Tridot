@@ -28,9 +28,7 @@ import java.util.*;
 @Mod("tridot")
 public class TridotLib{
     public static final String ID = "tridot";
-    public static final String NAME = "Tridot";
-    public static final String VERSION = "0.0.1";
-    public static final int VERSION_NUMBER = 7;
+    public static UUID BASE_PROJECTILE_DAMAGE_UUID = UUID.fromString("5334b818-69d4-417e-b4b8-1869d4917e29");
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, ID);
     public static final RegistryObject<Item> TEST = ITEMS.register("test", () -> new TestItem(new Item.Properties().rarity(Rarity.EPIC)));
 
@@ -38,6 +36,7 @@ public class TridotLib{
     public TridotLib(){
         IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
         EnchantmentsRegistry.register(eventBus);
+        AttributeRegistry.register(eventBus);
         TridotBlocks.register(eventBus);
         TridotBlockEntities.register(eventBus);
         TridotParticles.register(eventBus);
@@ -67,7 +66,11 @@ public class TridotLib{
         }
     }
 
-//    @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
-//    public static class RegistryEvents{
-//    }
+    @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
+    public static class RegistryEvents{
+        @SubscribeEvent
+        public static void attachAttribute(EntityAttributeModificationEvent event) {
+            event.add(EntityType.PLAYER, AttributeRegistry.PROJECTILE_DAMAGE.get());
+        }
+    }
 }

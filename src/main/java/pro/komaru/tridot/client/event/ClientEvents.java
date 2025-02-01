@@ -17,39 +17,6 @@ import pro.komaru.tridot.core.config.*;
 
 public class ClientEvents{
 
-    @SubscribeEvent(priority = EventPriority.LOWEST)
-    public void onOpenScreen(ScreenEvent.Opening event){
-        panoramaScreen(event.getCurrentScreen());
-        panoramaScreen(event.getNewScreen());
-    }
-
-    @SubscribeEvent(priority = EventPriority.HIGHEST)
-    public void onOpenScreenFirst(ScreenEvent.Opening event){
-        resetPanoramaScreen(event.getCurrentScreen());
-        resetPanoramaScreen(event.getNewScreen());
-    }
-
-    public static void panoramaScreen(Screen screen){
-        if(screen instanceof TitleScreen titleScreen){
-            TridotPanorama panorama = TridotModsHandler.getPanorama(ClientConfig.PANORAMA.get());
-            if(panorama != null && !panorama.equals(TridotLibClient.VANILLA_PANORAMA)){
-                boolean setPanorama = !TitleScreen.CUBE_MAP.images[0].equals(panorama.getTexture());
-                if(setPanorama){
-                    TridotModsHandler.setOpenPanorama(titleScreen, panorama);
-                }
-            }
-        }
-    }
-
-    public static void resetPanoramaScreen(Screen screen){
-        if(screen instanceof TitleScreen titleScreen){
-            TridotPanorama panorama = TridotModsHandler.getPanorama(ClientConfig.PANORAMA.get());
-            if(panorama != null || panorama.equals(TridotLibClient.VANILLA_PANORAMA)){
-                TridotModsHandler.setOpenPanorama(titleScreen, TridotLibClient.VANILLA_PANORAMA);
-            }
-        }
-    }
-
     @SubscribeEvent
     public void clientTick(TickEvent.ClientTickEvent event){
         Minecraft minecraft = Minecraft.getInstance();

@@ -24,7 +24,6 @@
     "client.ItemInHandLayerMixin",
     "client.ItemInHandRendererMixin",
     "client.ItemStackMixin",
-    "client.MinecraftMixin",
     "client.SplashManagerMixin",
     "client.curios.CurioTooltipMixin"
   ],
