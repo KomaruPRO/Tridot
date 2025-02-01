@@ -1,8 +1,8 @@
-package pro.komaru.tridot.client.graphics.render.entity.bossbar;
+package pro.komaru.tridot.client.graphics.gui.bossbars;
 
 import net.minecraft.resources.*;
 import net.minecraftforge.api.distmarker.*;
-import pro.komaru.tridot.TridotLib;
+import pro.komaru.tridot.*;
 
 import java.awt.*;
 import java.util.*;
@@ -26,7 +26,7 @@ public class Bossbar{
     }
 
     public Bossbar(boolean rainbow){
-        this.texture = new ResourceLocation(TridotLib.ID, "textures/gui/bossbars/base.png"); //todo
+        this.texture = new ResourceLocation(TridotLib.ID, "textures/gui/bossbars/base.png");
         this.color = new Color(1, 1, 1);
         this.rainbow = rainbow;
     }

@@ -1,5 +1,6 @@
 package pro.komaru.tridot.core.net;
 
+import com.mojang.datafixers.util.*;
 import net.minecraft.core.*;
 import net.minecraft.resources.*;
 import net.minecraft.server.level.*;
@@ -7,6 +8,7 @@ import net.minecraft.world.entity.player.*;
 import net.minecraft.world.level.*;
 import net.minecraftforge.network.*;
 import net.minecraftforge.network.simple.*;
+import net.minecraftforge.server.*;
 import pro.komaru.tridot.*;
 import pro.komaru.tridot.core.net.packets.*;
 
@@ -28,22 +30,38 @@ public class PacketHandler extends AbstractPacketHandler{
     }
 
     public static void sendTo(ServerPlayer playerMP, Object toSend){
-        sendTo(getHandler(), playerMP, toSend);
+        HANDLER.sendTo(toSend, playerMP.connection.connection, NetworkDirection.PLAY_TO_CLIENT);
+    }
+
+    public static void sendToAll(Object message){
+        for(ServerPlayer player : ServerLifecycleHooks.getCurrentServer().getPlayerList().getPlayers()){
+            sendNonLocal(message, player);
+        }
+    }
+
+    public static void sendNonLocal(Object msg, ServerPlayer player){
+        HANDLER.sendTo(msg, player.connection.connection, NetworkDirection.PLAY_TO_CLIENT);
     }
 
     public static void sendNonLocal(ServerPlayer playerMP, Object toSend){
-        sendNonLocal(getHandler(), playerMP, toSend);
+        if(playerMP.server.isDedicatedServer() || !playerMP.getGameProfile().getName().equals(playerMP.server.getLocalIp())){
+            sendTo(playerMP, toSend);
+        }
     }
 
-    public static void sendToTracking(Level level, BlockPos pos, Object msg){
-        sendToTracking(getHandler(), level, pos, msg);
+    public static void sendToTracking(Level world, BlockPos pos, Object msg){
+        HANDLER.send(TRACKING_CHUNK_AND_NEAR.with(() -> Pair.of(world, pos)), msg);
     }
 
     public static void sendTo(Player entity, Object msg){
-        sendTo(getHandler(), entity, msg);
+        HANDLER.send(PacketDistributor.PLAYER.with(() -> (ServerPlayer)entity), msg);
+    }
+
+    public static void sendEntity(Player entity, Object msg){
+        HANDLER.send(PacketDistributor.TRACKING_ENTITY_AND_SELF.with(() -> entity), msg);
     }
 
     public static void sendToServer(Object msg){
-        sendToServer(getHandler(), msg);
+        HANDLER.sendToServer(msg);
     }
 }
