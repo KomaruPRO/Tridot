@@ -91,7 +91,7 @@ task modrinthUpload {
 group = mod_group_id
 version = "${version}"
 base{
-    archivesName = mod_id
+    archivesName = "tridot"
 }
 
 
