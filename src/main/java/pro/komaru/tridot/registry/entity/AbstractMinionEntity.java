@@ -136,7 +136,7 @@ public abstract class AbstractMinionEntity extends Monster implements TraceableE
         this.limitedLifeTicks = pLimitedLifeTicks;
     }
 
-    class CopyOwnerTargetGoal extends TargetGoal{
+    public class CopyOwnerTargetGoal extends TargetGoal{
         private final TargetingConditions copyOwnerTargeting = TargetingConditions.forNonCombat().ignoreLineOfSight().ignoreInvisibilityTesting();
 
         public CopyOwnerTargetGoal(PathfinderMob pMob){
