@@ -22,6 +22,7 @@ import net.minecraftforge.fml.config.*;
 import net.minecraftforge.fml.event.lifecycle.*;
 import net.minecraftforge.fml.javafmlmod.*;
 import pro.komaru.tridot.registry.item.types.*;
+import pro.komaru.tridot.registry.loot.conditions.*;
 
 import java.util.*;
 
@@ -61,6 +62,7 @@ public class TridotLib{
     private void setup(final FMLCommonSetupEvent event){
         TridotBlocks.setFireBlock();
         PacketHandler.init();
+        LootConditionsRegistry.register();
         for(ItemSkin skin : ItemSkinHandler.getSkins()){
             skin.setupSkinEntries();
         }
