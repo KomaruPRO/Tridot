@@ -22,6 +22,15 @@ public abstract class AbstractBoss extends MultiAttackMob implements Enemy, Boss
         super(pEntityType, pLevel);
     }
 
+    @Override
+    public void tick(){
+        super.tick();
+        checkPhaseTransition();
+    }
+
+    /**
+     * Both sided
+     */
     public abstract void checkPhaseTransition();
 
     @Override
@@ -45,14 +54,10 @@ public abstract class AbstractBoss extends MultiAttackMob implements Enemy, Boss
 
     @Override
     public boolean hurt(DamageSource source, float amount){
-        if(source.getDirectEntity() instanceof Allied) return false;
+        if(source.getEntity() instanceof Allied) return false;
         if(source.getDirectEntity() instanceof Player player){
             UUID playerUUID = player.getUUID();
             getDamageMap().put(playerUUID, getDamageMap().getOrDefault(playerUUID, 0.0f) + amount);
-        }
-
-        if (!this.level().isClientSide) {
-            checkPhaseTransition();
         }
 
         return super.hurt(source, amount);

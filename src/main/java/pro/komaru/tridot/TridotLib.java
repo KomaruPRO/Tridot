@@ -31,17 +31,12 @@ public class TridotLib{
     public static final String NAME = "Tridot";
     public static final String VERSION = "0.0.1";
     public static final int VERSION_NUMBER = 7;
-    public static UUID BASE_ENTITY_REACH_UUID = UUID.fromString("c2e6b27c-fff1-4296-a6b2-7cfff13296cf");
-    public static UUID BASE_PROJECTILE_DAMAGE_UUID = UUID.fromString("5334b818-69d4-417e-b4b8-1869d4917e29");
-    public static UUID BASE_DASH_DISTANCE_UUID = UUID.fromString("b0e5853a-d071-40db-a585-3ad07100db82");
-    public static UUID BASE_ATTACK_RADIUS_UUID = UUID.fromString("49438567-6ad2-41bd-8385-676ad2a1bd5e");
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, ID);
     public static final RegistryObject<Item> TEST = ITEMS.register("test", () -> new TestItem(new Item.Properties().rarity(Rarity.EPIC)));
 
     public static final ISidedProxy proxy = DistExecutor.unsafeRunForDist(() -> ClientProxy::new, () -> ServerProxy::new);
     public TridotLib(){
         IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
-        AttributeRegistry.register(eventBus);
         EnchantmentsRegistry.register(eventBus);
         TridotBlocks.register(eventBus);
         TridotBlockEntities.register(eventBus);
@@ -72,13 +67,7 @@ public class TridotLib{
         }
     }
 
-    @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
-    public static class RegistryEvents{
-        @SubscribeEvent
-        public static void attachAttribute(EntityAttributeModificationEvent event) {
-            event.add(EntityType.PLAYER, AttributeRegistry.DASH_DISTANCE.get());
-            event.add(EntityType.PLAYER, AttributeRegistry.ATTACK_RADIUS.get());
-            event.add(EntityType.PLAYER, AttributeRegistry.PROJECTILE_DAMAGE.get());
-        }
-    }
+//    @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
+//    public static class RegistryEvents{
+//    }
 }
