@@ -10,7 +10,7 @@ public class LootConditionsRegistry{
     public static final LootItemConditionType LOCAL_DATE_CONDITION = new LootItemConditionType(new LocalDateCondition.Serializer());
 
     public static void register(){
-        Registry.register(BuiltInRegistries.LOOT_CONDITION_TYPE, new ResourceLocation("valoria", "local_date"), LOCAL_DATE_CONDITION);
-        Registry.register(BuiltInRegistries.LOOT_CONDITION_TYPE, new ResourceLocation("valoria", "mob_category"), MOB_CATEGORY_CONDITION);
+        Registry.register(BuiltInRegistries.LOOT_CONDITION_TYPE, new ResourceLocation("tridot", "local_date"), LOCAL_DATE_CONDITION);
+        Registry.register(BuiltInRegistries.LOOT_CONDITION_TYPE, new ResourceLocation("tridot", "mob_category"), MOB_CATEGORY_CONDITION);
     }
 }

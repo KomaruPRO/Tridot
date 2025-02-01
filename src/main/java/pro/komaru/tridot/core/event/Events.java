@@ -1,21 +1,27 @@
 package pro.komaru.tridot.core.event;
 
 import com.mojang.blaze3d.systems.*;
+import com.mojang.blaze3d.vertex.*;
 import net.minecraft.*;
 import net.minecraft.client.*;
 import net.minecraft.client.gui.*;
 import net.minecraft.client.gui.components.*;
 import net.minecraft.client.gui.screens.*;
+import net.minecraft.client.renderer.*;
+import net.minecraft.client.resources.language.*;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.*;
 import net.minecraft.tags.*;
+import net.minecraft.util.*;
 import net.minecraft.world.*;
 import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.ai.attributes.*;
 import net.minecraft.world.entity.player.*;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.block.state.*;
 import net.minecraftforge.api.distmarker.*;
 import net.minecraftforge.client.event.*;
+import net.minecraftforge.client.gui.overlay.*;
 import net.minecraftforge.event.entity.living.*;
 import net.minecraftforge.event.entity.player.*;
 import net.minecraftforge.eventbus.api.*;
@@ -26,6 +32,7 @@ import pro.komaru.tridot.core.config.*;
 import pro.komaru.tridot.core.mixin.client.BossHealthOverlayAccessor;
 import pro.komaru.tridot.core.proxy.*;
 import pro.komaru.tridot.registry.*;
+import pro.komaru.tridot.registry.item.*;
 import pro.komaru.tridot.utilities.Utils;
 
 import java.awt.*;
@@ -33,6 +40,7 @@ import java.util.*;
 import java.util.stream.*;
 
 public class Events{
+    protected static final ResourceLocation GUI_ICONS_LOCATION = new ResourceLocation("textures/gui/icons.png");
 
     @SubscribeEvent
     public void disableBlock(ShieldBlockEvent event){
@@ -73,6 +81,68 @@ public class Events{
                     e.getToolTip().add(Component.literal("Press [Control] to get tags info").withStyle(ChatFormatting.GRAY));
                 }
             }
+        }
+    }
+
+    // may be improved, not accurate
+    public static double calculateDamageReductionPercent(double defensePoints){
+        return Mth.clamp(defensePoints / 2, 0, 20) / 25 * 0.4;
+    }
+
+    @SubscribeEvent(priority = EventPriority.HIGHEST)
+    @OnlyIn(Dist.CLIENT)
+    public void onOverlayRender(RenderGuiOverlayEvent.Pre ev){
+        if(ev.isCanceled()) return;
+        Minecraft minecraft = Minecraft.getInstance();
+        GuiGraphics gui = ev.getGuiGraphics();
+        PoseStack ms = gui.pose();
+        if(minecraft.options.hideGui) return;
+        int width = minecraft.getWindow().getGuiScaledWidth();
+        int height = minecraft.getWindow().getGuiScaledHeight();
+        double armor = 0;
+        for(ItemStack armorPiece : minecraft.player.getArmorSlots()){
+            if(armorPiece.getItem() instanceof PercentageArmorItem percent){
+                int percentDefense = percent.getDefense();
+                armor += percentDefense;
+            }
+        }
+
+        if(armor > 0 && ev.getOverlay() == VanillaGuiOverlay.ARMOR_LEVEL.type() && ServerConfig.PERCENT_ARMOR.get() && new ForgeGui(minecraft).shouldDrawSurvivalElements()){
+            armor += calculateDamageReductionPercent(minecraft.player.getAttributeValue(Attributes.ARMOR));
+            ms.pushPose();
+            RenderSystem.enableBlend();
+            RenderSystem.defaultBlendFunc();
+            RenderSystem.disableDepthTest();
+            RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
+            RenderSystem.setShader(GameRenderer::getPositionTexShader);
+            int left = width / 2 + 60;
+            int top = height - 49;
+
+            RenderSystem.disableBlend();
+            String component = I18n.get("tooltip.tridot.value", Math.round(armor) + "%");
+            gui.blit(GUI_ICONS_LOCATION, left, top - 2, 34, 9, 9, 9);
+            gui.drawString(minecraft.font, component, left + 12, top - 1, Color.WHITE.getRGB());
+            ms.popPose();
+            ev.setCanceled(true);
+        }
+    }
+
+    @SubscribeEvent
+    public void onLivingHurt(LivingHurtEvent event){
+        float incomingDamage = event.getAmount();
+        float totalMultiplier;
+        if(ServerConfig.PERCENT_ARMOR.get()){
+            float armor = 0f;
+            for(ItemStack armorPiece : event.getEntity().getArmorSlots()){
+                if(armorPiece.getItem() instanceof PercentageArmorItem percent){
+                    float percentDefense = percent.getPercentDefense();
+                    armor += percentDefense;
+                }
+            }
+
+            totalMultiplier = Math.max(Math.min(1 - (armor), 1), 0);
+            float reducedDamage = incomingDamage * totalMultiplier;
+            event.setAmount(reducedDamage);
         }
     }
 
