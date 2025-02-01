@@ -1,5 +1,14 @@
 {
   "tooltip.tridot.total_armor": "Total Armor Percentage %s",
-  "tooltip.tridot.value": "%s"
-
+  "tooltip.tridot.value": "%s",
+  "lore.tridot.skin": "Skin:",
+  "enchantment.tridot.radius": "Radius",
+  "enchantment.tridot.radius.desc": "Increases radius for radius attack abilities",
+  "enchantment.tridot.dash": "Dash",
+  "enchantment.tridot.dash.desc": "Increases dash distance for katanas, allows other weapons to perform dash",
+  "enchantment.tridot.overdrive": "Overdrive",
+  "enchantment.tridot.overdrive.desc": "Cooldown reduction",
+  "attribute.tridot.projectile_damage": "Projectile Damage",
+  "tooltip.tridot.applies_with_chance": "Applies with chance: %s",
+  "tooltip.tridot.applies": "Applies: "
 }

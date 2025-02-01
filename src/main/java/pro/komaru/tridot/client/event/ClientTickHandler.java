@@ -2,6 +2,8 @@ package pro.komaru.tridot.client.event;
 
 import net.minecraft.client.*;
 import net.minecraftforge.event.*;
+import pro.komaru.tridot.core.event.*;
+import pro.komaru.tridot.utilities.*;
 
 public class ClientTickHandler{
 
@@ -16,11 +18,16 @@ public class ClientTickHandler{
         partialTicks = event.renderTickTime;
     }
 
-    public static void clientTick(TickEvent.ClientTickEvent event){
+    public static void clientTickEnd(TickEvent.ClientTickEvent event){
         if(event.phase == TickEvent.Phase.END){
             if(!Minecraft.getInstance().isPaused()){
                 ticksInGame++;
                 partialTicks = 0;
+            }
+
+            if(!Minecraft.getInstance().hasSingleplayerServer()){
+                ServerTickHandler.tick++;
+                Utils.Schedule.handleSyncScheduledTasks(ServerTickHandler.tick);
             }
         }
     }

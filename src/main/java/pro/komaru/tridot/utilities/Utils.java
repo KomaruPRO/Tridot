@@ -739,7 +739,7 @@ public class Utils {
          */
         public static ItemStack getProjectile(Player player, ItemStack shootable, TagKey<Item> tag) {
             Boolf<ItemStack> predicate = (stack) -> stack.is(tag);
-            return getProjectile(player, shootable, predicate);
+                return getProjectile(player, shootable, predicate);
         }
 
         /**

@@ -20,7 +20,7 @@ public class ClientEvents{
     @SubscribeEvent
     public void clientTick(TickEvent.ClientTickEvent event){
         Minecraft minecraft = Minecraft.getInstance();
-        ClientTickHandler.clientTick(event);
+        ClientTickHandler.clientTickEnd(event);
         if(event.phase == TickEvent.Phase.END){
             if(minecraft.isPaused()) return;
             Camera camera = Minecraft.getInstance().gameRenderer.getMainCamera();

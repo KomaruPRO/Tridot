@@ -1,5 +1,14 @@
 {
   "tooltip.tridot.total_armor": "Общий процент защиты %s",
-  "tooltip.tridot.value": "%s"
-
+  "tooltip.tridot.value": "%s",
+  "lore.tridot.skin": "Облик:",
+  "enchantment.tridot.radius": "Радиус",
+  "enchantment.tridot.radius.desc": "Увеличивает радиус круговых атак",
+  "enchantment.tridot.dash": "Рывок",
+  "enchantment.tridot.dash.desc": "Увеличивает радиус рывка",
+  "enchantment.tridot.overdrive": "Перегрев",
+  "enchantment.tridot.overdrive.desc": "Уменьшает время отката",
+  "attribute.tridot.projectile_damage": "урон от снаряда",
+  "tooltip.tridot.applies": "Накладывает: ",
+  "tooltip.tridot.applies_with_chance": "Применяется с шансом: %s"
 }

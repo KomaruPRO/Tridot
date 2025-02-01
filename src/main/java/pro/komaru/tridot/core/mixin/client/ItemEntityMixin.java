@@ -16,8 +16,8 @@ public abstract class ItemEntityMixin{
         ItemEntity self = (ItemEntity)((Object)this);
         if(self.level().isClientSide()){
             if(ClientConfig.ITEM_PARTICLE.get()){
-                if(self.getItem().getItem() instanceof IParticleItem item){
-                    item.addParticles(TridotLib.proxy.getLevel(), self);
+                if(self.getItem().getItem() instanceof ParticleItemEntity item){
+                    item.spawnParticles(TridotLib.proxy.getLevel(), self);
                 }
             }
         }

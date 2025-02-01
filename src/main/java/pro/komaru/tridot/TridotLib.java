@@ -5,6 +5,7 @@ import net.minecraftforge.api.distmarker.*;
 import net.minecraftforge.fml.config.ModConfig.*;
 import net.minecraftforge.registries.*;
 import pro.komaru.tridot.client.*;
+import pro.komaru.tridot.client.event.*;
 import pro.komaru.tridot.core.config.*;
 import pro.komaru.tridot.core.event.*;
 import pro.komaru.tridot.core.net.*;
@@ -45,11 +46,11 @@ public class TridotLib{
         TridotLootModifier.register(eventBus);
         ITEMS.register(eventBus);
 
-        DistExecutor.unsafeCallWhenOn(Dist.CLIENT, () -> {
-            return () -> {
-                TridotLibClient.clientInit();
-                return new Object();
-            };
+        IEventBus forgeBus = MinecraftForge.EVENT_BUS;
+        DistExecutor.unsafeCallWhenOn(Dist.CLIENT, () -> () -> {
+            forgeBus.addListener(ClientTickHandler::clientTickEnd);
+            TridotLibClient.clientInit();
+            return new Object();
         });
 
         ModLoadingContext.get().registerConfig(Type.SERVER, ServerConfig.SPEC);
