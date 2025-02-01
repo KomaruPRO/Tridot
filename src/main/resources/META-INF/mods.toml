@@ -1,22 +1,22 @@
 modLoader = "javafml"
-loaderVersion = "${loader_version_range}"
-license = "${mod_license}"
+loaderVersion = "[36,)"
+license = "$GPL-2.0 license"
 [[mods]]
-modId = "${mod_id}"
+modId = "tridot"
 version = "${file.jarVersion}"
-displayName = "${mod_name}"
-authors = "${mod_authors}"
+displayName = "Tridot"
+authors = "IriDark, Auriny, Skoow"
 
-description = '''${mod_description}'''
-[[dependencies."${mod_id}"]]
+description = '''API mod for Komaru org'''
+[[dependencies.tridot]]
 modId = "forge"
 mandatory = true
-versionRange = "${forge_version_range}"
+versionRange = "[47,)"
 ordering = "NONE"
 side = "BOTH"
-[[dependencies."${mod_id}"]]
+[[dependencies.tridot]]
 modId = "minecraft"
 mandatory = true
-versionRange = "${minecraft_version_range}"
+versionRange = "[1.20.1,1.21)"
 ordering = "NONE"
 side = "BOTH"
