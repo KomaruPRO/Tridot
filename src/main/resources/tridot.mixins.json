@@ -14,7 +14,7 @@
     "common.TntBlockMixin"
   ],
   "client": [
-    "client.SplashManagerMixin",
+    "client.BossHealthOverlayAccessor",
     "client.CameraMixin",
     "client.EffectProgramMixin",
     "client.GameRendererMixin",
