@@ -15,7 +15,9 @@ public class ClientConfig{
             SCREENSHAKE_INTENSITY = builder.comment("Intensity of screenshake.").defineInRange("screenshakeIntensity", 1d, 0, 10d);
             ABILITY_OVERLAY = builder.comment("When enabled shows the overlay after using a weapon ability (Default: true)").comment("Reload Resourcepacks after turning this on (F3+T)").define("DashOverlay", true);
             CUSTOM_BOSSBARS = builder.comment("Custom bossbars").define("CustomBossbars", true);
-            builder.comment("Particles").push("particles");
+            BOSSBAR_TITLE = builder.comment("Bossbar boss titles").define("BossbarTitles", true);
+
+        builder.comment("Particles").push("particles");
                 ITEM_PARTICLE = builder.comment("Enable dropping items particles.").define("itemParticle", true);
                 ITEM_GUI_PARTICLE = builder.comment("Enable items particles in GUI.").define("itemGuiParticle", true);
             builder.pop();
