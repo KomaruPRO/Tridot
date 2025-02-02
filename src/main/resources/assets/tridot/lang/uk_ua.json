@@ -10,5 +10,7 @@
   "enchantment.tridot.overdrive.desc": "Зменшує час перезарядки",
   "attribute.tridot.projectile_damage": "шкода від снаряду",
   "tooltip.tridot.applies": "Накладає: ",
-  "tooltip.tridot.applies_with_chance": "Застосовується з шансом: %s"
+  "tooltip.tridot.applies_with_chance": "Застосовується з шансом: %s",
+  "tooltip.tridot.special_arrow": "Перетворює звичайну стрілу в ",
+  "tooltip.tridot.bow_damage": "Шкоди при повній натяжці %s+, використовуючи звичайну стрілу"
 }

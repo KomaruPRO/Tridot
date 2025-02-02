@@ -1,5 +1,7 @@
 package pro.komaru.tridot.registry.item.types;
 
+import net.minecraft.*;
+import net.minecraft.network.chat.*;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
@@ -16,7 +18,11 @@ import net.minecraftforge.event.ForgeEventFactory;
 import org.jetbrains.annotations.NotNull;
 import pro.komaru.tridot.registry.entity.projectiles.*;
 
+import javax.annotation.*;
+import java.util.*;
 import java.util.function.Supplier;
+
+import static pro.komaru.tridot.utilities.Utils.Items.addContributorTooltip;
 
 public class ConfigurableBowItem extends BowItem{
     public double baseDamage;
@@ -140,5 +146,25 @@ public class ConfigurableBowItem extends BowItem{
                 }
             }
         }
+    }
+
+    private double calculateAverageDamage(ItemStack pStack){
+        double baseArrowDamage = this.baseDamage + 2;
+        int powerLevel = EnchantmentHelper.getTagEnchantmentLevel(Enchantments.POWER_ARROWS, pStack);
+        double powerBonus = powerLevel > 0 ? (powerLevel * 0.5D + 0.5D) : 0.0D;
+        return (baseArrowDamage + powerBonus) * (2 * 2.0F) - 2;
+    }
+
+    @Override
+    public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> pTooltipComponents, TooltipFlag pIsAdvanced){
+        super.appendHoverText(pStack, pLevel, pTooltipComponents, pIsAdvanced);
+        addContributorTooltip(pStack, pTooltipComponents);
+        double damage = calculateAverageDamage(pStack);
+        if(arrow.get() != EntityType.ARROW){
+            pTooltipComponents.add(Component.translatable("tooltip.tridot.special_arrow").withStyle(ChatFormatting.GRAY)
+            .append(Component.literal(getDefaultType().getDescription().getString()).withStyle(pStack.getRarity().getStyleModifier())));
+        }
+
+        pTooltipComponents.add(Component.translatable("tooltip.tridot.bow_damage", damage).withStyle(ChatFormatting.GRAY));
     }
 }
