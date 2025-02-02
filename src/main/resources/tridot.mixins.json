@@ -3,7 +3,7 @@
   "minVersion": "0.8",
   "package": "pro.komaru.tridot.core.mixin",
   "compatibilityLevel": "JAVA_8",
-  "refmap": "komaru.refmap.json",
+  "refmap": "tridot.refmap.json",
   "mixins": [
     "common.BlockItemMixin",
     "common.BlocksMixin",
