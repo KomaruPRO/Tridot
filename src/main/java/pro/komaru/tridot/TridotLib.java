@@ -6,8 +6,10 @@ import net.minecraftforge.fml.config.ModConfig.*;
 import net.minecraftforge.registries.*;
 import pro.komaru.tridot.client.*;
 import pro.komaru.tridot.client.event.*;
+import pro.komaru.tridot.client.graphics.gui.*;
 import pro.komaru.tridot.core.config.*;
 import pro.komaru.tridot.core.event.*;
+import pro.komaru.tridot.core.interfaces.*;
 import pro.komaru.tridot.core.net.*;
 import pro.komaru.tridot.core.proxy.*;
 import pro.komaru.tridot.registry.*;
@@ -48,6 +50,9 @@ public class TridotLib{
 
         IEventBus forgeBus = MinecraftForge.EVENT_BUS;
         DistExecutor.unsafeCallWhenOn(Dist.CLIENT, () -> () -> {
+            forgeBus.addListener(OverlayRender::tick);
+            forgeBus.addListener(OverlayRender::onDrawScreenPost);
+            forgeBus.addListener(OverlayRenderItem::onDrawScreenPost);
             forgeBus.addListener(ClientTickHandler::clientTickEnd);
             TridotLibClient.clientInit();
             return new Object();
