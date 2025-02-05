@@ -24,11 +24,19 @@ jobs:
         uses: gradle/actions/setup-gradle@417ae3ccd767c252f5661f1ace9f835f9654f2b5 # v3.1.0
       - name: Change wrapper permissions
         run: chmod +x ./gradlew
+
+      - name: Build Mod
+        run: ./gradlew build --stacktrace
+
       - name: Read shouldPublish property
         id: read_properties
         run: |
           shouldPublish=$(grep '^shouldPublish=' gradle.properties | cut -d'=' -f2)
           echo "shouldPublish=${shouldPublish}" >> $GITHUB_ENV
+      - name: Set first release tag
+        run: |
+          current_version=$(grep '^version=' gradle.properties | cut -d'=' -f2)
+          echo "TAG_NAME=$(current_version)" >> $GITHUB_ENV
       - name: Increment version
         if: ${{ env.shouldPublish == 'true' && github.repository == 'KomaruPRO/Tridot' }}
         run: |
@@ -51,9 +59,12 @@ jobs:
           new_version="$base_version-$new_last_version"
           echo "New version: $new_version"
           
+          echo "TAG_NAME=$(new_version)" >> $GITHUB_ENV
+          
           # Update the version line in gradle.properties
           sed -i "s/^version=.*/version=$new_version/" gradle.properties
           cat gradle.properties
+
       - name: Commit and Push Version Change
         if: ${{ env.shouldPublish == 'true' && github.repository == 'KomaruPRO/Tridot' }}
         run: |
@@ -62,6 +73,15 @@ jobs:
           git add gradle.properties
           git commit -m "Increment version to $new_version"
           git push
+
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: Tridot
+          path: |
+            ./build/libs/*.jar
+            ./libs/*.jar
+
       - name: Publish Maven Version
         env:
           maventoken: ${{ secrets.MAVEN_PASSWORD }}
@@ -69,3 +89,13 @@ jobs:
         run: |
           ./gradlew clean
           ./gradlew publish
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ env.TAG_NAME }}
+          name: "Release ${{ env.TAG_NAME }}"
+          body: "Automatic release"
+          files: ./build/libs/*.jar
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
