@@ -26,7 +26,9 @@ jobs:
         run: chmod +x ./gradlew
 
       - name: Build Mod
-        run: ./gradlew build --stacktrace
+        run: |
+          ./gradlew clean
+          ./gradlew build --stacktrace
 
       - name: Read shouldPublish property
         id: read_properties
@@ -87,15 +89,15 @@ jobs:
           maventoken: ${{ secrets.MAVEN_PASSWORD }}
         if: ${{ env.shouldPublish == 'true' && github.repository == 'KomaruPRO/Tridot' }}
         run: |
-          ./gradlew clean
           ./gradlew publish
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
         with:
           tag_name: ${{ env.TAG_NAME }}
-          name: "Release ${{ env.TAG_NAME }}"
-          body: "Automatic release"
+          name: "Auto Release ${{ env.TAG_NAME }}"
+          body: "Commit: ${{ env.COMMIT_MESSAGE }}"
           files: ./build/libs/*.jar
+          generate_release_notes: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
