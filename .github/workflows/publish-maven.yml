@@ -36,7 +36,7 @@ jobs:
       - name: Set first release tag
         run: |
           current_version=$(grep '^version=' gradle.properties | cut -d'=' -f2)
-          echo "TAG_NAME=$(current_version)" >> $GITHUB_ENV
+          echo "TAG_NAME=${current_version}" >> $GITHUB_ENV
       - name: Increment version
         if: ${{ env.shouldPublish == 'true' && github.repository == 'KomaruPRO/Tridot' }}
         run: |
@@ -59,7 +59,7 @@ jobs:
           new_version="$base_version-$new_last_version"
           echo "New version: $new_version"
           
-          echo "TAG_NAME=$(new_version)" >> $GITHUB_ENV
+          echo "TAG_NAME=${new_version}" >> $GITHUB_ENV
           
           # Update the version line in gradle.properties
           sed -i "s/^version=.*/version=$new_version/" gradle.properties
