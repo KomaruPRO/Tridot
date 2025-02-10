@@ -25,11 +25,6 @@ jobs:
       - name: Change wrapper permissions
         run: chmod +x ./gradlew
 
-      - name: Build Mod
-        run: |
-          ./gradlew clean
-          ./gradlew build --stacktrace
-
       - name: Read shouldPublish property
         id: read_properties
         run: |
@@ -39,6 +34,10 @@ jobs:
         run: |
           current_version=$(grep '^version=' gradle.properties | cut -d'=' -f2)
           echo "TAG_NAME=${current_version}" >> $GITHUB_ENV
+      - name: Build Mod
+        run: |
+          ./gradlew clean
+          ./gradlew build --stacktrace
       - name: Increment version
         if: ${{ env.shouldPublish == 'true' && github.repository == 'KomaruPRO/Tridot' }}
         run: |
