@@ -92,6 +92,7 @@ jobs:
           ./gradlew publish
 
       - name: Create GitHub Release
+        if: ${{ env.shouldPublish == 'true' && github.repository == 'KomaruPRO/Tridot' }}
         uses: softprops/action-gh-release@v2
         with:
           tag_name: ${{ env.TAG_NAME }}
