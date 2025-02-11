@@ -109,6 +109,11 @@ public class Seq<T> implements Iterable<T>, Serializable {
     }
 
     /** @see #Seq(Object[]) */
+    public static <T> Seq<T> with(){
+        return new Seq<>();
+    }
+
+    /** @see #Seq(Object[]) */
     public static <T> Seq<T> with(T... array){
         return new Seq<>(array);
     }

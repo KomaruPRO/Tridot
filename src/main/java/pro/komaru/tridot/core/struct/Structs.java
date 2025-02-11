@@ -1,6 +1,7 @@
 package pro.komaru.tridot.core.struct;
 
 
+import pro.komaru.tridot.core.struct.data.Seq;
 import pro.komaru.tridot.core.struct.func.Cons;
 import pro.komaru.tridot.core.struct.func.Func;
 import pro.komaru.tridot.core.struct.func.Prov;
@@ -14,6 +15,9 @@ public class Structs {
         return () -> null;
     }
 
+    public static <A,B> A cast(B obj) {
+        return (A) obj;
+    }
     public static  <T> T or(T a, T b) {
         if(a == null) return b;
         return a;
@@ -53,6 +57,11 @@ public class Structs {
             map.put(k,v);
         }
         return map;
+    }
+    public static <A> A[] pop(A[] def) {
+        var n = Seq.with(def);
+        n.slice();
+        return n.toArray();
     }
     public static <K,V> HashMap<V,K> revMap(HashMap<K,V> mapOrig) {
         HashMap<V,K> map = new HashMap<>();
