@@ -50,21 +50,6 @@ public class NamedContTree<A> extends ContainerTree<A> implements INamedTree {
     public NamedContTree<A> cd(String path) {
         return cd(true,path);
     }
-
-    public static void main(String[] args) {
-        NamedContTree<String> main = new NamedContTree<>("main");
-        main
-                .cd("a")
-                        .add("A section!")
-                .cd("../b")
-                        .add("B section!")
-                .cd("../a/c")
-                        .add("C section!")
-                .cd("../..")
-                        .add("End section!");
-        System.out.println(main);
-    }
-
     public Seq<NamedContTree<A>> namedContainers() {
         return Structs.cast(containers().select(e -> e instanceof NamedContTree));
     }
