@@ -3,6 +3,7 @@ package pro.komaru.tridot.client.graphics.render;
 import com.mojang.blaze3d.vertex.*;
 import net.minecraft.client.renderer.*;
 
+//todo fluffy
 public class TridotRenderType extends RenderType{
     public final CompositeState state;
 

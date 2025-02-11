@@ -8,6 +8,7 @@ import net.minecraft.world.item.*;
 
 import javax.annotation.*;
 
+//todo fluffy
 public class BowSkinItemOverrides extends BowItemOverrides{
 
     @Override

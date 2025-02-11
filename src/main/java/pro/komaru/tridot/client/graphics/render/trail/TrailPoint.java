@@ -3,6 +3,7 @@ package pro.komaru.tridot.client.graphics.render.trail;
 import net.minecraft.world.phys.*;
 import org.joml.*;
 
+//todo fluffy
 public class TrailPoint{
     private final Vec3 position;
     private int timeActive;

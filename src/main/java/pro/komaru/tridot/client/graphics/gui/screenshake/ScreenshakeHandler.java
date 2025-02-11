@@ -14,6 +14,7 @@ import pro.komaru.tridot.core.math.raycast.RayHitResult;
 
 import java.util.*;
 
+//todo fluffy
 public class ScreenshakeHandler{
     public static final ArrayList<ScreenshakeInstance> INSTANCES = new ArrayList<>();
     private static final RandomSource RANDOM = RandomSource.create();

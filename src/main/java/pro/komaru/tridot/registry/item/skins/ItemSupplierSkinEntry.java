@@ -5,6 +5,7 @@ import net.minecraftforge.api.distmarker.*;
 
 import java.util.function.*;
 
+//todo fluffy (custom)
 public class ItemSupplierSkinEntry extends ItemSkinEntry{
     public final Supplier<Item> item;
     public String skin;

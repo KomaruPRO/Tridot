@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.*;
 import java.util.function.*;
 
+//todo fluffy (custom)
 public class SkinBuilder{
     public String name;
     public List<ItemSkinEntry> skinEntries = new ArrayList<>();

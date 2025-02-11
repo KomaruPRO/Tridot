@@ -14,6 +14,7 @@ import pro.komaru.tridot.client.graphics.render.item.LargeItemRenderer;
 
 import java.util.*;
 
+//todo fluffy
 public class TridotItemSkins{
 
     @Mod.EventBusSubscriber(modid = TridotLib.ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)

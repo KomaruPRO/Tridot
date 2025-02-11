@@ -17,6 +17,7 @@ import java.awt.*;
 import java.util.List;
 import java.util.*;
 
+//todo fluffy
 public class ItemSkin{
     public String id;
     public Color color;

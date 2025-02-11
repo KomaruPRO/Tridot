@@ -8,6 +8,7 @@ import net.minecraft.world.entity.*;
 import net.minecraft.world.item.*;
 import net.minecraftforge.api.distmarker.*;
 
+//todo fluffy
 public class ItemSkinEntry{
 
     public boolean canApplyOnItem(ItemStack itemStack){

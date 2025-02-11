@@ -22,6 +22,7 @@ import java.util.Random;
 import java.util.*;
 import java.util.function.*;
 
+//todo fluffy
 public class RenderBuilder{
     public float r1 = 1, g1 = 1, b1 = 1, a1 = 1;
     public float r2 = 1, g2 = 1, b2 = 1, a2 = 1;

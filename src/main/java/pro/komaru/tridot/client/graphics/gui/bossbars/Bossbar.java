@@ -7,6 +7,7 @@ import pro.komaru.tridot.*;
 import java.awt.*;
 import java.util.*;
 
+//todo render method
 @OnlyIn(Dist.CLIENT)
 public class Bossbar{
     public static Map<String, Bossbar> bossbars = new HashMap<>();

@@ -9,6 +9,7 @@ import net.minecraftforge.api.distmarker.*;
 
 import java.util.*;
 
+//todo fluffy
 public class ArmorClassSkinEntry extends ItemClassSkinEntry{
     public Map<EquipmentSlot, String> skins = new HashMap<>();
 

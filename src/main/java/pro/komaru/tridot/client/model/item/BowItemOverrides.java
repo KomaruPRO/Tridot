@@ -9,6 +9,7 @@ import pro.komaru.tridot.registry.item.types.*;
 import javax.annotation.*;
 import java.util.*;
 
+//todo fluffy
 public class BowItemOverrides extends CustomItemOverrides{
     public ArrayList<BakedModel> models = new ArrayList<>();
 
