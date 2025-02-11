@@ -7,6 +7,7 @@ import net.minecraft.world.phys.*;
 
 import java.util.*;
 
+//todo fluffy
 public class ScreenshakeInstance{
     public int progress;
     public final int duration;

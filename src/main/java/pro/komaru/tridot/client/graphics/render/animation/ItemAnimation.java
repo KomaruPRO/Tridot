@@ -10,6 +10,7 @@ import net.minecraft.world.entity.player.*;
 import net.minecraft.world.item.*;
 import net.minecraftforge.api.distmarker.*;
 
+//todo fluffy
 public class ItemAnimation{
     @OnlyIn(Dist.CLIENT)
     public void setupAnim(HumanoidModel model, Entity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch){

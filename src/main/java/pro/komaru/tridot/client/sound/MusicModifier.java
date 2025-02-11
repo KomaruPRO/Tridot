@@ -10,6 +10,7 @@ import net.minecraft.world.entity.player.*;
 import net.minecraft.world.level.biome.*;
 import net.minecraft.world.level.levelgen.structure.*;
 
+//todo fluffy
 public class MusicModifier{
 
     public boolean isCanPlay(Music defaultMusic, Minecraft minecraft){
@@ -36,6 +37,7 @@ public class MusicModifier{
         return false;
     }
 
+    //todo fluffy (custom)
     public static class Dungeon extends MusicModifier {
         public SoundEvent music;
         public ResourceKey<Structure> structureKey;

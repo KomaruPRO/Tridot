@@ -9,6 +9,7 @@ import net.minecraft.world.level.block.state.*;
 
 import java.util.*;
 
+//todo fluffy (?)
 public class CustomFinalisedModel implements BakedModel{
     public final BakedModel parentModel;
     public final BakedModel subModel;

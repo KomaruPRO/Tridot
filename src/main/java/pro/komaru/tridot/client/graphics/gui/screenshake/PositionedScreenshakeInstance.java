@@ -7,6 +7,7 @@ import org.joml.*;
 
 import java.lang.Math;
 
+//todo fluffy
 public class PositionedScreenshakeInstance extends ScreenshakeInstance{
     public final Vec3 position;
     public final float falloffDistance;

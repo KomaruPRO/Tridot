@@ -11,6 +11,7 @@ import pro.komaru.tridot.core.struct.func.Prov;
 
 import java.util.*;
 
+//todo fluffy
 public class SplashHandler{
     public static Seq<SplashLanguaged> languagedSplashes = Seq.with();
     public static Seq<Prov<String>> dynamicSplashes = Seq.with();

@@ -22,9 +22,9 @@ import pro.komaru.tridot.integration.client.ShadersIntegration;
 
 import java.util.*;
 
+//todo fluffy
 @Mod.EventBusSubscriber(value = Dist.CLIENT, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class LevelRenderHandler{
-
     public static Matrix4f MATRIX4F = null;
     static MultiBufferSource.BufferSource DELAYED_RENDER = null;
     public static RenderTarget DEPTH_CACHE;
@@ -63,7 +63,6 @@ public class LevelRenderHandler{
             shadersDelayedRender(event);
         }
     }
-
 
     public static void standardDelayedRender(RenderLevelStageEvent event){
         if(event.getStage() == RenderLevelStageEvent.Stage.AFTER_WEATHER){

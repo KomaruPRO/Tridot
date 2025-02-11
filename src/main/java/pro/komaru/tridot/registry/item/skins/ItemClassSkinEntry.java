@@ -3,6 +3,7 @@ package pro.komaru.tridot.registry.item.skins;
 import net.minecraft.world.item.*;
 import net.minecraftforge.api.distmarker.*;
 
+//todo fluffy
 public class ItemClassSkinEntry extends ItemSkinEntry{
     public final Class item;
     public String skin;

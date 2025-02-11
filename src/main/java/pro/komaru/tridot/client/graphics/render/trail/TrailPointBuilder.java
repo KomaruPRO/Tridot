@@ -7,6 +7,7 @@ import java.util.*;
 import java.util.function.*;
 import java.util.stream.*;
 
+//todo fluffy
 public class TrailPointBuilder{
 
     private final List<TrailPoint> trailPoints = new ArrayList<>();

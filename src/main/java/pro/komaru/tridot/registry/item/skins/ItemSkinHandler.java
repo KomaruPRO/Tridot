@@ -2,6 +2,7 @@ package pro.komaru.tridot.registry.item.skins;
 
 import java.util.*;
 
+//todo fluffy
 public class ItemSkinHandler{
     public static Map<String, ItemSkin> skins = new HashMap<>();
     public static ArrayList<ItemSkin> skinList = new ArrayList<>();
