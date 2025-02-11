@@ -2,7 +2,6 @@ package pro.komaru.tridot.client;
 
 import pro.komaru.tridot.*;
 import pro.komaru.tridot.client.model.armor.*;
-import pro.komaru.tridot.client.model.book.*;
 import pro.komaru.tridot.client.model.item.*;
 import net.minecraft.client.model.geom.*;
 import net.minecraft.client.resources.model.*;
@@ -20,20 +19,16 @@ public class TridotModels{
 
     public static EmptyArmorModel EMPTY_ARMOR = null;
 
-    public static CustomBookModel BOOK = null;
-
     @Mod.EventBusSubscriber(modid = TridotLib.ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
     public static class ClientRegistryEvents{
         @SubscribeEvent
         public static void registerLayers(EntityRenderersEvent.RegisterLayerDefinitions event){
             event.registerLayerDefinition(EMPTY_ARMOR_LAYER, EmptyArmorModel::createBodyLayer);
-            event.registerLayerDefinition(BOOK_LAYER, CustomBookModel::createBodyLayer);
         }
 
         @SubscribeEvent
         public static void addLayers(EntityRenderersEvent.AddLayers event){
             EMPTY_ARMOR = new EmptyArmorModel(event.getEntityModels().bakeLayer(EMPTY_ARMOR_LAYER));
-            BOOK = new CustomBookModel(event.getEntityModels().bakeLayer(BOOK_LAYER));
         }
     }
 

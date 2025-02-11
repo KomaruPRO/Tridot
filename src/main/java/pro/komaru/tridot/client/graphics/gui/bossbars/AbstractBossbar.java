@@ -1,36 +1,41 @@
 package pro.komaru.tridot.client.graphics.gui.bossbars;
 
+import net.minecraft.client.*;
+import net.minecraft.client.gui.*;
+import net.minecraft.client.gui.components.*;
 import net.minecraft.resources.*;
 import net.minecraftforge.api.distmarker.*;
+import net.minecraftforge.client.event.CustomizeGuiOverlayEvent.*;
 import pro.komaru.tridot.*;
 
 import java.awt.*;
 import java.util.*;
 
-//todo render method
 @OnlyIn(Dist.CLIENT)
-public class Bossbar{
-    public static Map<String, Bossbar> bossbars = new HashMap<>();
+public abstract class AbstractBossbar{
+    public static Map<String, AbstractBossbar> bossbars = new HashMap<>(); // maybe move it somewhere else?
 
     public boolean rainbow = false;
     private final Color color;
     private final ResourceLocation texture;
 
-    public Bossbar(ResourceLocation tex){
+    public AbstractBossbar(ResourceLocation tex){
         this.texture = tex;
         this.color = new Color(1, 1, 1);
     }
 
-    public Bossbar(Color color){
+    public AbstractBossbar(Color color){
         this.texture = new ResourceLocation(TridotLib.ID, "textures/gui/bossbars/base.png");
         this.color = color;
     }
 
-    public Bossbar(boolean rainbow){
+    public AbstractBossbar(boolean rainbow){
         this.texture = new ResourceLocation(TridotLib.ID, "textures/gui/bossbars/base.png");
         this.color = new Color(1, 1, 1);
         this.rainbow = rainbow;
     }
+
+    public abstract void render(BossEventProgress ev, LerpingBossEvent event, int offset, int screenWidth, GuiGraphics pGuiGraphics, AbstractBossbar abstractBossbar, Minecraft mc);
 
     public Color getColor(){
         return color;
