@@ -3,13 +3,9 @@ package pro.komaru.tridot.core.struct.data.tree;
 import pro.komaru.tridot.core.struct.Structs;
 import pro.komaru.tridot.core.struct.data.Seq;
 
-import java.util.HashMap;
 
 public class NamedContTree<A> extends ContainerTree<A> implements INamedTree {
     public final String name;
-
-    private final HashMap<String,Object> PATH_CACHE =
-            new HashMap<>();
 
     public NamedContTree(String name) {
         this.name = name;
