@@ -39,7 +39,7 @@ public class DungeonSoundPacket{
             return;
         }
 
-        TridotLibClient.DUNGEON_MUSIC_INSTANCE = new TridotSoundInstance(event, SoundSource.AMBIENT, Minecraft.getInstance().player);
+        TridotLibClient.DUNGEON_MUSIC_INSTANCE = new TridotSoundInstance(event, SoundSource.MUSIC, Minecraft.getInstance().player);
         soundManager.play(TridotLibClient.DUNGEON_MUSIC_INSTANCE);
         if(!soundManager.isActive(TridotLibClient.DUNGEON_MUSIC_INSTANCE)){
             TridotLibClient.DUNGEON_MUSIC_INSTANCE = null;

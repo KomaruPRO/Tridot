@@ -10,7 +10,7 @@ public class TridotSoundInstance extends AbstractTickableSoundInstance{
     public final LocalPlayer player;
 
     public TridotSoundInstance(SoundEvent sound, LocalPlayer pPlayer){
-        super(sound, SoundSource.PLAYERS, SoundInstance.createUnseededRandom());
+        super(sound, SoundSource.AMBIENT, SoundInstance.createUnseededRandom());
         this.player = pPlayer;
         this.looping = false;
         this.delay = 0;

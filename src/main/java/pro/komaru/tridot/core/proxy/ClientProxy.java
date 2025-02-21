@@ -31,7 +31,7 @@ public class ClientProxy implements ISidedProxy{
             return;
         }
 
-        TridotLibClient.BOSS_MUSIC = new LoopedSoundInstance(event, Minecraft.getInstance().player);
+        TridotLibClient.BOSS_MUSIC = new LoopedSoundInstance(event, SoundSource.MUSIC, Minecraft.getInstance().player);
         soundManager.play(TridotLibClient.BOSS_MUSIC);
         if(!soundManager.isActive(TridotLibClient.BOSS_MUSIC)){
             TridotLibClient.BOSS_MUSIC = null;
