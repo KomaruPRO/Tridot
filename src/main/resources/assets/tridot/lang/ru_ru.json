@@ -8,7 +8,7 @@
   "enchantment.tridot.dash.desc": "Увеличивает радиус рывка",
   "enchantment.tridot.overdrive": "Перегрев",
   "enchantment.tridot.overdrive.desc": "Уменьшает время отката",
-  "attribute.tridot.projectile_damage": "урон от снаряда",
+  "attribute.tridot.projectile_damage": "Урон от снаряда",
   "tooltip.tridot.applies": "Накладывает: ",
   "tooltip.tridot.applies_with_chance": "Применяется с шансом: %s",
   "tooltip.tridot.special_arrow": "Превращает обычную стрелу в ",
