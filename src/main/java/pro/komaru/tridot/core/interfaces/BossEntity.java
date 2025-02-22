@@ -125,6 +125,7 @@ public interface BossEntity{
                 ItemEntity itemEntity = new ItemEntity(level, pos.getX(), pos.getY() + offsetY, pos.getZ(), stack.copy());
                 itemEntity.setExtendedLifetime();
                 itemEntity.setInvulnerable(true);
+                itemEntity.setGlowingTag(true);
                 itemEntity.setDefaultPickUpDelay();
                 itemEntity.setTarget(playerUUID);
                 level.addFreshEntity(itemEntity);
