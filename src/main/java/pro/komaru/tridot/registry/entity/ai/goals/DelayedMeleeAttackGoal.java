@@ -9,19 +9,19 @@ import net.minecraft.world.level.pathfinder.*;
 import java.util.*;
 
 public class DelayedMeleeAttackGoal extends Goal{
-    protected final PathfinderMob mob;
-    private final double speedModifier;
-    private final boolean followingTargetEvenIfNotSeen;
-    private Path path;
-    private double pathedTargetX;
-    private double pathedTargetY;
-    private double pathedTargetZ;
-    private int ticksUntilNextPathRecalculation;
-    private int ticksUntilNextAttack;
-    private int attackInterval = 20;
-    private long lastCanUseCheck;
-    private int failedPathFindingPenalty = 0;
-    private final boolean canPenalize = false;
+    public final PathfinderMob mob;
+    public final double speedModifier;
+    public final boolean followingTargetEvenIfNotSeen;
+    public Path path;
+    public double pathedTargetX;
+    public double pathedTargetY;
+    public double pathedTargetZ;
+    public int ticksUntilNextPathRecalculation;
+    public int ticksUntilNextAttack;
+    public int attackInterval = 20;
+    public long lastCanUseCheck;
+    public int failedPathFindingPenalty = 0;
+    public final boolean canPenalize = false;
 
     public DelayedMeleeAttackGoal(PathfinderMob pMob, double pSpeedModifier, boolean pFollowingTargetEvenIfNotSeen){
         this.mob = pMob;
