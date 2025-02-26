@@ -188,6 +188,65 @@ public class Vec3 implements Serializable {
     }
 
     /**
+     * Uses a distance constraint to correct the position of this vector
+     * @param to vector linked to
+     * @param constraint max/min distance
+     * @return Constrained pos
+     */
+    public Vec3 constraintMin(Vec3 to, float constraint) {
+        return constraintMin(to,constraint,1f);
+    }
+    /**
+     * Uses a distance constraint to correct the position of this vector
+     * @param to vector linked to
+     * @param constraint max/min distance
+     * @param speed Step (0.0-1.0)
+     * @return Constrained pos
+     */
+    public Vec3 constraintMin(Vec3 to, float constraint,float speed) {
+        return constraint(to,constraint,true,false,speed);
+    }
+    /**
+     * Uses a distance constraint to correct the position of this vector
+     * @param to vector linked to
+     * @param constraint max/min distance
+     * @return Constrained pos
+     */
+    public Vec3 constraintMax(Vec3 to, float constraint) {
+        return constraintMax(to,constraint,1f);
+    }
+    /**
+     * Uses a distance constraint to correct the position of this vector
+     * @param to vector linked to
+     * @param constraint max/min distance
+     * @param speed Step (0.0-1.0)
+     * @return Constrained pos
+     */
+    public Vec3 constraintMax(Vec3 to, float constraint,float speed) {
+        return constraint(to,constraint,false,true,speed);
+    }
+
+    /**
+     * Uses a distance constraint to correct the position of this vector
+     * @param to vector linked to
+     * @param constraint max/min distance
+     * @param min  Clamp pos if distance is smaller
+     * @param max Clamp pos if distance is bigger
+     * @param speed Step (0.0-1.0)
+     * @return Constrained pos
+     */
+    public Vec3 constraint(Vec3 to, float constraint,boolean min,boolean max,float speed) {
+        Vec3 vec = to.cpy().sub(this);
+        float len = vec.len();
+        if((max && len > constraint) || (min && len < constraint)) {
+            float step = (len-constraint)*speed;
+            Vec3 norVec = vec.cpy().nor().scale(step);
+            add(norVec);
+        }
+        return this;
+    }
+
+    /**
      * Rotates this vector around the Z-axis by the given angle.
      * @param angle Rotation angle in radians
      * @return this vector after rotation
