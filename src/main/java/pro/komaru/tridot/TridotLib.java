@@ -58,7 +58,7 @@ public class TridotLib{
             return new Object();
         });
 
-        ModLoadingContext.get().registerConfig(Type.SERVER, ServerConfig.SPEC);
+        ModLoadingContext.get().registerConfig(Type.COMMON, CommonConfig.SPEC);
         ModLoadingContext.get().registerConfig(Type.CLIENT, ClientConfig.SPEC);
         eventBus.addListener(this::setup);
         eventBus.addListener(TridotLibClient::clientSetup);
