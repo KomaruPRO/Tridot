@@ -75,7 +75,7 @@ public class PercentageArmorItem extends ArmorItem{
     @OnlyIn(Dist.CLIENT)
     public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> pTooltipComponents, TooltipFlag pIsAdvanced){
         super.appendHoverText(pStack, pLevel, pTooltipComponents, pIsAdvanced);
-        if(ServerConfig.PERCENT_ARMOR.get() != null && ServerConfig.PERCENT_ARMOR.get()){
+        if(CommonConfig.PERCENT_ARMOR.get() != null && CommonConfig.PERCENT_ARMOR.get()){
             pStack.hideTooltipPart(TooltipPart.MODIFIERS);
             pTooltipComponents.add(Component.translatable("tooltip.tridot.total_armor", getTotalDefense(((PercentageArmorItem)pStack.getItem()).getMaterial()) + "%").withStyle(ChatFormatting.GRAY));
             pTooltipComponents.add(Component.translatable("attribute.modifier.plus.1", defense, Component.translatable("attribute.name.generic.armor")).withStyle(ChatFormatting.BLUE));
@@ -127,7 +127,7 @@ public class PercentageArmorItem extends ArmorItem{
 
     public Multimap<Attribute, AttributeModifier> getDefaultAttributeModifiers(EquipmentSlot pEquipmentSlot) {
         if(pEquipmentSlot != this.type.getSlot()) return super.getDefaultAttributeModifiers(pEquipmentSlot);
-        if(!ServerConfig.PERCENT_ARMOR.get()){
+        if(!CommonConfig.PERCENT_ARMOR.get()){
             ImmutableMultimap.Builder<Attribute, AttributeModifier> builder = ImmutableMultimap.builder();
             if (this.knockbackResistance > 0) {
                 builder.put(Attributes.KNOCKBACK_RESISTANCE, new AttributeModifier(uuid, "Armor knockback resistance", this.knockbackResistance, AttributeModifier.Operation.ADDITION));

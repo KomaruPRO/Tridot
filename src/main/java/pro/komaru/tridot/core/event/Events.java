@@ -108,7 +108,7 @@ public class Events{
             }
         }
 
-        if(armor > 0 && ev.getOverlay() == VanillaGuiOverlay.ARMOR_LEVEL.type() && ServerConfig.PERCENT_ARMOR.get() && new ForgeGui(minecraft).shouldDrawSurvivalElements()){
+        if(armor > 0 && ev.getOverlay() == VanillaGuiOverlay.ARMOR_LEVEL.type() && CommonConfig.PERCENT_ARMOR.get() && new ForgeGui(minecraft).shouldDrawSurvivalElements()){
             armor += calculateDamageReductionPercent(minecraft.player.getAttributeValue(Attributes.ARMOR));
             ms.pushPose();
             RenderSystem.enableBlend();
@@ -132,7 +132,7 @@ public class Events{
     public void onLivingHurt(LivingHurtEvent event){
         float incomingDamage = event.getAmount();
         float totalMultiplier;
-        if(ServerConfig.PERCENT_ARMOR.get()){
+        if(CommonConfig.PERCENT_ARMOR.get()){
             float armor = 0f;
             for(ItemStack armorPiece : event.getEntity().getArmorSlots()){
                 if(armorPiece.getItem() instanceof PercentageArmorItem percent){
