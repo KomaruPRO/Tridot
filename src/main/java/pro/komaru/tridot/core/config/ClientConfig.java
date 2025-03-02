@@ -13,7 +13,7 @@ public class ClientConfig{
     public ClientConfig(ForgeConfigSpec.Builder builder){
         builder.comment("Graphics").push("graphics");
             SCREENSHAKE_INTENSITY = builder.comment("Intensity of screenshake.").defineInRange("screenshakeIntensity", 1d, 0, 10d);
-            ABILITY_OVERLAY = builder.comment("When enabled shows the overlay after using a weapon ability (Default: true)").comment("Reload Resourcepacks after turning this on (F3+T)").define("DashOverlay", true);
+            ABILITY_OVERLAY = builder.comment("When enabled shows the overlay after using a weapon ability (Default: true)").comment("Reload Resourcepacks after turning this on (F3+T)").define("AbilityOverlay", true);
             CUSTOM_BOSSBARS = builder.comment("Custom bossbars").define("CustomBossbars", true);
             BOSSBAR_TITLE = builder.comment("Bossbar boss titles").define("BossbarTitles", true);
 
