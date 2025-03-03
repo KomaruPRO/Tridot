@@ -14,6 +14,7 @@ import net.minecraft.resources.*;
 import net.minecraft.tags.*;
 import net.minecraft.util.*;
 import net.minecraft.world.*;
+import net.minecraft.world.damagesource.*;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.*;
 import net.minecraft.world.entity.player.*;
@@ -130,20 +131,22 @@ public class Events{
 
     @SubscribeEvent
     public void onLivingHurt(LivingHurtEvent event){
-        float incomingDamage = event.getAmount();
-        float totalMultiplier;
-        if(CommonConfig.PERCENT_ARMOR.get()){
-            float armor = 0f;
-            for(ItemStack armorPiece : event.getEntity().getArmorSlots()){
-                if(armorPiece.getItem() instanceof PercentageArmorItem percent){
-                    float percentDefense = percent.getPercentDefense();
-                    armor += percentDefense;
+        if(!event.getSource().is(DamageTypeTags.BYPASSES_ARMOR)){
+            float incomingDamage = event.getAmount();
+            float totalMultiplier;
+            if(CommonConfig.PERCENT_ARMOR.get()){
+                float armor = 0f;
+                for(ItemStack armorPiece : event.getEntity().getArmorSlots()){
+                    if(armorPiece.getItem() instanceof PercentageArmorItem percent){
+                        float percentDefense = percent.getPercentDefense();
+                        armor += percentDefense;
+                    }
                 }
-            }
 
-            totalMultiplier = Math.max(Math.min(1 - (armor), 1), 0);
-            float reducedDamage = incomingDamage * totalMultiplier;
-            event.setAmount(reducedDamage);
+                totalMultiplier = Math.max(Math.min(1 - (armor), 1), 0);
+                float reducedDamage = incomingDamage * totalMultiplier;
+                event.setAmount(reducedDamage);
+            }
         }
     }
 
