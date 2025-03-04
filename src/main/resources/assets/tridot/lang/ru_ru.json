@@ -5,7 +5,7 @@
   "enchantment.tridot.radius": "Радиус",
   "enchantment.tridot.radius.desc": "Увеличивает радиус круговых атак",
   "enchantment.tridot.dash": "Рывок",
-  "enchantment.tridot.dash.desc": "Увеличивает радиус рывка",
+  "enchantment.tridot.dash.desc": "Увеличивает дистанцию рывка",
   "enchantment.tridot.overdrive": "Перегрев",
   "enchantment.tridot.overdrive.desc": "Уменьшает время отката",
   "attribute.tridot.projectile_damage": "Урон от снаряда",
