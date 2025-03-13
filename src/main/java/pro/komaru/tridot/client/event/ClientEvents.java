@@ -43,6 +43,7 @@ public class ClientEvents{
     public void render(RenderGuiEvent.Post event) {
         var gui = event.getGuiGraphics();
         var mc = Minecraft.getInstance();
+        //todo temp thingy
         gui.drawString(mc.font,
                 Component.literal("Hello world!")
                         .setStyle(DotStyle.of()
