@@ -120,8 +120,11 @@ public class DotStyle extends Style {
         public void beforeGlyph(Font.StringRenderOutput self, DotStyle style, int index) {
 
         }
+        public void beforeGlyphEffects(Font.StringRenderOutput self, DotStyle style, int index, FontSet fontset, GlyphInfo glyphinfo, BakedGlyph bakedglyph, TextColor textcolor) {
+
+        }
         public void afterGlyph(Font.StringRenderOutput self, DotStyle style, int index, FontSet fontset, GlyphInfo glyphinfo, BakedGlyph bakedglyph, TextColor textcolor) {
-            self.x += advance();
+            
         }
     }
 }
