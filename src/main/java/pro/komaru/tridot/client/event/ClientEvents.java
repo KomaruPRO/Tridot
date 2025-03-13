@@ -45,15 +45,18 @@ public class ClientEvents{
         var mc = Minecraft.getInstance();
         //todo temp thingy
         gui.drawString(mc.font,
-                Component.literal("Hello world!")
+                Component.literal("Сан-наби...")
                         .setStyle(DotStyle.of()
                                 .color(Clr.fromHex("FF857C"))
                                 .effects(
-                                        TextFx.advance(0.5f),
-                                        TextFx.shake(3f)
+                                        TextFx.advance(1.5f),
+                                        TextFx.wave(0.1f,0.2f),
+                                        TextFx.shake(0.2f)
                                 )
                         ),
                 10,10,0xFFFFFFFF);
+
+
     }
 
     @SubscribeEvent

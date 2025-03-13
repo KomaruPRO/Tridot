@@ -24,9 +24,8 @@ public class StringRenderOutputMixin {
             }
         }
     }
-    @Inject(method = "accept", at = @At("HEAD"),
-            locals = LocalCapture.CAPTURE_FAILSOFT)
-    public void acceptBefore(int index, Style pStyle, int pCodePoint, CallbackInfoReturnable<Boolean> cir, FontSet fontset, GlyphInfo glyphinfo, BakedGlyph bakedglyph, boolean flag, float f3, TextColor textcolor, float f, float f1, float f2, float f6, float f7) {
+    @Inject(method = "accept", at = @At("HEAD"))
+    public void acceptBefore(int index, Style pStyle, int pCodePoint, CallbackInfoReturnable<Boolean> cir) {
         if(pStyle instanceof DotStyle ds) {
             for (DotStyle.DotStyleEffect effect : ds.effects) {
                 effect.beforeGlyph(self(),index);
