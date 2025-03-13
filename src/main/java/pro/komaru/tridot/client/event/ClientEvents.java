@@ -47,8 +47,9 @@ public class ClientEvents{
         gui.drawString(mc.font,
                 Component.literal("Сан-наби...")
                         .setStyle(DotStyle.of()
-                        .rainbowColor(15)
                                 .effects(
+                                        TextFx.rainbow(5),
+                                        TextFx.pulse(1f),
                                         TextFx.advance(1.5f),
                                         TextFx.wave(0.1f,0.2f),
                                         TextFx.shake(0.2f)

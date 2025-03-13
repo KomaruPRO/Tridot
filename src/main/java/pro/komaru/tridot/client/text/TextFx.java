@@ -1,12 +1,16 @@
 package pro.komaru.tridot.client.text;
 
 import com.mojang.blaze3d.font.GlyphInfo;
+import com.mojang.blaze3d.systems.*;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.font.FontSet;
 import net.minecraft.client.gui.font.glyphs.BakedGlyph;
 import net.minecraft.network.chat.TextColor;
 import pro.komaru.tridot.client.event.ClientTickHandler;
+import pro.komaru.tridot.client.graphics.*;
 import pro.komaru.tridot.core.math.ArcRandom;
+
+import java.awt.*;
 
 public class TextFx {
 
@@ -27,6 +31,44 @@ public class TextFx {
 
     public static AdvanceEffect advance(float adv) {
         return new AdvanceEffect(adv);
+    }
+
+    public static PulseEffect pulse(float intensity) {
+        return new PulseEffect(intensity);
+    }
+
+    public static RainbowEffect rainbow(float intensity) {
+        return new RainbowEffect(intensity);
+    }
+
+    public static class PulseEffect extends DotStyle.DotStyleEffect{
+        public float intensity;
+        public PulseEffect(float intensity){
+            this.intensity = intensity;
+        }
+
+        float pulse;
+        @Override
+        public void beforeGlyph(Font.StringRenderOutput self, DotStyle style, int index) {
+            pulse = (float)(1 + 0.035 * Math.sin(System.currentTimeMillis() / 250));
+            self.a = pulse; //todo
+        }
+    }
+
+    public static class RainbowEffect extends DotStyle.DotStyleEffect{
+        public float intensity;
+        public RainbowEffect(float intensity){
+            this.intensity = intensity;
+        }
+
+        float off;
+        @Override
+        public void beforeGlyph(Font.StringRenderOutput self, DotStyle style, int index) {
+            super.beforeGlyph(self, style, index);
+
+            off = ((index * 0.05f) + (ClientTickHandler.ticksInGame * 1 * intensity)) % 360f;
+            style.color(Clr.HSVtoRGB(off, 90, 100));
+        }
     }
 
     public static class WaveEffect extends DotStyle.DotStyleEffect {
