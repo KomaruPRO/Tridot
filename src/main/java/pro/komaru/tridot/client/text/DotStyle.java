@@ -1,7 +1,6 @@
 package pro.komaru.tridot.client.text;
 
 import com.mojang.blaze3d.font.GlyphInfo;
-import net.minecraft.client.*;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.font.FontSet;
 import net.minecraft.client.gui.font.glyphs.BakedGlyph;
@@ -13,7 +12,6 @@ import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.Nullable;
 import pro.komaru.tridot.client.event.*;
 import pro.komaru.tridot.client.graphics.Clr;
-import pro.komaru.tridot.core.event.*;
 import pro.komaru.tridot.core.struct.data.Seq;
 
 import java.awt.*;
@@ -41,11 +39,8 @@ public class DotStyle extends Style {
         return new DotStyle();
     }
 
-    public DotStyle rainbowColor(int speed) {
-        return this.color(Clr.rainbowColor(ClientTickHandler.getTotal() * 0.005f * speed));
-    }
     public DotStyle color(Color color) {
-        return this.color(new Clr(color.getRGB()).toTextColor());
+        return this.color(new Clr(color.getRGB()));
     }
     public DotStyle color(Clr color) {
         return color(color.toTextColor());
@@ -122,10 +117,10 @@ public class DotStyle extends Style {
             return 0;
         }
 
-        public void beforeGlyph(Font.StringRenderOutput self, int index) {
+        public void beforeGlyph(Font.StringRenderOutput self, DotStyle style, int index) {
 
         }
-        public void afterGlyph(Font.StringRenderOutput self, int index, FontSet fontset, GlyphInfo glyphinfo, BakedGlyph bakedglyph, TextColor textcolor) {
+        public void afterGlyph(Font.StringRenderOutput self, DotStyle style, int index, FontSet fontset, GlyphInfo glyphinfo, BakedGlyph bakedglyph, TextColor textcolor) {
             self.x += advance();
         }
     }

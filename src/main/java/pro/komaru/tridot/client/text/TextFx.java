@@ -38,8 +38,8 @@ public class TextFx {
         }
         float off;
         @Override
-        public void beforeGlyph(Font.StringRenderOutput self, int index) {
-            super.beforeGlyph(self, index);
+        public void beforeGlyph(Font.StringRenderOutput self, DotStyle style, int index) {
+            super.beforeGlyph(self, style, index);
 
             off = (float) Math.sin(Math.toDegrees(
                     (index * charIntensity * 0.02f + ClientTickHandler.getTotal() * 0.005f * intensity)
@@ -49,8 +49,8 @@ public class TextFx {
         }
 
         @Override
-        public void afterGlyph(Font.StringRenderOutput self, int index, FontSet fontset, GlyphInfo glyphinfo, BakedGlyph bakedglyph, TextColor textcolor) {
-            super.afterGlyph(self, index, fontset, glyphinfo, bakedglyph, textcolor);
+        public void afterGlyph(Font.StringRenderOutput self, DotStyle style, int index, FontSet fontset, GlyphInfo glyphinfo, BakedGlyph bakedglyph, TextColor textcolor) {
+            super.afterGlyph(self, style, index, fontset, glyphinfo, bakedglyph, textcolor);
 
             self.y -= off;
         }
@@ -70,8 +70,8 @@ public class TextFx {
         float offX, offY;
 
         @Override
-        public void beforeGlyph(Font.StringRenderOutput self, int index) {
-            super.beforeGlyph(self, index);
+        public void beforeGlyph(Font.StringRenderOutput self, DotStyle style, int index) {
+            super.beforeGlyph(self, style, index);
 
             offX = (float) (xi * rand.nextGaussian());
             offY = (float) (yi * rand.nextGaussian());
@@ -80,8 +80,8 @@ public class TextFx {
         }
 
         @Override
-        public void afterGlyph(Font.StringRenderOutput self, int index, FontSet fontset, GlyphInfo glyphinfo, BakedGlyph bakedglyph, TextColor textcolor) {
-            super.afterGlyph(self, index, fontset, glyphinfo, bakedglyph, textcolor);
+        public void afterGlyph(Font.StringRenderOutput self, DotStyle style, int index, FontSet fontset, GlyphInfo glyphinfo, BakedGlyph bakedglyph, TextColor textcolor) {
+            super.afterGlyph(self, style, index, fontset, glyphinfo, bakedglyph, textcolor);
             self.x -= offX; self.y -= offY;
         }
     }
