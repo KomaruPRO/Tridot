@@ -47,7 +47,7 @@ public class ClientEvents{
         gui.drawString(mc.font,
                 Component.literal("Сан-наби...")
                         .setStyle(DotStyle.of()
-                                .color(Clr.fromHex("FF857C"))
+                        .rainbowColor(15)
                                 .effects(
                                         TextFx.advance(1.5f),
                                         TextFx.wave(0.1f,0.2f),
@@ -55,8 +55,6 @@ public class ClientEvents{
                                 )
                         ),
                 10,10,0xFFFFFFFF);
-
-
     }
 
     @SubscribeEvent
