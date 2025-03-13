@@ -6,17 +6,15 @@ import net.minecraft.world.item.*;
 import net.minecraftforge.api.distmarker.*;
 import net.minecraftforge.common.*;
 import net.minecraftforge.fml.common.*;
-import pro.komaru.tridot.client.event.*;
+import pro.komaru.tridot.client.render.ClientEvents;
 import net.minecraft.resources.*;
 import net.minecraftforge.eventbus.api.*;
 import net.minecraftforge.fml.event.lifecycle.*;
-import pro.komaru.tridot.client.graphics.tooltip.*;
-import pro.komaru.tridot.client.sound.LoopedSoundInstance;
-import pro.komaru.tridot.client.sound.TridotSoundInstance;
-import pro.komaru.tridot.client.graphics.gui.splash.SplashHandler;
-import pro.komaru.tridot.integration.client.ShadersIntegration;
-
-import java.awt.*;
+import pro.komaru.tridot.oclient.graphics.tooltip.*;
+import pro.komaru.tridot.oclient.sound.LoopedSoundInstance;
+import pro.komaru.tridot.oclient.sound.TridotSoundInstance;
+import pro.komaru.tridot.oclient.graphics.gui.splash.SplashHandler;
+import pro.komaru.tridot.ointegration.client.ShadersIntegration;
 
 import static pro.komaru.tridot.TridotLib.*;
 

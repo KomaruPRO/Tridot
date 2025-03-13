@@ -1,24 +1,21 @@
 package pro.komaru.tridot;
 
-import net.minecraft.ChatFormatting;
-import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.Style;
 import net.minecraft.world.item.*;
 import net.minecraftforge.api.distmarker.*;
 import net.minecraftforge.fml.config.ModConfig.*;
 import net.minecraftforge.registries.*;
-import pro.komaru.tridot.client.*;
-import pro.komaru.tridot.client.event.*;
-import pro.komaru.tridot.client.graphics.gui.*;
-import pro.komaru.tridot.core.config.*;
-import pro.komaru.tridot.core.event.*;
-import pro.komaru.tridot.core.interfaces.*;
-import pro.komaru.tridot.core.net.*;
-import pro.komaru.tridot.core.proxy.*;
-import pro.komaru.tridot.registry.*;
-import pro.komaru.tridot.registry.block.*;
-import pro.komaru.tridot.registry.item.*;
-import pro.komaru.tridot.registry.item.skins.*;
+import pro.komaru.tridot.client.render.ClientTick;
+import pro.komaru.tridot.oclient.*;
+import pro.komaru.tridot.oclient.graphics.gui.*;
+import pro.komaru.tridot.ocore.config.*;
+import pro.komaru.tridot.ocore.event.*;
+import pro.komaru.tridot.ocore.interfaces.*;
+import pro.komaru.tridot.ocore.net.*;
+import pro.komaru.tridot.ocore.proxy.*;
+import pro.komaru.tridot.oregistry.*;
+import pro.komaru.tridot.oregistry.block.*;
+import pro.komaru.tridot.oregistry.item.*;
+import pro.komaru.tridot.oregistry.item.skins.*;
 import net.minecraft.world.entity.*;
 import net.minecraftforge.common.*;
 import net.minecraftforge.event.entity.*;
@@ -27,8 +24,8 @@ import net.minecraftforge.fml.*;
 import net.minecraftforge.fml.common.*;
 import net.minecraftforge.fml.event.lifecycle.*;
 import net.minecraftforge.fml.javafmlmod.*;
-import pro.komaru.tridot.registry.item.types.*;
-import pro.komaru.tridot.registry.loot.conditions.*;
+import pro.komaru.tridot.oregistry.item.types.*;
+import pro.komaru.tridot.oregistry.loot.conditions.*;
 
 import java.util.*;
 
@@ -55,7 +52,7 @@ public class TridotLib{
             forgeBus.addListener(OverlayRender::tick);
             forgeBus.addListener(OverlayRender::onDrawScreenPost);
             forgeBus.addListener(OverlayRenderItem::onDrawScreenPost);
-            forgeBus.addListener(ClientTickHandler::clientTickEnd);
+            forgeBus.addListener(ClientTick::clientTickEnd);
             TridotLibClient.clientInit();
             return new Object();
         });
