@@ -26,6 +26,7 @@
     "client.ItemStackMixin",
     "client.LivingEntityRendererMixin",
     "client.SplashManagerMixin",
+    "client.StringRenderOutputMixin",
     "client.curios.CurioTooltipMixin"
   ],
   "injectors": {

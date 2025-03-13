@@ -1,5 +1,6 @@
 package pro.komaru.tridot.client.graphics;
 
+import net.minecraft.network.chat.TextColor;
 import net.minecraft.world.phys.*;
 
 import java.awt.*;
@@ -10,6 +11,12 @@ public class Clr{
 
     public static Color getColor(int color) {
         return new Color(getRed(color), getGreen(color), getBlue(color), getAlpha(color));
+    }
+    public TextColor toTextColor() {
+        return TextColor.fromRgb(toMC());
+    }
+    public int toMC() {
+        return Clr.intArgb(this);
     }
 
     public static int intArgb(Clr color) {
@@ -643,6 +650,20 @@ public class Clr{
 
         return hex;
     }
+
+    /** Returns the color encoded as hex string with the format RRGGBBAA. */
+    public String toString(){
+        StringBuilder value = new StringBuilder();
+        toString(value);
+        return value.toString();
+    }
+
+    public void toString(StringBuilder builder){
+        builder.append(Integer.toHexString(((int)(255 * r) << 24) | ((int)(255 * g) << 16) | ((int)(255 * b) << 8) | ((int)(255 * a))));
+        while(builder.length() < 8)
+            builder.insert(0, "0");
+    }
+
 
     public static Clr fromHex(String hex){
         int offset = hex.charAt(0) == '#' ? 1 : 0;

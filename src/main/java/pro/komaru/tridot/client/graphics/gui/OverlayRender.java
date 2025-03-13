@@ -4,10 +4,14 @@ import com.mojang.blaze3d.platform.*;
 import com.mojang.blaze3d.systems.*;
 import net.minecraft.client.*;
 import net.minecraft.client.gui.*;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.*;
 import net.minecraftforge.api.distmarker.*;
 import net.minecraftforge.client.event.*;
 import net.minecraftforge.event.*;
+import pro.komaru.tridot.client.graphics.Clr;
+import pro.komaru.tridot.client.text.DotStyle;
+import pro.komaru.tridot.client.text.TextFx;
 import pro.komaru.tridot.core.config.ClientConfig;
 
 @OnlyIn(Dist.CLIENT)

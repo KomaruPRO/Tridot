@@ -2,6 +2,7 @@ package pro.komaru.tridot.client.event;
 
 import net.minecraft.client.*;
 import net.minecraft.client.gui.screens.*;
+import net.minecraft.network.chat.Component;
 import net.minecraft.util.*;
 import net.minecraft.world.entity.player.*;
 import net.minecraft.world.item.*;
@@ -9,10 +10,13 @@ import net.minecraftforge.client.event.*;
 import net.minecraftforge.event.*;
 import net.minecraftforge.eventbus.api.*;
 import pro.komaru.tridot.*;
+import pro.komaru.tridot.client.graphics.Clr;
 import pro.komaru.tridot.client.graphics.gui.screen.*;
 import pro.komaru.tridot.client.graphics.gui.screenshake.*;
 import pro.komaru.tridot.client.graphics.render.item.bow.*;
 import pro.komaru.tridot.client.graphics.shader.postprocess.*;
+import pro.komaru.tridot.client.text.DotStyle;
+import pro.komaru.tridot.client.text.TextFx;
 import pro.komaru.tridot.core.config.*;
 
 public class ClientEvents{
@@ -32,6 +36,23 @@ public class ClientEvents{
     @SubscribeEvent
     public void renderTick(TickEvent.RenderTickEvent event){
         ClientTickHandler.renderTick(event);
+
+    }
+
+    @SubscribeEvent
+    public void render(RenderGuiEvent.Post event) {
+        var gui = event.getGuiGraphics();
+        var mc = Minecraft.getInstance();
+        gui.drawString(mc.font,
+                Component.literal("Hello world!")
+                        .setStyle(DotStyle.of()
+                                .color(Clr.fromHex("FF857C"))
+                                .effects(
+                                        TextFx.advance(0.5f),
+                                        TextFx.shake(3f)
+                                )
+                        ),
+                10,10,0xFFFFFFFF);
     }
 
     @SubscribeEvent
