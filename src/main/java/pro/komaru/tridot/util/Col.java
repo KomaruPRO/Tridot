@@ -14,18 +14,22 @@ public class Col {
             ;
 
 
-    public static java.awt.Color getColor(int color) {
-        return new java.awt.Color(getRed(color), getGreen(color), getBlue(color), getAlpha(color));
+    public static Color getColor(int color) {
+        return new Color(getRed(color), getGreen(color), getBlue(color), getAlpha(color));
     }
+
     public TextColor toTextColor() {
         return TextColor.fromRgb(toMC());
     }
+
     public int toMC() {
         return Col.intArgb(this);
     }
+
     public Color toJava() {
         return new Color(r,g,b,a);
     }
+
 
     public static int intArgb(Col color) {
         // Input color string in RRGGBBAA format
@@ -44,6 +48,7 @@ public class Col {
         int colorInt = (int) Long.parseLong(aarrggbb, 16);
         return colorInt;
     }
+
     public static int intArgb(String str) {
         return intArgb(fromHex(str));
     }
@@ -75,6 +80,14 @@ public class Col {
      */
     public Col(Col color){
         set(color);
+    }
+
+    /**
+     * Constructs a new color using the given color
+     * @param color the color
+     */
+    public static Col fromColor(Color color){
+        return new Col(color.getRGB());
     }
 
     /**
@@ -638,7 +651,7 @@ public class Col {
         return Integer.parseInt(hex, 16);
     }
 
-    public static int toDecimal(java.awt.Color color){
+    public static int toDecimal(Color color){
         return Integer.parseInt(hex(color), 16);
     }
 
@@ -646,7 +659,7 @@ public class Col {
         return Integer.parseInt(hex(), 16);
     }
 
-    public static String hex(java.awt.Color color){
+    public static String hex(Color color){
         String hex = Integer.toHexString(color.getRGB() & 0xffffff);
         if(hex.length() < 6){
             hex = "0" + hex;
@@ -667,7 +680,6 @@ public class Col {
         while(builder.length() < 8)
             builder.insert(0, "0");
     }
-
 
     public static Col fromHex(String hex){
         int offset = hex.charAt(0) == '#' ? 1 : 0;

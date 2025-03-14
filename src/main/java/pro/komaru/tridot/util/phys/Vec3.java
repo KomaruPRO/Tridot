@@ -60,6 +60,15 @@ public class Vec3 implements Serializable {
         return new Vec3((float) entity.getX(), (float) entity.getY(), (float) entity.getZ());
     }
 
+    /**
+     * Creates a vector from a Minecraft Vec3
+     * @param position Minecraft Vec3 object
+     * @return converted vector
+     */
+    public static Vec3 from(net.minecraft.world.phys.Vec3 position) {
+        return new Vec3(position.x,position.y,position.z);
+    }
+
     // Getters and Setters
 
     /** @return the X coordinate */
@@ -275,6 +284,17 @@ public class Vec3 implements Serializable {
     }
 
     /**
+     * Adds the specified values to this vector.
+     * @param dx Value to add to X
+     * @param dy Value to add to Y
+     * @param dz Value to add to Z
+     * @return this vector after addition
+     */
+    public Vec3 add(double dx, double dy, double dz) {
+        return set(x + (float) dx, y + (float) dy, z + (float) dz);
+    }
+
+    /**
      * Adds another vector to this vector.
      * @param vec Vector to add
      * @return this vector after addition
@@ -301,6 +321,10 @@ public class Vec3 implements Serializable {
      */
     public Vec3 sub(Vec3 vec) {
         return sub(vec.x, vec.y, vec.z);
+    }
+
+    public Vec3 cross(Vec3 pVec) {
+        return new Vec3(this.y * pVec.z - this.z * pVec.y, this.z * pVec.x - this.x * pVec.z, this.x * pVec.y - this.y * pVec.x);
     }
 
     /**

@@ -3,11 +3,11 @@ package pro.komaru.tridot.client.gfx.particle.behavior;
 import com.mojang.blaze3d.vertex.*;
 import net.minecraft.client.*;
 import net.minecraft.util.*;
-import net.minecraft.world.phys.*;
 import org.joml.*;
 import pro.komaru.tridot.client.gfx.particle.GenericParticle;
 import pro.komaru.tridot.client.gfx.particle.behavior.component.ParticleBehaviorComponent;
 import pro.komaru.tridot.client.gfx.particle.data.SpinParticleData;
+import pro.komaru.tridot.util.phys.Vec3;
 
 import java.lang.Math;
 import java.util.Random;
@@ -147,11 +147,11 @@ public class ParticleBehavior{
     }
 
     public Vec3 getPosition(GenericParticle particle, Camera renderInfo, float partialTicks){
-        Vec3 vec3 = renderInfo.getPosition();
-        float x = (float)(Mth.lerp(partialTicks, particle.xo, particle.x) - vec3.x());
-        float y = (float)(Mth.lerp(partialTicks, particle.yo, particle.y) - vec3.y());
-        float z = (float)(Mth.lerp(partialTicks, particle.zo, particle.z) - vec3.z());
-        return new Vec3(x, y, z);
+        Vec3 vec3 = Vec3.from(renderInfo.getPosition());
+        Vec3 pposo = new Vec3(particle.xo,particle.yo,particle.zo);
+        Vec3 ppos = new Vec3(particle.x,particle.y,particle.z);
+
+        return pposo.lerp(ppos,partialTicks).sub(vec3);
     }
 
     public Quaternionf getRotate(GenericParticle particle, Camera renderInfo, float partialTicks){

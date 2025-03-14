@@ -35,7 +35,7 @@ public abstract class Node {
   private Tag tag;
   private final Mark startMark;
   protected Mark endMark;
-  private Class<? extends Object> type;
+  private Class<?> type;
   private boolean twoStepsConstruction;
   private String anchor;
   private List<CommentLine> inLineComments;
@@ -104,11 +104,11 @@ public abstract class Node {
     return super.equals(obj);
   }
 
-  public Class<? extends Object> getType() {
+  public Class<?> getType() {
     return type;
   }
 
-  public void setType(Class<? extends Object> type) {
+  public void setType(Class<?> type) {
     if (!type.isAssignableFrom(this.type)) {
       this.type = type;
     }

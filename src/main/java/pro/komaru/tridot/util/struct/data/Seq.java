@@ -807,16 +807,6 @@ public class Seq<T> implements Iterable<T>, Serializable {
         Sort.instance().sort(items, comparator, 0, size);
         return this;
     }
-/*
-    public Seq<T> sort(Floatf<? super T> comparator){
-        Sort.instance().sort(items, Structs.comparingFloat(comparator), 0, size);
-        return this;
-    }
-
-    public <U extends Comparable<? super U>> Seq<T> sortComparing(Func<? super T, ? extends U> keyExtractor){
-        sort(Structs.comparing(keyExtractor));
-        return this;
-    }*/
 
     public Seq<T> selectFrom(Seq<T> base, Boolf<T> predicate){
         clear();

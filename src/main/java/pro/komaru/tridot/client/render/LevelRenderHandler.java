@@ -21,7 +21,6 @@ import pro.komaru.tridot.client.compatibility.ShadersIntegration;
 
 import java.util.*;
 
-//todo fluffy
 @Mod.EventBusSubscriber(value = Dist.CLIENT, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class LevelRenderHandler{
     public static Matrix4f MATRIX4F = null;

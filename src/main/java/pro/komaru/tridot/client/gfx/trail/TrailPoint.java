@@ -1,41 +1,30 @@
 package pro.komaru.tridot.client.gfx.trail;
 
-import net.minecraft.world.phys.*;
-import org.joml.*;
+import org.joml.Vector4f;
+import pro.komaru.tridot.util.phys.Vec3;
 
-//todo fluffy
 public class TrailPoint{
-    private final Vec3 position;
-    private int timeActive;
+    public final Vec3 pos;
+    public int lifetime;
 
-    public TrailPoint(Vec3 position, int timeActive){
-        this.position = position;
-        this.timeActive = timeActive;
+    public TrailPoint(Vec3 pos, int lifetime){
+        this.pos = pos;
+        this.lifetime = lifetime;
     }
 
-    public TrailPoint(Vec3 position){
-        this(position, 0);
+    public TrailPoint(Vec3 pos){
+        this(pos, 0);
     }
 
     public Vector4f getMatrixPosition(){
-        Vec3 position = getPosition();
-        return new Vector4f((float)position.x, (float)position.y, (float)position.z, 1.0f);
-    }
-
-    public Vec3 getPosition(){
-        return position;
-    }
-
-    public int getTimeActive(){
-        return timeActive;
+        return new Vector4f(pos.x, pos.y, pos.z, 1.0f);
     }
 
     public TrailPoint lerp(TrailPoint trailPoint, float delta){
-        Vec3 position = getPosition();
-        return new TrailPoint(position.lerp(trailPoint.position, delta), timeActive);
+        return new TrailPoint(pos.lerp(trailPoint.pos, delta), lifetime);
     }
 
     public void tick(){
-        timeActive++;
+        lifetime++;
     }
 }

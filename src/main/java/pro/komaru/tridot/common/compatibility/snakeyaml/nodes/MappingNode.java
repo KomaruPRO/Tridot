@@ -60,13 +60,13 @@ public class MappingNode extends CollectionNode<NodeTuple> {
     value = mergedValue;
   }
 
-  public void setOnlyKeyType(Class<? extends Object> keyType) {
+  public void setOnlyKeyType(Class<?> keyType) {
     for (NodeTuple nodes : value) {
       nodes.getKeyNode().setType(keyType);
     }
   }
 
-  public void setTypes(Class<? extends Object> keyType, Class<? extends Object> valueType) {
+  public void setTypes(Class<?> keyType, Class<?> valueType) {
     for (NodeTuple nodes : value) {
       nodes.getValueNode().setType(valueType);
       nodes.getKeyNode().setType(keyType);

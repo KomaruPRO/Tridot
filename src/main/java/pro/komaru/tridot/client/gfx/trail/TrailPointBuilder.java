@@ -1,62 +1,58 @@
 package pro.komaru.tridot.client.gfx.trail;
 
-import net.minecraft.world.phys.*;
 import org.joml.*;
+import pro.komaru.tridot.util.phys.Vec3;
+import pro.komaru.tridot.util.struct.data.Seq;
+import pro.komaru.tridot.util.struct.func.Prov;
 
-import java.util.*;
-import java.util.function.*;
-import java.util.stream.*;
-
-//todo fluffy
 public class TrailPointBuilder{
 
-    private final List<TrailPoint> trailPoints = new ArrayList<>();
-    public final Supplier<Integer> trailLength;
+    private final Seq<TrailPoint> points = Seq.with();
+    public final Prov<Integer> length;
 
-    public TrailPointBuilder(Supplier<Integer> trailLength){
-        this.trailLength = trailLength;
+    public TrailPointBuilder(Prov<Integer> length){
+        this.length = length;
     }
 
     public static TrailPointBuilder create(int trailLength){
         return create(() -> trailLength);
     }
 
-    public static TrailPointBuilder create(Supplier<Integer> trailLength){
+    public static TrailPointBuilder create(Prov<Integer> trailLength){
         return new TrailPointBuilder(trailLength);
     }
 
-    public List<TrailPoint> getTrailPoints(){
-        return trailPoints;
+    public Seq<TrailPoint> points(){
+        return points;
     }
 
-    public List<TrailPoint> getTrailPoints(float lerp){
-        List<TrailPoint> lerpedTrailPoints = new ArrayList<>();
-        final int size = trailPoints.size();
-        if(size > 1){
-            for(int i = 0; i < size - 2; i++){
-                lerpedTrailPoints.add(trailPoints.get(i).lerp(trailPoints.get(i + 1), lerp));
-            }
-        }
-        return lerpedTrailPoints;
+    public Seq<TrailPoint> points(float lerp){
+        Seq<TrailPoint> lerped = Seq.with();
+        int size = points.size;
+        if(size <= 1) return lerped;
+
+        for(int i = 0; i < size - 2; i++)
+            lerped.add(points.get(i).lerp(points.get(i + 1), lerp));
+        return lerped;
     }
 
-    public TrailPointBuilder addTrailPoint(Vec3 point){
-        return addTrailPoint(new TrailPoint(point, 0));
+    public TrailPointBuilder add(Vec3 point){
+        return add(new TrailPoint(point, 0));
     }
 
-    public TrailPointBuilder addTrailPoint(TrailPoint point){
-        trailPoints.add(point);
+    public TrailPointBuilder add(TrailPoint point){
+        points.add(point);
         return this;
     }
 
-    public TrailPointBuilder tickTrailPoints(){
-        int trailLength = this.trailLength.get();
-        trailPoints.forEach(TrailPoint::tick);
-        trailPoints.removeIf(p -> p.getTimeActive() > trailLength);
+    public TrailPointBuilder tick(){
+        int trailLength = this.length.get();
+        points.each(TrailPoint::tick);
+        points.removeAll(p -> p.lifetime > trailLength);
         return this;
     }
 
-    public List<Vector4f> build(){
-        return trailPoints.stream().map(TrailPoint::getMatrixPosition).collect(Collectors.toList());
+    public Seq<Vector4f> build(){
+        return points.map(TrailPoint::getMatrixPosition);
     }
 }

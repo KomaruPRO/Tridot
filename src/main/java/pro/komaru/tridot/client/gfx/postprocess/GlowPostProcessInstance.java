@@ -2,8 +2,7 @@ package pro.komaru.tridot.client.gfx.postprocess;
 
 import org.joml.*;
 import pro.komaru.tridot.client.ClientTick;
-
-import java.util.function.*;
+import pro.komaru.tridot.util.struct.func.Cons2;
 
 public class GlowPostProcessInstance extends PostProcessInstance{
     public Vector3f center;
@@ -57,7 +56,7 @@ public class GlowPostProcessInstance extends PostProcessInstance{
         return this;
     }
 
-    public void fadeUpdate(double deltaTime){
+    public void fadeUpdate(float deltaTime){
         if(isFade){
             tickTime = ClientTick.getTotal() - startTick;
             fade = 1f - (tickTime / fadeTime);
@@ -69,23 +68,23 @@ public class GlowPostProcessInstance extends PostProcessInstance{
     }
 
     @Override
-    public void update(double deltaTime){
+    public void update(float deltaTime){
         super.update(deltaTime);
         fadeUpdate(deltaTime);
     }
 
     @Override
-    public void writeDataToBuffer(BiConsumer<Integer, Float> writer){
-        writer.accept(0, center.x());
-        writer.accept(1, center.y());
-        writer.accept(2, center.z());
-        writer.accept(3, color.x());
-        writer.accept(4, color.y());
-        writer.accept(5, color.z());
-        writer.accept(6, radius);
-        writer.accept(7, intensity);
-        writer.accept(8, fade);
-        writer.accept(9, tickTime);
-        writer.accept(10, fadeTime);
+    public void writeDataToBuffer(Cons2<Integer, Float> writer){
+        writer.get(0, center.x());
+        writer.get(1, center.y());
+        writer.get(2, center.z());
+        writer.get(3, color.x());
+        writer.get(4, color.y());
+        writer.get(5, color.z());
+        writer.get(6, radius);
+        writer.get(7, intensity);
+        writer.get(8, fade);
+        writer.get(9, tickTime);
+        writer.get(10, fadeTime);
     }
 }

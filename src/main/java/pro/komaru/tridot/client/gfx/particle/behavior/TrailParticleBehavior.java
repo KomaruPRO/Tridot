@@ -4,7 +4,6 @@ import com.mojang.blaze3d.vertex.*;
 import net.minecraft.client.*;
 import net.minecraft.client.renderer.*;
 import net.minecraft.util.*;
-import net.minecraft.world.phys.*;
 import pro.komaru.tridot.client.gfx.TridotParticles;
 import pro.komaru.tridot.client.gfx.particle.GenericParticle;
 import pro.komaru.tridot.client.gfx.particle.behavior.component.TrailParticleBehaviorComponent;
@@ -14,11 +13,11 @@ import pro.komaru.tridot.client.gfx.particle.data.SpinParticleData;
 import pro.komaru.tridot.client.render.RenderBuilder;
 import pro.komaru.tridot.client.gfx.trail.TrailPoint;
 import pro.komaru.tridot.client.gfx.trail.TrailPointBuilder;
+import pro.komaru.tridot.util.phys.Vec3;
+import pro.komaru.tridot.util.struct.data.Seq;
+import pro.komaru.tridot.util.struct.func.Func;
 
 import java.awt.*;
-import java.util.List;
-import java.util.*;
-import java.util.function.*;
 
 public class TrailParticleBehavior extends ParticleBehavior implements ICustomBehaviorParticleRender{
 
@@ -26,9 +25,9 @@ public class TrailParticleBehavior extends ParticleBehavior implements ICustomBe
     public GenericParticleData transparencyData;
     public boolean secondColor;
     public int trailSize;
-    Function<Float, Float> widthFunc;
+    Func<Float, Float> widthFunc;
 
-    public TrailParticleBehavior(ColorParticleData colorData, GenericParticleData transparencyData, boolean secondColor, int trailSize, Function<Float, Float> widthFunc, SpinParticleData xSpinData, SpinParticleData ySpinData, SpinParticleData zSpinData, float xOffset, float yOffset, float zOffset, boolean firstSide, boolean secondSide, boolean camera, boolean xRotCam, boolean yRotCam){
+    public TrailParticleBehavior(ColorParticleData colorData, GenericParticleData transparencyData, boolean secondColor, int trailSize, Func<Float, Float> widthFunc, SpinParticleData xSpinData, SpinParticleData ySpinData, SpinParticleData zSpinData, float xOffset, float yOffset, float zOffset, boolean firstSide, boolean secondSide, boolean camera, boolean xRotCam, boolean yRotCam){
         super(xSpinData, ySpinData, zSpinData, xOffset, yOffset, zOffset, firstSide, secondSide, camera, xRotCam, yRotCam);
         this.colorData = colorData;
         this.transparencyData = transparencyData;
@@ -103,8 +102,8 @@ public class TrailParticleBehavior extends ParticleBehavior implements ICustomBe
     @Override
     public void updateTraits(GenericParticle particle){
         TrailParticleBehaviorComponent component = getTrailComponent(particle);
-        component.trailPointBuilder.addTrailPoint(particle.getPosition());
-        component.trailPointBuilder.tickTrailPoints();
+        component.trailPointBuilder.add(particle.getPosition());
+        component.trailPointBuilder.tick();
 
         pickColor(particle, colorData.colorCurveEasing.apply(colorData.getProgress(particle.age, particle.lifetime)));
         component.a = transparencyData.getValue(particle.age, particle.lifetime, component.st, component.mt, component.et);
@@ -127,33 +126,30 @@ public class TrailParticleBehavior extends ParticleBehavior implements ICustomBe
     public void render(GenericParticle particle, PoseStack poseStack, MultiBufferSource buffer, float partialTicks){
         TrailParticleBehaviorComponent component = getTrailComponent(particle);
 
-        List<TrailPoint> trail = new ArrayList<>(component.trailPointBuilder.getTrailPoints());
-        if(trail.size() > 2 && particle.getAge() > component.trailPointBuilder.trailLength.get()){
+        Seq<TrailPoint> trail = component.trailPointBuilder.points().copy();
+        if(trail.size > 2 && particle.getAge() > component.trailPointBuilder.length.get()){
             TrailPoint position = trail.get(0);
             TrailPoint nextPosition = trail.get(1);
-            float x = (float)Mth.lerp(partialTicks, position.getPosition().x, nextPosition.getPosition().x);
-            float y = (float)Mth.lerp(partialTicks, position.getPosition().y, nextPosition.getPosition().y);
-            float z = (float)Mth.lerp(partialTicks, position.getPosition().z, nextPosition.getPosition().z);
-            trail.set(0, new TrailPoint(new Vec3(x, y, z)));
+            trail.set(0, position.lerp(nextPosition,partialTicks));
         }
 
         float x = (float)(Mth.lerp(partialTicks, particle.xo, particle.x));
         float y = (float)(Mth.lerp(partialTicks, particle.yo, particle.y));
         float z = (float)(Mth.lerp(partialTicks, particle.zo, particle.z));
 
-        if(trail.size() > 0){
-            trail.set(trail.size() - 1, new TrailPoint(new Vec3(x, y, z)));
+        if(trail.size > 0){
+            trail.set(trail.size - 1, new TrailPoint(new Vec3(x, y, z)));
         }
 
         RenderBuilder builder = RenderBuilder.create().setRenderType(particle.renderType).setSided(firstSide, secondSide)
         .setUV(particle.getU0(), particle.getV0(), particle.getU1(), particle.getV1())
-        .setColorRaw(particle.getRed(), particle.getGreen(), particle.getBlue())
+        .setColor(particle.getRed(), particle.getGreen(), particle.getBlue())
         .setAlpha(particle.getAlpha())
         .setLight(particle.getLightColor(partialTicks));
         if(secondColor){
-            builder.setSecondColorRaw(component.r, component.g, component.b)
+            builder.setSecondColor(component.r, component.g, component.b)
             .setSecondAlpha(component.a);
         }
-        builder.renderTrail(poseStack, trail, (f) -> widthFunc.apply(f) * (particle.getSize() / 2f));
+        builder.renderTrail(poseStack, trail, (f) -> widthFunc.get(f) * (particle.getSize() / 2f));
     }
 }

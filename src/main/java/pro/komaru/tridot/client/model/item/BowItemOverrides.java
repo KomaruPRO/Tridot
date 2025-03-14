@@ -9,7 +9,6 @@ import pro.komaru.tridot.common.registry.item.types.ConfigurableBowItem;
 import javax.annotation.*;
 import java.util.*;
 
-//todo fluffy
 public class BowItemOverrides extends CustomItemOverrides{
     public ArrayList<BakedModel> models = new ArrayList<>();
 
@@ -18,14 +17,11 @@ public class BowItemOverrides extends CustomItemOverrides{
         if(getPulling(stack, level, entity, seed) > 0){
             float pull = getPull(stack, level, entity, seed);
             BakedModel model = models.get(0);
-            if(pull >= 0.65f){
-                model = models.get(1);
-            }
-            if(pull >= 0.9f){
-                model = models.get(2);
-            }
+            if(pull >= 0.65f) model = models.get(1);
+            if(pull >= 0.9f) model = models.get(2);
             return model;
         }
+
         return originalModel;
     }
 

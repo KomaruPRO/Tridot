@@ -8,12 +8,11 @@ import net.minecraft.world.item.*;
 
 import javax.annotation.*;
 
-//todo fluffy
 public class BowSkinItemOverrides extends BowItemOverrides{
 
     @Override
     public BakedModel resolve(BakedModel originalModel, ItemStack stack, @Nullable ClientLevel level, @Nullable LivingEntity entity, int seed){
-        ItemSkin skin = ItemSkin.getSkinFromItem(stack);
+        ItemSkin skin = ItemSkin.itemSkin(stack);
         if(skin != null){
             String skinStr = getSkinModel(skin, originalModel, stack, level, entity, seed);
             if(skinStr != null) return ItemSkinModels.getModelSkins(skinStr);

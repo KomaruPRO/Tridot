@@ -1,10 +1,10 @@
 package pro.komaru.tridot.client.gfx.particle.behavior;
 
-import net.minecraft.world.phys.*;
 import pro.komaru.tridot.client.gfx.particle.data.ColorParticleData;
 import pro.komaru.tridot.client.gfx.particle.data.GenericParticleData;
 import pro.komaru.tridot.client.gfx.particle.data.SpinParticleData;
 import pro.komaru.tridot.client.gfx.particle.options.GenericParticleOptions;
+import pro.komaru.tridot.util.phys.Vec3;
 
 public class SparkParticleBehaviorBuilder extends ParticleBehaviorBuilder{
 

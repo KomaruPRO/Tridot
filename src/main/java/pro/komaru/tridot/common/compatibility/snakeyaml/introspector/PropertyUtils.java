@@ -74,11 +74,11 @@ public class PropertyUtils {
     return properties;
   }
 
-  public Set<Property> getProperties(Class<? extends Object> type) {
+  public Set<Property> getProperties(Class<?> type) {
     return getProperties(type, beanAccess);
   }
 
-  public Set<Property> getProperties(Class<? extends Object> type, BeanAccess bAccess) {
+  public Set<Property> getProperties(Class<?> type, BeanAccess bAccess) {
     if (readableProperties.containsKey(type)) {
       return readableProperties.get(type);
     }
@@ -87,7 +87,7 @@ public class PropertyUtils {
     return properties;
   }
 
-  protected Set<Property> createPropertySet(Class<? extends Object> type, BeanAccess bAccess) {
+  protected Set<Property> createPropertySet(Class<?> type, BeanAccess bAccess) {
     Set<Property> properties = new TreeSet<Property>();
     Collection<Property> props = getPropertiesMap(type, bAccess).values();
     for (Property property : props) {
@@ -98,11 +98,11 @@ public class PropertyUtils {
     return properties;
   }
 
-  public Property getProperty(Class<? extends Object> type, String name) {
+  public Property getProperty(Class<?> type, String name) {
     return getProperty(type, name, beanAccess);
   }
 
-  public Property getProperty(Class<? extends Object> type, String name, BeanAccess bAccess) {
+  public Property getProperty(Class<?> type, String name, BeanAccess bAccess) {
     Map<String, Property> properties = getPropertiesMap(type, bAccess);
     Property property = properties.get(name);
     if (property == null && skipMissingProperties) {

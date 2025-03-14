@@ -55,7 +55,7 @@ public final class Constant {
         sb.appendCodePoint(c);
       }
     }
-    if (sb.length() > 0) {
+    if (!sb.isEmpty()) {
       noASCII = true;
       this.content = sb.toString();
     }

@@ -42,7 +42,7 @@ public class TypeDescription {
 
   private static final Logger log = Logger.getLogger(TypeDescription.class.getPackage().getName());
 
-  private final Class<? extends Object> type;
+  private final Class<?> type;
 
   // class that implements the described type; if set, will be used as a source for constructor.
   // If not set - TypeDescription will leave instantiation of an entity to the YAML Constructor
@@ -60,26 +60,26 @@ public class TypeDescription {
   protected String[] includes = null;
   protected BeanAccess beanAccess;
 
-  public TypeDescription(Class<? extends Object> clazz, Tag tag) {
+  public TypeDescription(Class<?> clazz, Tag tag) {
     this(clazz, tag, null);
   }
 
-  public TypeDescription(Class<? extends Object> clazz, Tag tag, Class<?> impl) {
+  public TypeDescription(Class<?> clazz, Tag tag, Class<?> impl) {
     this.type = clazz;
     this.tag = tag;
     this.impl = impl;
     beanAccess = null;
   }
 
-  public TypeDescription(Class<? extends Object> clazz, String tag) {
+  public TypeDescription(Class<?> clazz, String tag) {
     this(clazz, new Tag(tag), null);
   }
 
-  public TypeDescription(Class<? extends Object> clazz) {
+  public TypeDescription(Class<?> clazz) {
     this(clazz, new Tag(clazz), null);
   }
 
-  public TypeDescription(Class<? extends Object> clazz, Class<?> impl) {
+  public TypeDescription(Class<?> clazz, Class<?> impl) {
     this(clazz, new Tag(clazz), impl);
   }
 
@@ -98,7 +98,7 @@ public class TypeDescription {
    *
    * @return type (class) to be described.
    */
-  public Class<? extends Object> getType() {
+  public Class<?> getType() {
     return type;
   }
 
@@ -109,7 +109,7 @@ public class TypeDescription {
    * @param type class of List values
    */
   @Deprecated
-  public void putListPropertyType(String property, Class<? extends Object> type) {
+  public void putListPropertyType(String property, Class<?> type) {
     addPropertyParameters(property, type);
   }
 
@@ -121,8 +121,8 @@ public class TypeDescription {
    * @param value class of values in Map
    */
   @Deprecated
-  public void putMapPropertyType(String property, Class<? extends Object> key,
-      Class<? extends Object> value) {
+  public void putMapPropertyType(String property, Class<?> key,
+      Class<?> value) {
     addPropertyParameters(property, key, value);
   }
 
@@ -154,7 +154,7 @@ public class TypeDescription {
     for (PropertySubstitute p : values) {
       try {
         p.setDelegate(discoverProperty(p.getName()));
-      } catch (YAMLException e) {
+      } catch (YAMLException ignored) {
       }
     }
     delegatesChecked = true;

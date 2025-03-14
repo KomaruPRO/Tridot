@@ -27,7 +27,7 @@ import java.util.*;
  */
 public class Representer extends SafeRepresenter {
 
-  protected Map<Class<? extends Object>, TypeDescription> typeDefinitions = Collections.emptyMap();
+  protected Map<Class<?>, TypeDescription> typeDefinitions = Collections.emptyMap();
 
   public Representer(DumperOptions options) {
     super(options);
@@ -36,7 +36,7 @@ public class Representer extends SafeRepresenter {
 
   public TypeDescription addTypeDescription(TypeDescription td) {
     if (Collections.EMPTY_MAP == typeDefinitions) {
-      typeDefinitions = new HashMap<Class<? extends Object>, TypeDescription>();
+      typeDefinitions = new HashMap<Class<?>, TypeDescription>();
     }
     if (td.getTag() != null) {
       addClassTag(td.getType(), td.getTag());
@@ -169,7 +169,7 @@ public class Representer extends SafeRepresenter {
     if (arguments != null) {
       if (node.getNodeId() == NodeId.sequence) {
         // apply map tag where class is the same
-        Class<? extends Object> t = arguments[0];
+        Class<?> t = arguments[0];
         SequenceNode snode = (SequenceNode) node;
         Iterable<Object> memberList = Collections.emptyList();
         if (object.getClass().isArray()) {
@@ -220,7 +220,7 @@ public class Representer extends SafeRepresenter {
     }
   }
 
-  private void resetTag(Class<? extends Object> type, Node node) {
+  private void resetTag(Class<?> type, Node node) {
     Tag tag = node.getTag();
     if (tag.matches(type)) {
       if (Enum.class.isAssignableFrom(type)) {
@@ -238,7 +238,7 @@ public class Representer extends SafeRepresenter {
    * @param type - JavaBean to inspect the properties
    * @return properties to serialise
    */
-  protected Set<Property> getProperties(Class<? extends Object> type) {
+  protected Set<Property> getProperties(Class<?> type) {
     if (typeDefinitions.containsKey(type)) {
       return typeDefinitions.get(type).getProperties();
     }

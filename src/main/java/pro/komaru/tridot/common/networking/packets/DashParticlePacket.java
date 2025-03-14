@@ -56,7 +56,7 @@ public class DashParticlePacket {
                 Player player = level.getPlayerByUUID(msg.id);
                 if (player != null) {
                     RandomSource rand = level.getRandom();
-                    Color color = new Color(msg.colorR, msg.colorG, msg.colorB);
+                    Col color = new Col(msg.colorR, msg.colorG, msg.colorB);
                     Vec3 pos = new Vec3(player.getX(), player.getY(), player.getZ());
                     for (int count = 0; count < msg.count; count++) {
                         double pitch = ((player.getRotationVector().x + 90) * Math.PI) / 180;
@@ -69,7 +69,7 @@ public class DashParticlePacket {
 
                             Random random = new Random();
                             ParticleBuilder.create(TridotParticles.WISP)
-                            .setColorData(ColorParticleData.create(color, Col.fromHex("a2a2a2").toJava()).build())
+                            .setColorData(ColorParticleData.create(color, Col.fromHex("a2a2a2")).build())
                             .setRenderType(TridotRenderTypes.ADDITIVE_PARTICLE)
                             .setTransparencyData(GenericParticleData.create(random.nextFloat(0, 0.6f), 0f).build())
                             .setScaleData(GenericParticleData.create(0.92f, 0f).build())

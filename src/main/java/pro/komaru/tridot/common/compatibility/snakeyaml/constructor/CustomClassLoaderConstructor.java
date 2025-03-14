@@ -39,8 +39,8 @@ public class CustomClassLoaderConstructor extends Constructor {
    * @param theRoot - the class to instantiate
    * @param theLoader - the class loader to find the class definition
    */
-  public CustomClassLoaderConstructor(Class<? extends Object> theRoot, ClassLoader theLoader,
-      LoaderOptions loadingConfig) {
+  public CustomClassLoaderConstructor(Class<?> theRoot, ClassLoader theLoader,
+                                      LoaderOptions loadingConfig) {
     super(theRoot, loadingConfig);
     if (theLoader == null) {
       throw new NullPointerException("Loader must be provided.");

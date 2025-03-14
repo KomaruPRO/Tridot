@@ -5,7 +5,6 @@ import net.minecraft.world.phys.*;
 import org.joml.*;
 import pro.komaru.tridot.client.render.RenderBuilder;
 
-//todo fluffy
 public class TrailRenderPoint{
 
     public final float xp;

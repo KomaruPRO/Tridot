@@ -39,13 +39,7 @@ public class ClientEvents {
                 if(itemStack.is(item)){
                     float f = event.getFovModifier();
                     if(f != event.getNewFovModifier()) f = event.getNewFovModifier();
-                    int i = player.getTicksUsingItem();
-                    float f1 = (float)i / 20.0F;
-                    if(f1 > 1.0F){
-                        f1 = 1.0F;
-                    }else{
-                        f1 *= f1;
-                    }
+                    float f1 = computeFov(player);
 
                     f *= 1.0F - f1 * 0.15F;
                     event.setNewFovModifier((float)Mth.lerp(Minecraft.getInstance().options.fovEffectScale().get(), 1.0F, f));
@@ -54,5 +48,17 @@ public class ClientEvents {
         }
 
         ScreenshakeHandler.fovTick(event);
+    }
+
+    private float computeFov(Player player) {
+        int i = player.getTicksUsingItem();
+        float f1 = (float)i / 20.0F;
+        if(f1 > 1.0F){
+            f1 = 1.0F;
+        }else {
+            f1 *= f1;
+        }
+
+        return f1;
     }
 }

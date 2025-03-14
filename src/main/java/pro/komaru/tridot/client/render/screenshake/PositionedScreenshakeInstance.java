@@ -2,12 +2,11 @@ package pro.komaru.tridot.client.render.screenshake;
 
 import pro.komaru.tridot.util.math.Interp;
 import net.minecraft.client.*;
-import net.minecraft.world.phys.*;
 import org.joml.*;
+import pro.komaru.tridot.util.phys.Vec3;
 
 import java.lang.Math;
 
-//todo fluffy
 public class PositionedScreenshakeInstance extends ScreenshakeInstance{
     public final Vec3 position;
     public final float falloffDistance;
@@ -29,7 +28,7 @@ public class PositionedScreenshakeInstance extends ScreenshakeInstance{
     @Override
     public float updateIntensity(Camera camera){
         float intensity = super.updateIntensity(camera);
-        float distance = (float)position.distanceTo(camera.getPosition());
+        float distance = position.cpy().sub(Vec3.from(camera.getPosition())).len();
         if(distance > maxDistance){
             return 0;
         }
@@ -40,8 +39,8 @@ public class PositionedScreenshakeInstance extends ScreenshakeInstance{
             distanceMultiplier = 1 - current / remaining;
         }
         Vector3f lookDirection = camera.getLookVector();
-        Vec3 directionToScreenshake = position.subtract(camera.getPosition()).normalize();
-        float angle = Math.max(0, lookDirection.dot(new Vector3f((float)directionToScreenshake.x, (float)directionToScreenshake.y, (float)directionToScreenshake.z)));
+        Vec3 directionToScreenshake = position.cpy().sub(Vec3.from(camera.getPosition())).nor();
+        float angle = Math.max(0, lookDirection.dot(new Vector3f(directionToScreenshake.x, directionToScreenshake.y, directionToScreenshake.z)));
         return (intensity + (intensity * angle)) * 0.5f * distanceMultiplier;
     }
 }

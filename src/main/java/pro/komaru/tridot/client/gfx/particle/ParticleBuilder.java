@@ -6,12 +6,12 @@ import net.minecraft.client.particle.*;
 import net.minecraft.client.renderer.*;
 import net.minecraft.core.particles.*;
 import net.minecraft.world.level.*;
-import net.minecraft.world.phys.*;
 import net.minecraft.world.phys.shapes.*;
 import net.minecraftforge.registries.*;
 import org.joml.Math;
 import pro.komaru.tridot.client.gfx.particle.behavior.ParticleBehavior;
 import pro.komaru.tridot.client.gfx.particle.options.GenericParticleOptions;
+import pro.komaru.tridot.util.phys.Vec3;
 
 import java.util.*;
 import java.util.function.*;
@@ -380,20 +380,20 @@ public class ParticleBuilder{
         voxelShape.forAllBoxes(
         (x1, y1, z1, x2, y2, z2) -> {
             Vec3 v = pos;
-            Vec3 b = pos.add(x1, y1, z1);
-            Vec3 e = pos.add(x2, y2, z2);
-            repeatLine(level, b, v.add(x2, y1, z1), n, chance);
-            repeatLine(level, b, v.add(x1, y2, z1), n, chance);
-            repeatLine(level, b, v.add(x1, y1, z2), n, chance);
-            repeatLine(level, v.add(x1, y2, z1), v.add(x2, y2, z1), n, chance);
-            repeatLine(level, v.add(x1, y2, z1), v.add(x1, y2, z2), n, chance);
-            repeatLine(level, e, v.add(x2, y2, z1), n, chance);
-            repeatLine(level, e, v.add(x1, y2, z2), n, chance);
-            repeatLine(level, e, v.add(x2, y1, z2), n, chance);
-            repeatLine(level, v.add(x2, y1, z1), v.add(x2, y1, z2), n, chance);
-            repeatLine(level, v.add(x1, y1, z2), v.add(x2, y1, z2), n, chance);
-            repeatLine(level, v.add(x2, y1, z1), v.add(x2, y2, z1), n, chance);
-            repeatLine(level, v.add(x1, y1, z2), v.add(x1, y2, z2), n, chance);
+            Vec3 b = pos.cpy().add(x1, y1, z1);
+            Vec3 e = pos.cpy().add(x2, y2, z2);
+            repeatLine(level, b, v.cpy().add(x2, y1, z1), n, chance);
+            repeatLine(level, b, v.cpy().add(x1, y2, z1), n, chance);
+            repeatLine(level, b, v.cpy().add(x1, y1, z2), n, chance);
+            repeatLine(level, v.cpy().add(x1, y2, z1), v.cpy().add(x2, y2, z1), n, chance);
+            repeatLine(level, v.cpy().add(x1, y2, z1), v.cpy().add(x1, y2, z2), n, chance);
+            repeatLine(level, e, v.cpy().add(x2, y2, z1), n, chance);
+            repeatLine(level, e, v.cpy().add(x1, y2, z2), n, chance);
+            repeatLine(level, e, v.cpy().add(x2, y1, z2), n, chance);
+            repeatLine(level, v.cpy().add(x2, y1, z1), v.cpy().add(x2, y1, z2), n, chance);
+            repeatLine(level, v.cpy().add(x1, y1, z2), v.cpy().add(x2, y1, z2), n, chance);
+            repeatLine(level, v.cpy().add(x2, y1, z1), v.cpy().add(x2, y2, z1), n, chance);
+            repeatLine(level, v.cpy().add(x1, y1, z2), v.cpy().add(x1, y2, z2), n, chance);
         }
         );
         return this;

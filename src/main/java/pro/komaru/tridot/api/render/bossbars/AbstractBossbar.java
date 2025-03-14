@@ -9,7 +9,6 @@ import net.minecraftforge.client.event.CustomizeGuiOverlayEvent.*;
 import pro.komaru.tridot.*;
 import pro.komaru.tridot.util.Col;
 
-import java.awt.*;
 import java.util.*;
 
 @OnlyIn(Dist.CLIENT)

@@ -55,7 +55,7 @@ public class SequenceNode extends CollectionNode<Node> {
     return value;
   }
 
-  public void setListType(Class<? extends Object> listType) {
+  public void setListType(Class<?> listType) {
     for (Node node : value) {
       node.setType(listType);
     }
@@ -73,7 +73,7 @@ public class SequenceNode extends CollectionNode<Node> {
       buf.append(",");
     }
     // delete last comma
-    if (buf.length() > 0) {
+    if (!buf.isEmpty()) {
       buf.deleteCharAt(buf.length() - 1);
     }
     return "<" + this.getClass().getName() + " (tag=" + getTag() + ", value=[" + buf + "])>";

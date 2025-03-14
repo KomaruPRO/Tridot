@@ -2162,7 +2162,7 @@ public final class ScannerImpl implements Scanner {
       }
       if (!"\n".equals(lineBreak)) {
         return lineBreak + breaks;
-      } else if (breaks.length() == 0) {
+      } else if (breaks.isEmpty()) {
         return " ";
       }
       return breaks.toString();
@@ -2266,7 +2266,7 @@ public final class ScannerImpl implements Scanner {
     if (length != 0) {
       chunks.append(reader.prefixForward(length));
     }
-    if (chunks.length() == 0) {
+    if (chunks.isEmpty()) {
       // If no URI was found, an error has occurred.
       final String s = String.valueOf(Character.toChars(c));
       throw new ScannerException("while scanning a " + name, startMark,

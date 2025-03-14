@@ -359,8 +359,8 @@ public class SafeConstructor extends BaseConstructor {
         }
         return Double.valueOf(sign * val);
       } else {
-        Double d = Double.valueOf(value);
-        return Double.valueOf(d.doubleValue() * sign);
+        double d = Double.parseDouble(value);
+        return Double.valueOf((double) d * sign);
       }
     }
   }

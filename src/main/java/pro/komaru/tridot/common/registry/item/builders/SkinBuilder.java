@@ -3,11 +3,9 @@ package pro.komaru.tridot.common.registry.item.builders;
 import pro.komaru.tridot.common.registry.item.skins.AuthoredItemSkin;
 import pro.komaru.tridot.common.registry.item.skins.ItemSkin;
 import pro.komaru.tridot.common.registry.item.skins.ItemSkinEntry;
-import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.*;
 import pro.komaru.tridot.util.Col;
 
-import java.util.List;
 import java.util.*;
 import java.util.function.*;
 

@@ -3,11 +3,11 @@ package pro.komaru.tridot.client.gfx.particle.behavior;
 import com.mojang.blaze3d.vertex.*;
 import net.minecraft.client.*;
 import net.minecraft.client.renderer.*;
-import net.minecraft.world.phys.*;
 import pro.komaru.tridot.client.gfx.TridotParticles;
 import pro.komaru.tridot.client.gfx.particle.GenericParticle;
 import pro.komaru.tridot.client.gfx.particle.data.SpinParticleData;
 import pro.komaru.tridot.client.render.RenderBuilder;
+import pro.komaru.tridot.util.phys.Vec3;
 
 public class CubeParticleBehavior extends ParticleBehavior implements ICustomBehaviorParticleRender{
 
@@ -37,14 +37,14 @@ public class CubeParticleBehavior extends ParticleBehavior implements ICustomBeh
     public void render(GenericParticle particle, PoseStack poseStack, MultiBufferSource buffer, float partialTicks){
         poseStack.pushPose();
         Camera camera = Minecraft.getInstance().gameRenderer.getMainCamera();
-        Vec3 vec3 = camera.getPosition();
+        Vec3 vec3 = Vec3.from(camera.getPosition());
         Vec3 pos = getPosition(particle, Minecraft.getInstance().gameRenderer.getMainCamera(), partialTicks);
-        poseStack.translate((float)pos.x() + vec3.x(), (float)pos.y() + vec3.y(), (float)pos.z() + vec3.z());
+        poseStack.translate(pos.x() + vec3.x(), pos.y() + vec3.y(), pos.z() + vec3.z());
         poseStack.mulPose(getRotate(particle, Minecraft.getInstance().gameRenderer.getMainCamera(), partialTicks));
 
         RenderBuilder.create().setRenderType(particle.renderType).setSided(firstSide, secondSide)
         .setUV(particle.getU0(), particle.getV0(), particle.getU1(), particle.getV1())
-        .setColorRaw(particle.getRed(), particle.getGreen(), particle.getBlue())
+        .setColor(particle.getRed(), particle.getGreen(), particle.getBlue())
         .setAlpha(particle.getAlpha())
         .setLight(particle.getLightColor(partialTicks))
         .renderCenteredCube(poseStack, particle.getSize() / 2f);

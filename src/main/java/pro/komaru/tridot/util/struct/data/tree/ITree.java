@@ -20,7 +20,8 @@ public interface ITree<A> {
 
     default A childDeep(Boolf<A> filter) {
         return childDeep(filter,false);
-    };
+    }
+
     default A child(Boolf<A> filter, boolean deep, boolean depthSearch) {
         return deep ? childDeep(filter,depthSearch) : child(filter);
     }

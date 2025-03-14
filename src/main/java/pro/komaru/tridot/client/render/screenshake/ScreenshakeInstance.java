@@ -1,13 +1,11 @@
 package pro.komaru.tridot.client.render.screenshake;
 
+import pro.komaru.tridot.util.math.ArcRandom;
 import pro.komaru.tridot.util.math.Interp;
 import net.minecraft.client.*;
 import net.minecraft.util.*;
-import net.minecraft.world.phys.*;
+import pro.komaru.tridot.util.phys.Vec3;
 
-import java.util.*;
-
-//todo fluffy
 public class ScreenshakeInstance{
     public int progress;
     public final int duration;
@@ -21,65 +19,65 @@ public class ScreenshakeInstance{
     public boolean isFov = false;
     public boolean isFovNormalize = false;
 
-    public Vec3 vector = Vec3.ZERO;
+    public Vec3 vector = Vec3.zero();
 
-    public static final Random random = new Random();
+    public static final ArcRandom random = new ArcRandom();
 
     public ScreenshakeInstance(int duration){
         this.duration = duration;
     }
 
-    public ScreenshakeInstance setIntensity(float intensity){
-        return setIntensity(intensity, intensity);
+    public ScreenshakeInstance intensity(float intensity){
+        return intensity(intensity, intensity);
     }
 
-    public ScreenshakeInstance setIntensity(float intensity1, float intensity2){
-        return setIntensity(intensity1, intensity2, intensity2);
+    public ScreenshakeInstance intensity(float intensity1, float intensity2){
+        return intensity(intensity1, intensity2, intensity2);
     }
 
-    public ScreenshakeInstance setIntensity(float intensity1, float intensity2, float intensity3){
+    public ScreenshakeInstance intensity(float intensity1, float intensity2, float intensity3){
         this.intensity1 = intensity1;
         this.intensity2 = intensity2;
         this.intensity3 = intensity3;
         return this;
     }
 
-    public ScreenshakeInstance setEasing(Interp easing){
-        return setEasing(easing, easing);
+    public ScreenshakeInstance interp(Interp interp){
+        return interp(interp, interp);
     }
 
-    public ScreenshakeInstance setEasing(Interp intensityCurveStartEasing, Interp intensityCurveEndEasing){
+    public ScreenshakeInstance interp(Interp intensityCurveStartEasing, Interp intensityCurveEndEasing){
         this.intensityCurveStartEasing = intensityCurveStartEasing;
         this.intensityCurveEndEasing = intensityCurveEndEasing;
         return this;
     }
 
-    public ScreenshakeInstance setNormalize(boolean normalize){
+    public ScreenshakeInstance normalize(boolean normalize){
         this.isNormalize = normalize;
         return this;
     }
 
-    public ScreenshakeInstance setRotation(boolean rotation){
+    public ScreenshakeInstance rot(boolean rotation){
         this.isRotation = rotation;
         return this;
     }
 
-    public ScreenshakeInstance setPosition(boolean position){
+    public ScreenshakeInstance pos(boolean position){
         this.isPosition = position;
         return this;
     }
 
-    public ScreenshakeInstance setVector(boolean vector){
+    public ScreenshakeInstance vec(boolean vector){
         this.isVector = vector;
         return this;
     }
 
-    public ScreenshakeInstance setVector(Vec3 vector){
+    public ScreenshakeInstance vec(Vec3 vector){
         this.vector = vector;
         return this;
     }
 
-    public ScreenshakeInstance setRandomVector(){
+    public ScreenshakeInstance randVec(){
         double angleA = random.nextDouble() * Math.PI * 2;
         double angleB = random.nextDouble() * Math.PI * 2;
         float x = (float)(Math.cos(angleA) * Math.cos(angleB));
@@ -89,12 +87,12 @@ public class ScreenshakeInstance{
         return this;
     }
 
-    public ScreenshakeInstance setFov(boolean fov){
+    public ScreenshakeInstance fov(boolean fov){
         this.isFov = fov;
         return this;
     }
 
-    public ScreenshakeInstance setFovNormalize(boolean fovNormalize){
+    public ScreenshakeInstance normalizeFov(boolean fovNormalize){
         this.isFovNormalize = fovNormalize;
         return this;
     }

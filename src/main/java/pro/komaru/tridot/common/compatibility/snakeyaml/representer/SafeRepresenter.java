@@ -29,7 +29,7 @@ import java.util.regex.Pattern;
  */
 class SafeRepresenter extends BaseRepresenter {
 
-  protected Map<Class<? extends Object>, Tag> classTags;
+  protected Map<Class<?>, Tag> classTags;
   protected TimeZone timeZone = null;
   protected DumperOptions.NonPrintableStyle nonPrintableStyle;
 
@@ -62,7 +62,7 @@ class SafeRepresenter extends BaseRepresenter {
     this.multiRepresenters.put(Date.class, new RepresentDate());
     this.multiRepresenters.put(Enum.class, new RepresentEnum());
     this.multiRepresenters.put(Calendar.class, new RepresentDate());
-    classTags = new HashMap<Class<? extends Object>, Tag>();
+    classTags = new HashMap<Class<?>, Tag>();
     this.nonPrintableStyle = options.getNonPrintableStyle();
     setDefaultScalarStyle(options.getDefaultScalarStyle());
     setDefaultFlowStyle(options.getDefaultFlowStyle());
@@ -84,7 +84,7 @@ class SafeRepresenter extends BaseRepresenter {
    * @param tag new tag to be used for every instance of the specified <code>Class</code>
    * @return the previous tag associated with the <code>Class</code>
    */
-  public Tag addClassTag(Class<? extends Object> clazz, Tag tag) {
+  public Tag addClassTag(Class<?> clazz, Tag tag) {
     if (tag == null) {
       throw new NullPointerException("Tag must be provided.");
     }

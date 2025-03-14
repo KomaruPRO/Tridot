@@ -262,7 +262,7 @@ public class Yaml {
    * @param data Iterator with Objects
    * @return YAML String with all the objects in proper sequence
    */
-  public String dumpAll(Iterator<? extends Object> data) {
+  public String dumpAll(Iterator<?> data) {
     StringWriter buffer = new StringWriter();
     dumpAll(data, buffer, null);
     return buffer.toString();
@@ -286,11 +286,11 @@ public class Yaml {
    * @param data Iterator with Objects
    * @param output stream to write to
    */
-  public void dumpAll(Iterator<? extends Object> data, Writer output) {
+  public void dumpAll(Iterator<?> data, Writer output) {
     dumpAll(data, output, null);
   }
 
-  private void dumpAll(Iterator<? extends Object> data, Writer output, Tag rootTag) {
+  private void dumpAll(Iterator<?> data, Writer output, Tag rootTag) {
     Serializer serializer =
         new Serializer(new Emitter(output, dumperOptions), resolver, dumperOptions, rootTag);
     try {

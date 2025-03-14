@@ -245,7 +245,7 @@ public class CompactConstructor extends Constructor {
         iterator.remove();
       }
     }
-    if (properties.size() == 0) {
+    if (properties.isEmpty()) {
       throw new YAMLException("No list property found in " + bean);
     } else if (properties.size() > 1) {
       throw new YAMLException("Many list properties found in " + bean

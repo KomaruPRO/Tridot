@@ -98,11 +98,11 @@ public abstract class BaseConstructor {
   /**
    * Mapping from a class to its manager
    */
-  protected final Map<Class<? extends Object>, TypeDescription> typeDefinitions;
+  protected final Map<Class<?>, TypeDescription> typeDefinitions;
   /**
    * register classes for tags
    */
-  protected final Map<Tag, Class<? extends Object>> typeTags;
+  protected final Map<Tag, Class<?>> typeTags;
 
   /**
    * options
@@ -122,8 +122,8 @@ public abstract class BaseConstructor {
     recursiveObjects = new HashSet<Node>();
     maps2fill = new ArrayList<Tuple<Map<Object, Object>, Tuple<Object, Object>>>();
     sets2fill = new ArrayList<Tuple<Set<Object>, Object>>();
-    typeDefinitions = new HashMap<Class<? extends Object>, TypeDescription>();
-    typeTags = new HashMap<Tag, Class<? extends Object>>();
+    typeDefinitions = new HashMap<Class<?>, TypeDescription>();
+    typeTags = new HashMap<Tag, Class<?>>();
 
     rootTag = null;
     explicitPropertyUtils = false;
@@ -328,7 +328,7 @@ public abstract class BaseConstructor {
   // <<<< DEFAULTS <<<<
 
   protected Object finalizeConstruction(Node node, Object data) {
-    final Class<? extends Object> type = node.getType();
+    final Class<?> type = node.getType();
     if (typeDefinitions.containsKey(type)) {
       return typeDefinitions.get(type).finalizeConstruction(data);
     }
@@ -359,7 +359,7 @@ public abstract class BaseConstructor {
    */
   protected Object newInstance(Class<?> ancestor, Node node, boolean tryDefault) {
     try {
-      final Class<? extends Object> type = node.getType();
+      final Class<?> type = node.getType();
       if (typeDefinitions.containsKey(type)) {
         TypeDescription td = typeDefinitions.get(type);
         final Object instance = td.newInstance(node);
@@ -425,7 +425,7 @@ public abstract class BaseConstructor {
    * @param node - the source
    * @return filled List
    */
-  protected List<? extends Object> constructSequence(SequenceNode node) {
+  protected List<?> constructSequence(SequenceNode node) {
     List<Object> result = newList(node);
     constructSequenceStep2(node, result);
     return result;
@@ -437,7 +437,7 @@ public abstract class BaseConstructor {
    * @param node - sequence
    * @return constructed Set
    */
-  protected Set<? extends Object> constructSet(SequenceNode node) {
+  protected Set<?> constructSet(SequenceNode node) {
     Set<Object> result = newSet(node);
     constructSequenceStep2(node, result);
     return result;

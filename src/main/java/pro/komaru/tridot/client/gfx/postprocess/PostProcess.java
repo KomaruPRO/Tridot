@@ -14,18 +14,18 @@ import net.minecraft.resources.*;
 import org.joml.*;
 import pro.komaru.tridot.client.ClientTick;
 import pro.komaru.tridot.util.Log;
+import pro.komaru.tridot.util.struct.func.Cons;
 
 import java.io.*;
 import java.lang.Math;
 import java.util.*;
-import java.util.function.*;
 
 import static com.mojang.blaze3d.platform.GlConst.GL_DRAW_FRAMEBUFFER;
 
 public abstract class PostProcess{
     public static final Minecraft minecraft = Minecraft.getInstance();
 
-    public static final Collection<Pair<String, Consumer<Uniform>>> COMMON_UNIFORMS = Lists.newArrayList(
+    public static final Collection<Pair<String, Cons<Uniform>>> COMMON_UNIFORMS = Lists.newArrayList(
     Pair.of("cameraPos", u -> u.set(new Vector3f(minecraft.gameRenderer.getMainCamera().getPosition().toVector3f()))),
     Pair.of("lookVector", u -> u.set(minecraft.gameRenderer.getMainCamera().getLookVector())),
     Pair.of("upVector", u -> u.set(minecraft.gameRenderer.getMainCamera().getUpVector())),
@@ -52,7 +52,7 @@ public abstract class PostProcess{
     public boolean effectActive;
     public RenderTarget tempDepthBuffer;
     public EffectInstance[] effects;
-    public Collection<Pair<Uniform, Consumer<Uniform>>> defaultUniforms;
+    public Collection<Pair<Uniform, Cons<Uniform>>> defaultUniforms;
 
     public boolean initialized = false;
     public boolean isActive = true;
@@ -65,7 +65,7 @@ public abstract class PostProcess{
 
             defaultUniforms = new ArrayList<>();
             for(EffectInstance e : effects){
-                for(Pair<String, Consumer<Uniform>> pair : COMMON_UNIFORMS){
+                for(Pair<String, Cons<Uniform>> pair : COMMON_UNIFORMS){
                     Uniform u = e.getUniform(pair.getFirst());
                     if(u != null){
                         defaultUniforms.add(Pair.of(u, pair.getSecond()));
@@ -119,7 +119,7 @@ public abstract class PostProcess{
         Arrays.stream(effects).forEach(e -> e.safeGetUniform("partialTicks").set(ClientTick.partialTicks));
         Arrays.stream(effects).forEach(e -> e.safeGetUniform("gameTicks").set(ClientTick.ticksInGame));
         Arrays.stream(effects).forEach(e -> e.safeGetUniform("time").set((float)time));
-        defaultUniforms.forEach(pair -> pair.getSecond().accept(pair.getFirst()));
+        defaultUniforms.forEach(pair -> pair.getSecond().get(pair.getFirst()));
     }
 
     public void applyPostProcess(){

@@ -9,8 +9,8 @@ import pro.komaru.tridot.client.render.TridotRenderTypes;
 import pro.komaru.tridot.client.gfx.particle.GenericParticle;
 import pro.komaru.tridot.client.gfx.particle.GenericParticleRenderType;
 import pro.komaru.tridot.client.gfx.particle.behavior.ParticleBehavior;
+import pro.komaru.tridot.util.Col;
 
-import java.awt.*;
 import java.util.*;
 import java.util.function.*;
 
@@ -23,7 +23,7 @@ public class GenericParticleOptions implements ParticleOptions{
 
     public ParticleBehavior behavior = null;
 
-    public static final ColorParticleData DEFAULT_COLOR = ColorParticleData.create(Color.WHITE, Color.WHITE).build();
+    public static final ColorParticleData DEFAULT_COLOR = ColorParticleData.create(Col.white, Col.white).build();
     public static final GenericParticleData DEFAULT_GENERIC = GenericParticleData.create(1, 0).build();
     public static final SpinParticleData DEFAULT_SPIN = SpinParticleData.create(0).build();
     public static final LightParticleData DEFAULT_LIGHT = LightParticleData.GLOW;

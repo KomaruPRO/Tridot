@@ -1580,7 +1580,7 @@ public final class Emitter implements Emitable {
   void writeFolded(String text, boolean split) throws IOException {
     String hints = determineBlockHints(text);
     writeIndicator(">" + hints, true, false, false);
-    if (hints.length() > 0 && (hints.charAt(hints.length() - 1) == '+')) {
+    if (!hints.isEmpty() && (hints.charAt(hints.length() - 1) == '+')) {
       openEnded = true;
     }
     if (!writeInlineComments()) {
@@ -1647,7 +1647,7 @@ public final class Emitter implements Emitable {
   void writeLiteral(String text) throws IOException {
     String hints = determineBlockHints(text);
     writeIndicator("|" + hints, true, false, false);
-    if (hints.length() > 0 && (hints.charAt(hints.length() - 1)) == '+') {
+    if (!hints.isEmpty() && (hints.charAt(hints.length() - 1)) == '+') {
       openEnded = true;
     }
     if (!writeInlineComments()) {

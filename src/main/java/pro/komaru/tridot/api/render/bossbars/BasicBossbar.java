@@ -11,7 +11,6 @@ import pro.komaru.tridot.*;
 import pro.komaru.tridot.common.config.ClientConfig;
 import pro.komaru.tridot.util.Col;
 
-import java.awt.*;
 import java.util.*;
 
 public class BasicBossbar extends AbstractBossbar{

@@ -7,19 +7,21 @@ import net.minecraft.client.multiplayer.*;
 import net.minecraft.client.particle.*;
 import net.minecraft.client.renderer.*;
 import net.minecraft.util.*;
-import net.minecraft.world.phys.*;
 import pro.komaru.tridot.client.render.TridotRenderTypes;
 import pro.komaru.tridot.client.gfx.particle.behavior.ParticleBehavior;
 import pro.komaru.tridot.client.gfx.particle.behavior.component.ParticleBehaviorComponent;
 import pro.komaru.tridot.client.gfx.particle.options.GenericParticleOptions;
+import pro.komaru.tridot.util.Col;
+import pro.komaru.tridot.util.Tmp;
+import pro.komaru.tridot.util.math.ArcRandom;
+import pro.komaru.tridot.util.phys.Vec3;
 
-import java.awt.*;
 import java.util.*;
 import java.util.function.*;
 
 public class GenericParticle extends TextureSheetParticle{
 
-    public static final Random random = new Random();
+    public static final ArcRandom random = new ArcRandom();
 
     public RenderType renderType;
     public ParticleRenderType particleRenderType;
@@ -120,8 +122,11 @@ public class GenericParticle extends TextureSheetParticle{
         this.vo = random.nextFloat();
         spriteData.init(this);
 
-        Color.RGBtoHSB((int)(255 * Math.min(1.0f, r1)), (int)(255 * Math.min(1.0f, g1)), (int)(255 * Math.min(1.0f, b1)), hsv1);
-        Color.RGBtoHSB((int)(255 * Math.min(1.0f, r2)), (int)(255 * Math.min(1.0f, g2)), (int)(255 * Math.min(1.0f, b2)), hsv2);
+        Tmp.c1.set(r1,g1,b1);
+        hsv1 = Tmp.c1.toHsv(hsv1);
+        Tmp.c2.set(r2,g2,b2);
+        hsv2 = Tmp.c2.toHsv(hsv2);
+
         options.spawnActors.forEach(actor -> actor.accept(this));
         updateTraits();
     }
@@ -144,11 +149,8 @@ public class GenericParticle extends TextureSheetParticle{
         float h = Mth.rotLerp(coeff, 360 * hsv1[0], 360 * hsv2[0]) / 360;
         float s = Mth.lerp(coeff, hsv1[1], hsv2[1]);
         float v = Mth.lerp(coeff, hsv1[2], hsv2[2]);
-        int packed = Color.HSBtoRGB(h, s, v);
-        float r = FastColor.ARGB32.red(packed) / 255.0f;
-        float g = FastColor.ARGB32.green(packed) / 255.0f;
-        float b = FastColor.ARGB32.blue(packed) / 255.0f;
-        setColor(r, g, b);
+        var col = Col.HSVtoRGB(h,s,v);
+        setColor(col.r,col.g,col.b);
     }
 
     public void updateTraits(){

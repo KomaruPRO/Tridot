@@ -95,11 +95,11 @@ public class Files {
         try {
             InputStreamReader reader = input(f);
             int t;
-            String readResult = "";
+            StringBuilder readResult = new StringBuilder();
             while ((t = reader.read()) != -1) {
-                readResult = readResult + (char) t;
+                readResult.append((char) t);
             }
-            return readResult;
+            return readResult.toString();
         } catch (IOException e) {
             e.printStackTrace();
         }

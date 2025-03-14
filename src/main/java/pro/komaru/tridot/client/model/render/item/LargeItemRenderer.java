@@ -16,7 +16,6 @@ import net.minecraftforge.client.*;
 import javax.annotation.*;
 import java.util.*;
 
-//todo fluffy
 @OnlyIn(Dist.CLIENT)
 public class LargeItemRenderer{
 

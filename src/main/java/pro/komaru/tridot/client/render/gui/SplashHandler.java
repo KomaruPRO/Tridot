@@ -1,61 +1,52 @@
 package pro.komaru.tridot.client.render.gui;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.fml.DistExecutor;
-import pro.komaru.tridot.util.struct.data.Pair;
+import pro.komaru.tridot.api.Utils;
 import pro.komaru.tridot.util.struct.data.Seq;
+import pro.komaru.tridot.util.struct.func.Boolf;
 import pro.komaru.tridot.util.struct.func.Prov;
 
 import java.util.*;
 
-//todo fluffy
 public class SplashHandler {
 
     public static class DotSplash {
-        public Prov<String> textSupplier;
-        public 
-    }
+        public Prov<String> text;
+        public Boolf<DotSplash> filter;
 
-
-    public static Seq<SplashLanguaged> languagedSplashes = Seq.with();
-    public static Seq<Prov<String>> dynamicSplashes = Seq.with();
-
-    public static void addSplash(String splash){
-        addSplash(() -> splash);
-    }
-    public static void addSplash(Component splash){
-        addSplash(splash::getString);
-    }
-    public static void addSplash(Prov<String> splash){
-        dynamicSplashes.add(splash);
-    }
-    public static void addSplash(String lang, String splash){
-        languagedSplashes.add(new SplashLanguaged(lang,splash));
-    }
-    public static void addSplash(int weight, String lang, String splash){
-        for (int i = 0; i < weight; i++) addSplash(lang,splash);
-    }
-
-    public static List<String> getSplashes(){
-        List<String> all = dynamicSplashes.map(Prov::get).list();
-        DistExecutor.unsafeRunWhenOn(Dist.CLIENT,() -> () -> addLanguaged(all));
-        return all;
-    }
-
-    @OnlyIn(Dist.CLIENT)
-    public static void addLanguaged(List<String> all) {
-        for (SplashLanguaged languagedSplash : languagedSplashes) {
-            if(languagedSplash.first().equals(Minecraft.getInstance().options.languageCode))
-                all.add(languagedSplash.second());
+        public DotSplash(Prov<String> text, Boolf<DotSplash> filter) {
+            this.text = text;
+            this.filter = filter;
         }
     }
 
-    public static class SplashLanguaged extends Pair<String,String> {
-        public SplashLanguaged(String lang, String splash) {
-            super(lang,splash);
+    public static Seq<DotSplash> all = Seq.with();
+
+    public static void add(Prov<String> text, String language, int weight) {
+        for (int i = 0; i < weight; i++) {
+            all.add(new DotSplash(text,s -> language == null || Utils.mc().options.languageCode.equals(language)));
         }
+    }
+    public static void add(Prov<String> text, String language) {
+        add(text,language,1);
+    }
+    public static void add(Prov<String> text) {
+        add(text,null,1);
+    }
+    public static void add(String text, String language) {
+        add(() -> text,language,1);
+    }
+    public static void add(String text, String language,int weight) {
+        add(() -> text,language,weight);
+    }
+    public static void add(Component comp) {
+        add(comp::getString,null,1);
+    }
+    public static void add(Component comp, int weight) {
+        add(comp::getString,null,weight);
+    }
+
+    public static List<String> getSplashes() {
+        return SplashHandler.all.select(f -> f.filter.get(f)).map(e -> e.text.get()).list();
     }
 }

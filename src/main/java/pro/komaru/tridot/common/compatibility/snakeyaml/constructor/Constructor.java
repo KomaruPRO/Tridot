@@ -56,14 +56,14 @@ public class Constructor extends SafeConstructor {
    * @param theRoot - the class to create (to be the root of the YAML document)
    * @param loadingConfig - options
    */
-  public Constructor(Class<? extends Object> theRoot, LoaderOptions loadingConfig) {
+  public Constructor(Class<?> theRoot, LoaderOptions loadingConfig) {
     this(new TypeDescription(checkRoot(theRoot)), null, loadingConfig);
   }
 
   /**
    * Ugly Java way to check the argument in the constructor
    */
-  private static Class<? extends Object> checkRoot(Class<? extends Object> theRoot) {
+  private static Class<?> checkRoot(Class<?> theRoot) {
     if (theRoot == null) {
       throw new NullPointerException("Root class must be provided.");
     } else {
@@ -212,7 +212,7 @@ public class Constructor extends SafeConstructor {
 
     protected Object constructJavaBean2ndStep(MappingNode node, Object object) {
       flattenMapping(node, true);
-      Class<? extends Object> beanType = node.getType();
+      Class<?> beanType = node.getType();
       List<NodeTuple> nodeValue = node.getValue();
       for (NodeTuple tuple : nodeValue) {
         Node valueNode = tuple.getValueNode();
@@ -295,7 +295,7 @@ public class Constructor extends SafeConstructor {
       return constructObject(node);
     }
 
-    protected Property getProperty(Class<? extends Object> type, String name) {
+    protected Property getProperty(Class<?> type, String name) {
       return getPropertyUtils().getProperty(type, name);
     }
   }
@@ -591,7 +591,7 @@ public class Constructor extends SafeConstructor {
       }
     }
 
-    private Class<? extends Object> wrapIfPrimitive(Class<?> clazz) {
+    private Class<?> wrapIfPrimitive(Class<?> clazz) {
       if (!clazz.isPrimitive()) {
         return clazz;
       }
@@ -637,7 +637,7 @@ public class Constructor extends SafeConstructor {
   }
 
   protected Class<?> getClassForNode(Node node) {
-    Class<? extends Object> classForTag = typeTags.get(node.getTag());
+    Class<?> classForTag = typeTags.get(node.getTag());
     if (classForTag == null) {
       String name = node.getTag().getClassName();
       Class<?> cl;

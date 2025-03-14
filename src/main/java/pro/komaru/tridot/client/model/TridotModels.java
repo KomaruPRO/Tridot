@@ -55,7 +55,7 @@ public class TridotModels{
         CustomModel customModel = new CustomModel(model, itemOverrides);
 
         for(int i = 0; i < 3; i++){
-            BakedModel pullModel = map.get(new ModelResourceLocation(new ResourceLocation(item + "_pulling_" + String.valueOf(i)), "inventory"));
+            BakedModel pullModel = map.get(new ModelResourceLocation(new ResourceLocation(item + "_pulling_" + i), "inventory"));
             itemOverrides.models.add(pullModel);
         }
 

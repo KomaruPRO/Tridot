@@ -106,7 +106,7 @@ public final class Tag {
     this.secondary = !tag.startsWith(PREFIX);
   }
 
-  public Tag(Class<? extends Object> clazz) {
+  public Tag(Class<?> clazz) {
     if (clazz == null) {
       throw new NullPointerException("Class for tag must be provided.");
     }
@@ -173,7 +173,7 @@ public final class Tag {
    * @param clazz - Class to check
    * @return true when this tag can be used as a global tag for the Class during serialisation
    */
-  public boolean matches(Class<? extends Object> clazz) {
+  public boolean matches(Class<?> clazz) {
     return value.equals(Tag.PREFIX + clazz.getName());
   }
 

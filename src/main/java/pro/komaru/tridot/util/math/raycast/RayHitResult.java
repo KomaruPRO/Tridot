@@ -2,7 +2,7 @@ package pro.komaru.tridot.util.math.raycast;
 
 import net.minecraft.core.*;
 import net.minecraft.world.entity.*;
-import net.minecraft.world.phys.*;
+import pro.komaru.tridot.util.phys.Vec3;
 
 import java.util.*;
 
