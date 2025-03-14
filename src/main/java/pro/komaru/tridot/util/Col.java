@@ -691,12 +691,21 @@ public class Col {
         return Integer.parseInt(hex, 16);
     }
 
-    public static int toDecimal(Color color){
+    public static int toDecimal(Col color){
         return Integer.parseInt(hex(color), 16);
     }
 
     public int toDecimal(){
         return Integer.parseInt(hex(), 16);
+    }
+
+    public static String hex(Col color){
+        String hex = Integer.toHexString(color.rgb() & 0xffffff);
+        if(hex.length() < 6){
+            hex = "0" + hex;
+        }
+
+        return hex;
     }
 
     public static String hex(Color color){
