@@ -46,9 +46,11 @@ public class ItemSkin{
     public boolean appliesOn(ItemStack stack) {
         return entries.contains(e -> e.appliesOn(stack));
     }
-    public void applyTo(ItemStack stack) {
+    public ItemStack apply(ItemStack stack) {
         stack.getOrCreateTag().putString("skin",id.toString());
+        return stack;
     }
+
     public static ItemSkin itemSkin(ItemStack stack) {
         CompoundTag nbt = stack.getOrCreateTag();
         return ItemSkinHandler.get(nbt.getString("skin"));
