@@ -6,10 +6,13 @@ import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.font.FontSet;
 import net.minecraft.client.gui.font.glyphs.BakedGlyph;
 import net.minecraft.network.chat.TextColor;
-import pro.komaru.tridot.client.event.ClientTickHandler;
-import pro.komaru.tridot.client.graphics.*;
-import pro.komaru.tridot.core.math.ArcRandom;
-import pro.komaru.tridot.core.math.Mathf;
+import net.minecraft.resources.ResourceLocation;
+import pro.komaru.tridot.client.ClientTick;
+import pro.komaru.tridot.client.gfx.text.DotStyle;
+import pro.komaru.tridot.util.Col;
+import pro.komaru.tridot.util.Tmp;
+import pro.komaru.tridot.util.math.ArcRandom;
+import pro.komaru.tridot.util.math.Mathf;
 
 import java.awt.*;
 
@@ -17,7 +20,6 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class DotText {
-
     static ArcRandom random = Tmp.rnd;
     public static Map<String, DotStyle.DotStyleEffect> EFFECTS = new LinkedHashMap<>();
 
@@ -74,11 +76,10 @@ public class DotText {
 
         @Override
         public void beforeGlyph(Font.StringRenderOutput self, DotStyle style, int index) {
-            pulse = (float)(1 - Math.abs(0.3 * Math.sin(ClientTickHandler.getTotal()/20f * intensity)));
+            pulse = (float)(1 - Math.abs(0.3 * Math.sin(ClientTick.getTotal()/20f * intensity)));
         }
     }
 
-    //todo might be better
     public static class PulseColorEffect extends DotStyle.DotStyleEffect{
         public float intensity;
         public PulseColorEffect(float intensity){
@@ -87,7 +88,7 @@ public class DotText {
 
         @Override
         public float alpha(float alpha) {
-            hue = (float)(Math.sin(ClientTickHandler.getTotal() * 0.05f * intensity) * 0.5 + 0.5);
+            hue = (float)(Math.sin(ClientTick.getTotal() * 0.05f * intensity) * 0.5 + 0.5);
             return alpha * (hue);
         }
 
@@ -95,13 +96,13 @@ public class DotText {
         @Override
         public void beforeGlyph(Font.StringRenderOutput self, DotStyle style, int index) {
             super.beforeGlyph(self, style, index);
-            hue = (float)(Math.sin(ClientTickHandler.ticksInGame * 0.05f * intensity) * 0.5 + 0.5);
+            hue = (float)(Math.sin(ClientTick.ticksInGame * 0.05f * intensity) * 0.5 + 0.5);
             if (hue > 1 || hue < 0) {
-                hue += (rand.nextFloat() - 0.5f) * 0.1f;
+                hue += (random.nextFloat() - 0.5f) * 0.1f;
                 hue = Math.max(0f, Math.min(1f, hue));
             }
 
-            style.color(Clr.HSVtoRGB(hue*360f, 100.0f, 100.0f));
+            style.color(Col.HSVtoRGB(hue*360f, 100.0f, 100.0f));
         }
     }
 
@@ -114,15 +115,15 @@ public class DotText {
         }
 
         float off;
-        Clr oldCol;
+        Col oldCol;
         @Override
         public void beforeGlyph(Font.StringRenderOutput self, DotStyle style, int index) {
             super.beforeGlyph(self, style, index);
 
-            if(shiftSymbols) off = (index * 36f + ClientTickHandler.getTotal() * 3.25f * intensity) % 360f;
-            else off = ((index * 0.05f) + (ClientTickHandler.getTotal() * 1 * intensity)) % 360f;
-            oldCol = style.color == null ? new Clr(1f,1f,1f,1f) : new Clr(style.color.getValue());
-            style.color(Clr.HSVtoRGB(off, 90, 100));
+            if(shiftSymbols) off = (index * 36f + ClientTick.getTotal() * 3.25f * intensity) % 360f;
+            else off = ((index * 0.05f) + (ClientTick.getTotal() * 1 * intensity)) % 360f;
+            oldCol = style.color == null ? new Col(1f,1f,1f,1f) : new Col(style.color.getValue());
+            style.color(Col.HSVtoRGB(off, 90, 100));
         }
 
         @Override
@@ -145,7 +146,7 @@ public class DotText {
             super.beforeGlyph(self, style, index);
 
             off = (float) Math.sin(Math.toDegrees(
-                    (index * charIntensity * 0.02f + ClientTickHandler.getTotal() * 0.005f * intensity)
+                    (index * charIntensity * 0.02f + ClientTick.getTotal() * 0.005f * intensity)
             ));
 
             self.y += off;

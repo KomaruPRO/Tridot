@@ -10,9 +10,10 @@ import net.minecraft.network.chat.Style;
 import net.minecraft.network.chat.TextColor;
 import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.Nullable;
+import pro.komaru.tridot.api.render.DotText;
 import pro.komaru.tridot.client.event.*;
-import pro.komaru.tridot.client.graphics.Clr;
-import pro.komaru.tridot.core.struct.data.Seq;
+import pro.komaru.tridot.util.Col;
+import pro.komaru.tridot.util.struct.data.Seq;
 
 import java.awt.*;
 import java.util.*;
@@ -45,9 +46,9 @@ public class DotStyle extends Style {
     }
 
     public DotStyle color(Color color) {
-        return this.color(new Clr(color.getRGB()));
+        return this.color(new Col(color.getRGB()));
     }
-    public DotStyle color(Clr color) {
+    public DotStyle color(Col color) {
         return color(color.toTextColor());
     }
     public DotStyle color(TextColor color) {

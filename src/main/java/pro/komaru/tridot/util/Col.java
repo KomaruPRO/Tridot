@@ -147,8 +147,8 @@ public class Col {
         return clamp();
     }
 
-    public Clr a(float alpha) {
-        return new Clr(r, g, b, alpha);
+    public Col a(float alpha) {
+        return new Col(r, g, b, alpha);
     }
 
     /**
