@@ -48,8 +48,7 @@ public class ClientEvents{
                 Component.literal("Сан-наби...")
                         .setStyle(DotStyle.of()
                                 .effects(
-                                        TextFx.rainbow(5),
-                                        TextFx.pulse(1f),
+                                        TextFx.rainbow(1, true),
                                         TextFx.advance(1.5f),
                                         TextFx.wave(0.1f,0.2f),
                                         TextFx.shake(0.2f)

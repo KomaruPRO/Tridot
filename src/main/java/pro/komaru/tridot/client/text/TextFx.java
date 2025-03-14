@@ -38,7 +38,11 @@ public class TextFx {
     }
 
     public static RainbowEffect rainbow(float intensity) {
-        return new RainbowEffect(intensity);
+        return new RainbowEffect(intensity, false);
+    }
+
+    public static RainbowEffect rainbow(float intensity, boolean shiftSymbols) {
+        return new RainbowEffect(intensity, shiftSymbols);
     }
 
     public static class PulseEffect extends DotStyle.DotStyleEffect{
@@ -57,8 +61,10 @@ public class TextFx {
 
     public static class RainbowEffect extends DotStyle.DotStyleEffect{
         public float intensity;
-        public RainbowEffect(float intensity){
+        public boolean shiftSymbols;
+        public RainbowEffect(float intensity, boolean shiftSymbols){
             this.intensity = intensity;
+            this.shiftSymbols = shiftSymbols;
         }
 
         float off;
@@ -66,7 +72,9 @@ public class TextFx {
         public void beforeGlyph(Font.StringRenderOutput self, DotStyle style, int index) {
             super.beforeGlyph(self, style, index);
 
-            off = ((index * 0.05f) + (ClientTickHandler.ticksInGame * 1 * intensity)) % 360f;
+            if(shiftSymbols) off = (index * 36f + ClientTickHandler.getTotal() * 3.25f * intensity) % 360f;
+            else off = ((index * 0.05f) + (ClientTickHandler.ticksInGame * 1 * intensity)) % 360f;
+
             style.color(Clr.HSVtoRGB(off, 90, 100));
         }
     }
