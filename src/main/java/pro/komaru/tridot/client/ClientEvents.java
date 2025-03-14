@@ -1,15 +1,22 @@
 package pro.komaru.tridot.client;
 
 import net.minecraft.client.*;
+import net.minecraft.network.chat.*;
+import net.minecraft.network.chat.Component;
 import net.minecraft.util.*;
 import net.minecraft.world.entity.player.*;
 import net.minecraft.world.item.*;
 import net.minecraftforge.client.event.*;
 import net.minecraftforge.event.*;
 import net.minecraftforge.eventbus.api.*;
+import pro.komaru.tridot.api.render.*;
 import pro.komaru.tridot.client.gfx.postprocess.*;
+import pro.komaru.tridot.client.gfx.text.*;
 import pro.komaru.tridot.client.model.render.item.bow.*;
 import pro.komaru.tridot.client.render.screenshake.*;
+import pro.komaru.tridot.util.*;
+
+import java.awt.*;
 
 public class ClientEvents {
 
@@ -23,6 +30,14 @@ public class ClientEvents {
             ScreenshakeHandler.clientTick(camera);
             PostProcessHandler.tick();
         }
+    }
+
+    @SubscribeEvent
+    public void render(RenderGuiEvent.Post event) {
+        var gui = event.getGuiGraphics();
+        var mc = Minecraft.getInstance();
+        //todo temp thingy
+        //gui.drawString(mc.font, Component.literal("Тридотушка").setStyle(DotStyle.of().effects(DotText.outline())), 10, 10, Col.packColor(Color.WHITE));
     }
 
     @SubscribeEvent

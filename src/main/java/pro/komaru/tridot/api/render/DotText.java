@@ -2,11 +2,14 @@ package pro.komaru.tridot.api.render;
 
 import com.mojang.blaze3d.font.GlyphInfo;
 import com.mojang.blaze3d.systems.*;
+import net.minecraft.client.*;
 import net.minecraft.client.gui.Font;
+import net.minecraft.client.gui.Font.*;
 import net.minecraft.client.gui.font.FontSet;
 import net.minecraft.client.gui.font.glyphs.BakedGlyph;
 import net.minecraft.network.chat.TextColor;
 import net.minecraft.resources.ResourceLocation;
+import org.codehaus.plexus.util.dag.*;
 import pro.komaru.tridot.client.ClientTick;
 import pro.komaru.tridot.client.gfx.text.DotStyle;
 import pro.komaru.tridot.util.Col;
@@ -61,6 +64,7 @@ public class DotText {
         return new RainbowEffect(intensity, shiftSymbols);
     }
 
+    // todo outline
     public static class PulseEffect extends DotStyle.DotStyleEffect{
         public float intensity;
         public PulseEffect(float intensity){
