@@ -147,6 +147,10 @@ public class Col {
         return clamp();
     }
 
+    public Clr a(float alpha) {
+        return new Clr(r, g, b, alpha);
+    }
+
     /**
      * Adds the given color to this color.
      * @param color the color

@@ -10,9 +10,12 @@ import net.minecraft.network.chat.Style;
 import net.minecraft.network.chat.TextColor;
 import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.Nullable;
-import pro.komaru.tridot.api.render.DotText;
-import pro.komaru.tridot.util.Col;
-import pro.komaru.tridot.util.struct.data.Seq;
+import pro.komaru.tridot.client.event.*;
+import pro.komaru.tridot.client.graphics.Clr;
+import pro.komaru.tridot.core.struct.data.Seq;
+
+import java.awt.*;
+import java.util.*;
 
 public class DotStyle extends Style {
 
@@ -29,7 +32,22 @@ public class DotStyle extends Style {
         return new DotStyle();
     }
 
-    public DotStyle color(Col color) {
+    @Override
+    public boolean equals(Object pOther) {
+        if (this == pOther) {
+            return true;
+        } else if (!(pOther instanceof DotStyle)) {
+            return false;
+        }
+        DotStyle dot = (DotStyle) pOther;
+        if(!dot.effects.equals(this.effects)) return false;
+        return super.equals(pOther);
+    }
+
+    public DotStyle color(Color color) {
+        return this.color(new Clr(color.getRGB()));
+    }
+    public DotStyle color(Clr color) {
         return color(color.toTextColor());
     }
     public DotStyle color(TextColor color) {
@@ -100,15 +118,21 @@ public class DotStyle extends Style {
     public static class DotStyleEffect {
         public ResourceLocation id;
 
-        public float advance() {
-            return 0;
+        public float advance(float advance) {
+            return advance;
+        }
+        public float alpha(float alpha) {
+            return alpha;
         }
 
-        public void beforeGlyph(Font.StringRenderOutput self, int index) {
+        public void beforeGlyph(Font.StringRenderOutput self, DotStyle style, int index) {
 
         }
-        public void afterGlyph(Font.StringRenderOutput self, int index, FontSet fontset, GlyphInfo glyphinfo, BakedGlyph bakedglyph, TextColor textcolor) {
-            self.x += advance();
+        public void beforeGlyphEffects(Font.StringRenderOutput self, DotStyle style, int index, FontSet fontset, GlyphInfo glyphinfo, BakedGlyph bakedglyph, TextColor textcolor) {
+
+        }
+        public void afterGlyph(Font.StringRenderOutput self, DotStyle style, int index, FontSet fontset, GlyphInfo glyphinfo, BakedGlyph bakedglyph, TextColor textcolor) {
+            
         }
     }
 }
