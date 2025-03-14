@@ -116,7 +116,6 @@ public class ScreenshakeHandler{
         }
     }
 
-    //todo
     public static void clientTick(Camera camera){
         float intensity = (float) (double) ClientConfig.SCREENSHAKE_INTENSITY.get();
         float rotationNormalize = 0;
