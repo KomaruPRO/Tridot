@@ -1,5 +1,9 @@
 package pro.komaru.tridot.client.tooltip;
 
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.TooltipFlag;
+
 import java.util.*;
 
 public class TooltipModifierHandler{
@@ -8,6 +12,14 @@ public class TooltipModifierHandler{
 
     public static void register(AttributeTooltipModifier modifier){
         modifiers.add(modifier);
+    }
+
+    public static void add(UUID id) {
+        register(new AttributeTooltipModifier(){
+            public boolean isToolBase(AttributeModifier modifier, Player player, TooltipFlag flag){
+                return modifier.getId().equals(id);
+            }
+        });
     }
 
     public static List<AttributeTooltipModifier> getModifiers(){

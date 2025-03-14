@@ -168,6 +168,7 @@ public class ScreenshakeHandler{
     }
 
     public static float randomizeOffset(float offset){
+        if(offset == 0) return 0f;
         return rand.nextFloat(-offset * 2, offset * 2);
     }
 }
