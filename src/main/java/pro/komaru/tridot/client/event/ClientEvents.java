@@ -46,10 +46,10 @@ public class ClientEvents{
         //todo temp thingy
         gui.drawString(mc.font,
                 Component.literal("Сан-наби...")
-                        .setStyle(DotStyle.of()
+                        .setStyle(DotStyle.of().bold(true)
                                 .effects(
-                                        TextFx.rainbow(1, true),
-                                        TextFx.advance(1.5f),
+                                 TextFx.rainbow(2, true),
+                                        TextFx.advance(55),
                                         TextFx.wave(0.1f,0.2f),
                                         TextFx.shake(0.2f)
                                 )

@@ -37,6 +37,10 @@ public class TextFx {
         return new PulseEffect(intensity);
     }
 
+    public static PulseColorEffect pulseColor(float intensity) {
+        return new PulseColorEffect(intensity);
+    }
+
     public static RainbowEffect rainbow(float intensity) {
         return new RainbowEffect(intensity, false);
     }
@@ -56,6 +60,27 @@ public class TextFx {
         public void beforeGlyph(Font.StringRenderOutput self, DotStyle style, int index) {
             pulse = (float)(1 + 0.035 * Math.sin(System.currentTimeMillis() / 250));
             self.a = pulse; //todo
+        }
+    }
+
+    //todo might be better
+    public static class PulseColorEffect extends DotStyle.DotStyleEffect{
+        public float intensity;
+        public PulseColorEffect(float intensity){
+            this.intensity = intensity;
+        }
+
+        float hue;
+        @Override
+        public void beforeGlyph(Font.StringRenderOutput self, DotStyle style, int index) {
+            super.beforeGlyph(self, style, index);
+            hue = (float)(Math.sin(ClientTickHandler.ticksInGame * 0.05f * intensity) * 0.5 + 0.5);
+            if (hue > 1 || hue < 0) {
+                hue += (rand.nextFloat() - 0.5f) * 0.1f;
+                hue = Math.max(0f, Math.min(1f, hue));
+            }
+
+            style.color(Color.getHSBColor(hue, 1.0f, 1.0f));
         }
     }
 
