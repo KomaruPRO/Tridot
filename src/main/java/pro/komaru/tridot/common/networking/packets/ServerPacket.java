@@ -7,8 +7,6 @@ import java.util.*;
 import java.util.function.*;
 
 public abstract class ServerPacket{
-    public static final Random random = new Random();
-
     public void encode(FriendlyByteBuf buf){
     }
 

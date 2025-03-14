@@ -9,12 +9,14 @@ import net.minecraft.world.entity.player.*;
 import net.minecraft.world.level.*;
 import net.minecraft.world.level.block.state.*;
 import net.minecraft.world.phys.*;
+import pro.komaru.tridot.util.Tmp;
+import pro.komaru.tridot.util.math.ArcRandom;
 
 import java.util.*;
 
 public class FireItemModifier{
 
-    public static final Random random = new Random();
+    public static final ArcRandom random = Tmp.rnd;
 
     public boolean isCreeperInteract(Entity entity, Player player, InteractionHand hand){
         return false;

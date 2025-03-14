@@ -11,6 +11,8 @@ import net.minecraftforge.registries.*;
 import org.joml.Math;
 import pro.komaru.tridot.client.gfx.particle.behavior.ParticleBehavior;
 import pro.komaru.tridot.client.gfx.particle.options.GenericParticleOptions;
+import pro.komaru.tridot.util.Tmp;
+import pro.komaru.tridot.util.math.ArcRandom;
 import pro.komaru.tridot.util.phys.Vec3;
 
 import java.util.*;
@@ -18,7 +20,7 @@ import java.util.function.*;
 
 public class ParticleBuilder{
 
-    public static final Random random = new Random();
+    public static final ArcRandom random = Tmp.rnd;
 
     public final GenericParticleOptions options;
 

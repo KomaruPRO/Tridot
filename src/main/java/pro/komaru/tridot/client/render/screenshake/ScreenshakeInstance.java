@@ -1,5 +1,6 @@
 package pro.komaru.tridot.client.render.screenshake;
 
+import pro.komaru.tridot.util.Tmp;
 import pro.komaru.tridot.util.math.ArcRandom;
 import pro.komaru.tridot.util.math.Interp;
 import net.minecraft.client.*;
@@ -21,7 +22,7 @@ public class ScreenshakeInstance{
 
     public Vec3 vector = Vec3.zero();
 
-    public static final ArcRandom random = new ArcRandom();
+    public static final ArcRandom random = Tmp.rnd;
 
     public ScreenshakeInstance(int duration){
         this.duration = duration;

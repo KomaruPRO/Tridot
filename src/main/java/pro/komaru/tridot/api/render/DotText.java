@@ -7,6 +7,7 @@ import net.minecraft.client.gui.font.glyphs.BakedGlyph;
 import net.minecraft.network.chat.TextColor;
 import net.minecraft.resources.ResourceLocation;
 import pro.komaru.tridot.client.gfx.text.DotStyle;
+import pro.komaru.tridot.util.Tmp;
 import pro.komaru.tridot.util.math.ArcRandom;
 
 import java.util.LinkedHashMap;
@@ -14,7 +15,7 @@ import java.util.Map;
 
 public class DotText {
 
-    static ArcRandom rand = new ArcRandom();
+    static ArcRandom random = Tmp.rnd;
     public static Map<String, DotStyle.DotStyleEffect> EFFECTS = new LinkedHashMap<>();
 
     public static void registerEffect(ResourceLocation effectId, DotStyle.DotStyleEffect effectObject) {
@@ -50,8 +51,8 @@ public class DotText {
         public void beforeGlyph(Font.StringRenderOutput self, int index) {
             super.beforeGlyph(self, index);
 
-            offX = (float) (xi * rand.nextGaussian());
-            offY = (float) (yi * rand.nextGaussian());
+            offX = (float) (xi * random.nextGaussian());
+            offY = (float) (yi * random.nextGaussian());
 
             self.x += offX; self.y += offY;
         }

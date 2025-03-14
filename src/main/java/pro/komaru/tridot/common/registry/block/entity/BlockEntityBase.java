@@ -8,12 +8,14 @@ import net.minecraft.network.protocol.game.*;
 import net.minecraft.world.level.block.entity.*;
 import net.minecraft.world.level.block.state.*;
 import org.jetbrains.annotations.*;
+import pro.komaru.tridot.util.Tmp;
+import pro.komaru.tridot.util.math.ArcRandom;
 
 import java.util.*;
 
 public abstract class BlockEntityBase extends BlockEntity{
 
-    public Random random = new Random();
+    public ArcRandom random = Tmp.rnd;
 
     public BlockEntityBase(BlockEntityType<?> type, BlockPos pos, BlockState blockState){
         super(type, pos, blockState);

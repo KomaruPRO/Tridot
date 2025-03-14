@@ -7,14 +7,15 @@ import org.joml.*;
 import pro.komaru.tridot.client.gfx.particle.GenericParticle;
 import pro.komaru.tridot.client.gfx.particle.behavior.component.ParticleBehaviorComponent;
 import pro.komaru.tridot.client.gfx.particle.data.SpinParticleData;
+import pro.komaru.tridot.util.Tmp;
+import pro.komaru.tridot.util.math.ArcRandom;
 import pro.komaru.tridot.util.phys.Vec3;
 
 import java.lang.Math;
-import java.util.Random;
 
 public class ParticleBehavior{
 
-    public static final Random random = new Random();
+    public static final ArcRandom random = Tmp.rnd;
 
     public SpinParticleData xSpinData;
     public SpinParticleData ySpinData;

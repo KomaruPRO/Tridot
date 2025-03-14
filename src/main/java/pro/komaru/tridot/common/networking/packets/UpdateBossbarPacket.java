@@ -32,9 +32,9 @@ public class UpdateBossbarPacket{
     public static void handle(UpdateBossbarPacket msg, Supplier<Context> context){
         context.get().setPacketHandled(true);
         if(Objects.equals(msg.id, "empty")){
-            TridotLib.proxy.removeBossBarRender(msg.bossBar);
+            TridotLib.PROXY.removeBossBarRender(msg.bossBar);
         }else{
-            TridotLib.proxy.setBossBarRender(msg.bossBar, msg.id, msg.bossMusic);
+            TridotLib.PROXY.setBossBarRender(msg.bossBar, msg.id, msg.bossMusic);
         }
     }
 }

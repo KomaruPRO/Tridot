@@ -9,8 +9,6 @@ import java.util.*;
 import java.util.function.*;
 
 public abstract class ClientPacket{
-    public static final Random random = new Random();
-
     public void encode(FriendlyByteBuf buf){
     }
 

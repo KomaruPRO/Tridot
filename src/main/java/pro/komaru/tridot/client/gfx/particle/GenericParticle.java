@@ -21,7 +21,7 @@ import java.util.function.*;
 
 public class GenericParticle extends TextureSheetParticle{
 
-    public static final ArcRandom random = new ArcRandom();
+    public static final ArcRandom random = Tmp.rnd;
 
     public RenderType renderType;
     public ParticleRenderType particleRenderType;
@@ -149,7 +149,7 @@ public class GenericParticle extends TextureSheetParticle{
         float h = Mth.rotLerp(coeff, 360 * hsv1[0], 360 * hsv2[0]) / 360;
         float s = Mth.lerp(coeff, hsv1[1], hsv2[1]);
         float v = Mth.lerp(coeff, hsv1[2], hsv2[2]);
-        var col = Col.HSVtoRGB(h,s,v);
+        Col col = Col.HSVtoRGB(h,s,v);
         setColor(col.r,col.g,col.b);
     }
 

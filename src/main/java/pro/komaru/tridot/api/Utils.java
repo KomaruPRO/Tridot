@@ -76,7 +76,6 @@ import javax.annotation.*;
 import java.awt.*;
 import java.lang.Math;
 import java.util.List;
-import java.util.Random;
 import java.util.*;
 import java.util.concurrent.*;
 import java.util.function.*;
@@ -84,7 +83,7 @@ import java.util.function.*;
 import static net.minecraft.util.Mth.sqrt;
 
 public class Utils {
-
+    static ArcRandom rand;
     /**
      * Checks if the game was started in IDE
      */
@@ -191,7 +190,7 @@ public class Utils {
                 double Y = Math.cos(pitch) * pRadius * 0.75F;
                 double Z = Math.sin(pitch) * Math.sin(yaw) * pRadius * 0.75F;
                 if (!level.isClientSide() && level instanceof ServerLevel pServer) {
-                    pServer.sendParticles(type, pos.x + X, pos.y + Y + ((Math.random() - 0.5D) * 0.2F), pos.z + Z, 1, 0, 0, 0, 0);
+                    pServer.sendParticles(type, pos.x + X, pos.y + Y + ((rand.nextFloat() - 0.5D) * 0.2F), pos.z + Z, 1, 0, 0, 0, 0);
                 }
             }
         }
@@ -211,7 +210,7 @@ public class Utils {
                 double Y = Math.cos(pitch) * radius;
                 double Z = Math.sin(pitch) * Math.sin(yaw) * radius;
 
-                AABB boundingBox = new AABB(pos.x, pos.y - 8 + ((Math.random() - 0.5D) * 0.2F), pos.z, pos.x + X, pos.y + Y + ((Math.random() - 0.5D) * 0.2F), pos.z + Z);
+                AABB boundingBox = new AABB(pos.x, pos.y - 8 + ((rand.nextFloat() - 0.5D) * 0.2F), pos.z, pos.x + X, pos.y + Y + ((rand.nextFloat() - 0.5D) * 0.2F), pos.z + Z);
                 List<Entity> entities = level.getEntitiesOfClass(Entity.class, boundingBox);
                 for (Entity entity : entities) {
                     if (entity instanceof LivingEntity livingEntity && !hitEntities.contains(livingEntity) && !livingEntity.equals(player)) {
@@ -221,7 +220,7 @@ public class Utils {
                         }
 
                         if (!level.isClientSide() && level instanceof ServerLevel pServer) {
-                            pServer.sendParticles(type, livingEntity.getX(), livingEntity.getY() + 2 + ((Math.random() - 0.5D) * 0.2F), livingEntity.getZ(), 1, 0, 0, 0, 0);
+                            pServer.sendParticles(type, livingEntity.getX(), livingEntity.getY() + 2 + ((rand.nextFloat() - 0.5D) * 0.2F), livingEntity.getZ(), 1, 0, 0, 0, 0);
                         }
                     }
                 }
@@ -237,7 +236,6 @@ public class Utils {
          * @param pos      Position
          */
         public static void around(Vector3d pos, float distance, float speed, Level level, ParticleOptions options) {
-            Random rand = new Random();
             RandomSource source = RandomSource.create();
             for (int i = 0; i < 360; i += 10) {
                 double X = ((rand.nextDouble() - 0.5D) * distance);
@@ -338,7 +336,7 @@ public class Utils {
             double X = Math.sin(pitch) * Math.cos(yaw) * radius;
             double Y = Math.cos(pitch) * radius;
             double Z = Math.sin(pitch) * Math.sin(yaw) * radius;
-            AABB boundingBox = new AABB(pos.x, pos.y - 8 + ((Math.random() - 0.5D) * 0.2F), pos.z, pos.x + X, pos.y + Y + ((Math.random() - 0.5D) * 0.2F), pos.z + Z);
+            AABB boundingBox = new AABB(pos.x, pos.y - 8 + ((rand.nextFloat() - 0.5D) * 0.2F), pos.z, pos.x + X, pos.y + Y + ((rand.nextFloat() - 0.5D) * 0.2F), pos.z + Z);
             List<Entity> entities = pLevel.getEntitiesOfClass(Entity.class, boundingBox);
             for (Entity entity : entities) {
                 if (entity instanceof LivingEntity livingEntity && !hitEntities.contains(livingEntity) && !livingEntity.equals(pPlayer)) {
@@ -531,7 +529,7 @@ public class Utils {
                 double Y = Math.cos(pitch) * pRadius;
                 double Z = Math.sin(pitch) * Math.sin(yaw + i) * pRadius;
 
-                AABB boundingBox = new AABB(pos.x, pos.y - 1 + ((Math.random() - 0.5D) * 0.2F), pos.z, pos.x + X, pos.y + Y + ((Math.random() - 0.5D) * 0.2F), pos.z + Z);
+                AABB boundingBox = new AABB(pos.x, pos.y - 1 + ((rand.nextFloat() - 0.5D) * 0.2F), pos.z, pos.x + X, pos.y + Y + ((rand.nextFloat() - 0.5D) * 0.2F), pos.z + Z);
                 List<Entity> entities = level.getEntitiesOfClass(Entity.class, boundingBox);
                 for (Entity entity : entities) {
                     if (entity instanceof LivingEntity livingEntity && !hitEntities.contains(livingEntity) && !livingEntity.equals(player)) {
@@ -543,7 +541,7 @@ public class Utils {
                 Y = Math.cos(pitch) * pRadius * 0.75F;
                 Z = Math.sin(pitch) * Math.sin(yaw + i) * pRadius * 0.75F;
                 if (type != null && !level.isClientSide() && level instanceof ServerLevel pServer) {
-                    pServer.sendParticles(type, pos.x + X, pos.y + Y + ((Math.random() - 0.5D) * 0.2F), pos.z + Z, 1, 0, 0, 0, 0);
+                    pServer.sendParticles(type, pos.x + X, pos.y + Y + ((rand.nextFloat() - 0.5D) * 0.2F), pos.z + Z, 1, 0, 0, 0, 0);
                 }
             }
         }
@@ -564,7 +562,7 @@ public class Utils {
                 double Y = Math.cos(pitch) * radius;
                 double Z = Math.sin(pitch) * Math.sin(yaw + i) * radius;
 
-                AABB boundingBox = new AABB(pos.x, pos.y - 1 + ((Math.random() - 0.5D) * 0.2F), pos.z, pos.x + X, pos.y + Y + ((Math.random() - 0.5D) * 0.2F), pos.z + Z);
+                AABB boundingBox = new AABB(pos.x, pos.y - 1 + ((rand.nextFloat() - 0.5D) * 0.2F), pos.z, pos.x + X, pos.y + Y + ((rand.nextFloat() - 0.5D) * 0.2F), pos.z + Z);
                 List<Entity> entities = level.getEntitiesOfClass(Entity.class, boundingBox);
                 for (Entity entity : entities) {
                     if (entity instanceof LivingEntity livingEntity && !hitEntities.contains(livingEntity) && !livingEntity.equals(player)) {
@@ -576,7 +574,7 @@ public class Utils {
                 Y = Math.cos(pitch) * radius * 0.75F;
                 Z = Math.sin(pitch) * Math.sin(yaw + i) * radius * 0.75F;
                 if (type != null && !level.isClientSide() && level instanceof ServerLevel pServer) {
-                    pServer.sendParticles(type, pos.x + X, pos.y + Y + ((Math.random() - 0.5D) * 0.2F), pos.z + Z, 1, 0, 0, 0, 0);
+                    pServer.sendParticles(type, pos.x + X, pos.y + Y + ((rand.nextFloat() - 0.5D) * 0.2F), pos.z + Z, 1, 0, 0, 0, 0);
                 }
             }
         }
@@ -605,7 +603,7 @@ public class Utils {
             double X = Math.sin(pitch) * Math.cos(yaw) * radius;
             double Y = Math.cos(pitch) * radius;
             double Z = Math.sin(pitch) * Math.sin(yaw) * radius;
-            AABB boundingBox = new AABB(pos.x, pos.y - 8 + ((Math.random() - 0.5D) * 0.2F), pos.z, pos.x + X, pos.y + Y + ((Math.random() - 0.5D) * 0.2F), pos.z + Z);
+            AABB boundingBox = new AABB(pos.x, pos.y - 8 + ((rand.nextFloat() - 0.5D) * 0.2F), pos.z, pos.x + X, pos.y + Y + ((rand.nextFloat() - 0.5D) * 0.2F), pos.z + Z);
             List<Entity> entities = pLevel.getEntitiesOfClass(Entity.class, boundingBox);
             for (Entity entity : entities) {
                 if (entity instanceof LivingEntity livingEntity && !hitEntities.contains(livingEntity) && !livingEntity.equals(pPlayer)) {
@@ -634,7 +632,7 @@ public class Utils {
                 double Y = Math.cos(pitch) * radius;
                 double Z = Math.sin(pitch) * Math.sin(yaw + i) * radius;
 
-                AABB boundingBox = new AABB(pos.x, pos.y - 8 + ((Math.random() - 0.5D) * 0.2F), pos.z, pos.x + X, pos.y + Y + ((Math.random() - 0.5D) * 0.2F), pos.z + Z);
+                AABB boundingBox = new AABB(pos.x, pos.y - 8 + ((rand.nextFloat() - 0.5D) * 0.2F), pos.z, pos.x + X, pos.y + Y + ((rand.nextFloat() - 0.5D) * 0.2F), pos.z + Z);
                 List<Entity> entities = pLevel.getEntitiesOfClass(Entity.class, boundingBox);
                 for (Entity entity : entities) {
                     if (entity instanceof LivingEntity livingEntity && !hitEntities.contains(livingEntity) && !livingEntity.equals(pHealer) && pType.equals(entity.getType().getCategory())) {
@@ -663,7 +661,7 @@ public class Utils {
                 double Y = Math.cos(pitch) * radius;
                 double Z = Math.sin(pitch) * Math.sin(yaw + i) * radius;
 
-                AABB boundingBox = new AABB(pos.x, pos.y - 8 + ((Math.random() - 0.5D) * 0.2F), pos.z, pos.x + X, pos.y + Y + ((Math.random() - 0.5D) * 0.2F), pos.z + Z);
+                AABB boundingBox = new AABB(pos.x, pos.y - 8 + ((rand.nextFloat() - 0.5D) * 0.2F), pos.z, pos.x + X, pos.y + Y + ((rand.nextFloat() - 0.5D) * 0.2F), pos.z + Z);
                 List<Entity> entities = pLevel.getEntitiesOfClass(Entity.class, boundingBox);
                 for (Entity entity : entities) {
                     if (entity instanceof LivingEntity livingEntity && !hitEntities.contains(livingEntity) && !livingEntity.equals(pHealer)) {
@@ -1047,7 +1045,6 @@ public class Utils {
          * @return Position of safe non-collideable area to spawn
          */
         public static BlockPos nearbySurface(Level pLevel, BlockPos pos, LivingEntity entity,int iterations) {
-            Random rand = new Random();
             int x = pos.getX() + (rand.nextInt() - rand.nextInt()) * 6;
             int y = pos.getY() + rand.nextInt(1, 2);
             int z = pos.getZ() + (rand.nextInt() - rand.nextInt()) * 6;

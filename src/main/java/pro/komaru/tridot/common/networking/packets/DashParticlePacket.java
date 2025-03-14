@@ -1,7 +1,6 @@
 package pro.komaru.tridot.common.networking.packets;
 
 import net.minecraft.network.*;
-import net.minecraft.util.*;
 import net.minecraft.world.entity.player.*;
 import net.minecraft.world.level.*;
 import net.minecraft.world.phys.*;
@@ -13,6 +12,8 @@ import pro.komaru.tridot.client.gfx.particle.data.*;
 import pro.komaru.tridot.client.render.*;
 import pro.komaru.tridot.util.Col;
 import pro.komaru.tridot.util.Log;
+import pro.komaru.tridot.util.Tmp;
+import pro.komaru.tridot.util.math.ArcRandom;
 
 import java.awt.*;
 import java.util.*;
@@ -52,10 +53,10 @@ public class DashParticlePacket {
     public static void handle(DashParticlePacket msg, Supplier<Context> ctx) {
         if (ctx.get().getDirection().getReceptionSide().isClient()) {
             ctx.get().enqueueWork(() -> {
-                Level level = TridotLib.proxy.getLevel();
+                Level level = TridotLib.PROXY.getLevel();
                 Player player = level.getPlayerByUUID(msg.id);
                 if (player != null) {
-                    RandomSource rand = level.getRandom();
+                    ArcRandom rand = Tmp.rnd;
                     Col color = new Col(msg.colorR, msg.colorG, msg.colorB);
                     Vec3 pos = new Vec3(player.getX(), player.getY(), player.getZ());
                     for (int count = 0; count < msg.count; count++) {
@@ -67,11 +68,10 @@ public class DashParticlePacket {
                             double Y = Math.cos(pitch) * 2;
                             double Z = Math.sin(pitch) * Math.sin(yaw) * locDistance;
 
-                            Random random = new Random();
                             ParticleBuilder.create(TridotParticles.WISP)
                             .setColorData(ColorParticleData.create(color, Col.fromHex("a2a2a2")).build())
                             .setRenderType(TridotRenderTypes.ADDITIVE_PARTICLE)
-                            .setTransparencyData(GenericParticleData.create(random.nextFloat(0, 0.6f), 0f).build())
+                            .setTransparencyData(GenericParticleData.create(rand.nextFloat(0, 0.6f), 0f).build())
                             .setScaleData(GenericParticleData.create(0.92f, 0f).build())
                             .setLifetime(15)
                             .randomVelocity(msg.velX, msg.velY, msg.velZ)
