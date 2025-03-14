@@ -10,8 +10,8 @@ import net.minecraft.client.gui.components.events.*;
 import net.minecraft.client.gui.screens.*;
 import net.minecraft.network.chat.*;
 import net.minecraft.resources.*;
-import pro.komaru.tridot.ocore.struct.func.Cons;
-import pro.komaru.tridot.outilities.Utils;
+import pro.komaru.tridot.core.struct.func.Cons;
+import pro.komaru.tridot.util.Utils;
 
 import java.util.*;
 
