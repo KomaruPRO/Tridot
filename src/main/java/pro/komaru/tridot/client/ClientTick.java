@@ -2,8 +2,8 @@ package pro.komaru.tridot.client;
 
 import net.minecraft.client.*;
 import net.minecraftforge.event.*;
-import pro.komaru.tridot.core.event.*;
-import pro.komaru.tridot.util.*;
+import pro.komaru.tridot.api.Utils;
+import pro.komaru.tridot.common.ServerTickHandler;
 
 public class ClientTick {
 

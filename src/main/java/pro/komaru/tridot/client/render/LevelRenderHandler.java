@@ -17,7 +17,7 @@ import org.lwjgl.opengl.*;
 import pro.komaru.tridot.client.gfx.particle.GenericParticle;
 import pro.komaru.tridot.client.gfx.particle.ICustomParticleRender;
 import pro.komaru.tridot.client.gfx.particle.behavior.ICustomBehaviorParticleRender;
-import pro.komaru.tridot.core.integration.client.ShadersIntegration;
+import pro.komaru.tridot.client.compatibility.ShadersIntegration;
 
 import java.util.*;
 

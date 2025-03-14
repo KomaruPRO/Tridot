@@ -4,7 +4,7 @@ import net.minecraft.client.multiplayer.*;
 import net.minecraft.client.resources.model.*;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.item.*;
-import pro.komaru.tridot.registry.item.types.*;
+import pro.komaru.tridot.common.registry.item.types.ConfigurableBowItem;
 
 import javax.annotation.*;
 import java.util.*;

@@ -8,7 +8,7 @@ import net.minecraft.world.level.block.state.properties.*;
 import net.minecraftforge.registries.*;
 import org.jetbrains.annotations.*;
 import pro.komaru.tridot.*;
-import pro.komaru.tridot.registry.block.entity.*;
+import pro.komaru.tridot.common.registry.block.entity.TridotChestBlockEntity;
 
 public class TridotChestRender extends ChestRenderer<TridotChestBlockEntity> {
 

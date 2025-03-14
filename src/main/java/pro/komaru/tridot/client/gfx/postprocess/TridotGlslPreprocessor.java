@@ -1,12 +1,12 @@
 package pro.komaru.tridot.client.gfx.postprocess;
 
 import com.mojang.blaze3d.preprocessor.*;
-import pro.komaru.tridot.*;
 import net.minecraft.client.*;
 import net.minecraft.resources.*;
 import net.minecraft.server.packs.resources.*;
 import org.apache.commons.io.*;
 import org.jetbrains.annotations.*;
+import pro.komaru.tridot.util.Log;
 
 import java.io.*;
 import java.nio.charset.*;

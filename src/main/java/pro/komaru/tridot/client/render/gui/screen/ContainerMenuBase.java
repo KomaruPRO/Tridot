@@ -1,11 +1,11 @@
 package pro.komaru.tridot.client.render.gui.screen;
 
-import pro.komaru.tridot.*;
 import net.minecraft.world.entity.player.*;
 import net.minecraft.world.inventory.*;
 import net.minecraft.world.item.*;
 import net.minecraftforge.items.*;
 import org.jetbrains.annotations.*;
+import pro.komaru.tridot.util.Log;
 
 public class ContainerMenuBase extends AbstractContainerMenu{
     private static final int HOTBAR_SLOT_COUNT = 9;

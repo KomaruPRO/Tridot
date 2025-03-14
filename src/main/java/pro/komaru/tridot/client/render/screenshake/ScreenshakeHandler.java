@@ -7,10 +7,10 @@ import net.minecraft.world.phys.*;
 import net.minecraftforge.client.event.*;
 import pro.komaru.tridot.TridotLib;
 import pro.komaru.tridot.client.ClientTick;
-import pro.komaru.tridot.core.config.ClientConfig;
-import pro.komaru.tridot.core.math.raycast.RayCast;
-import pro.komaru.tridot.core.math.raycast.RayCastContext;
-import pro.komaru.tridot.core.math.raycast.RayHitResult;
+import pro.komaru.tridot.common.config.ClientConfig;
+import pro.komaru.tridot.util.math.raycast.RayCast;
+import pro.komaru.tridot.util.math.raycast.RayCastContext;
+import pro.komaru.tridot.util.math.raycast.RayHitResult;
 
 import java.util.*;
 

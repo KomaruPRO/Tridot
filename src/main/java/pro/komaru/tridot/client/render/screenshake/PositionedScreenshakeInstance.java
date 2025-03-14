@@ -1,6 +1,6 @@
 package pro.komaru.tridot.client.render.screenshake;
 
-import pro.komaru.tridot.core.math.Interp;
+import pro.komaru.tridot.util.math.Interp;
 import net.minecraft.client.*;
 import net.minecraft.world.phys.*;
 import org.joml.*;

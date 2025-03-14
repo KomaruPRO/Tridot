@@ -6,7 +6,7 @@ import net.minecraft.world.level.material.*;
 import net.minecraftforge.client.extensions.common.*;
 import net.minecraftforge.fluids.*;
 import pro.komaru.tridot.client.gfx.particle.options.FluidParticleOptions;
-import pro.komaru.tridot.util.Utils;
+import pro.komaru.tridot.api.Utils;
 
 public class FluidParticle extends GenericParticle{
 

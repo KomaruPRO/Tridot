@@ -8,12 +8,12 @@ import com.mojang.blaze3d.shaders.*;
 import com.mojang.blaze3d.systems.*;
 import com.mojang.blaze3d.vertex.*;
 import com.mojang.datafixers.util.*;
-import pro.komaru.tridot.*;
 import net.minecraft.client.*;
 import net.minecraft.client.renderer.*;
 import net.minecraft.resources.*;
 import org.joml.*;
 import pro.komaru.tridot.client.ClientTick;
+import pro.komaru.tridot.util.Log;
 
 import java.io.*;
 import java.lang.Math;

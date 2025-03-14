@@ -3,7 +3,7 @@ package pro.komaru.tridot.api.interfaces;
 import net.minecraft.world.entity.player.*;
 import net.minecraft.world.item.*;
 import net.minecraft.world.phys.*;
-import pro.komaru.tridot.registry.*;
+import pro.komaru.tridot.common.registry.EnchantmentsRegistry;
 
 public interface DashItem{
     default double getEnchantmentBonus(ItemStack stack) {

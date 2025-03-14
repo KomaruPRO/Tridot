@@ -3,7 +3,7 @@ package pro.komaru.tridot.client.render.gui.screen;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
-import pro.komaru.tridot.core.struct.func.Cons;
+import pro.komaru.tridot.util.struct.func.Cons;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Renderable;
@@ -11,7 +11,7 @@ import net.minecraft.client.gui.components.events.GuiEventListener;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
-import pro.komaru.tridot.util.Utils;
+import pro.komaru.tridot.api.Utils;
 
 import java.util.List;
 

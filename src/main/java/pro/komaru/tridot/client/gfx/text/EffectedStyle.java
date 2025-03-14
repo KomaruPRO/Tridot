@@ -11,8 +11,8 @@ import net.minecraft.network.chat.TextColor;
 import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.Nullable;
 import pro.komaru.tridot.api.render.DotText;
-import pro.komaru.tridot.api.Col;
-import pro.komaru.tridot.core.struct.data.Seq;
+import pro.komaru.tridot.util.Col;
+import pro.komaru.tridot.util.struct.data.Seq;
 
 public class EffectedStyle extends Style {
 

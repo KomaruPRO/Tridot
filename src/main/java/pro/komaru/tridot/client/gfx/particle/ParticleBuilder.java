@@ -1,9 +1,6 @@
 package pro.komaru.tridot.client.gfx.particle;
 
 import pro.komaru.tridot.client.gfx.particle.data.*;
-import pro.komaru.tridot.client.particle.data.*;
-import pro.komaru.tridot.client.render.particle.data.*;
-import pro.komaru.tridot.oclient.graphics.particle.data.*;
 import net.minecraft.client.*;
 import net.minecraft.client.particle.*;
 import net.minecraft.client.renderer.*;

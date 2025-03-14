@@ -1,6 +1,6 @@
 package pro.komaru.tridot.client.model.item;
 
-import pro.komaru.tridot.registry.item.skins.*;
+import pro.komaru.tridot.common.registry.item.skins.ItemSkin;
 import net.minecraft.client.multiplayer.*;
 import net.minecraft.client.resources.model.*;
 import net.minecraft.world.entity.*;

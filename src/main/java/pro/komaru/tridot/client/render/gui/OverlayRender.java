@@ -8,7 +8,7 @@ import net.minecraft.resources.*;
 import net.minecraftforge.api.distmarker.*;
 import net.minecraftforge.client.event.*;
 import net.minecraftforge.event.*;
-import pro.komaru.tridot.core.config.ClientConfig;
+import pro.komaru.tridot.common.config.ClientConfig;
 
 @OnlyIn(Dist.CLIENT)
 public class OverlayRender {

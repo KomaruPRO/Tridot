@@ -14,7 +14,7 @@ import pro.komaru.tridot.client.tooltip.*;
 import pro.komaru.tridot.client.sound.LoopedSoundInstance;
 import pro.komaru.tridot.client.sound.TridotSoundInstance;
 import pro.komaru.tridot.client.render.gui.SplashHandler;
-import pro.komaru.tridot.core.integration.client.ShadersIntegration;
+import pro.komaru.tridot.client.compatibility.ShadersIntegration;
 
 import static pro.komaru.tridot.TridotLib.*;
 

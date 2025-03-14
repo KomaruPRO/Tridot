@@ -1,6 +1,6 @@
 package pro.komaru.tridot.client.gfx.particle.data;
 
-import pro.komaru.tridot.core.math.Interp;
+import pro.komaru.tridot.util.math.Interp;
 import net.minecraft.util.*;
 
 import java.util.*;

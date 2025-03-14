@@ -12,7 +12,7 @@ import org.joml.*;
 import pro.komaru.tridot.client.ClientTick;
 import pro.komaru.tridot.client.gfx.trail.TrailPoint;
 import pro.komaru.tridot.client.gfx.trail.TrailRenderPoint;
-import pro.komaru.tridot.util.Utils;
+import pro.komaru.tridot.api.Utils;
 
 import javax.annotation.*;
 import java.awt.*;

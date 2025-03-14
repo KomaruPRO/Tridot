@@ -3,8 +3,8 @@ package pro.komaru.tridot.api.render.bossbars;
 import net.minecraft.network.chat.*;
 import net.minecraft.server.level.*;
 import net.minecraft.sounds.*;
-import pro.komaru.tridot.core.net.*;
-import pro.komaru.tridot.core.net.packets.*;
+import pro.komaru.tridot.api.networking.PacketHandler;
+import pro.komaru.tridot.common.networking.packets.UpdateBossbarPacket;
 
 public class ServerBossBarEvent extends ServerBossEvent{
     private String id;

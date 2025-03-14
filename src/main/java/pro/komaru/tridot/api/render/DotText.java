@@ -7,7 +7,7 @@ import net.minecraft.client.gui.font.glyphs.BakedGlyph;
 import net.minecraft.network.chat.TextColor;
 import net.minecraft.resources.ResourceLocation;
 import pro.komaru.tridot.client.gfx.text.EffectedStyle;
-import pro.komaru.tridot.core.math.ArcRandom;
+import pro.komaru.tridot.util.math.ArcRandom;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
