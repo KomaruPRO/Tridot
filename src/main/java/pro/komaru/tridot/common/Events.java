@@ -55,7 +55,7 @@ public class Events{
         if (server.getTickCount() % 100 != 0) return;
         for (Player player : server.getPlayerList().getPlayers()) {
             for(MusicModifier modifier : MusicHandler.getModifiers()) {
-                if(modifier instanceof MusicModifier.Dungeon dungeonMusic) {
+                if(modifier instanceof MusicModifier.DungeonMusic dungeonMusic) {
                     if (dungeonMusic.isPlayerInStructure(player, (ServerLevel) player.level()) && TridotLibClient.DUNGEON_MUSIC_INSTANCE == null) PacketHandler.sendTo(player, new DungeonSoundPacket(dungeonMusic.music, player.getX(), player.getY() + (player.getBbHeight() / 2), player.getZ()));
                 }
             }

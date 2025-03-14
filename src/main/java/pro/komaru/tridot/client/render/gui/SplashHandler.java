@@ -12,7 +12,14 @@ import pro.komaru.tridot.util.struct.func.Prov;
 import java.util.*;
 
 //todo fluffy
-public class SplashHandler{
+public class SplashHandler {
+
+    public static class DotSplash {
+        public Prov<String> textSupplier;
+        public 
+    }
+
+
     public static Seq<SplashLanguaged> languagedSplashes = Seq.with();
     public static Seq<Prov<String>> dynamicSplashes = Seq.with();
 

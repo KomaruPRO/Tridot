@@ -60,7 +60,7 @@ import net.minecraftforge.server.ServerLifecycleHooks;
 import org.joml.*;
 import pro.komaru.tridot.client.render.TridotRenderTypes;
 import pro.komaru.tridot.client.render.RenderBuilder;
-import pro.komaru.tridot.client.render.TridotRenderType;
+import pro.komaru.tridot.client.render.DotRenderType;
 import pro.komaru.tridot.client.model.render.item.CustomItemRenderer;
 import pro.komaru.tridot.util.struct.Structs;
 import pro.komaru.tridot.util.struct.data.Seq;
@@ -1151,7 +1151,7 @@ public class Utils {
         public static Function<Float, Float> LINEAR_OUT_SEMI_ROUND_WIDTH_FUNCTION = (f) -> f == 0 ? 0.5f : 1f - f;
 
         public static ShaderInstance getShader(RenderType type){
-            if(type instanceof TridotRenderType renderType){
+            if(type instanceof DotRenderType renderType){
                 Optional<Supplier<ShaderInstance>> shader = renderType.state.shaderState.shader;
                 if(shader.isPresent()){
                     return shader.get().get();
