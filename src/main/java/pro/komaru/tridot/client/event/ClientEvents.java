@@ -49,8 +49,7 @@ public class ClientEvents{
                 DotStyle.of()
                         .effects(
                                 TextFx.wave(0.2f,10f),
-                                TextFx.rainbow(2, true),
-                                TextFx.advance(5f)
+                                TextFx.pulseColor(2f)
                         ));
         var comp3 = Component.literal("?")
                 .setStyle(DotStyle.of());

@@ -33,7 +33,7 @@ public class StringRenderOutputMixin {
         }
     }
 
-    @ModifyVariable(method = "accept", at = @At(value = "INVOKE", target = "Lnet/minecraft/network/chat/Style;isStrikethrough()Z"), name = "f6")
+    @ModifyVariable(method = "accept", at = @At(value = "INVOKE", target = "Lnet/minecraft/network/chat/Style;getColor()Lnet/minecraft/network/chat/TextColor;"), name = "f3")
     public float changeF3(float value) {
         if(tridot$style != null) {
             for (DotStyle.DotStyleEffect effect : tridot$style.effects)

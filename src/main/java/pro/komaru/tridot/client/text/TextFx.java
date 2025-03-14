@@ -9,6 +9,7 @@ import net.minecraft.network.chat.TextColor;
 import pro.komaru.tridot.client.event.ClientTickHandler;
 import pro.komaru.tridot.client.graphics.*;
 import pro.komaru.tridot.core.math.ArcRandom;
+import pro.komaru.tridot.core.math.Mathf;
 
 import java.awt.*;
 
@@ -56,10 +57,15 @@ public class TextFx {
         }
 
         float pulse;
+
+        @Override
+        public float alpha(float alpha) {
+            return alpha * Mathf.clamp(pulse);
+        }
+
         @Override
         public void beforeGlyph(Font.StringRenderOutput self, DotStyle style, int index) {
-            pulse = (float)(1 + 0.035 * Math.sin(System.currentTimeMillis() / 250));
-            self.a = pulse; //todo
+            pulse = (float)(1 - Math.abs(0.3 * Math.sin(ClientTickHandler.getTotal()/20f * intensity)));
         }
     }
 
@@ -72,8 +78,8 @@ public class TextFx {
 
         @Override
         public float alpha(float alpha) {
-            hue = (float)(Math.sin(ClientTickHandler.ticksInGame * 0.05f * intensity) * 0.5 + 0.5);
-            return alpha * hue;
+            hue = (float)(Math.sin(ClientTickHandler.getTotal() * 0.05f * intensity) * 0.5 + 0.5);
+            return alpha * (hue);
         }
 
         float hue;
@@ -86,7 +92,7 @@ public class TextFx {
                 hue = Math.max(0f, Math.min(1f, hue));
             }
 
-            style.color(Color.getHSBColor(hue, 1.0f, 1.0f));
+            style.color(Clr.HSVtoRGB(hue*360f, 100.0f, 100.0f));
         }
     }
 
@@ -105,7 +111,7 @@ public class TextFx {
             super.beforeGlyph(self, style, index);
 
             if(shiftSymbols) off = (index * 36f + ClientTickHandler.getTotal() * 3.25f * intensity) % 360f;
-            else off = ((index * 0.05f) + (ClientTickHandler.ticksInGame * 1 * intensity)) % 360f;
+            else off = ((index * 0.05f) + (ClientTickHandler.getTotal() * 1 * intensity)) % 360f;
             oldCol = style.color == null ? new Clr(1f,1f,1f,1f) : new Clr(style.color.getValue());
             style.color(Clr.HSVtoRGB(off, 90, 100));
         }
