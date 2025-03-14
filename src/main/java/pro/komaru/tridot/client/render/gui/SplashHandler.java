@@ -33,6 +33,9 @@ public class SplashHandler {
     public static void add(Prov<String> text) {
         add(text,null,1);
     }
+    public static void add(String text) {
+        add(text,null,1);
+    }
     public static void add(String text, String language) {
         add(() -> text,language,1);
     }
