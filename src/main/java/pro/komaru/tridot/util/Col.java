@@ -10,8 +10,19 @@ public class Col {
     private static final float[] tmpHSV = new float[3];
 
     public static Col
-        white = new Col(1f,1f,1f,1f)
-            ;
+    white = new Col(1f, 1f, 1f, 1f),
+    lightGray = new Col(192, 192, 192),
+    gray = new Col(64, 64, 64),
+    darkGray = new Col(64, 64, 64),
+    black = new Col(0, 0, 0),
+    red = new Col(255, 0, 0),
+    pink = new Col(255, 175, 175),
+    orange = new Col(255, 200, 0),
+    yellow = new Col(255, 255, 0),
+    green = new Col(0, 255, 0),
+    magenta = new Col(255, 0, 255),
+    cyan = new Col(0, 255, 255),
+    blue = new Col(0, 0, 255);
 
 
     public static Color getColor(int color) {
@@ -570,6 +581,16 @@ public class Col {
      */
     public Col(float r, float g, float b){
         this(r, g, b, 1f);
+    }
+
+    /**
+     * Constructor, sets the components of the color
+     * @param r the red component
+     * @param g the green component
+     * @param b the blue component
+     */
+    public Col(int r, int g, int b){
+        this((float)r/ 255, (float)g/ 255, (float)b / 255, 1);
     }
 
     /**
