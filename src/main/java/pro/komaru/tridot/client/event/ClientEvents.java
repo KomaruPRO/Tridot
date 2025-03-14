@@ -44,16 +44,19 @@ public class ClientEvents{
         var gui = event.getGuiGraphics();
         var mc = Minecraft.getInstance();
         //todo temp thingy
+        var comp1 = Component.literal("Вы что, не знаете о легендарной ");
+        var comp2 = Component.literal("Джастис").setStyle(
+                DotStyle.of()
+                        .effects(
+                                TextFx.wave(0.2f,10f),
+                                TextFx.rainbow(2, true),
+                                TextFx.advance(5f)
+                        ));
+        var comp3 = Component.literal("?")
+                .setStyle(DotStyle.of());
+
         gui.drawString(mc.font,
-                Component.literal("Сан-наби...")
-                        .setStyle(DotStyle.of().bold(true)
-                                .effects(
-                                 TextFx.rainbow(2, true),
-                                        TextFx.advance(55),
-                                        TextFx.wave(0.1f,0.2f),
-                                        TextFx.shake(0.2f)
-                                )
-                        ),
+                Component.empty().append(comp1).append(comp2).append(comp3),
                 10,10,0xFFFFFFFF);
     }
 

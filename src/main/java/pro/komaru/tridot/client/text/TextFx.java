@@ -70,6 +70,12 @@ public class TextFx {
             this.intensity = intensity;
         }
 
+        @Override
+        public float alpha(float alpha) {
+            hue = (float)(Math.sin(ClientTickHandler.ticksInGame * 0.05f * intensity) * 0.5 + 0.5);
+            return alpha * hue;
+        }
+
         float hue;
         @Override
         public void beforeGlyph(Font.StringRenderOutput self, DotStyle style, int index) {
@@ -93,14 +99,21 @@ public class TextFx {
         }
 
         float off;
+        Clr oldCol;
         @Override
         public void beforeGlyph(Font.StringRenderOutput self, DotStyle style, int index) {
             super.beforeGlyph(self, style, index);
 
             if(shiftSymbols) off = (index * 36f + ClientTickHandler.getTotal() * 3.25f * intensity) % 360f;
             else off = ((index * 0.05f) + (ClientTickHandler.ticksInGame * 1 * intensity)) % 360f;
-
+            oldCol = style.color == null ? new Clr(1f,1f,1f,1f) : new Clr(style.color.getValue());
             style.color(Clr.HSVtoRGB(off, 90, 100));
+        }
+
+        @Override
+        public void afterGlyph(Font.StringRenderOutput self, DotStyle style, int index, FontSet fontset, GlyphInfo glyphinfo, BakedGlyph bakedglyph, TextColor textcolor) {
+            super.afterGlyph(self, style, index, fontset, glyphinfo, bakedglyph, textcolor);
+            style.color(oldCol);
         }
     }
 
@@ -169,8 +182,8 @@ public class TextFx {
         }
 
         @Override
-        public float advance() {
-            return advance;
+        public float advance(float adv) {
+            return adv + advance;
         }
     }
 }

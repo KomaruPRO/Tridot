@@ -14,7 +14,7 @@ import pro.komaru.tridot.client.text.DotStyle;
 
 @Mixin(Font.StringRenderOutput.class)
 public class StringRenderOutputMixin {
-    @Unique float tridot$f6;
+    @Unique DotStyle tridot$style;
 
     @Inject(method = "accept", at = @At("TAIL"), locals = LocalCapture.CAPTURE_FAILSOFT)
     public void accept(int index, Style pStyle, int pCodePoint, CallbackInfoReturnable<Boolean> cir, FontSet fontset, GlyphInfo glyphinfo, BakedGlyph bakedglyph, boolean flag, float f3, TextColor textcolor, float f, float f1, float f2, float f6, float f7) {
@@ -28,22 +28,33 @@ public class StringRenderOutputMixin {
     public void acceptBeforeEffects(int index, Style pStyle, int pCodePoint, CallbackInfoReturnable<Boolean> cir, FontSet fontset, GlyphInfo glyphinfo, BakedGlyph bakedglyph, boolean flag, float f3, TextColor textcolor, float f, float f1, float f2, float f6, float f7) {
         if(pStyle instanceof DotStyle ds) {
             for (DotStyle.DotStyleEffect effect : ds.effects) {
-                f6 += effect.advance();
                 effect.beforeGlyphEffects(tridot$self(),ds,index,fontset,glyphinfo,bakedglyph,textcolor);
             }
         }
-
-        this.tridot$f6 = f6; // бог любит костыли
     }
 
     @ModifyVariable(method = "accept", at = @At(value = "INVOKE", target = "Lnet/minecraft/network/chat/Style;isStrikethrough()Z"), name = "f6")
-    public float acceptBeforeEffects(float value) {
-        return tridot$f6;
+    public float changeF3(float value) {
+        if(tridot$style != null) {
+            for (DotStyle.DotStyleEffect effect : tridot$style.effects)
+                value = effect.alpha(value);
+        }
+        return value;
+    }
+    @ModifyVariable(method = "accept", at = @At(value = "INVOKE", target = "Lnet/minecraft/network/chat/Style;isStrikethrough()Z"), name = "f6")
+    public float changeF6(float value) {
+        if(tridot$style != null) {
+            for (DotStyle.DotStyleEffect effect : tridot$style.effects)
+                value = effect.advance(value);
+        }
+        return value;
     }
 
     @Inject(method = "accept", at = @At("HEAD"))
     public void acceptBefore(int index, Style pStyle, int pCodePoint, CallbackInfoReturnable<Boolean> cir) {
+        tridot$style = null;
         if(pStyle instanceof DotStyle ds) {
+            tridot$style = ds;
             for (DotStyle.DotStyleEffect effect : ds.effects) {
                 effect.beforeGlyph(tridot$self(),ds,index);
             }

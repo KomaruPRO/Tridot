@@ -39,6 +39,18 @@ public class DotStyle extends Style {
         return new DotStyle();
     }
 
+    @Override
+    public boolean equals(Object pOther) {
+        if (this == pOther) {
+            return true;
+        } else if (!(pOther instanceof DotStyle)) {
+            return false;
+        }
+        DotStyle dot = (DotStyle) pOther;
+        if(!dot.effects.equals(this.effects)) return false;
+        return super.equals(pOther);
+    }
+
     public DotStyle color(Color color) {
         return this.color(new Clr(color.getRGB()));
     }
@@ -113,8 +125,11 @@ public class DotStyle extends Style {
     public static class DotStyleEffect {
         ResourceLocation id;
 
-        public float advance() {
-            return 0;
+        public float advance(float advance) {
+            return advance;
+        }
+        public float alpha(float alpha) {
+            return alpha;
         }
 
         public void beforeGlyph(Font.StringRenderOutput self, DotStyle style, int index) {
