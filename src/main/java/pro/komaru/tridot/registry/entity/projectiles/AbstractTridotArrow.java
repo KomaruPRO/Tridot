@@ -23,12 +23,12 @@ public abstract class AbstractTridotArrow extends AbstractArrow{
         super(pEntityType, pLevel);
     }
 
-    public AbstractTridotArrow(EntityType<? extends AbstractArrow> pEntityType, Level worldIn, LivingEntity thrower, int baseDamage){
+    public AbstractTridotArrow(EntityType<? extends AbstractArrow> pEntityType, Level worldIn, LivingEntity thrower, double baseDamage){
         super(pEntityType, thrower, worldIn);
         this.baseDamage = baseDamage;
     }
 
-    public AbstractTridotArrow(EntityType<? extends AbstractArrow> pEntityType, Level worldIn, LivingEntity thrower, ItemStack thrownStackIn, int baseDamage){
+    public AbstractTridotArrow(EntityType<? extends AbstractArrow> pEntityType, Level worldIn, LivingEntity thrower, ItemStack thrownStackIn, double baseDamage){
         super(pEntityType, thrower, worldIn);
         arrowItem = new ItemStack(thrownStackIn.getItem());
         this.baseDamage = baseDamage;
