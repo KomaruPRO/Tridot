@@ -19,7 +19,7 @@ public class BasicBossbar extends AbstractBossbar{
         super(tex);
     }
 
-    public BasicBossbar(Color color){
+    public BasicBossbar(Col color){
         super(color);
     }
 
@@ -39,8 +39,8 @@ public class BasicBossbar extends AbstractBossbar{
                 if(event.getOverlay() == BossEvent.BossBarOverlay.PROGRESS){
                     RenderSystem.enableBlend();
                     if(Objects.equals(abstractBossbar.getTexture(), new ResourceLocation(TridotLib.ID, "textures/gui/bossbars/base.png"))){
-                        Color color = abstractBossbar.rainbow ? Col.rainbowColor(mc.level.getGameTime() / 1.5f) : abstractBossbar.getColor();
-                        pGuiGraphics.setColor((float)color.getRed() / 255, (float)color.getGreen() / 255, (float)color.getBlue() / 255, 1);
+                        Col color = abstractBossbar.rainbow ? Col.rainbow(mc.level.getGameTime() / 1.5f) : abstractBossbar.getColor();
+                        pGuiGraphics.setColor(color.r,color.g,color.b, 1);
                     }
 
                     pGuiGraphics.blit(abstractBossbar.getTexture(), xOffset + 3, yOffset + 14, 3, 30, i, 4, 256, 64);
@@ -62,8 +62,8 @@ public class BasicBossbar extends AbstractBossbar{
             if(i > 0){
                 if(event.getOverlay() == BossEvent.BossBarOverlay.PROGRESS){
                     if(Objects.equals(abstractBossbar.getTexture(), new ResourceLocation(TridotLib.ID, "textures/gui/bossbars/base.png"))){
-                        java.awt.Color color = abstractBossbar.rainbow ? Col.rainbowColor(mc.level.getGameTime() / 1.5f) : abstractBossbar.getColor();
-                        pGuiGraphics.setColor((float)color.getRed() / 255, (float)color.getGreen() / 255, (float)color.getBlue() / 255, 1);
+                        Col color = abstractBossbar.rainbow ? Col.rainbow(mc.level.getGameTime() / 1.5f) : abstractBossbar.getColor();
+                        pGuiGraphics.setColor(color.r, color.g, color.b, 1);
                     }
 
                     RenderSystem.enableBlend();

@@ -11,15 +11,15 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
-import pro.komaru.tridot.client.gfx.text.EffectedStyle;
+import pro.komaru.tridot.client.gfx.text.DotStyle;
 
 @Mixin(Font.StringRenderOutput.class)
 public class StringRenderOutputMixin {
     @Inject(method = "accept", at = @At("TAIL"),
         locals = LocalCapture.CAPTURE_FAILSOFT)
     public void accept(int index, Style pStyle, int pCodePoint, CallbackInfoReturnable<Boolean> cir, FontSet fontset, GlyphInfo glyphinfo, BakedGlyph bakedglyph, boolean flag, float f3, TextColor textcolor, float f, float f1, float f2, float f6, float f7) {
-        if(pStyle instanceof EffectedStyle ds) {
-            for (EffectedStyle.DotStyleEffect effect : ds.effects) {
+        if(pStyle instanceof DotStyle ds) {
+            for (DotStyle.DotStyleEffect effect : ds.effects) {
                 effect.afterGlyph(self(),index,fontset,glyphinfo,bakedglyph,textcolor);
             }
         }
@@ -27,8 +27,8 @@ public class StringRenderOutputMixin {
     @Inject(method = "accept", at = @At("HEAD"),
             locals = LocalCapture.CAPTURE_FAILSOFT)
     public void acceptBefore(int index, Style pStyle, int pCodePoint, CallbackInfoReturnable<Boolean> cir, FontSet fontset, GlyphInfo glyphinfo, BakedGlyph bakedglyph, boolean flag, float f3, TextColor textcolor, float f, float f1, float f2, float f6, float f7) {
-        if(pStyle instanceof EffectedStyle ds) {
-            for (EffectedStyle.DotStyleEffect effect : ds.effects) {
+        if(pStyle instanceof DotStyle ds) {
+            for (DotStyle.DotStyleEffect effect : ds.effects) {
                 effect.beforeGlyph(self(),index);
             }
         }

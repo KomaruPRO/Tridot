@@ -6,7 +6,7 @@ import net.minecraft.client.gui.font.FontSet;
 import net.minecraft.client.gui.font.glyphs.BakedGlyph;
 import net.minecraft.network.chat.TextColor;
 import net.minecraft.resources.ResourceLocation;
-import pro.komaru.tridot.client.gfx.text.EffectedStyle;
+import pro.komaru.tridot.client.gfx.text.DotStyle;
 import pro.komaru.tridot.util.math.ArcRandom;
 
 import java.util.LinkedHashMap;
@@ -15,9 +15,9 @@ import java.util.Map;
 public class DotText {
 
     static ArcRandom rand = new ArcRandom();
-    public static Map<String, EffectedStyle.DotStyleEffect> EFFECTS = new LinkedHashMap<>();
+    public static Map<String, DotStyle.DotStyleEffect> EFFECTS = new LinkedHashMap<>();
 
-    public static void registerEffect(ResourceLocation effectId, EffectedStyle.DotStyleEffect effectObject) {
+    public static void registerEffect(ResourceLocation effectId, DotStyle.DotStyleEffect effectObject) {
         effectObject.id = effectId;
         EFFECTS.put(effectId.toString(),effectObject);
     }
@@ -33,7 +33,7 @@ public class DotText {
         return new AdvanceEffect(adv);
     }
 
-    public static class ShakeEffect extends EffectedStyle.DotStyleEffect {
+    public static class ShakeEffect extends DotStyle.DotStyleEffect {
         public float xi,yi;
 
         public ShakeEffect(float intensity) {
@@ -63,7 +63,7 @@ public class DotText {
         }
     }
 
-    public static class AdvanceEffect extends EffectedStyle.DotStyleEffect {
+    public static class AdvanceEffect extends DotStyle.DotStyleEffect {
         public float advance;
 
         public AdvanceEffect(float advance) {

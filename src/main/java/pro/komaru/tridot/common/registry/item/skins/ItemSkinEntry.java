@@ -8,25 +8,24 @@ import net.minecraft.world.entity.*;
 import net.minecraft.world.item.*;
 import net.minecraftforge.api.distmarker.*;
 
-//todo fluffy
 public class ItemSkinEntry{
 
-    public boolean canApplyOnItem(ItemStack itemStack){
+    public boolean appliesOn(ItemStack itemStack){
         return true;
     }
 
     @OnlyIn(Dist.CLIENT)
-    public ArmorModel getArmorModel(LivingEntity entity, ItemStack itemStack, EquipmentSlot armorSlot, HumanoidModel _default){
+    public ArmorModel armorModel(LivingEntity entity, ItemStack itemStack, EquipmentSlot armorSlot, HumanoidModel _default){
         return TridotModels.EMPTY_ARMOR;
     }
 
     @OnlyIn(Dist.CLIENT)
-    public String getArmorTexture(ItemStack stack, Entity entity, EquipmentSlot slot, String type){
+    public String armorTexture(Entity entity, ItemStack stack, EquipmentSlot slot, String type){
         return TridotLib.ID + ":textures/models/armor/skin/empty.png";
     }
 
     @OnlyIn(Dist.CLIENT)
-    public String getItemModelName(ItemStack stack){
+    public String itemModel(ItemStack stack){
         return null;
     }
 }

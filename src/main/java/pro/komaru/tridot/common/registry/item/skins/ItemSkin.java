@@ -4,142 +4,106 @@ import net.minecraft.client.model.*;
 import net.minecraft.client.player.*;
 import net.minecraft.nbt.*;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.*;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.item.*;
 import net.minecraftforge.api.distmarker.*;
 import pro.komaru.tridot.TridotLib;
+import pro.komaru.tridot.client.gfx.text.DotStyle;
 import pro.komaru.tridot.client.model.TridotModels;
 import pro.komaru.tridot.client.model.armor.ArmorModel;
 import pro.komaru.tridot.util.Col;
+import pro.komaru.tridot.util.struct.Structs;
+import pro.komaru.tridot.util.struct.data.Seq;
 
-import java.util.List;
-import java.util.*;
-
-//todo fluffy
 public class ItemSkin{
-    public String id;
-    public java.awt.Color color;
-    public List<ItemSkinEntry> skinEntries = new ArrayList<>();
 
-    public ItemSkin(String id){
-        this.id = id;
-        this.color = java.awt.Color.WHITE;
-    }
+    public ResourceLocation id;
+    public Col color;
+    public Seq<ItemSkinEntry> entries = Seq.with();
 
-    public ItemSkin(String id, java.awt.Color color){
+    public static Col loreCol = new Col(249/255f, 210/255f, 129/255f);
+
+    public ItemSkin(ResourceLocation id, Col color) {
         this.id = id;
         this.color = color;
     }
-
-    public String getId(){
-        return id;
+    public ItemSkin(ResourceLocation id) {
+        this(id,Col.white);
     }
-
-    public java.awt.Color getColor(){
-        return color;
+    public ItemSkin(String id, Col color) {
+        this(new ResourceLocation(id),color);
     }
-
-    public String getTranslatedName(){
-        return getTranslatedName(id);
-    }
-
-    public String getTranslatedLoreName(){
-        return getTranslatedLoreName(id);
-    }
-
-    public static String getTranslatedName(String id){
-        int i = id.indexOf(":");
-        String modId = id.substring(0, i);
-        String monogramId = id.substring(i + 1);
-        return "item_skin." + modId + "." + monogramId;
-    }
-
-    public static String getTranslatedLoreName(String id){
-        return getTranslatedName(id) + ".lore";
-    }
-
-    public static Component getSkinName(ItemSkin skin){
-        java.awt.Color color = skin.getColor();
-
-        return Component.translatable(skin.getTranslatedName()).withStyle(Style.EMPTY.withColor(Col.packColor(255, color.getRed(), color.getGreen(), color.getBlue())));
-    }
-
-    public static Component getSkinComponent(ItemSkin skin){
-        return Component.translatable("lore.tridot.skin").withStyle(Style.EMPTY.withColor(Col.packColor(255, 249, 210, 129))).append(" ").append(getSkinName(skin));
-    }
-
-    public Component getSkinName(){
-        return getSkinName(this);
-    }
-
-    public Component getSkinComponent(){
-        return getSkinComponent(this);
-    }
-
-    public boolean canApplyOnItem(ItemStack itemStack){
-        for(ItemSkinEntry skinEntry : getSkinEntries()){
-            if(skinEntry.canApplyOnItem(itemStack)) return true;
-        }
-        return false;
-    }
-
-    public ItemStack applyOnItem(ItemStack itemStack){
-        CompoundTag nbt = itemStack.getOrCreateTag();
-        nbt.putString("skin", this.getId());
-        return itemStack;
-    }
-
-    public static ItemSkin getSkinFromItem(ItemStack itemStack){
-        CompoundTag nbt = itemStack.getOrCreateTag();
-        if(nbt.contains("skin")){
-            return ItemSkinHandler.getSkin(nbt.getString("skin"));
-        }
-        return null;
-    }
-
-    @OnlyIn(Dist.CLIENT)
-    public ArmorModel getArmorModel(LivingEntity entity, ItemStack itemStack, EquipmentSlot armorSlot, HumanoidModel _default){
-        for(ItemSkinEntry skinEntry : getSkinEntries()){
-            if(skinEntry.canApplyOnItem(itemStack)) return skinEntry.getArmorModel(entity, itemStack, armorSlot, _default);
-        }
-        return TridotModels.EMPTY_ARMOR;
-    }
-
-    @OnlyIn(Dist.CLIENT)
-    public String getArmorTexture(ItemStack stack, Entity entity, EquipmentSlot slot, String type){
-        for(ItemSkinEntry skinEntry : getSkinEntries()){
-            if(skinEntry.canApplyOnItem(stack)) return skinEntry.getArmorTexture(stack, entity, slot, type);
-        }
-        return TridotLib.ID + ":textures/models/armor/skin/empty.png";
-    }
-
-    @OnlyIn(Dist.CLIENT)
-    public String getItemModelName(ItemStack stack){
-        for(ItemSkinEntry skinEntry : getSkinEntries()){
-            if(skinEntry.canApplyOnItem(stack)) return skinEntry.getItemModelName(stack);
-        }
-        return null;
-    }
-
-    public List<ItemSkinEntry> getSkinEntries(){
-        return skinEntries;
-    }
-
-    public void addSkinEntry(ItemSkinEntry skinEntry){
-        skinEntries.add(skinEntry);
+    public ItemSkin(String id) {
+        this(id,Col.white);
     }
 
     public void setupSkinEntries(){
 
     }
 
+
+    public boolean appliesOn(ItemStack stack) {
+        return entries.contains(e -> e.appliesOn(stack));
+    }
+    public void applyTo(ItemStack stack) {
+        stack.getOrCreateTag().putString("skin",id.toString());
+    }
+    public static ItemSkin itemSkin(ItemStack stack) {
+        CompoundTag nbt = stack.getOrCreateTag();
+        return ItemSkinHandler.get(nbt.getString("skin"));
+    }
+
+    public Seq<ItemSkinEntry> skinEntries(){
+        return entries;
+    }
+    public ResourceLocation id() {
+        return id;
+    }
+    public Col color() {
+        return color;
+    }
+    public String translatedName(){
+        return Component.translatable("item_skin."+id.toLanguageKey()).getString();
+    }
+    public String translatedLoreName(){
+        return Component.translatable("item_skin."+id.toLanguageKey()+".lore").getString();
+    }
+
+    public Component skinName(){
+        return Component.translatable(translatedName())
+                .setStyle(DotStyle.of().color(color()));
+    }
+    public Component skinComponent(){
+        return Component.translatable("lore.tridot.skin")
+                .setStyle(DotStyle.of().color(loreCol)).append(" ").append(skinName());
+    }
+
     @OnlyIn(Dist.CLIENT)
-    public static boolean isDefaultModel(Entity entity){
+    public ArmorModel getArmorModel(LivingEntity entity, ItemStack stack, EquipmentSlot slot, HumanoidModel _default){
+        return Structs.safeGet(
+                entries.find(e -> e.appliesOn(stack)),
+                e -> e.armorModel(entity,stack,slot,_default),
+                () -> TridotModels.EMPTY_ARMOR);
+    }
+    @OnlyIn(Dist.CLIENT)
+    public String getArmorTexture(ItemStack stack, Entity entity, EquipmentSlot slot, String type){
+        return Structs.safeGet(
+                entries.find(e -> e.appliesOn(stack)),
+                e -> e.armorTexture(entity,stack,slot,type),
+                () -> TridotLib.ID + ":textures/models/armor/skin/empty.png");
+    }
+    @OnlyIn(Dist.CLIENT)
+    public String getItemModelName(ItemStack stack){
+        return Structs.safeGet(
+                entries.find(e -> e.appliesOn(stack)),
+                e -> e.itemModel(stack));
+    }
+    @OnlyIn(Dist.CLIENT)
+    public static boolean defaultModel(Entity entity){
         if(entity instanceof AbstractClientPlayer player){
             return player.getModelName().equals("default");
         }
-
         return true;
     }
 }

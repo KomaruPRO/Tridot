@@ -9,6 +9,10 @@ public class Col {
     public float r, g, b, a;
     private static final float[] tmpHSV = new float[3];
 
+    public static Col
+        white = new Col(1f,1f,1f,1f)
+            ;
+
 
     public static java.awt.Color getColor(int color) {
         return new java.awt.Color(getRed(color), getGreen(color), getBlue(color), getAlpha(color));
@@ -706,11 +710,8 @@ public class Col {
         return (color.getRed() << 16) | (color.getGreen() << 8) | color.getBlue();
     }
 
-    public static java.awt.Color rainbowColor(float ticks){
-        int r = (int)(Math.sin((double)ticks) * 127.0 + 128.0);
-        int g = (int)(Math.sin((double)ticks + 1.5707963267948966) * 127.0 + 128.0);
-        int b = (int)(Math.sin((double)ticks + Math.PI) * 127.0 + 128.0);
-        return new java.awt.Color(r, g, b);
+    public static Col rainbow(float ticks){
+        return Col.HSVtoRGB(ticks % 360, 100f,100f);
     }
 
     public static int hexToDecimal(String hex){

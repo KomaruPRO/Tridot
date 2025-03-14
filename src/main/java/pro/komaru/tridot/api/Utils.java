@@ -771,7 +771,7 @@ public class Utils {
                     tooltip.add(0, Component.literal(stack.getHoverName().getString()).append(authored.getContributorComponent()));
                 }
 
-                tooltip.add(1, skin.getSkinComponent());
+                tooltip.add(1, skin.skinComponent());
                 tooltip.add(2, Component.empty());
             }
         }
