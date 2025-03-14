@@ -37,11 +37,7 @@ public class TridotLibClient{
 
         @SubscribeEvent
         public static void registerAttributeModifiers(FMLClientSetupEvent event){
-            TooltipModifierHandler.register(new AttributeTooltipModifier(){
-                public boolean isToolBase(AttributeModifier modifier, Player player, TooltipFlag flag){
-                    return modifier.getId().equals(BASE_PROJECTILE_DAMAGE_UUID);
-                }
-            });
+            TooltipModifierHandler.add(BASE_PROJECTILE_DAMAGE_UUID);
         }
     }
 }
