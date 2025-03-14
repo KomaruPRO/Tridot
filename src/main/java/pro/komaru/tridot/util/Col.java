@@ -41,6 +41,21 @@ public class Col {
         return new Color(r,g,b,a);
     }
 
+    public Col darker() {
+        return set(Math.max(r * 0.7f, 0), Math.max(g * 0.7f, 0), Math.max(b * 0.7f, 0));
+    }
+
+    public Col brighter() {
+        int i = (int)(1.0/(1.0-0.7f));
+        if ( r == 0 && g == 0 && b == 0) {
+            return new Col(i, i, i, 1);
+        }
+
+        if ( r > 0 && r < i ) r = i;
+        if ( g > 0 && g < i ) g = i;
+        if ( b > 0 && b < i ) b = i;
+        return set(Math.min(r / 0.7f, 1), Math.min(g / 0.7f, 1), Math.min(b / 0.7f, 1));
+    }
 
     public static int intArgb(Col color) {
         // Input color string in RRGGBBAA format
