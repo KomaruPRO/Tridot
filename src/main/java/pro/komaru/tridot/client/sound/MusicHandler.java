@@ -1,16 +1,15 @@
 package pro.komaru.tridot.client.sound;
 
-import java.util.*;
+import pro.komaru.tridot.util.struct.data.Seq;
 
-//todo fluffy
-public class MusicHandler{
-    public static List<MusicModifier> modifiers = new ArrayList<>();
+public class MusicHandler {
+    public static Seq<MusicModifier> modifiers = Seq.with();
 
     public static void register(MusicModifier modifier){
         modifiers.add(modifier);
     }
 
-    public static List<MusicModifier> getModifiers(){
+    public static Seq<MusicModifier> getModifiers(){
         return modifiers;
     }
 }

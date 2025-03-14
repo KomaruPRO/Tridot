@@ -9,7 +9,6 @@ import net.minecraft.world.level.block.state.*;
 
 import java.util.*;
 
-//todo fluffy
 public class CustomModel implements BakedModel{
     public final BakedModel baseModel;
     public final CustomItemOverrides itemOverrides;

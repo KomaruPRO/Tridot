@@ -10,21 +10,20 @@ import net.minecraftforge.client.event.*;
 import net.minecraftforge.event.*;
 import net.minecraftforge.eventbus.api.*;
 import pro.komaru.tridot.*;
-import pro.komaru.tridot.client.graphics.Clr;
-import pro.komaru.tridot.client.graphics.gui.screen.*;
-import pro.komaru.tridot.client.graphics.gui.screenshake.*;
-import pro.komaru.tridot.client.graphics.render.item.bow.*;
-import pro.komaru.tridot.client.graphics.shader.postprocess.*;
-import pro.komaru.tridot.client.text.DotStyle;
-import pro.komaru.tridot.client.text.TextFx;
-import pro.komaru.tridot.core.config.*;
+import pro.komaru.tridot.api.render.DotText;
+import pro.komaru.tridot.client.ClientTick;
+import pro.komaru.tridot.client.gfx.postprocess.PostProcessHandler;
+import pro.komaru.tridot.client.gfx.text.DotStyle;
+import pro.komaru.tridot.client.model.render.item.bow.BowHandler;
+import pro.komaru.tridot.client.render.screenshake.ScreenshakeHandler;
+
 
 public class ClientEvents{
 
     @SubscribeEvent
     public void clientTick(TickEvent.ClientTickEvent event){
         Minecraft minecraft = Minecraft.getInstance();
-        ClientTickHandler.clientTickEnd(event);
+        ClientTick.clientTickEnd(event);
         if(event.phase == TickEvent.Phase.END){
             if(minecraft.isPaused()) return;
             Camera camera = Minecraft.getInstance().gameRenderer.getMainCamera();
@@ -35,8 +34,7 @@ public class ClientEvents{
 
     @SubscribeEvent
     public void renderTick(TickEvent.RenderTickEvent event){
-        ClientTickHandler.renderTick(event);
-
+        ClientTick.renderTick(event);
     }
 
     @SubscribeEvent
@@ -48,8 +46,8 @@ public class ClientEvents{
         var comp2 = Component.literal("Джастис").setStyle(
                 DotStyle.of()
                         .effects(
-                                TextFx.wave(0.2f,10f),
-                                TextFx.pulseColor(2f)
+                                DotText.wave(0.2f,10f),
+                                DotText.pulseColor(2f)
                         ));
         var comp3 = Component.literal("?")
                 .setStyle(DotStyle.of());

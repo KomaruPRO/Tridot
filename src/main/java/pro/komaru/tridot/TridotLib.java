@@ -1,24 +1,29 @@
 package pro.komaru.tridot;
 
-import net.minecraft.ChatFormatting;
-import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.Style;
 import net.minecraft.world.item.*;
 import net.minecraftforge.api.distmarker.*;
 import net.minecraftforge.fml.config.ModConfig.*;
 import net.minecraftforge.registries.*;
-import pro.komaru.tridot.client.*;
-import pro.komaru.tridot.client.event.*;
-import pro.komaru.tridot.client.graphics.gui.*;
-import pro.komaru.tridot.core.config.*;
-import pro.komaru.tridot.core.event.*;
-import pro.komaru.tridot.core.interfaces.*;
-import pro.komaru.tridot.core.net.*;
-import pro.komaru.tridot.core.proxy.*;
-import pro.komaru.tridot.registry.*;
-import pro.komaru.tridot.registry.block.*;
-import pro.komaru.tridot.registry.item.*;
-import pro.komaru.tridot.registry.item.skins.*;
+import pro.komaru.tridot.api.interfaces.*;
+import pro.komaru.tridot.api.level.loot.conditions.LootConditionsRegistry;
+import pro.komaru.tridot.api.networking.PacketHandler;
+import pro.komaru.tridot.client.ClientTick;
+import pro.komaru.tridot.client.gfx.*;
+import pro.komaru.tridot.client.render.gui.*;
+import pro.komaru.tridot.common.Events;
+import pro.komaru.tridot.common.config.ClientConfig;
+import pro.komaru.tridot.common.config.CommonConfig;
+import pro.komaru.tridot.common.networking.proxy.ClientProxy;
+import pro.komaru.tridot.common.networking.proxy.ISidedProxy;
+import pro.komaru.tridot.common.networking.proxy.ServerProxy;
+import pro.komaru.tridot.common.registry.EnchantmentsRegistry;
+import pro.komaru.tridot.common.registry.TridotLootModifier;
+import pro.komaru.tridot.common.registry.block.TridotBlockEntities;
+import pro.komaru.tridot.common.registry.block.TridotBlocks;
+import pro.komaru.tridot.common.registry.item.AttributeRegistry;
+import pro.komaru.tridot.common.registry.item.skins.ItemSkin;
+import pro.komaru.tridot.common.registry.item.skins.ItemSkinHandler;
+import pro.komaru.tridot.common.registry.item.types.TestItem;
 import net.minecraft.world.entity.*;
 import net.minecraftforge.common.*;
 import net.minecraftforge.event.entity.*;
@@ -27,8 +32,6 @@ import net.minecraftforge.fml.*;
 import net.minecraftforge.fml.common.*;
 import net.minecraftforge.fml.event.lifecycle.*;
 import net.minecraftforge.fml.javafmlmod.*;
-import pro.komaru.tridot.registry.item.types.*;
-import pro.komaru.tridot.registry.loot.conditions.*;
 
 import java.util.*;
 
@@ -39,7 +42,7 @@ public class TridotLib{
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, ID);
     public static final RegistryObject<Item> TEST = ITEMS.register("test", () -> new TestItem(new Item.Properties().rarity(Rarity.EPIC)));
 
-    public static final ISidedProxy proxy = DistExecutor.unsafeRunForDist(() -> ClientProxy::new, () -> ServerProxy::new);
+    public static final ISidedProxy PROXY = DistExecutor.unsafeRunForDist(() -> ClientProxy::new, () -> ServerProxy::new);
     public TridotLib(){
         IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
         EnchantmentsRegistry.register(eventBus);
@@ -55,7 +58,7 @@ public class TridotLib{
             forgeBus.addListener(OverlayRender::tick);
             forgeBus.addListener(OverlayRender::onDrawScreenPost);
             forgeBus.addListener(OverlayRenderItem::onDrawScreenPost);
-            forgeBus.addListener(ClientTickHandler::clientTickEnd);
+            forgeBus.addListener(ClientTick::clientTickEnd);
             TridotLibClient.clientInit();
             return new Object();
         });

@@ -5,7 +5,6 @@ import net.minecraft.resources.*;
 
 import java.util.*;
 
-//todo fluffy
 public class ItemSkinModels{
     public static Map<String, BakedModel> modelsSkins = new HashMap<>();
     public static ArrayList<String> skins = new ArrayList<>();
