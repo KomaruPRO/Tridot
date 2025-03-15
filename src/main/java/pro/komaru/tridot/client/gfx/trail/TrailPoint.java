@@ -21,7 +21,7 @@ public class TrailPoint{
     }
 
     public TrailPoint lerp(TrailPoint trailPoint, float delta){
-        return new TrailPoint(pos.lerp(trailPoint.pos, delta), lifetime);
+        return new TrailPoint(pos.cpy().lerp(trailPoint.pos, delta), lifetime);
     }
 
     public void tick(){
