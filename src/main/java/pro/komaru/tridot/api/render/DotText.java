@@ -1,7 +1,7 @@
 package pro.komaru.tridot.api.render;
 
 import com.mojang.blaze3d.font.GlyphInfo;
-import com.mojang.blaze3d.systems.*;
+import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.*;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.Font.*;
@@ -9,15 +9,15 @@ import net.minecraft.client.gui.font.FontSet;
 import net.minecraft.client.gui.font.glyphs.BakedGlyph;
 import net.minecraft.network.chat.TextColor;
 import net.minecraft.resources.ResourceLocation;
-import org.codehaus.plexus.util.dag.*;
 import pro.komaru.tridot.client.ClientTick;
 import pro.komaru.tridot.client.gfx.text.DotStyle;
 import pro.komaru.tridot.util.Col;
 import pro.komaru.tridot.util.Tmp;
 import pro.komaru.tridot.util.math.ArcRandom;
+import pro.komaru.tridot.util.math.Direction2;
 import pro.komaru.tridot.util.math.Mathf;
-
-import java.awt.*;
+import pro.komaru.tridot.util.phys.Vec2;
+import pro.komaru.tridot.util.struct.Structs;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -63,7 +63,40 @@ public class DotText {
     public static RainbowEffect rainbow(float intensity, boolean shiftSymbols) {
         return new RainbowEffect(intensity, shiftSymbols);
     }
+    public static OutlineEffect outline(Col col) {
+        return outline(col,false);
+    }
+    public static OutlineEffect outline(Col col,boolean square) {
+        return new OutlineEffect(col,square);
+    }
 
+    public static class OutlineEffect extends DotStyle.DotStyleEffect {
+
+        public Col textCol;
+        public boolean square;
+
+        public OutlineEffect(Col textCol, boolean square) {
+            this.textCol = textCol;
+            this.square = square;
+        }
+
+        @Override
+        public void beforeGlyphEffects(StringRenderOutput self, DotStyle style, int index, FontSet fontset, GlyphInfo glyphinfo, BakedGlyph bakedglyph, TextColor textcolor, float f, float f1, float f2, float f3, float f6, float f7) {
+            super.beforeGlyphEffects(self, style, index, fontset, glyphinfo, bakedglyph, textcolor, f, f1, f2, f3, f6, f7);
+            Font font = Minecraft.getInstance().font;
+            VertexConsumer vertexconsumer = self.bufferSource.getBuffer(bakedglyph.renderType(self.mode));
+            var col = Structs.or(textCol,Col.black);
+
+            for (Vec2 vec2 : square ? Direction2.d8 : Direction2.d4) {
+                font.renderChar(bakedglyph, style.isBold(), style.isItalic(), 1f,
+                        self.x + f7 + vec2.x, self.y + f7 + vec2.y, self.pose,
+                        vertexconsumer, f, f1, f2, f3, self.packedLightCoords);
+            }
+            font.renderChar(bakedglyph, style.isBold(), style.isItalic(),1f,
+                    self.x + f7, self.y + f7, self.pose,
+                    vertexconsumer, col.r, col.g, col.b, col.a * f3, self.packedLightCoords);
+        }
+    }
     // todo outline
     public static class PulseEffect extends DotStyle.DotStyleEffect{
         public float intensity;

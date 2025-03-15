@@ -17,6 +17,7 @@
     "client.BossHealthOverlayAccessor",
     "client.CameraMixin",
     "client.EffectProgramMixin",
+    "client.FontMixin",
     "client.GameRendererMixin",
     "client.GuiGraphicsMixin",
     "client.HumanoidModelMixin",

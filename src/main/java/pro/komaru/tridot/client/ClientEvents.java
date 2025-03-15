@@ -33,14 +33,6 @@ public class ClientEvents {
     }
 
     @SubscribeEvent
-    public void render(RenderGuiEvent.Post event) {
-        var gui = event.getGuiGraphics();
-        var mc = Minecraft.getInstance();
-        //todo temp thingy
-        //gui.drawString(mc.font, Component.literal("Тридотушка").setStyle(DotStyle.of().effects(DotText.outline())), 10, 10, Col.packColor(Color.WHITE));
-    }
-
-    @SubscribeEvent
     public void renderTick(TickEvent.RenderTickEvent event){
         ClientTick.renderTick(event);
     }

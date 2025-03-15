@@ -15,7 +15,6 @@ import pro.komaru.tridot.util.Col;
 import pro.komaru.tridot.util.struct.data.Seq;
 
 import java.awt.*;
-import java.util.*;
 
 public class DotStyle extends Style {
 
@@ -128,7 +127,7 @@ public class DotStyle extends Style {
         public void beforeGlyph(Font.StringRenderOutput self, DotStyle style, int index) {
 
         }
-        public void beforeGlyphEffects(Font.StringRenderOutput self, DotStyle style, int index, FontSet fontset, GlyphInfo glyphinfo, BakedGlyph bakedglyph, TextColor textcolor) {
+        public void beforeGlyphEffects(Font.StringRenderOutput self, DotStyle style, int index, FontSet fontset, GlyphInfo glyphinfo, BakedGlyph bakedglyph, TextColor textcolor, float f, float f1, float f2, float f3, float f6, float f7) {
 
         }
         public void afterGlyph(Font.StringRenderOutput self, DotStyle style, int index, FontSet fontset, GlyphInfo glyphinfo, BakedGlyph bakedglyph, TextColor textcolor) {

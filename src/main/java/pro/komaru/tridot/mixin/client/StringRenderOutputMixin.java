@@ -28,7 +28,7 @@ public class StringRenderOutputMixin {
     public void acceptBeforeEffects(int index, Style pStyle, int pCodePoint, CallbackInfoReturnable<Boolean> cir, FontSet fontset, GlyphInfo glyphinfo, BakedGlyph bakedglyph, boolean flag, float f3, TextColor textcolor, float f, float f1, float f2, float f6, float f7) {
         if(pStyle instanceof DotStyle ds) {
             for (DotStyle.DotStyleEffect effect : ds.effects) {
-                effect.beforeGlyphEffects(tridot$self(),ds,index,fontset,glyphinfo,bakedglyph,textcolor);
+                effect.beforeGlyphEffects(tridot$self(),ds,index,fontset,glyphinfo,bakedglyph,textcolor,f,f1,f2,f3,f6,f7);
             }
         }
     }

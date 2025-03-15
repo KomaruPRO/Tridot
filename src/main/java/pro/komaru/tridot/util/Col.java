@@ -771,6 +771,8 @@ public class Col {
         return (color.getRed() << 16) | (color.getGreen() << 8) | color.getBlue();
     }
 
+
+
     public static Col rainbow(float ticks){
         return Col.HSVtoRGB(ticks % 360, 100f,100f);
     }
