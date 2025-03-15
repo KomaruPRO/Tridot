@@ -1,8 +1,8 @@
 package pro.komaru.tridot.client.gfx.particle.data;
 
+import pro.komaru.tridot.util.*;
+import pro.komaru.tridot.util.math.*;
 import net.minecraft.util.*;
-import pro.komaru.tridot.util.Col;
-import pro.komaru.tridot.util.math.Interp;
 
 public class ColorParticleData{
 

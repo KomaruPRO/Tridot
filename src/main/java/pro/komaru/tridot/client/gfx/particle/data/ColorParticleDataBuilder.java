@@ -1,8 +1,9 @@
 package pro.komaru.tridot.client.gfx.particle.data;
 
-import pro.komaru.tridot.util.Col;
-import pro.komaru.tridot.util.math.Interp;
+import pro.komaru.tridot.util.*;
+import pro.komaru.tridot.util.math.*;
 
+import java.awt.*;
 
 public class ColorParticleDataBuilder{
 
@@ -58,12 +59,12 @@ public class ColorParticleDataBuilder{
     }
 
     public ColorParticleDataBuilder setRandomColor(Col start1, Col start2, Col end1, Col end2){
-        setRandomColor(start1.r,start2.r,start1.g,start2.g,start1.b,start2.b,end1.r,end2.r,end1.g,end2.g,end1.b,end2.b);
+        setRandomColor(start1.r, start2.r, start1.g, start2.g, start1.b, start2.b, end1.r, end2.r, end1.g, end2.g, end1.b, end2.b);
         return this;
     }
 
     public ColorParticleDataBuilder setRandomColor(Col start1, Col start2){
-        setRandomColor(start1.r,start2.r,start1.g,start2.g,start1.b,start2.b);
+        setRandomColor(start1.r, start2.r, start1.g, start2.g, start1.b, start2.b);
         return this;
     }
 

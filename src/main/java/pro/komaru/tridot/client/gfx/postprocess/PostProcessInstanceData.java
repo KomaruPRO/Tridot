@@ -1,9 +1,10 @@
 package pro.komaru.tridot.client.gfx.postprocess;
 
 import com.mojang.blaze3d.vertex.*;
+import pro.komaru.tridot.*;
 import net.minecraft.client.*;
 import net.minecraft.client.renderer.*;
-import pro.komaru.tridot.util.Log;
+import pro.komaru.tridot.util.*;
 
 import javax.annotation.*;
 import java.util.*;

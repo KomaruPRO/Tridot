@@ -7,17 +7,17 @@ import net.minecraft.client.*;
 import net.minecraft.client.renderer.*;
 import net.minecraft.client.renderer.texture.*;
 import net.minecraft.util.*;
+import net.minecraft.world.phys.*;
 import org.joml.*;
+import pro.komaru.tridot.api.*;
 import pro.komaru.tridot.client.ClientTick;
 import pro.komaru.tridot.client.gfx.trail.TrailPoint;
 import pro.komaru.tridot.client.gfx.trail.TrailRenderPoint;
-import pro.komaru.tridot.api.Utils;
-import pro.komaru.tridot.util.Col;
-import pro.komaru.tridot.util.phys.Vec3;
-import pro.komaru.tridot.util.struct.data.Seq;
 
 import javax.annotation.*;
+import java.awt.*;
 import java.lang.Math;
+import java.util.List;
 import java.util.Random;
 import java.util.*;
 import java.util.function.*;
@@ -126,11 +126,11 @@ public class RenderBuilder{
         return supplier;
     }
 
-    public RenderBuilder setColor(Col color){
-        return setColor(color.r, color.g, color.b);
+    public RenderBuilder setColor(Color color){
+        return setColor(color.getRed(), color.getGreen(), color.getBlue());
     }
 
-    public RenderBuilder setColor(Col color, float a){
+    public RenderBuilder setColor(Color color, float a){
         return setFirstColor(color).setFirstAlpha(a).setSecondColor(color).setSecondAlpha(a).setThirdColor(color).setThirdAlpha(a);
     }
 
@@ -143,6 +143,10 @@ public class RenderBuilder{
         return this;
     }
 
+    public RenderBuilder setColorRaw(float r, float g, float b){
+        return setFirstColorRaw(r, g, b).setSecondColorRaw(r, g, b).setThirdColorRaw(r, g, b);
+    }
+
     public RenderBuilder setAlpha(float a){
         return setFirstAlpha(a).setSecondAlpha(a).setThirdAlpha(a);
     }
@@ -151,11 +155,11 @@ public class RenderBuilder{
         return setFirstLight(light).setSecondLight(light);
     }
 
-    public RenderBuilder setFirstColor(Col color){
-        return setFirstColor(color.r, color.g, color.b);
+    public RenderBuilder setFirstColor(Color color){
+        return setFirstColor(color.getRed(), color.getGreen(), color.getBlue());
     }
 
-    public RenderBuilder setFirstColor(Col color, float a){
+    public RenderBuilder setFirstColor(Color color, float a){
         return setFirstColor(color).setFirstAlpha(a);
     }
 
@@ -164,6 +168,13 @@ public class RenderBuilder{
     }
 
     public RenderBuilder setFirstColor(float r, float g, float b){
+        this.r1 = r / 255f;
+        this.g1 = g / 255f;
+        this.b1 = b / 255f;
+        return this;
+    }
+
+    public RenderBuilder setFirstColorRaw(float r, float g, float b){
         this.r1 = r;
         this.g1 = g;
         this.b1 = b;
@@ -180,11 +191,11 @@ public class RenderBuilder{
         return this;
     }
 
-    public RenderBuilder setSecondColor(Col color){
-        return setSecondColor(color.r, color.g, color.b);
+    public RenderBuilder setSecondColor(Color color){
+        return setSecondColor(color.getRed(), color.getGreen(), color.getBlue());
     }
 
-    public RenderBuilder setSecondColor(Col color, float a){
+    public RenderBuilder setSecondColor(Color color, float a){
         return setSecondColor(color).setSecondAlpha(a);
     }
 
@@ -193,6 +204,13 @@ public class RenderBuilder{
     }
 
     public RenderBuilder setSecondColor(float r, float g, float b){
+        this.r2 = r / 255f;
+        this.g2 = g / 255f;
+        this.b2 = b / 255f;
+        return this;
+    }
+
+    public RenderBuilder setSecondColorRaw(float r, float g, float b){
         this.r2 = r;
         this.g2 = g;
         this.b2 = b;
@@ -209,11 +227,11 @@ public class RenderBuilder{
         return this;
     }
 
-    public RenderBuilder setThirdColor(Col color){
-        return setThirdColor(color.r, color.g, color.b);
+    public RenderBuilder setThirdColor(Color color){
+        return setThirdColor(color.getRed(), color.getGreen(), color.getBlue());
     }
 
-    public RenderBuilder setThirdColor(Col color, float a){
+    public RenderBuilder setThirdColor(Color color, float a){
         return setThirdColor(color).setThirdAlpha(a);
     }
 
@@ -222,6 +240,13 @@ public class RenderBuilder{
     }
 
     public RenderBuilder setThirdColor(float r, float g, float b){
+        this.r3 = r / 255f;
+        this.g3 = g / 255f;
+        this.b3 = b / 255f;
+        return this;
+    }
+
+    public RenderBuilder setThirdColorRaw(float r, float g, float b){
         this.r3 = r;
         this.g3 = g;
         this.b3 = b;
@@ -628,13 +653,13 @@ public class RenderBuilder{
 
     public RenderBuilder renderBeam(@Nullable Matrix4f last, Vec3 start, Vec3 end, float width){
         Minecraft minecraft = Minecraft.getInstance();
-        Vec3 cameraPosition = Vec3.from(minecraft.getBlockEntityRenderDispatcher().camera.getPosition());
+        Vec3 cameraPosition = minecraft.getBlockEntityRenderDispatcher().camera.getPosition();
         return renderBeam(last, start, end, width, width, cameraPosition);
     }
 
     public RenderBuilder renderBeam(@Nullable Matrix4f last, Vec3 start, Vec3 end, float width1, float width2){
         Minecraft minecraft = Minecraft.getInstance();
-        Vec3 cameraPosition = Vec3.from(minecraft.getBlockEntityRenderDispatcher().camera.getPosition());
+        Vec3 cameraPosition = minecraft.getBlockEntityRenderDispatcher().camera.getPosition();
         return renderBeam(last, start, end, width1, width2, cameraPosition);
     }
 
@@ -643,42 +668,42 @@ public class RenderBuilder{
     }
 
     public RenderBuilder renderBeam(@Nullable Matrix4f last, Vec3 start, Vec3 end, float width1, float width2, Vec3 cameraPosition){
-        Vec3 delta = end.sub(start);
-        Vec3 normalStart = start.sub(cameraPosition).cross(delta).nor().scale(width1 / 2f, width1 / 2f, width1 / 2f);
-        Vec3 normalEnd = start.sub(cameraPosition).cross(delta).nor().scale(width2 / 2f, width2 / 2f, width2 / 2f);
+        Vec3 delta = end.subtract(start);
+        Vec3 normalStart = start.subtract(cameraPosition).cross(delta).normalize().multiply(width1 / 2f, width1 / 2f, width1 / 2f);
+        Vec3 normalEnd = start.subtract(cameraPosition).cross(delta).normalize().multiply(width2 / 2f, width2 / 2f, width2 / 2f);
 
-        Vec3[] positions = new Vec3[]{start.sub(normalStart), start.add(normalStart), end.add(normalEnd), end.sub(normalEnd)};
+        Vec3[] positions = new Vec3[]{start.subtract(normalStart), start.add(normalStart), end.add(normalEnd), end.subtract(normalEnd)};
 
-        supplier.placeVertex(getVertexConsumer(), last, this, positions[0].x, positions[0].y, positions[0].z, r1, g1, b1, a1, u0, v1, l1);
-        supplier.placeVertex(getVertexConsumer(), last, this, positions[1].x, positions[1].y, positions[1].z, r1, g1, b1, a1, u1, v1, l1);
-        supplier.placeVertex(getVertexConsumer(), last, this, positions[2].x, positions[2].y, positions[2].z, r2, g2, b2, a2, u1, v0, l2);
-        supplier.placeVertex(getVertexConsumer(), last, this, positions[3].x, positions[3].y, positions[3].z, r2, g2, b2, a2, u0, v0, l2);
+        supplier.placeVertex(getVertexConsumer(), last, this, (float)positions[0].x, (float)positions[0].y, (float)positions[0].z, r1, g1, b1, a1, u0, v1, l1);
+        supplier.placeVertex(getVertexConsumer(), last, this, (float)positions[1].x, (float)positions[1].y, (float)positions[1].z, r1, g1, b1, a1, u1, v1, l1);
+        supplier.placeVertex(getVertexConsumer(), last, this, (float)positions[2].x, (float)positions[2].y, (float)positions[2].z, r2, g2, b2, a2, u1, v0, l2);
+        supplier.placeVertex(getVertexConsumer(), last, this, (float)positions[3].x, (float)positions[3].y, (float)positions[3].z, r2, g2, b2, a2, u0, v0, l2);
 
         return this;
     }
 
-    public RenderBuilder renderTrail(PoseStack stack, Seq<TrailPoint> trailSegments, float width){
+    public RenderBuilder renderTrail(PoseStack stack, List<TrailPoint> trailSegments, float width){
         return renderTrail(stack, trailSegments, f -> width, f -> {
         });
     }
 
-    public RenderBuilder renderTrail(PoseStack stack, Seq<TrailPoint> trailSegments, Function<Float, Float> widthFunc){
+    public RenderBuilder renderTrail(PoseStack stack, List<TrailPoint> trailSegments, Function<Float, Float> widthFunc){
         return renderTrail(stack, trailSegments, widthFunc, f -> {
         });
     }
 
-    public RenderBuilder renderTrail(PoseStack stack, Seq<TrailPoint> trailSegments, Function<Float, Float> widthFunc, Consumer<Float> vfxOperator){
+    public RenderBuilder renderTrail(PoseStack stack, List<TrailPoint> trailSegments, Function<Float, Float> widthFunc, Consumer<Float> vfxOperator){
         return renderTrail(stack.last().pose(), trailSegments, widthFunc, vfxOperator);
     }
 
-    public RenderBuilder renderTrail(Matrix4f pose, Seq<TrailPoint> trailSegments, Function<Float, Float> widthFunc, Consumer<Float> vfxOperator){
-        if(trailSegments.size < 2){
+    public RenderBuilder renderTrail(Matrix4f pose, List<TrailPoint> trailSegments, Function<Float, Float> widthFunc, Consumer<Float> vfxOperator){
+        if(trailSegments.size() < 2){
             return this;
         }
-        Seq<Vector4f> positions = trailSegments.map(TrailPoint::getMatrixPosition).map(p -> p.mul(pose));
-        int count = trailSegments.size - 1;
+        List<Vector4f> positions = trailSegments.stream().map(TrailPoint::getMatrixPosition).peek(p -> p.mul(pose)).toList();
+        int count = trailSegments.size() - 1;
         float increment = 1.0F / count;
-        TrailRenderPoint[] points = new TrailRenderPoint[trailSegments.size];
+        TrailRenderPoint[] points = new TrailRenderPoint[trailSegments.size()];
         for(int i = 1; i < count; i++){
             float width = widthFunc.apply(increment * i);
             Vector4f previous = positions.get(i - 1);

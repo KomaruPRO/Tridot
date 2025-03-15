@@ -9,7 +9,7 @@ import pro.komaru.tridot.client.render.TridotRenderTypes;
 import pro.komaru.tridot.client.gfx.particle.GenericParticle;
 import pro.komaru.tridot.client.gfx.particle.GenericParticleRenderType;
 import pro.komaru.tridot.client.gfx.particle.behavior.ParticleBehavior;
-import pro.komaru.tridot.util.Col;
+import pro.komaru.tridot.util.*;
 
 import java.util.*;
 import java.util.function.*;

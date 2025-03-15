@@ -4,27 +4,37 @@ import org.joml.Vector4f;
 import pro.komaru.tridot.util.phys.Vec3;
 
 public class TrailPoint{
-    public final Vec3 pos;
-    public int lifetime;
+    private final Vec3 position;
+    private int timeActive;
 
-    public TrailPoint(Vec3 pos, int lifetime){
-        this.pos = pos;
-        this.lifetime = lifetime;
+    public TrailPoint(Vec3 position, int timeActive){
+        this.position = position;
+        this.timeActive = timeActive;
     }
 
-    public TrailPoint(Vec3 pos){
-        this(pos, 0);
+    public TrailPoint(Vec3 position){
+        this(position, 0);
     }
 
     public Vector4f getMatrixPosition(){
-        return new Vector4f(pos.x, pos.y, pos.z, 1.0f);
+        Vec3 position = getPosition();
+        return new Vector4f(position.x, position.y, position.z, 1.0f);
+    }
+
+    public Vec3 getPosition(){
+        return position;
+    }
+
+    public int getTimeActive(){
+        return timeActive;
     }
 
     public TrailPoint lerp(TrailPoint trailPoint, float delta){
-        return new TrailPoint(pos.cpy().lerp(trailPoint.pos, delta), lifetime);
+        Vec3 position = getPosition();
+        return new TrailPoint(position.lerp(trailPoint.position, delta), timeActive);
     }
 
     public void tick(){
-        lifetime++;
+        timeActive++;
     }
 }

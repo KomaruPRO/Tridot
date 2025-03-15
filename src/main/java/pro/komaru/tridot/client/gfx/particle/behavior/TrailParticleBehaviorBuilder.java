@@ -4,8 +4,8 @@ import pro.komaru.tridot.client.gfx.particle.data.ColorParticleData;
 import pro.komaru.tridot.client.gfx.particle.data.GenericParticleData;
 import pro.komaru.tridot.client.gfx.particle.data.SpinParticleData;
 import pro.komaru.tridot.client.gfx.particle.options.GenericParticleOptions;
-import pro.komaru.tridot.util.struct.func.Func;
 
+import java.util.function.*;
 
 public class TrailParticleBehaviorBuilder extends ParticleBehaviorBuilder{
 
@@ -13,7 +13,7 @@ public class TrailParticleBehaviorBuilder extends ParticleBehaviorBuilder{
     public GenericParticleData transparencyData = GenericParticleOptions.DEFAULT_GENERIC;
     public boolean secondColor = false;
     public int trailSize = 10;
-    public Func<Float, Float> widthFunc = (f) -> f;
+    public Function<Float, Float> widthFunc = (f) -> f;
 
     protected TrailParticleBehaviorBuilder(float xOffset, float yOffset, float zOffset){
         super(xOffset, yOffset, zOffset);
@@ -123,7 +123,7 @@ public class TrailParticleBehaviorBuilder extends ParticleBehaviorBuilder{
         return this;
     }
 
-    public TrailParticleBehaviorBuilder setWidthFunction(Func<Float, Float> widthFunc){
+    public TrailParticleBehaviorBuilder setWidthFunction(Function<Float, Float> widthFunc){
         this.widthFunc = widthFunc;
         return this;
     }

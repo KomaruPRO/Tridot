@@ -1,6 +1,7 @@
 package pro.komaru.tridot.client.gfx.particle.data;
 
-import pro.komaru.tridot.util.math.Interp;
+
+import pro.komaru.tridot.util.math.*;
 
 public class GenericParticleDataBuilder{
     protected float startingValue, middleValue, endingValue;

@@ -21,7 +21,7 @@ public class TestItem extends Item{
         var rand = Tmp.rnd;
         net.minecraft.world.phys.Vec3 pos = new net.minecraft.world.phys.Vec3(playerIn.getX() + (rand.nextDouble() - 0.5f) / 6, playerIn.getY() + 0.4F, playerIn.getZ());
 
-        Col particleColor = Col.darkGray;
+        Col particleColor = Col.pink;
         Col particleColorTo = Col.blue;
 
         ParticleBuilder.create(TridotParticles.HEART.get())

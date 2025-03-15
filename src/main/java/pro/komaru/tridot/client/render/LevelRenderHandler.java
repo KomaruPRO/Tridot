@@ -14,10 +14,10 @@ import net.minecraftforge.fml.*;
 import net.minecraftforge.fml.common.*;
 import org.joml.*;
 import org.lwjgl.opengl.*;
+import pro.komaru.tridot.client.compatibility.*;
 import pro.komaru.tridot.client.gfx.particle.GenericParticle;
 import pro.komaru.tridot.client.gfx.particle.ICustomParticleRender;
 import pro.komaru.tridot.client.gfx.particle.behavior.ICustomBehaviorParticleRender;
-import pro.komaru.tridot.client.compatibility.ShadersIntegration;
 
 import java.util.*;
 

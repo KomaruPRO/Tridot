@@ -12,16 +12,15 @@ import net.minecraftforge.registries.*;
 import org.joml.Math;
 import pro.komaru.tridot.client.gfx.particle.behavior.ParticleBehavior;
 import pro.komaru.tridot.client.gfx.particle.options.GenericParticleOptions;
+import pro.komaru.tridot.util.*;
+import pro.komaru.tridot.util.math.*;
 
 import java.util.*;
 import java.util.function.*;
 
 public class ParticleBuilder{
-
-    public static final Random random = new Random();
-
+    public static final ArcRandom random = Tmp.rnd;
     public final GenericParticleOptions options;
-
     double vx = 0, vy = 0, vz = 0;
     double fvx = 0, fvy = 0, fvz = 0;
     double fdx = 0, fdy = 0, fdz = 0;
@@ -304,12 +303,12 @@ public class ParticleBuilder{
 
     public ParticleBuilder spawn(Level level, Vec3 pos){
         double yaw = random.nextFloat() * Math.PI * 2, pitch = random.nextFloat() * Math.PI - Math.PI / 2,
-                xSpeed = random.nextFloat() * maxXSpeed, ySpeed = random.nextFloat() * maxYSpeed, zSpeed = random.nextFloat() * maxZSpeed;
+        xSpeed = random.nextFloat() * maxXSpeed, ySpeed = random.nextFloat() * maxYSpeed, zSpeed = random.nextFloat() * maxZSpeed;
         double vx = this.vx + Math.sin(yaw) * Math.cos(pitch) * xSpeed;
         double vy = this.vy + Math.sin(pitch) * ySpeed;
         double vz = this.vz + Math.cos(yaw) * Math.cos(pitch) * zSpeed;
         double yaw2 = random.nextFloat() * Math.PI * 2, pitch2 = random.nextFloat() * Math.PI - Math.PI / 2,
-                xDist = random.nextFloat() * maxXDist, yDist = random.nextFloat() * maxYDist, zDist = random.nextFloat() * maxZDist;
+        xDist = random.nextFloat() * maxXDist, yDist = random.nextFloat() * maxYDist, zDist = random.nextFloat() * maxZDist;
         double dx = Math.sin(yaw2) * Math.cos(pitch2) * xDist;
         double dy = Math.sin(pitch2) * yDist;
         double dz = Math.cos(yaw2) * Math.cos(pitch2) * zDist;
@@ -378,23 +377,23 @@ public class ParticleBuilder{
 
     public ParticleBuilder spawnVoxelShape(Level level, Vec3 pos, VoxelShape voxelShape, int n, float chance){
         voxelShape.forAllBoxes(
-                (x1, y1, z1, x2, y2, z2) -> {
-                    Vec3 v = pos;
-                    Vec3 b = pos.add(x1, y1, z1);
-                    Vec3 e = pos.add(x2, y2, z2);
-                    repeatLine(level, b, v.add(x2, y1, z1), n, chance);
-                    repeatLine(level, b, v.add(x1, y2, z1), n, chance);
-                    repeatLine(level, b, v.add(x1, y1, z2), n, chance);
-                    repeatLine(level, v.add(x1, y2, z1), v.add(x2, y2, z1), n, chance);
-                    repeatLine(level, v.add(x1, y2, z1), v.add(x1, y2, z2), n, chance);
-                    repeatLine(level, e, v.add(x2, y2, z1), n, chance);
-                    repeatLine(level, e, v.add(x1, y2, z2), n, chance);
-                    repeatLine(level, e, v.add(x2, y1, z2), n, chance);
-                    repeatLine(level, v.add(x2, y1, z1), v.add(x2, y1, z2), n, chance);
-                    repeatLine(level, v.add(x1, y1, z2), v.add(x2, y1, z2), n, chance);
-                    repeatLine(level, v.add(x2, y1, z1), v.add(x2, y2, z1), n, chance);
-                    repeatLine(level, v.add(x1, y1, z2), v.add(x1, y2, z2), n, chance);
-                }
+        (x1, y1, z1, x2, y2, z2) -> {
+            Vec3 v = pos;
+            Vec3 b = pos.add(x1, y1, z1);
+            Vec3 e = pos.add(x2, y2, z2);
+            repeatLine(level, b, v.add(x2, y1, z1), n, chance);
+            repeatLine(level, b, v.add(x1, y2, z1), n, chance);
+            repeatLine(level, b, v.add(x1, y1, z2), n, chance);
+            repeatLine(level, v.add(x1, y2, z1), v.add(x2, y2, z1), n, chance);
+            repeatLine(level, v.add(x1, y2, z1), v.add(x1, y2, z2), n, chance);
+            repeatLine(level, e, v.add(x2, y2, z1), n, chance);
+            repeatLine(level, e, v.add(x1, y2, z2), n, chance);
+            repeatLine(level, e, v.add(x2, y1, z2), n, chance);
+            repeatLine(level, v.add(x2, y1, z1), v.add(x2, y1, z2), n, chance);
+            repeatLine(level, v.add(x1, y1, z2), v.add(x2, y1, z2), n, chance);
+            repeatLine(level, v.add(x2, y1, z1), v.add(x2, y2, z1), n, chance);
+            repeatLine(level, v.add(x1, y1, z2), v.add(x1, y2, z2), n, chance);
+        }
         );
         return this;
     }

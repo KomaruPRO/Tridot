@@ -1,16 +1,16 @@
 package pro.komaru.tridot.client.gfx.particle.data;
 
-import pro.komaru.tridot.util.Tmp;
-import pro.komaru.tridot.util.math.ArcRandom;
-import pro.komaru.tridot.util.math.Interp;
 import net.minecraft.util.*;
+import pro.komaru.tridot.util.math.*;
+
+import java.util.*;
 
 public class SpinParticleDataBuilder extends GenericParticleDataBuilder{
     protected float spinOffset;
     protected float rsp1 = 0, rsp2 = 0;
     protected float rso1 = 0, rso2 = 0;
 
-    public static final ArcRandom random = Tmp.rnd;
+    public static final Random random = new Random();
 
     protected SpinParticleDataBuilder(float startingValue, float middleValue, float endingValue){
         super(startingValue, middleValue, endingValue);

@@ -2,38 +2,41 @@ package pro.komaru.tridot.client.gfx.trail;
 
 import org.joml.*;
 import pro.komaru.tridot.util.phys.Vec3;
-import pro.komaru.tridot.util.struct.data.Seq;
-import pro.komaru.tridot.util.struct.func.Prov;
+
+import java.util.*;
+import java.util.function.*;
+import java.util.stream.*;
 
 public class TrailPointBuilder{
 
-    private final Seq<TrailPoint> points = Seq.with();
-    public final Prov<Integer> length;
+    private final List<TrailPoint> trailPoints = new ArrayList<>();
+    public final Supplier<Integer> trailLength;
 
-    public TrailPointBuilder(Prov<Integer> length){
-        this.length = length;
+    public TrailPointBuilder(Supplier<Integer> trailLength){
+        this.trailLength = trailLength;
     }
 
     public static TrailPointBuilder create(int trailLength){
         return create(() -> trailLength);
     }
 
-    public static TrailPointBuilder create(Prov<Integer> trailLength){
+    public static TrailPointBuilder create(Supplier<Integer> trailLength){
         return new TrailPointBuilder(trailLength);
     }
 
-    public Seq<TrailPoint> points(){
-        return points;
+    public List<TrailPoint> points(){
+        return trailPoints;
     }
 
-    public Seq<TrailPoint> points(float lerp){
-        Seq<TrailPoint> lerped = Seq.with();
-        int size = points.size;
-        if(size <= 1) return lerped;
-
-        for(int i = 0; i < size - 2; i++)
-            lerped.add(points.get(i).lerp(points.get(i + 1), lerp));
-        return lerped;
+    public List<TrailPoint> points(float lerp){
+        List<TrailPoint> lerpedTrailPoints = new ArrayList<>();
+        final int size = trailPoints.size();
+        if(size > 1){
+            for(int i = 0; i < size - 2; i++){
+                lerpedTrailPoints.add(trailPoints.get(i).lerp(trailPoints.get(i + 1), lerp));
+            }
+        }
+        return lerpedTrailPoints;
     }
 
     public TrailPointBuilder add(Vec3 point){
@@ -41,18 +44,18 @@ public class TrailPointBuilder{
     }
 
     public TrailPointBuilder add(TrailPoint point){
-        points.add(point);
+        trailPoints.add(point);
         return this;
     }
 
     public TrailPointBuilder tick(){
-        int trailLength = this.length.get();
-        points.each(TrailPoint::tick);
-        points.removeAll(p -> p.lifetime > trailLength);
+        int trailLength = this.trailLength.get();
+        trailPoints.forEach(TrailPoint::tick);
+        trailPoints.removeIf(p -> p.getTimeActive() > trailLength);
         return this;
     }
 
-    public Seq<Vector4f> build(){
-        return points.map(TrailPoint::getMatrixPosition);
+    public List<Vector4f> build(){
+        return trailPoints.stream().map(TrailPoint::getMatrixPosition).collect(Collectors.toList());
     }
 }

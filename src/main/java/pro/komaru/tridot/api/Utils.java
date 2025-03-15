@@ -1324,7 +1324,7 @@ public class Utils {
         public static void renderFluid(PoseStack stack, FluidStack fluidStack, float width, float height, float length, float texWidth, float texHeight, float texLength, java.awt.Color color, boolean flowing, int light){
             if(!fluidStack.isEmpty()){
                 RenderBuilder builder = getFluidRenderBuilder(fluidStack, texWidth, texHeight, texLength, flowing, light);
-                builder.setColor(Col.fromColor(color)).renderCube(stack, width, height, length);
+                builder.setColor(color).renderCube(stack, width, height, length);
             }
         }
 
@@ -1346,7 +1346,7 @@ public class Utils {
         public static void renderCenteredFluid(PoseStack stack, FluidStack fluidStack, float width, float height, float length, float texWidth, float texHeight, float texLength, java.awt.Color color, boolean flowing, int light){
             if(!fluidStack.isEmpty()){
                 RenderBuilder builder = getFluidRenderBuilder(fluidStack, texWidth, texHeight, texLength, flowing, light);
-                builder.setColor(Col.fromColor(color)).renderCenteredCube(stack, width, height, length);
+                builder.setColor(color).renderCenteredCube(stack, width, height, length);
             }
         }
 
@@ -1368,7 +1368,7 @@ public class Utils {
         public static void renderWavyFluid(PoseStack stack, FluidStack fluidStack, float width, float height, float length, float texWidth, float texHeight, float texLength, java.awt.Color color, boolean flowing, int light, float strength, float time){
             if(!fluidStack.isEmpty()){
                 RenderBuilder builder = getFluidRenderBuilder(fluidStack, texWidth, texHeight, texLength, flowing, light);
-                builder.setColor(Col.fromColor(color)).renderWavyCube(stack, width, height, length, strength, time);
+                builder.setColor(color).renderWavyCube(stack, width, height, length, strength, time);
             }
         }
 
@@ -1383,7 +1383,7 @@ public class Utils {
                 builder.setFirstUV(sprite.getU0(), sprite.getV0(), sprite.getU0() + ((sprite.getU1() - sprite.getU0()) * texLength), sprite.getV0() + ((sprite.getV1() - sprite.getV0()) * texWidth))
                 .setSecondUV(sprite.getU0(), sprite.getV0(), sprite.getU0() + ((sprite.getU1() - sprite.getU0()) * texWidth), sprite.getV0() + ((sprite.getV1() - sprite.getV0()) * texHeight))
                 .setThirdUV(sprite.getU0(), sprite.getV0(), sprite.getU0() + ((sprite.getU1() - sprite.getU0()) * texLength), sprite.getV0() + ((sprite.getV1() - sprite.getV0()) * texHeight))
-                .setColor(new Col(clientType.getTintColor(fluidStack)))
+                .setColor(new Color(clientType.getTintColor(fluidStack)))
                 .setLight(Math.max(type.getLightLevel(fluidStack) << 4, light));
             }
             return builder;
@@ -1401,7 +1401,7 @@ public class Utils {
             stack.mulPose(Axis.YP.rotationDegrees((float)Math.toDegrees(-yaw)));
             stack.mulPose(Axis.ZP.rotationDegrees((float)Math.toDegrees(-pitch) - 180f));
             RenderBuilder.create().setRenderType(TridotRenderTypes.ADDITIVE)
-            .setColor(Col.fromColor(color))
+            .setColor(color)
             .setAlpha(alpha)
             .renderRay(stack, 0.01f, (float)from.distanceTo(to) + 0.01f);
             stack.popPose();
@@ -1436,7 +1436,7 @@ public class Utils {
             stack.pushPose();
             stack.translate(0.01f, 0.01f, 0.01f);
             RenderBuilder.create().setRenderType(TridotRenderTypes.ADDITIVE)
-            .setColor(Col.fromColor(color))
+            .setColor(color)
             .setAlpha(alpha / 8f)
             .enableSided()
             .renderCube(stack, (float)size.x() - 0.02f, (float)size.y() - 0.02f, (float)size.z() - 0.02f);
@@ -1451,7 +1451,7 @@ public class Utils {
             stack.pushPose();
             stack.mulPose(Axis.XP.rotationDegrees(90f));
             RenderBuilder.create().setRenderType(TridotRenderTypes.ADDITIVE)
-            .setColor(Col.fromColor(color))
+            .setColor(color)
             .setAlpha(alpha / 8f)
             .enableSided()
             .renderQuad(stack, (float)size.x(), (float)size.y());

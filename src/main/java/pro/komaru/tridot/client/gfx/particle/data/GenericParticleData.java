@@ -1,8 +1,7 @@
 package pro.komaru.tridot.client.gfx.particle.data;
 
-import pro.komaru.tridot.util.math.Interp;
 import net.minecraft.util.*;
-import pro.komaru.tridot.util.math.Mathf;
+import pro.komaru.tridot.util.math.*;
 
 public class GenericParticleData{
     public final float startingValue, middleValue, endingValue;
@@ -61,7 +60,7 @@ public class GenericParticleData{
     }
 
     public float getProgress(float age, float lifetime){
-        return Mathf.clamp((age * coefficient * coefficientMultiplier) / lifetime);
+        return Mth.clamp((age * coefficient * coefficientMultiplier) / lifetime, 0, 1);
     }
 
     public float getValue(float age, float lifetime, float startingValue, float middleValue, float endingValue){
@@ -100,15 +99,15 @@ public class GenericParticleData{
     }
 
     public static GenericParticleData constrictTransparency(GenericParticleData data){
-        float startingValue = Mathf.clamp(data.startingValue);
-        float middleValue = Mathf.clamp(data.middleValue);
-        float endingValue = data.endingValue == -1 ? -1 : Mathf.clamp(data.endingValue);
-        float rs1 = data.rs1 == -1 ? -1 : Mathf.clamp(data.rs1);
-        float rm1 = data.rm1 == -1 ? -1 : Mathf.clamp(data.rm1);
-        float re1 = data.re1 == -1 ? -1 : Mathf.clamp(data.re1);
-        float rs2 = data.rs2 == -1 ? -1 : Mathf.clamp(data.rs2);
-        float rm2 = data.rm2 == -1 ? -1 : Mathf.clamp(data.rm2);
-        float re2 = data.re2 == -1 ? -1 : Mathf.clamp(data.re2);
+        float startingValue = Mth.clamp(data.startingValue, 0, 1);
+        float middleValue = Mth.clamp(data.middleValue, 0, 1);
+        float endingValue = data.endingValue == -1 ? -1 : Mth.clamp(data.endingValue, 0, 1);
+        float rs1 = data.rs1 == -1 ? -1 : Mth.clamp(data.rs1, 0, 1);
+        float rm1 = data.rm1 == -1 ? -1 : Mth.clamp(data.rm1, 0, 1);
+        float re1 = data.re1 == -1 ? -1 : Mth.clamp(data.re1, 0, 1);
+        float rs2 = data.rs2 == -1 ? -1 : Mth.clamp(data.rs2, 0, 1);
+        float rm2 = data.rm2 == -1 ? -1 : Mth.clamp(data.rm2, 0, 1);
+        float re2 = data.re2 == -1 ? -1 : Mth.clamp(data.re2, 0, 1);
         float coefficient = data.coefficient;
         Interp startToMiddleEasing = data.startToMiddleEasing;
         Interp middleToEndEasing = data.middleToEndEasing;
