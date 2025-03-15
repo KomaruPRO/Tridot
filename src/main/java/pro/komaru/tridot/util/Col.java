@@ -393,7 +393,7 @@ public class Col {
         }
 
         if(max > 0){
-            hsv[1] = 1 - min / max;
+            hsv[1] = (1 - min / max);
         }else{
             hsv[1] = 0;
         }

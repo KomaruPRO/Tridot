@@ -1,9 +1,8 @@
 package pro.komaru.tridot.client.gfx.particle.data;
 
+import net.minecraft.util.*;
 import pro.komaru.tridot.util.Col;
 import pro.komaru.tridot.util.math.Interp;
-import net.minecraft.util.*;
-
 
 public class ColorParticleData{
 
@@ -64,11 +63,11 @@ public class ColorParticleData{
     }
 
     public static ColorParticleDataBuilder create(Col start, Col end){
-        return create(start.r,start.g,start.b,end.r,end.g,end.b);
+        return create(start.r, start.g, start.b, end.r, end.g, end.b);
     }
 
     public static ColorParticleDataBuilder create(Col color){
-        return create(color.r,color.g,color.b);
+        return create(color.r, color.g, color.b);
     }
 
     public static ColorParticleDataBuilder create(){

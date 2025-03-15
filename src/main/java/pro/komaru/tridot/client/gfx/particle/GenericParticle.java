@@ -14,6 +14,7 @@ import pro.komaru.tridot.client.gfx.particle.options.GenericParticleOptions;
 import pro.komaru.tridot.util.Col;
 import pro.komaru.tridot.util.Tmp;
 import pro.komaru.tridot.util.math.ArcRandom;
+import pro.komaru.tridot.util.math.Mathf;
 import pro.komaru.tridot.util.phys.Vec3;
 
 import java.awt.*;
@@ -128,8 +129,6 @@ public class GenericParticle extends TextureSheetParticle{
         Tmp.c2.set(r2,g2,b2);
         hsv2 = Tmp.c2.toHsv(hsv2);
 
-        Color.RGBtoHSB((int)(255 * Math.min(1.0f, r1)), (int)(255 * Math.min(1.0f, g1)), (int)(255 * Math.min(1.0f, b1)), hsv1);
-        Color.RGBtoHSB((int)(255 * Math.min(1.0f, r2)), (int)(255 * Math.min(1.0f, g2)), (int)(255 * Math.min(1.0f, b2)), hsv2);
         options.spawnActors.forEach(actor -> actor.accept(this));
         updateTraits();
     }
@@ -149,14 +148,10 @@ public class GenericParticle extends TextureSheetParticle{
     }
 
     public void pickColor(float coeff){
-        float h = Mth.rotLerp(coeff, 360 * hsv1[0], 360 * hsv2[0]) / 360;
-        float s = Mth.lerp(coeff, hsv1[1], hsv2[1]);
-        float v = Mth.lerp(coeff, hsv1[2], hsv2[2]);
-        int packed = Color.HSBtoRGB(h, s, v);
-        float r = FastColor.ARGB32.red(packed) / 255.0f;
-        float g = FastColor.ARGB32.green(packed) / 255.0f;
-        float b = FastColor.ARGB32.blue(packed) / 255.0f;
-        setColor(r, g, b);
+        var col = Col.HSVtoRGB(hsv1[0], hsv1[1] * 100f, hsv1[2] * 100f);
+        var col2 = Col.HSVtoRGB(hsv2[0], hsv2[1] * 100f, hsv2[2] * 100f);
+        col.lerp(col2,coeff);
+        setColor(col.r,col.g,col.b);
     }
 
     public void updateTraits(){

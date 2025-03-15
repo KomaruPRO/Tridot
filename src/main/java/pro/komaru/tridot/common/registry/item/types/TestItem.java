@@ -1,6 +1,5 @@
 package pro.komaru.tridot.common.registry.item.types;
 
-import net.minecraft.util.*;
 import net.minecraft.world.*;
 import net.minecraft.world.entity.player.*;
 import net.minecraft.world.item.*;
@@ -11,7 +10,6 @@ import pro.komaru.tridot.client.gfx.particle.*;
 import pro.komaru.tridot.client.gfx.particle.data.*;
 import pro.komaru.tridot.client.render.*;
 import pro.komaru.tridot.util.*;
-import pro.komaru.tridot.util.phys.*;
 
 public class TestItem extends Item{
     public TestItem(Properties pProperties){
@@ -23,12 +21,11 @@ public class TestItem extends Item{
         var rand = Tmp.rnd;
         net.minecraft.world.phys.Vec3 pos = new net.minecraft.world.phys.Vec3(playerIn.getX() + (rand.nextDouble() - 0.5f) / 6, playerIn.getY() + 0.4F, playerIn.getZ());
 
+        Col particleColor = Col.darkGray;
+        Col particleColorTo = Col.blue;
 
-        Col particleColor = Col.pink;
-        Col particleColorTo = Col.magenta;
-
-            ParticleBuilder.create(TridotParticles.HEART.get())
-            .setRenderType(TridotRenderTypes.TRANSLUCENT_PARTICLE)
+        ParticleBuilder.create(TridotParticles.HEART.get())
+            .setRenderType(TridotRenderTypes.ADDITIVE_PARTICLE)
             .setTransparencyData(GenericParticleData.create(1, 0f).build())
             .setScaleData(GenericParticleData.create(1 + Tmp.rnd.randomValueUpTo(0.15f), Tmp.rnd.randomValueUpTo(0.2f)).build())
             .setLifetime(100)
