@@ -17,7 +17,6 @@ import pro.komaru.tridot.client.render.LevelRenderHandler;
 
 public class TridotParticles{
     public static final DeferredRegister<ParticleType<?>> PARTICLES = DeferredRegister.create(ForgeRegistries.PARTICLE_TYPES, TridotLib.ID);
-
     public static RegistryObject<GenericParticleType> WISP = PARTICLES.register("wisp", GenericParticleType::new);
     public static RegistryObject<GenericParticleType> TINY_WISP = PARTICLES.register("tiny_wisp", GenericParticleType::new);
     public static RegistryObject<GenericParticleType> SPARKLE = PARTICLES.register("sparkle", GenericParticleType::new);
@@ -31,10 +30,6 @@ public class TridotParticles{
     public static RegistryObject<GenericParticleType> SKULL = PARTICLES.register("skull", GenericParticleType::new);
     public static RegistryObject<GenericParticleType> SMOKE = PARTICLES.register("smoke", GenericParticleType::new);
     public static RegistryObject<GenericParticleType> TRAIL = PARTICLES.register("trail", GenericParticleType::new);
-    public static RegistryObject<GenericParticleType> PANCAKE = PARTICLES.register("pancake", GenericParticleType::new);
-    public static RegistryObject<GenericParticleType> DEATH = PARTICLES.register("death", GenericParticleType::new);
-    public static RegistryObject<GenericParticleType> EARTH = PARTICLES.register("earth", GenericParticleType::new);
-    public static RegistryObject<GenericParticleType> SUN = PARTICLES.register("sun", GenericParticleType::new);
     public static RegistryObject<ItemParticleType> ITEM = PARTICLES.register("item", ItemParticleType::new);
     public static RegistryObject<BlockParticleType> BLOCK = PARTICLES.register("block", BlockParticleType::new);
     public static RegistryObject<FluidParticleType> FLUID = PARTICLES.register("fluid", FluidParticleType::new);
@@ -63,10 +58,6 @@ public class TridotParticles{
             particleEngine.register(SKULL.get(), GenericParticleType.Factory::new);
             particleEngine.register(SMOKE.get(), GenericParticleType.Factory::new);
             particleEngine.register(TRAIL.get(), GenericParticleType.Factory::new);
-            particleEngine.register(PANCAKE.get(), GenericParticleType.Factory::new);
-            particleEngine.register(DEATH.get(), GenericParticleType.Factory::new);
-            particleEngine.register(EARTH.get(), GenericParticleType.Factory::new);
-            particleEngine.register(SUN.get(), GenericParticleType.Factory::new);
             particleEngine.register(ITEM.get(), ItemParticleType.Factory::new);
             particleEngine.register(BLOCK.get(), BlockParticleType.Factory::new);
             particleEngine.register(FLUID.get(), FluidParticleType.Factory::new);
