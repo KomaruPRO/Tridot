@@ -3,7 +3,7 @@ package pro.komaru.tridot.api.render.text;
 import pro.komaru.tridot.util.phys.Rect;
 
 public class TextRenderProps {
-    public boolean centered = false;
+    public boolean xCentered = false;
     public boolean yCentered = false;
     public boolean shadow = true;
 
@@ -14,11 +14,11 @@ public class TextRenderProps {
     public float scaleX = 1f, scaleY = 1f;
 
     public TextRenderProps centered(boolean val) {
-        centered = val;
+        xCentered = val;
         return this;
     }
     public TextRenderProps centered(boolean val, boolean y) {
-        centered = val;
+        xCentered = val;
         yCentered = y;
         return this;
     }

@@ -1,8 +1,6 @@
 package pro.komaru.tridot.api.render.text;
 
-import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
@@ -107,18 +105,17 @@ public class TextBuilder {
 
         List<FormattedCharSequence> split = split(true);
 
-        if(renderProps.centered) x -= w/2f;
+        if(renderProps.xCentered) x -= w/2f;
         if(renderProps.yCentered) y -= h/2f;
 
         d.push();
         d.move(x,y);
-        if(renderProps.centered) d.scale(renderProps.scaleX, renderProps.scaleY, 0f, 0f);
-        else d.scale(renderProps.scaleX, renderProps.scaleY);
+        d.scale(renderProps.scaleX, renderProps.scaleY);
 
         int i = 0;
         for (FormattedCharSequence charseq : split) {
             float locw = Utils.mc().font.width(charseq);
-            g.drawString(Utils.mc().font,charseq,renderProps.centered ? w/2f/renderProps.scaleX-locw/2f : 0f,i * 9, Tmp.c1.set(1f,1f,1f,renderProps.alpha).argb8888(), renderProps.shadow);
+            g.drawString(Utils.mc().font,charseq,renderProps.xCentered ? w/2f/renderProps.scaleX-locw/2f : 0f,i * 9, Tmp.c1.set(1f,1f,1f,renderProps.alpha).argb8888(), renderProps.shadow);
             i++;
         }
 
