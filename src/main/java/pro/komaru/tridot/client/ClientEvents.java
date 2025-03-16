@@ -1,34 +1,19 @@
 package pro.komaru.tridot.client;
 
 import net.minecraft.client.*;
-import net.minecraft.network.chat.*;
-import net.minecraft.network.chat.Component;
 import net.minecraft.util.*;
 import net.minecraft.world.entity.player.*;
 import net.minecraft.world.item.*;
 import net.minecraftforge.client.event.*;
 import net.minecraftforge.event.*;
 import net.minecraftforge.eventbus.api.*;
-import pro.komaru.tridot.api.Utils;
-import pro.komaru.tridot.api.render.*;
-import pro.komaru.tridot.client.gfx.TridotParticles;
-import pro.komaru.tridot.client.gfx.particle.GenericParticle;
-import pro.komaru.tridot.client.gfx.particle.ParticleBuilder;
-import pro.komaru.tridot.client.gfx.particle.behavior.TrailParticleBehavior;
-import pro.komaru.tridot.client.gfx.particle.data.ColorParticleData;
-import pro.komaru.tridot.client.gfx.particle.data.GenericParticleData;
+import pro.komaru.tridot.api.render.text.DotText;
 import pro.komaru.tridot.client.gfx.postprocess.*;
-import pro.komaru.tridot.client.gfx.text.*;
 import pro.komaru.tridot.client.model.render.item.bow.*;
-import pro.komaru.tridot.client.render.TridotRenderTypes;
 import pro.komaru.tridot.client.render.screenshake.*;
-import pro.komaru.tridot.util.*;
-import pro.komaru.tridot.util.math.Interp;
-import pro.komaru.tridot.util.phys.Vec3;
-import pro.komaru.tridot.util.struct.func.Cons;
+import pro.komaru.tridot.util.Col;
 
-import java.awt.*;
-import java.util.function.Consumer;
+import static pro.komaru.tridot.api.render.text.DotText.*;
 
 public class ClientEvents {
 
@@ -47,6 +32,27 @@ public class ClientEvents {
     @SubscribeEvent
     public void renderTick(TickEvent.RenderTickEvent event){
         ClientTick.renderTick(event);
+    }
+
+    @SubscribeEvent
+    public void render(RenderGuiEvent event) {
+        DotText.create("Hello ")
+                .add(
+                        DotText.create("world!")
+                                .effects()
+                                .effects(
+                                        rainbow(1f,true),
+                                        outline(Col.black,true),
+                                        wave(1f))
+                )
+                .renderStyle(r ->
+                        r
+                                .shadow(true)
+                                .centered(false,false)
+                                .maxWidth(60f + (float) Math.abs(Math.sin(ClientTick.getTotal()/50f))*60f)
+                                .scl((float) (1f+Math.abs(Math.sin(ClientTick.getTotal()/20f)))))
+                .render(event.getGuiGraphics(),100,100);
+        ;
     }
 
     @SubscribeEvent

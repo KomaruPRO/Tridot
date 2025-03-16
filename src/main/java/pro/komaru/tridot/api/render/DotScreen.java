@@ -1,4 +1,4 @@
-package pro.komaru.tridot.client.render.gui;
+package pro.komaru.tridot.api.render;
 
 import com.mojang.blaze3d.systems.*;
 import com.mojang.blaze3d.vertex.*;

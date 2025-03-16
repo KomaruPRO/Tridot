@@ -10,7 +10,7 @@ import net.minecraft.network.chat.Style;
 import net.minecraft.network.chat.TextColor;
 import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.Nullable;
-import pro.komaru.tridot.api.render.DotText;
+import pro.komaru.tridot.api.render.text.DotText;
 import pro.komaru.tridot.util.Col;
 import pro.komaru.tridot.util.struct.data.Seq;
 
@@ -25,6 +25,20 @@ public class DotStyle extends Style {
     }
     public DotStyle() {
         super(null,null,null,null,null,null,null,null,null,null);
+    }
+
+    public DotStyle from(Style style) {
+        color = style.color;
+        bold = style.bold;
+        italic = style.italic;
+        underlined = style.underlined;
+        strikethrough = style.strikethrough;
+        obfuscated = style.obfuscated;
+        clickEvent = style.clickEvent;
+        hoverEvent = style.hoverEvent;
+        insertion = style.insertion;
+        font = style.font;
+        return this;
     }
 
     public static DotStyle of() {
@@ -89,9 +103,11 @@ public class DotStyle extends Style {
         this.font = font;
         return this;
     }
-
-    public DotStyle effects(DotStyleEffect ...effects) {
+    public DotStyle effects() {
         this.effects.clear();
+        return this;
+    }
+    public DotStyle effects(DotStyleEffect ...effects) {
         this.effects.addAll(effects);
         return this;
     }

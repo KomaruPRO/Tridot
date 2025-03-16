@@ -1,4 +1,4 @@
-package pro.komaru.tridot.api.render;
+package pro.komaru.tridot.api.render.text;
 
 import com.mojang.blaze3d.font.GlyphInfo;
 import com.mojang.blaze3d.vertex.VertexConsumer;
@@ -7,6 +7,8 @@ import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.Font.*;
 import net.minecraft.client.gui.font.FontSet;
 import net.minecraft.client.gui.font.glyphs.BakedGlyph;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.TextColor;
 import net.minecraft.resources.ResourceLocation;
 import pro.komaru.tridot.client.ClientTick;
@@ -29,6 +31,13 @@ public class DotText {
     public static void registerEffect(ResourceLocation effectId, DotStyle.DotStyleEffect effectObject) {
         effectObject.id = effectId;
         EFFECTS.put(effectId.toString(),effectObject);
+    }
+
+    public static TextBuilder create(Component component) {
+        return new TextBuilder((MutableComponent) component);
+    }
+    public static TextBuilder create(String text) {
+        return new TextBuilder(Component.literal(text));
     }
 
     public static WaveEffect wave(float intensity) {
@@ -97,7 +106,7 @@ public class DotText {
                     vertexconsumer, col.r, col.g, col.b, col.a * f3, self.packedLightCoords);
         }
     }
-    // todo outline
+
     public static class PulseEffect extends DotStyle.DotStyleEffect{
         public float intensity;
         public PulseEffect(float intensity){
