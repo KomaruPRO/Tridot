@@ -83,6 +83,55 @@ public class DotText {
         return new OutlineEffect(col,square);
     }
 
+    public static AdvanceWaveEffect advanceWave(float speed, float power) {
+        return new AdvanceWaveEffect(speed,power);
+    }
+    public static SpinEffect spin(float speed) {
+        return new SpinEffect(speed);
+    }
+
+    public static class SpinEffect extends DotStyle.DotStyleEffect {
+        public float speed = 1f;
+
+        public SpinEffect(float speed) {
+            this.speed = speed;
+        }
+
+        float x,y;
+        @Override
+        public void beforeGlyph(StringRenderOutput self, DotStyle style, int index) {
+            super.beforeGlyph(self, style, index);
+            x = self.x + 2.5f;
+            y = self.y + 4.5f;
+
+            self.pose.translate(x,y,0f);
+            self.pose.rotateZ(ClientTick.getTotal()/20f * speed);
+            self.pose.translate(-x,-y,0f);
+        }
+
+        @Override
+        public void afterGlyph(StringRenderOutput self, DotStyle style, int index, FontSet fontset, GlyphInfo glyphinfo, BakedGlyph bakedglyph, TextColor textcolor, float f, float f1, float f2, float f3, float f6, float f7) {
+            super.afterGlyph(self, style, index, fontset, glyphinfo, bakedglyph, textcolor, f, f1, f2, f3, f6, f7);
+            self.pose.translate(x,y,0f);
+            self.pose.rotateZ(-ClientTick.getTotal()/20f * speed);
+            self.pose.translate(-x,-y,0f);
+        }
+    }
+
+    public static class AdvanceWaveEffect extends DotStyle.DotStyleEffect {
+        public float speed = 1f;
+        public float power = 1f;
+        public AdvanceWaveEffect(float speed, float power) {
+            this.speed = speed;
+            this.power = power;
+        }
+
+        @Override
+        public float advance(float advance) {
+            return advance + (float) ((Math.sin(ClientTick.getTotal() / 20f * speed) + 1f) / 2f * power);
+        }
+    }
+
     public static class ScaleEffect extends DotStyle.DotStyleEffect {
 
         public float scl = 1f;
@@ -91,20 +140,29 @@ public class DotText {
             this.scl = scale;
         }
 
+        float x,y;
+
         @Override
-        public void beforeGlyph(StringRenderOutput self, DotStyle style, int index) {
-            super.beforeGlyph(self, style, index);
-            self.pose.translate(self.x,self.y+8,0f);
-            self.pose.scale(scl,scl,1f);
-            self.pose.translate(-self.x,-(self.y+8),0f);
+        public float advance(float advance) {
+            return advance * scl;
         }
 
         @Override
-        public void afterGlyph(StringRenderOutput self, DotStyle style, int index, FontSet fontset, GlyphInfo glyphinfo, BakedGlyph bakedglyph, TextColor textcolor) {
-            super.afterGlyph(self, style, index, fontset, glyphinfo, bakedglyph, textcolor);
-            self.pose.translate(self.x,self.y+8,0f);
+        public void beforeGlyph(StringRenderOutput self, DotStyle style, int index) {
+            super.beforeGlyph(self, style, index);
+            x = self.x;
+            y = self.y + 8;
+            self.pose.translate(x,y,0f);
+            self.pose.scale(scl,scl,1f);
+            self.pose.translate(-x,-y,0f);
+        }
+
+        @Override
+        public void afterGlyph(StringRenderOutput self, DotStyle style, int index, FontSet fontset, GlyphInfo glyphinfo, BakedGlyph bakedglyph, TextColor textcolor, float f, float f1, float f2, float f3, float f6, float f7) {
+            super.afterGlyph(self, style, index, fontset, glyphinfo, bakedglyph, textcolor, f, f1, f2, f3, f6, f7);
+            self.pose.translate(x,y,0f);
             self.pose.scale(1f/scl,1f/scl,1f);
-            self.pose.translate(-self.x,-(self.y+8),0f);
+            self.pose.translate(-x,-y,0f);
         }
     }
 
@@ -202,8 +260,8 @@ public class DotText {
         }
 
         @Override
-        public void afterGlyph(Font.StringRenderOutput self, DotStyle style, int index, FontSet fontset, GlyphInfo glyphinfo, BakedGlyph bakedglyph, TextColor textcolor) {
-            super.afterGlyph(self, style, index, fontset, glyphinfo, bakedglyph, textcolor);
+        public void afterGlyph(StringRenderOutput self, DotStyle style, int index, FontSet fontset, GlyphInfo glyphinfo, BakedGlyph bakedglyph, TextColor textcolor, float f, float f1, float f2, float f3, float f6, float f7) {
+            super.afterGlyph(self, style, index, fontset, glyphinfo, bakedglyph, textcolor, f, f1, f2, f3, f6, f7);
             style.color(oldCol);
         }
     }
@@ -228,8 +286,8 @@ public class DotText {
         }
 
         @Override
-        public void afterGlyph(Font.StringRenderOutput self, DotStyle style, int index, FontSet fontset, GlyphInfo glyphinfo, BakedGlyph bakedglyph, TextColor textcolor) {
-            super.afterGlyph(self, style, index, fontset, glyphinfo, bakedglyph, textcolor);
+        public void afterGlyph(StringRenderOutput self, DotStyle style, int index, FontSet fontset, GlyphInfo glyphinfo, BakedGlyph bakedglyph, TextColor textcolor, float f, float f1, float f2, float f3, float f6, float f7) {
+            super.afterGlyph(self, style, index, fontset, glyphinfo, bakedglyph, textcolor, f, f1, f2, f3, f6, f7);
 
             self.y -= off;
         }
@@ -259,8 +317,8 @@ public class DotText {
         }
 
         @Override
-        public void afterGlyph(Font.StringRenderOutput self, DotStyle style, int index, FontSet fontset, GlyphInfo glyphinfo, BakedGlyph bakedglyph, TextColor textcolor) {
-            super.afterGlyph(self, style, index, fontset, glyphinfo, bakedglyph, textcolor);
+        public void afterGlyph(StringRenderOutput self, DotStyle style, int index, FontSet fontset, GlyphInfo glyphinfo, BakedGlyph bakedglyph, TextColor textcolor, float f, float f1, float f2, float f3, float f6, float f7) {
+            super.afterGlyph(self, style, index, fontset, glyphinfo, bakedglyph, textcolor, f, f1, f2, f3, f6, f7);
             self.x -= offX; self.y -= offY;
         }
     }
