@@ -11,9 +11,6 @@ import pro.komaru.tridot.api.render.text.DotText;
 import pro.komaru.tridot.client.gfx.postprocess.*;
 import pro.komaru.tridot.client.model.render.item.bow.*;
 import pro.komaru.tridot.client.render.screenshake.*;
-import pro.komaru.tridot.util.Col;
-
-import static pro.komaru.tridot.api.render.text.DotText.*;
 
 public class ClientEvents {
 
@@ -36,23 +33,14 @@ public class ClientEvents {
 
     @SubscribeEvent
     public void render(RenderGuiEvent event) {
-        DotText.create("Hello ")
-                .add(
-                        DotText.create("world!")
-                                .effects()
-                                .effects(
-                                        rainbow(1f,true),
-                                        outline(Col.black,true),
-                                        wave(1f))
-                )
-                .renderStyle(r ->
-                        r
-                                .shadow(true)
-                                .centered(false,false)
-                                .maxWidth(60f + (float) Math.abs(Math.sin(ClientTick.getTotal()/50f))*60f)
-                                .scl((float) (1f+Math.abs(Math.sin(ClientTick.getTotal()/20f)))))
-                .render(event.getGuiGraphics(),100,100);
-        ;
+        /*DotText.create("Hello world!")
+                .render(event.getGuiGraphics(),100,100, r -> r
+                        .shadow(true)
+                        .centered(false,true)
+                        .scl(1.5f,1f)
+                        .alpha(0.75f)
+                        .maxWidth(100f));
+        ;*/
     }
 
     @SubscribeEvent
