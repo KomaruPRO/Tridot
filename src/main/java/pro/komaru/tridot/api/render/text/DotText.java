@@ -57,6 +57,10 @@ public class DotText {
         return new AdvanceEffect(adv);
     }
 
+    public static ScaleEffect scale(float scl) {
+        return new ScaleEffect(scl);
+    }
+
     public static PulseEffect pulse(float intensity) {
         return new PulseEffect(intensity);
     }
@@ -77,6 +81,31 @@ public class DotText {
     }
     public static OutlineEffect outline(Col col,boolean square) {
         return new OutlineEffect(col,square);
+    }
+
+    public static class ScaleEffect extends DotStyle.DotStyleEffect {
+
+        public float scl = 1f;
+
+        public ScaleEffect(float scale) {
+            this.scl = scale;
+        }
+
+        @Override
+        public void beforeGlyph(StringRenderOutput self, DotStyle style, int index) {
+            super.beforeGlyph(self, style, index);
+            self.pose.translate(self.x,self.y+8,0f);
+            self.pose.scale(scl,scl,1f);
+            self.pose.translate(-self.x,-(self.y+8),0f);
+        }
+
+        @Override
+        public void afterGlyph(StringRenderOutput self, DotStyle style, int index, FontSet fontset, GlyphInfo glyphinfo, BakedGlyph bakedglyph, TextColor textcolor) {
+            super.afterGlyph(self, style, index, fontset, glyphinfo, bakedglyph, textcolor);
+            self.pose.translate(self.x,self.y+8,0f);
+            self.pose.scale(1f/scl,1f/scl,1f);
+            self.pose.translate(-self.x,-(self.y+8),0f);
+        }
     }
 
     public static class OutlineEffect extends DotStyle.DotStyleEffect {
