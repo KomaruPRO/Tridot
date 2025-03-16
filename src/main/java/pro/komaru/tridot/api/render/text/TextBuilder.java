@@ -2,6 +2,7 @@ package pro.komaru.tridot.api.render.text;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
@@ -94,6 +95,10 @@ public class TextBuilder {
         return style(s -> s.effects(effs));
     }
 
+    public TextBuilder render(GuiGraphics g, float x, float y, UnaryOperator<TextRenderProps> props) {
+        renderStyle(props);
+        return render(g,x,y);
+    }
     public TextBuilder render(GuiGraphics g, float x, float y) {
         GuiDraw d = new GuiDraw(g);
 
