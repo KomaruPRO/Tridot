@@ -1,6 +1,7 @@
 package pro.komaru.tridot.util.struct;
 
 
+import pro.komaru.tridot.util.Log;
 import pro.komaru.tridot.util.struct.data.Seq;
 import pro.komaru.tridot.util.struct.func.Cons;
 import pro.komaru.tridot.util.struct.func.Func;
@@ -13,6 +14,31 @@ public class Structs {
 
     public static <A> Prov<A> nil(){
         return () -> null;
+    }
+
+    //todo better system for this stuff
+    public static Object cast(Object obj, String type) {
+        try {
+            return switch (type.toLowerCase()) {
+                case "string","str" -> obj.toString(); // Convert to String
+                case "integer","int","i" -> obj instanceof Number ? Integer.valueOf(((Number) obj).intValue())
+                        : obj instanceof String ? Integer.parseInt((String) obj)
+                        : null;
+                case "double","d" -> obj instanceof Number ? Double.valueOf(((Number) obj).doubleValue())
+                        : obj instanceof String ? Double.parseDouble((String) obj)
+                        : null;
+                case "boolean","b" -> obj instanceof Boolean ? obj
+                        : obj instanceof String ? Boolean.parseBoolean((String) obj)
+                        : null;
+                default -> {
+                    System.err.println("Unsupported type: " + type);
+                    yield null;
+                }
+            };
+        } catch (NumberFormatException | ClassCastException e) {
+            Log.error(e.toString());
+        }
+        return null;
     }
 
     public static <A,B> A cast(B obj) {

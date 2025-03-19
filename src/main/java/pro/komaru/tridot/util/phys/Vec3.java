@@ -273,6 +273,70 @@ public class Vec3 implements Serializable {
     }
 
     /**
+     * Rotates this vector around the X, Y, and Z axes by the given angles.
+     * @param x Rotation angle around X axis in radians
+     * @param y Rotation angle around Y axis in radians
+     * @param z Rotation angle around Z axis in radians
+     * @return this vector after rotation
+     */
+    public Vec3 rotate(float x, float y, float z) {
+        double cosX = Math.cos(x);
+        double sinX = Math.sin(x);
+        float yNew = (float) (this.y * cosX - this.z * sinX);
+        float zNew = (float) (this.y * sinX + this.z * cosX);
+        this.y = yNew;
+        this.z = zNew;
+
+        // Rotate around Y axis
+        double cosY = Math.cos(y);
+        double sinY = Math.sin(y);
+        float xNew = (float) (this.x * cosY + this.z * sinY);
+        zNew = (float) (-this.x * sinY + this.z * cosY);
+        this.x = xNew;
+        this.z = zNew;
+
+        // Rotate around Z axis
+        double cosZ = Math.cos(z);
+        double sinZ = Math.sin(z);
+        xNew = (float) (this.x * cosZ - this.y * sinZ);
+        yNew = (float) (this.x * sinZ + this.y * cosZ);
+        this.x = xNew;
+        this.y = yNew;
+
+        return this;
+    }
+
+    /**
+     * Rotates this vector around the X, Y, and Z axes by the given angles.
+     * @param vec Rotation angles around X, Y, and Z axes in radians
+     * @return this vector after rotation
+     */
+    public Vec3 rotate(Vec3 vec) {
+        return rotate(vec.x, vec.y, vec.z);
+    }
+
+    /**
+     * Rotates this vector around the X, Y, and Z axes by the given angles.
+     * @param x Rotation angle around X axis in degrees
+     * @param y Rotation angle around Y axis in degrees
+     * @param z Rotation angle around Z axis in degrees
+     * @return this vector after rotation
+     */
+    public Vec3 rotateDeg(float x, float y, float z) {
+        return rotate(x * Mathf.degRad, y * Mathf.degRad, z * Mathf.degRad);
+    }
+
+    /**
+     * Rotates this vector around the X, Y, and Z axes by the given angles.
+     * @param vec Rotation angles around X, Y, and Z axes in degrees
+     * @return this vector after rotation
+     */
+    public Vec3 rotateDeg(Vec3 vec) {
+        return rotateDeg(vec.x, vec.y, vec.z);
+    }
+
+
+    /**
      * Adds the specified values to this vector.
      * @param dx Value to add to X
      * @param dy Value to add to Y

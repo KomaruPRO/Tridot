@@ -38,6 +38,7 @@ public abstract class DotScreen extends Screen {
     public void pop() {
         localPose.popPose();
     }
+    public void br() {pop();push();}
 
     public void scissorsOn(int x, int y, int w, int h) {
         localG.enableScissor(x,y,x+w,y+h);
