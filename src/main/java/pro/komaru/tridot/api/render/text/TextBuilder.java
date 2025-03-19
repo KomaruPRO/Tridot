@@ -1,5 +1,6 @@
 package pro.komaru.tridot.api.render.text;
 
+import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
@@ -9,11 +10,13 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.FormattedCharSequence;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import org.joml.Matrix4f;
 import pro.komaru.tridot.api.Utils;
 import pro.komaru.tridot.api.render.GuiDraw;
 import pro.komaru.tridot.client.gfx.text.DotStyle;
 import pro.komaru.tridot.util.Col;
 import pro.komaru.tridot.util.Tmp;
+import pro.komaru.tridot.util.phys.Rect;
 
 import java.awt.*;
 import java.util.List;
@@ -100,6 +103,9 @@ public class TextBuilder {
     public TextBuilder render(GuiGraphics g, float x, float y) {
         GuiDraw d = new GuiDraw(g);
 
+        final float fx = x;
+        final float fy = y;
+
         float w = width(true);
         float h = height(true);
 
@@ -112,11 +118,22 @@ public class TextBuilder {
         d.move(x,y);
         d.scale(renderProps.scaleX, renderProps.scaleY);
 
+        if(renderProps.clipRect != null) {
+            PoseStack pose = g.pose();
+            Rect r = renderProps.clipRect.pose(pose);
+
+            d.scissorsOn((int) r.x, (int) r.y, (int) r.w(), (int) r.h());
+        }
+
         int i = 0;
         for (FormattedCharSequence charseq : split) {
             float locw = Utils.mc().font.width(charseq);
             g.drawString(Utils.mc().font,charseq,renderProps.xCentered ? w/2f/renderProps.scaleX-locw/2f : 0f,i * 9, Tmp.c1.set(1f,1f,1f,renderProps.alpha).argb8888(), renderProps.shadow);
             i++;
+        }
+
+        if(renderProps.clipRect != null) {
+            d.scissorsOff();
         }
 
         d.pop();
