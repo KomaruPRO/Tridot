@@ -308,7 +308,7 @@ public class ParticleBuilder{
         double vy = this.vy + Math.sin(pitch) * ySpeed;
         double vz = this.vz + Math.cos(yaw) * Math.cos(pitch) * zSpeed;
         double yaw2 = random.nextFloat() * Math.PI * 2, pitch2 = random.nextFloat() * Math.PI - Math.PI / 2,
-        xDist = random.nextFloat() * maxXDist, yDist = random.nextFloat() * maxYDist, zDist = random.nextFloat() * maxZDist;
+        xDist = random.nextGaussian() * maxXDist, yDist = random.nextGaussian() * maxYDist, zDist = random.nextGaussian() * maxZDist;
         double dx = Math.sin(yaw2) * Math.cos(pitch2) * xDist;
         double dy = Math.sin(pitch2) * yDist;
         double dz = Math.cos(yaw2) * Math.cos(pitch2) * zDist;

@@ -1,4 +1,4 @@
-package pro.komaru.tridot.client.render.gui;
+package pro.komaru.tridot.api.render;
 
 import com.mojang.blaze3d.systems.*;
 import com.mojang.blaze3d.vertex.*;
@@ -11,6 +11,7 @@ import net.minecraft.client.gui.screens.*;
 import net.minecraft.network.chat.*;
 import net.minecraft.resources.*;
 import pro.komaru.tridot.api.*;
+import pro.komaru.tridot.util.Col;
 import pro.komaru.tridot.util.struct.func.*;
 
 import java.util.*;
@@ -38,6 +39,7 @@ public abstract class DotScreen extends Screen {
     public void pop() {
         localPose.popPose();
     }
+    public void br() {pop();push();}
 
     public void scissorsOn(int x, int y, int w, int h) {
         localG.enableScissor(x,y,x+w,y+h);
@@ -56,6 +58,9 @@ public abstract class DotScreen extends Screen {
     }
     public void blit(String texture,int x,int y,int cutx,int cuty,int cutw,int cuth) {
         blit(texture,x,y,cutx,cuty,cutw,cuth,256,256);
+    }
+    public void color(Col col) {
+        color(col.r,col.g,col.b,col.a);
     }
     public void color(float r, float g, float b, float a) {
         if(localG != null) localG.setColor(r,g,b,a);

@@ -8,6 +8,19 @@
 > - Fixing Minecraft Forge's modding experience for more robust additions
 > ...and more!
 ---
+# For developers
+To install, add the following code to your `build.gradle`
+```kotlin
+repositories {
+    maven { url = "https://maven.komaru.ru/repository/maven-releases" }
+}
+
+dependencies {
+    runtimeOnly fg.deobf("pro.komaru:Tridot:${minecraft_version}-${tridot_version}")
+    compileOnly fg.deobf("pro.komaru:Tridot:${minecraft_version}-${tridot_version}:api")
+}
+```
+---
 # Features
 ### Screenshakes, even as an earthquake
 > Uses trigonometry to make it natural and nice-looking

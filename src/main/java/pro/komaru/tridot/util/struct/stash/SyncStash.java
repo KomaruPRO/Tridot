@@ -18,7 +18,7 @@ public class SyncStash {
         SyncStashObject<T> stashObject = new SyncStashObject<>(obj);
         stash.setSize(Math.max(stash.size,stashObject.getId()+1));
         stash.set(stashObject.getId(),stashObject);
-        lastChanged.add(stashObject.getId());
+        lastChanged.addUnique(stashObject.getId());
         return stashObject.getId();
     }
     public static <T> int set(int id, byte[] obj) {
@@ -33,7 +33,7 @@ public class SyncStash {
         stashObject.setId(id);
         stash.setSize(Math.max(stash.size,stashObject.getId()+1));
         stash.set(stashObject.getId(),stashObject);
-        if(!same) lastChanged.add(stashObject.getId());
+        if(!same) lastChanged.addUnique(stashObject.getId());
         return stashObject.getId();
     }
     public static <T> T get(int obj) {
@@ -41,10 +41,13 @@ public class SyncStash {
     }
     public static <T> T getAndDelete(int obj) {
         T stashObject = get(obj);
-        lastChanged.add(getStash().get(obj).getId());
+        lastChanged.addUnique(getStash().get(obj).getId());
         stash.remove(obj);
         if(lastId == obj) lastId--;
         return stashObject;
+    }
+    public static void notify(int id) {
+        lastChanged.addUnique(id);
     }
 
     public static void synchronizeLast(SimpleChannel CHANNEL) {
