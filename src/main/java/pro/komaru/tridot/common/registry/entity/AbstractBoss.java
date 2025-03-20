@@ -56,14 +56,11 @@ public abstract class AbstractBoss extends MultiAttackMob implements Enemy, Boss
         return super.hurt(source, amount);
     }
 
-    @Override
-    public void onAddedToWorld(){
+    public void onAddedToWorld() {
         super.onAddedToWorld();
-        CompoundTag data = this.getPersistentData();
-        if(!data.getBoolean("NearbyPlayerHealthBonus")){
-            initializeNearbyPlayers(this.level(), this);
-            applyBonusHealth(this);
-        }
+        getNearbyPlayers().clear();
+        initializeNearbyPlayers(this.level(), this);
+        applyBonusHealth(this);
     }
 
     @Override

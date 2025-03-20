@@ -64,6 +64,8 @@ public interface BossEntity{
     Map<UUID, Float> getDamageMap();
 
     default void readBossData(CompoundTag pCompound){
+        getNearbyPlayers().clear();
+        getDamageMap().clear();
         ListTag nearbyPlayersList = pCompound.getList("NearbyPlayers", Tag.TAG_COMPOUND);
         for(int i = 0; i < nearbyPlayersList.size(); i++){
             CompoundTag playerTag = nearbyPlayersList.getCompound(i);
@@ -104,15 +106,21 @@ public interface BossEntity{
         return 16;
     }
 
-    default int scalingFactor(){
-        return 200;
+    default float scalingFactor(float a, float b, float playerCount) {
+        float x = playerCount - 1;
+        return a * x * x + b * x + 1;
     }
 
     /**
-     * Health boost value
+     * {@code a} is the scaling boost per additional player
+     * {@code b} is the base scaling factor
      */
-    default int getHealthScale(Mob mob){
-        return (int)(mob.getMaxHealth() + (getNearbyPlayers().size() - 1) * scalingFactor() * Math.log(getNearbyPlayers().size()));
+    float a = 0.1f, b = 0.1f;
+    default int getHealthScale(Mob mob) {
+        int defaultHealth = (int)mob.getMaxHealth();
+        int playerCount = getNearbyPlayers().size() - 1;
+
+        return (int)(defaultHealth * scalingFactor(a,b,playerCount));
     }
 
     default double getRequiredDamage(){
