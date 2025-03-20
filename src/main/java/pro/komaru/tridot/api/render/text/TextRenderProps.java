@@ -9,6 +9,7 @@ public class TextRenderProps {
 
     public float maxWidth = -1f;
     public Rect clipRect = Rect.ZERO;
+    public boolean persistentClip = true;
 
     public float alpha = 1f;
     public float scaleX = 1f, scaleY = 1f;

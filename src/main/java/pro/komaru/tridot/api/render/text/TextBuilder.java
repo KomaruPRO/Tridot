@@ -10,7 +10,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.FormattedCharSequence;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import org.joml.Matrix4f;
 import pro.komaru.tridot.api.Utils;
 import pro.komaru.tridot.api.render.GuiDraw;
 import pro.komaru.tridot.client.gfx.text.DotStyle;
@@ -23,6 +22,8 @@ import java.util.List;
 import java.util.function.UnaryOperator;
 
 public class TextBuilder {
+
+    static float[] tmp = new float[2];
 
     public MutableComponent text;
     public TextRenderProps renderProps;
@@ -100,11 +101,12 @@ public class TextBuilder {
         renderStyle(props);
         return render(g,x,y);
     }
+
     public TextBuilder render(GuiGraphics g, float x, float y) {
         GuiDraw d = new GuiDraw(g);
 
-        final float fx = x;
-        final float fy = y;
+        x += tmp[0];
+        y += tmp[1];
 
         float w = width(true);
         float h = height(true);
@@ -118,11 +120,19 @@ public class TextBuilder {
         d.move(x,y);
         d.scale(renderProps.scaleX, renderProps.scaleY);
 
-        if(renderProps.clipRect != null) {
+        if(renderProps.clipRect != null && renderProps.clipRect != Rect.ZERO) {
             PoseStack pose = g.pose();
             Rect r = renderProps.clipRect.pose(pose);
 
-            d.scissorsOn((int) r.x, (int) r.y, (int) r.w(), (int) r.h());
+            float clipx = r.x;
+            float clipy = r.y;
+
+            if(renderProps.persistentClip) {
+                clipx -= tmp[0];
+                clipy -= tmp[1];
+            }
+
+            d.scissorsOn((int) clipx, (int) clipy, (int) r.w(), (int) r.h());
         }
 
         int i = 0;
@@ -132,13 +142,27 @@ public class TextBuilder {
             i++;
         }
 
-        if(renderProps.clipRect != null) {
+        if(renderProps.clipRect != null && renderProps.clipRect != Rect.ZERO) {
             d.scissorsOff();
         }
 
         d.pop();
 
         return this;
+    }
+
+    public TextBuilder next(boolean horizontal, boolean vertical) {
+        if(horizontal) tmp[0] += width(true);
+        if(vertical) tmp[1] += height(true);
+        return this;
+    }
+    public TextBuilder end() {
+        tmp[0] = tmp[1] = 0;
+        return this;
+    }
+
+    public static void reset() {
+        tmp[0] = tmp[1] = 0;
     }
 
     @OnlyIn(Dist.CLIENT)
