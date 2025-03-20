@@ -121,16 +121,19 @@ public class TextBuilder {
         d.scale(renderProps.scaleX, renderProps.scaleY);
 
         if(renderProps.clipRect != null && renderProps.clipRect != Rect.ZERO) {
+            if(renderProps.persistentClip) {
+                d.move(-tmp[0], -tmp[1]);
+            }
+
             PoseStack pose = g.pose();
             Rect r = renderProps.clipRect.pose(pose);
 
+            if(renderProps.persistentClip) {
+                d.move(tmp[0], tmp[1]);
+            }
+
             float clipx = r.x;
             float clipy = r.y;
-
-            if(renderProps.persistentClip) {
-                clipx -= tmp[0];
-                clipy -= tmp[1];
-            }
 
             d.scissorsOn((int) clipx, (int) clipy, (int) r.w(), (int) r.h());
         }
