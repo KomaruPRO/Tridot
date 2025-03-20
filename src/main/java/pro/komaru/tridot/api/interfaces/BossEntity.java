@@ -142,7 +142,7 @@ public interface BossEntity{
     }
 
     default void applyBonusHealth(Mob mob){
-        if(mob.getAttribute(Attributes.MAX_HEALTH) != null){
+        if(mob.getAttribute(Attributes.MAX_HEALTH) != null && getNearbyPlayers().size() > 1){
             UUID healthModifierId = UUID.fromString("39ba0d18-24f3-4ea8-ba0d-1824f3fea88b");
             AttributeModifier existingModifier = mob.getAttribute(Attributes.MAX_HEALTH).getModifier(healthModifierId);
             if(existingModifier != null){

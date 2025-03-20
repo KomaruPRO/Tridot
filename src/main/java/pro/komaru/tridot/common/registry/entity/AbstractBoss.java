@@ -16,7 +16,6 @@ import java.util.*;
 public abstract class AbstractBoss extends MultiAttackMob implements Enemy, BossEntity, Allied{
     public final List<UUID> nearbyPlayers = new ArrayList<>();
     public final Map<UUID, Float> damageMap = new HashMap<>();
-    public int phase = 1;
 
     public AbstractBoss(EntityType<? extends PathfinderMob> pEntityType, Level pLevel){
         super(pEntityType, pLevel);
@@ -25,13 +24,7 @@ public abstract class AbstractBoss extends MultiAttackMob implements Enemy, Boss
     @Override
     public void tick(){
         super.tick();
-        checkPhaseTransition();
     }
-
-    /**
-     * Both sided
-     */
-    public abstract void checkPhaseTransition();
 
     @Override
     public boolean isAlliedTo(Entity pEntity){
