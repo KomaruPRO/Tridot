@@ -12,6 +12,7 @@ import net.minecraft.network.chat.*;
 import net.minecraft.resources.*;
 import pro.komaru.tridot.api.*;
 import pro.komaru.tridot.util.Col;
+import pro.komaru.tridot.util.phys.Rect;
 import pro.komaru.tridot.util.struct.func.*;
 
 import java.util.*;
@@ -42,7 +43,8 @@ public abstract class DotScreen extends Screen {
     public void br() {pop();push();}
 
     public void scissorsOn(int x, int y, int w, int h) {
-        localG.enableScissor(x,y,x+w,y+h);
+        Rect r = Rect.xywh(x,y,w,h).pose(localPose);
+        localG.enableScissor(r.x,r.y,r.x2,r.y2);
     }
     public void scissorsOff() {
         localG.disableScissor();
