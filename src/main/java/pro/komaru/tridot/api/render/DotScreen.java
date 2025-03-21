@@ -44,7 +44,7 @@ public abstract class DotScreen extends Screen {
 
     public void scissorsOn(int x, int y, int w, int h) {
         Rect r = Rect.xywh(x,y,w,h).pose(localPose);
-        localG.enableScissor(r.x,r.y,r.x2,r.y2);
+        localG.enableScissor((int) r.x, (int) r.y, (int) r.x2, (int) r.y2);
     }
     public void scissorsOff() {
         localG.disableScissor();
