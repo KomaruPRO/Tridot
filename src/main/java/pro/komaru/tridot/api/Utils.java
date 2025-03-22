@@ -62,6 +62,7 @@ import pro.komaru.tridot.client.render.TridotRenderTypes;
 import pro.komaru.tridot.client.render.RenderBuilder;
 import pro.komaru.tridot.client.render.DotRenderType;
 import pro.komaru.tridot.client.model.render.item.CustomItemRenderer;
+import pro.komaru.tridot.util.*;
 import pro.komaru.tridot.util.struct.Structs;
 import pro.komaru.tridot.util.struct.data.Seq;
 import pro.komaru.tridot.util.struct.func.Boolf;
@@ -70,7 +71,6 @@ import pro.komaru.tridot.util.math.ArcRandom;
 import pro.komaru.tridot.common.registry.EnchantmentsRegistry;
 import pro.komaru.tridot.common.registry.item.skins.AuthoredItemSkin;
 import pro.komaru.tridot.common.registry.item.skins.ItemSkin;
-import pro.komaru.tridot.util.Col;
 
 import javax.annotation.*;
 import java.awt.*;
@@ -83,7 +83,8 @@ import java.util.function.*;
 import static net.minecraft.util.Mth.sqrt;
 
 public class Utils {
-    static ArcRandom rand;
+    public static ArcRandom rand = Tmp.rnd;
+
     /**
      * Checks if the game was started in IDE
      */
