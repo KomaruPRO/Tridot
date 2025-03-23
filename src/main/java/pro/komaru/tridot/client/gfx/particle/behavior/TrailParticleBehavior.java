@@ -152,7 +152,7 @@ public class TrailParticleBehavior extends ParticleBehavior implements ICustomBe
             builder.setSecondColorRaw(component.r, component.g, component.b)
             .setSecondAlpha(component.a);
         }
-
+        if(widthFunc == null) widthFunc = (f) -> f;
         builder.renderTrail(poseStack, trail, (f) -> widthFunc.apply(f) * (particle.getSize() / 2f));
     }
 }
