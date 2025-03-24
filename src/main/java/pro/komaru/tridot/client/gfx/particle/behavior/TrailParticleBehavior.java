@@ -28,6 +28,7 @@ public class TrailParticleBehavior extends ParticleBehavior implements ICustomBe
     public boolean secondColor;
     public int trailSize;
     Function<Float, Float> widthFunc;
+    public TrailParticleBehaviorComponent component = new TrailParticleBehaviorComponent();
 
     public TrailParticleBehavior(ColorParticleData colorData, GenericParticleData transparencyData, boolean secondColor, int trailSize, Function<Float, Float> widthFunc, SpinParticleData xSpinData, SpinParticleData ySpinData, SpinParticleData zSpinData, float xOffset, float yOffset, float zOffset, boolean firstSide, boolean secondSide, boolean camera, boolean xRotCam, boolean yRotCam){
         super(xSpinData, ySpinData, zSpinData, xOffset, yOffset, zOffset, firstSide, secondSide, camera, xRotCam, yRotCam);
@@ -50,18 +51,13 @@ public class TrailParticleBehavior extends ParticleBehavior implements ICustomBe
         return new TrailParticleBehaviorBuilder((float)Math.toRadians(xOffset), (float)Math.toRadians(yOffset), (float)Math.toRadians(zOffset));
     }
 
-    public TrailParticleBehaviorComponent getComponent(){
-        return new TrailParticleBehaviorComponent();
-    }
-
     public TrailParticleBehaviorComponent getTrailComponent(GenericParticle particle){
         if(particle.behaviorComponent instanceof TrailParticleBehaviorComponent behaviorComponent){
             return behaviorComponent;
         }
-        return getComponent();
+        return component;
     }
 
-    float[] hsv1 = getComponent().hsv1, hsv2 = getComponent().hsv2;
     @Override
     public void init(GenericParticle particle){
         super.init(particle);
@@ -80,12 +76,14 @@ public class TrailParticleBehavior extends ParticleBehavior implements ICustomBe
         component.et = GenericParticle.pickRandomValue(transparencyData.endingValue, transparencyData.re1, transparencyData.re2);
 
         Tmp.c1.set(r1,g1,b1);
-        hsv1 = Tmp.c1.toHsv(component.hsv1);
+        component.hsv1 = Tmp.c1.toHsv(component.hsv1);
         Tmp.c2.set(r2,g2,b2);
-        hsv2 = Tmp.c2.toHsv(component.hsv2);
+        component.hsv2 = Tmp.c2.toHsv(component.hsv2);
     }
 
     public void pickColor(GenericParticle particle, float coeff){
+        TrailParticleBehaviorComponent component = getTrailComponent(particle);
+        float[] hsv1 = component.hsv1, hsv2 = component.hsv2;
         var col = Col.HSVtoRGB(hsv1[0], hsv1[1] * 100f, hsv1[2] * 100f);
         var col2 = Col.HSVtoRGB(hsv2[0], hsv2[1] * 100f, hsv2[2] * 100f);
         col.lerp(col2,coeff);
