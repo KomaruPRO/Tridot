@@ -5,11 +5,12 @@ import net.minecraft.client.*;
 import net.minecraft.util.*;
 import net.minecraft.world.phys.*;
 import pro.komaru.tridot.client.gfx.particle.GenericParticle;
-import pro.komaru.tridot.client.gfx.particle.behavior.component.SparkParticleBehaviorComponent;
+import pro.komaru.tridot.client.gfx.particle.behavior.component.*;
 import pro.komaru.tridot.client.gfx.particle.data.ColorParticleData;
 import pro.komaru.tridot.client.gfx.particle.data.GenericParticleData;
 import pro.komaru.tridot.client.gfx.particle.data.SpinParticleData;
 import pro.komaru.tridot.client.render.RenderBuilder;
+import pro.komaru.tridot.util.*;
 
 import java.awt.*;
 
@@ -55,6 +56,7 @@ public class SparkParticleBehavior extends ParticleBehavior{
         return getComponent();
     }
 
+    float[] hsv1 = getComponent().hsv1, hsv2 = getComponent().hsv2;
     @Override
     public void init(GenericParticle particle){
         super.init(particle);
@@ -75,20 +77,17 @@ public class SparkParticleBehavior extends ParticleBehavior{
         component.ms = GenericParticle.pickRandomValue(scaleData.middleValue, scaleData.rm1, scaleData.rm2);
         component.es = GenericParticle.pickRandomValue(scaleData.endingValue, scaleData.re1, scaleData.re2);
 
-        Color.RGBtoHSB((int)(255 * Math.min(1.0f, r1)), (int)(255 * Math.min(1.0f, g1)), (int)(255 * Math.min(1.0f, b1)), component.hsv1);
-        Color.RGBtoHSB((int)(255 * Math.min(1.0f, r2)), (int)(255 * Math.min(1.0f, g2)), (int)(255 * Math.min(1.0f, b2)), component.hsv2);
+        Tmp.c1.set(r1,g1,b1);
+        hsv1 = Tmp.c1.toHsv(component.hsv1);
+        Tmp.c2.set(r2,g2,b2);
+        hsv2 = Tmp.c2.toHsv(component.hsv2);
     }
 
     public void pickColor(GenericParticle particle, float coeff){
-        SparkParticleBehaviorComponent component = getSparkComponent(particle);
-        float h = Mth.rotLerp(coeff, 360 * component.hsv1[0], 360 * component.hsv2[0]) / 360;
-        float s = Mth.lerp(coeff, component.hsv1[1], component.hsv2[1]);
-        float v = Mth.lerp(coeff, component.hsv1[2], component.hsv2[2]);
-        int packed = Color.HSBtoRGB(h, s, v);
-        float r = FastColor.ARGB32.red(packed) / 255.0f;
-        float g = FastColor.ARGB32.green(packed) / 255.0f;
-        float b = FastColor.ARGB32.blue(packed) / 255.0f;
-        setColor(particle, r, g, b);
+        var col = Col.HSVtoRGB(hsv1[0], hsv1[1] * 100f, hsv1[2] * 100f);
+        var col2 = Col.HSVtoRGB(hsv2[0], hsv2[1] * 100f, hsv2[2] * 100f);
+        col.lerp(col2,coeff);
+        setColor(particle, col.r,col.g,col.b);
     }
 
     public void setColor(GenericParticle particle, float r, float g, float b){
