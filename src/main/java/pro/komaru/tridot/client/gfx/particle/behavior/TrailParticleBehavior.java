@@ -22,13 +22,11 @@ import java.util.*;
 import java.util.function.*;
 
 public class TrailParticleBehavior extends ParticleBehavior implements ICustomBehaviorParticleRender{
-
     public ColorParticleData colorData;
     public GenericParticleData transparencyData;
     public boolean secondColor;
     public int trailSize;
     Function<Float, Float> widthFunc;
-    public TrailParticleBehaviorComponent component = new TrailParticleBehaviorComponent();
 
     public TrailParticleBehavior(ColorParticleData colorData, GenericParticleData transparencyData, boolean secondColor, int trailSize, Function<Float, Float> widthFunc, SpinParticleData xSpinData, SpinParticleData ySpinData, SpinParticleData zSpinData, float xOffset, float yOffset, float zOffset, boolean firstSide, boolean secondSide, boolean camera, boolean xRotCam, boolean yRotCam){
         super(xSpinData, ySpinData, zSpinData, xOffset, yOffset, zOffset, firstSide, secondSide, camera, xRotCam, yRotCam);
@@ -51,11 +49,16 @@ public class TrailParticleBehavior extends ParticleBehavior implements ICustomBe
         return new TrailParticleBehaviorBuilder((float)Math.toRadians(xOffset), (float)Math.toRadians(yOffset), (float)Math.toRadians(zOffset));
     }
 
+    public TrailParticleBehaviorComponent getComponent(){
+        return new TrailParticleBehaviorComponent();
+    }
+
     public TrailParticleBehaviorComponent getTrailComponent(GenericParticle particle){
         if(particle.behaviorComponent instanceof TrailParticleBehaviorComponent behaviorComponent){
             return behaviorComponent;
         }
-        return component;
+
+        return getComponent();
     }
 
     @Override
