@@ -34,10 +34,12 @@ public class SkinBuilder{
     }
 
     public SkinBuilder style(UnaryOperator<Style> pModifyFunc) {
+        if(component == null) throw new NullPointerException("No component found");
         component.withStyle(pModifyFunc);
         return this;
     }
     public SkinBuilder style(Style pStyle) {
+        if(component == null) throw new NullPointerException("No component found");
         component.setStyle(pStyle);
         return this;
     }
