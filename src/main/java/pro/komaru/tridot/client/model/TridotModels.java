@@ -63,7 +63,7 @@ public class TridotModels{
     }
 
     public static void addBowItemModel(Map<ResourceLocation, BakedModel> map, ResourceLocation item){
-        addBowItemModel(map, item, new BowItemOverrides());
+        addBowItemModel(map, item, new BowSkinItemOverrides());
     }
 
     public static ArrayList<ModelResourceLocation> getBowModels(String modId, String item){
