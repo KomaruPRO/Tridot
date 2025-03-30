@@ -18,6 +18,7 @@
     "client.CameraMixin",
     "client.EffectProgramMixin",
     "client.FontMixin",
+    "client.ForgeGuiMixin",
     "client.GameRendererMixin",
     "client.GuiGraphicsMixin",
     "client.HumanoidModelMixin",

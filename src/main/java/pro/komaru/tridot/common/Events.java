@@ -47,7 +47,7 @@ import java.util.*;
 import java.util.stream.*;
 
 public class Events{
-    protected static final ResourceLocation GUI_ICONS_LOCATION = new ResourceLocation("textures/gui/icons.png");
+    public static final ResourceLocation GUI_ICONS_LOCATION = new ResourceLocation("textures/gui/icons.png");
 
     @SubscribeEvent
     public static void onServerTick(TickEvent.ServerTickEvent event) {
@@ -101,36 +101,6 @@ public class Events{
                     e.getToolTip().add(Component.literal("Press [Control] to get tags info").withStyle(ChatFormatting.GRAY));
                 }
             }
-        }
-    }
-
-    @SubscribeEvent(priority = EventPriority.HIGHEST)
-    @OnlyIn(Dist.CLIENT)
-    public void onOverlayRender(RenderGuiOverlayEvent.Pre ev){
-        if(ev.isCanceled()) return;
-        Minecraft minecraft = Minecraft.getInstance();
-        GuiGraphics gui = ev.getGuiGraphics();
-        PoseStack ms = gui.pose();
-        if(minecraft.options.hideGui) return;
-        int width = minecraft.getWindow().getGuiScaledWidth();
-        int height = minecraft.getWindow().getGuiScaledHeight();
-        double armor = (float)minecraft.player.getAttributeValue(AttributeRegistry.PERCENT_ARMOR.get());
-        if(armor > 0 && ev.getOverlay() == VanillaGuiOverlay.ARMOR_LEVEL.type() && CommonConfig.PERCENT_ARMOR.get() && new ForgeGui(minecraft).shouldDrawSurvivalElements()){
-            ms.pushPose();
-            RenderSystem.enableBlend();
-            RenderSystem.defaultBlendFunc();
-            RenderSystem.disableDepthTest();
-            RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
-            RenderSystem.setShader(GameRenderer::getPositionTexShader);
-            int left = width / 2 + 60;
-            int top = height - 49;
-
-            RenderSystem.disableBlend();
-            String component = I18n.get("tooltip.tridot.value", armor + "%");
-            gui.blit(GUI_ICONS_LOCATION, left, top - 2, 34, 9, 9, 9);
-            gui.drawString(minecraft.font, component, left + 8, top - 1, Color.WHITE.getRGB());
-            ms.popPose();
-            ev.setCanceled(true);
         }
     }
 
