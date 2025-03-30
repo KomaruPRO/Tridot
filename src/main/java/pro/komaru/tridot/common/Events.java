@@ -36,7 +36,7 @@ import pro.komaru.tridot.common.config.ClientConfig;
 import pro.komaru.tridot.common.config.CommonConfig;
 import pro.komaru.tridot.common.networking.proxy.ClientProxy;
 import pro.komaru.tridot.common.registry.TagsRegistry;
-import pro.komaru.tridot.common.registry.item.PercentageArmorItem;
+import pro.komaru.tridot.common.registry.item.*;
 import pro.komaru.tridot.mixin.client.BossHealthOverlayAccessor;
 import pro.komaru.tridot.api.networking.PacketHandler;
 import pro.komaru.tridot.common.networking.packets.DungeonSoundPacket;
@@ -152,15 +152,8 @@ public class Events{
         if(!event.getSource().is(DamageTypeTags.BYPASSES_ARMOR)){
             float incomingDamage = event.getAmount();
             float totalMultiplier;
-            if(CommonConfig.PERCENT_ARMOR.get()){
-                float armor = 0f;
-                for(ItemStack armorPiece : event.getEntity().getArmorSlots()){
-                    if(armorPiece.getItem() instanceof PercentageArmorItem percent){
-                        float percentDefense = percent.getPercentDefense();
-                        armor += percentDefense;
-                    }
-                }
-
+            if(CommonConfig.PERCENT_ARMOR.get() && event.getEntity() instanceof Player player){
+                float armor = (float)player.getAttributeValue(AttributeRegistry.PERCENT_ARMOR.get());
                 totalMultiplier = Math.max(Math.min(1 - (armor), 1), 0);
                 float reducedDamage = incomingDamage * totalMultiplier;
                 event.setAmount(reducedDamage);

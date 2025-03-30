@@ -47,6 +47,7 @@ public class PercentageArmorItem extends ArmorItem{
             builder.put(Attributes.KNOCKBACK_RESISTANCE, new AttributeModifier(uuid, "Armor knockback resistance", this.knockbackResistance, AttributeModifier.Operation.ADDITION));
         }
 
+        builder.put(AttributeRegistry.PERCENT_ARMOR.get(), new AttributeModifier(uuid, "PercentArmor", this.defense, AttributeModifier.Operation.ADDITION));
         builder.put(Attributes.ARMOR_TOUGHNESS, new AttributeModifier(uuid, "Armor toughness", this.toughness, AttributeModifier.Operation.ADDITION));
         this.defaultModifiers = builder.build();
     }
@@ -77,7 +78,7 @@ public class PercentageArmorItem extends ArmorItem{
         if(CommonConfig.PERCENT_ARMOR.get() != null && CommonConfig.PERCENT_ARMOR.get()){
             pStack.hideTooltipPart(TooltipPart.MODIFIERS);
             pTooltipComponents.add(Component.translatable("tooltip.tridot.total_armor", getTotalDefense(((PercentageArmorItem)pStack.getItem()).getMaterial()) + "%").withStyle(ChatFormatting.GRAY));
-            pTooltipComponents.add(Component.translatable("attribute.modifier.plus.1", defense, Component.translatable("attribute.name.generic.armor")).withStyle(ChatFormatting.BLUE));
+//            pTooltipComponents.add(Component.translatable("attribute.modifier.plus.1", defense, Component.translatable("attribute.name.generic.armor")).withStyle(ChatFormatting.BLUE));
             Player pPlayer = Minecraft.getInstance().player;
             for(EquipmentSlot equipmentslot : EquipmentSlot.values()){
                 Multimap<Attribute, AttributeModifier> multimap = this.getAttributeModifiers(equipmentslot, pStack);

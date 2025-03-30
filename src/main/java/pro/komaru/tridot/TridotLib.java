@@ -86,6 +86,7 @@ public class TridotLib{
         @SubscribeEvent
         public static void attachAttribute(EntityAttributeModificationEvent event) {
             event.add(EntityType.PLAYER, AttributeRegistry.PROJECTILE_DAMAGE.get());
+            event.add(EntityType.PLAYER, AttributeRegistry.PERCENT_ARMOR.get());
         }
     }
 }
