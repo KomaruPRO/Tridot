@@ -8,9 +8,12 @@ import net.minecraft.world.entity.monster.*;
 import net.minecraft.world.entity.player.*;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.*;
+import net.minecraft.world.level.material.*;
+import org.jetbrains.annotations.*;
 import pro.komaru.tridot.api.interfaces.*;
 
 import javax.annotation.*;
+import javax.annotation.Nullable;
 import java.util.*;
 
 public abstract class AbstractBoss extends MultiAttackMob implements Enemy, BossEntity, Allied{
@@ -24,6 +27,33 @@ public abstract class AbstractBoss extends MultiAttackMob implements Enemy, Boss
     @Override
     public void tick(){
         super.tick();
+    }
+
+    @Override
+    protected boolean canRide(Entity pVehicle){
+        return false;
+    }
+
+    public boolean isIgnoringBlockTriggers(){
+        return true;
+    }
+
+    public boolean isAffectedByPotions(){
+        return false;
+    }
+
+    public @NotNull PushReaction getPistonPushReaction(){
+        return PushReaction.IGNORE;
+    }
+
+    @Override
+    public boolean isPushedByFluid(){
+        return false;
+    }
+
+    @Override
+    public boolean canBreatheUnderwater(){
+        return true;
     }
 
     @Override
