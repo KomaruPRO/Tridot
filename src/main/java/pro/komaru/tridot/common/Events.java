@@ -104,11 +104,6 @@ public class Events{
         }
     }
 
-    // may be improved, not accurate
-    public static double calculateDamageReductionPercent(double defensePoints){
-        return Mth.clamp(defensePoints / 2, 0, 20) / 25 * 0.4;
-    }
-
     @SubscribeEvent(priority = EventPriority.HIGHEST)
     @OnlyIn(Dist.CLIENT)
     public void onOverlayRender(RenderGuiOverlayEvent.Pre ev){
@@ -119,16 +114,8 @@ public class Events{
         if(minecraft.options.hideGui) return;
         int width = minecraft.getWindow().getGuiScaledWidth();
         int height = minecraft.getWindow().getGuiScaledHeight();
-        double armor = 0;
-        for(ItemStack armorPiece : minecraft.player.getArmorSlots()){
-            if(armorPiece.getItem() instanceof PercentageArmorItem percent){
-                int percentDefense = percent.getDefense();
-                armor += percentDefense;
-            }
-        }
-
+        double armor = (float)minecraft.player.getAttributeValue(AttributeRegistry.PERCENT_ARMOR.get());
         if(armor > 0 && ev.getOverlay() == VanillaGuiOverlay.ARMOR_LEVEL.type() && CommonConfig.PERCENT_ARMOR.get() && new ForgeGui(minecraft).shouldDrawSurvivalElements()){
-            armor += calculateDamageReductionPercent(minecraft.player.getAttributeValue(Attributes.ARMOR));
             ms.pushPose();
             RenderSystem.enableBlend();
             RenderSystem.defaultBlendFunc();
@@ -139,9 +126,9 @@ public class Events{
             int top = height - 49;
 
             RenderSystem.disableBlend();
-            String component = I18n.get("tooltip.tridot.value", Math.round(armor) + "%");
+            String component = I18n.get("tooltip.tridot.value", armor + "%");
             gui.blit(GUI_ICONS_LOCATION, left, top - 2, 34, 9, 9, 9);
-            gui.drawString(minecraft.font, component, left + 12, top - 1, Color.WHITE.getRGB());
+            gui.drawString(minecraft.font, component, left + 8, top - 1, Color.WHITE.getRGB());
             ms.popPose();
             ev.setCanceled(true);
         }
@@ -153,7 +140,7 @@ public class Events{
             float incomingDamage = event.getAmount();
             float totalMultiplier;
             if(CommonConfig.PERCENT_ARMOR.get() && event.getEntity() instanceof Player player){
-                float armor = (float)player.getAttributeValue(AttributeRegistry.PERCENT_ARMOR.get());
+                float armor = (float)player.getAttributeValue(AttributeRegistry.PERCENT_ARMOR.get()) / 100;
                 totalMultiplier = Math.max(Math.min(1 - (armor), 1), 0);
                 float reducedDamage = incomingDamage * totalMultiplier;
                 event.setAmount(reducedDamage);
