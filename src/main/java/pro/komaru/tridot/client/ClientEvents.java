@@ -11,6 +11,7 @@ import pro.komaru.tridot.api.render.text.DotText;
 import pro.komaru.tridot.client.gfx.postprocess.*;
 import pro.komaru.tridot.client.model.render.item.bow.*;
 import pro.komaru.tridot.client.render.screenshake.*;
+import pro.komaru.tridot.util.Col;
 
 public class ClientEvents {
 
@@ -29,6 +30,15 @@ public class ClientEvents {
     @SubscribeEvent
     public void renderTick(TickEvent.RenderTickEvent event){
         ClientTick.renderTick(event);
+    }
+
+    @SubscribeEvent
+    public void render(RenderGuiEvent.Post event) {
+        DotText
+                .create("Hello world!")
+                .color(Col.orange)
+                .effects(new DotText.GlintEffect(0.7f,0.5f,Col.white))
+                .render(event.getGuiGraphics(),10,10);
     }
 
     @SubscribeEvent

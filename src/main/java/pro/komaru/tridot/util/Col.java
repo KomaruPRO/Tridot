@@ -75,6 +75,11 @@ public class Col {
         return colorInt;
     }
 
+    public static Col fromARGB(int aarrggbb) {
+        Col col = new Col(aarrggbb);
+        return new Col(col.g,col.b,col.a,col.r);
+    }
+
     public static int intArgb(String str) {
         return intArgb(fromHex(str));
     }
