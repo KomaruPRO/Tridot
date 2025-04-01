@@ -33,15 +33,6 @@ public class ClientEvents {
     }
 
     @SubscribeEvent
-    public void render(RenderGuiEvent.Post event) {
-        DotText
-                .create("Hello world!")
-                .color(Col.orange)
-                .effects(new DotText.GlintEffect(0.7f,0.5f,Col.white))
-                .render(event.getGuiGraphics(),10,10);
-    }
-
-    @SubscribeEvent
     public void getFovModifier(ComputeFovModifierEvent event){
         Player player = event.getPlayer();
         ItemStack itemStack = player.getUseItem();

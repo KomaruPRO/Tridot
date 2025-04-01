@@ -90,6 +90,16 @@ public class DotText {
         return new SpinEffect(speed);
     }
 
+    public static GlintEffect glint(float speed, float scl, Col glintColor) {
+        return new GlintEffect(speed,scl,glintColor);
+    }
+    public static GlintEffect glint(float speed, Col glintColor) {
+        return new GlintEffect(speed,1f,glintColor);
+    }
+    public static GlintEffect glint(Col glintColor) {
+        return new GlintEffect(1f,1f,glintColor);
+    }
+
     public static class GlintEffect extends DotStyle.DotStyleEffect {
         public float speed = 1f;
         public float scl = 1f;
