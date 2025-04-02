@@ -62,6 +62,8 @@ import pro.komaru.tridot.client.render.TridotRenderTypes;
 import pro.komaru.tridot.client.render.RenderBuilder;
 import pro.komaru.tridot.client.render.DotRenderType;
 import pro.komaru.tridot.client.model.render.item.CustomItemRenderer;
+import pro.komaru.tridot.common.*;
+import pro.komaru.tridot.common.compatibility.snakeyaml.internal.*;
 import pro.komaru.tridot.util.*;
 import pro.komaru.tridot.util.struct.Structs;
 import pro.komaru.tridot.util.struct.data.Seq;
@@ -1078,11 +1080,16 @@ public class Utils {
         }
     }
     /**Schedule utils*/
+    //todo redo
     public static class Schedule {
         private static ScheduledExecutorService scheduler = null;
         private static final HashMultimap<Integer, Runnable> scheduledSynchTasks = HashMultimap.create();
 
-        public static void scheduleAsyncTask(Runnable run, int time, TimeUnit unit) {
+        public static void syncTask(Runnable run, int ticks) {
+            scheduledSynchTasks.put(ServerTickHandler.tick + ticks, run);
+        }
+
+        public static void asyncTask(Runnable run, int time, TimeUnit unit) {
             if (scheduler == null) {
                 serverStartupTasks();
             }
@@ -1106,7 +1113,7 @@ public class Utils {
                     try {
                         tasks.next().run();
                     } catch (Exception ex) {
-                        System.out.print(ex.getMessage());
+                        Logger.getLogger("Scheduler").warn(ex.getMessage());
                     }
 
                     tasks.remove();
