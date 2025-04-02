@@ -11,6 +11,7 @@ import pro.komaru.tridot.api.render.text.DotText;
 import pro.komaru.tridot.client.gfx.postprocess.*;
 import pro.komaru.tridot.client.model.render.item.bow.*;
 import pro.komaru.tridot.client.render.screenshake.*;
+import pro.komaru.tridot.util.Col;
 
 public class ClientEvents {
 

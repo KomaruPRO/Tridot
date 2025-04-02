@@ -90,6 +90,47 @@ public class DotText {
         return new SpinEffect(speed);
     }
 
+    public static GlintEffect glint(float speed, float scl, Col glintColor) {
+        return new GlintEffect(speed,scl,glintColor);
+    }
+    public static GlintEffect glint(float speed, Col glintColor) {
+        return new GlintEffect(speed,1f,glintColor);
+    }
+    public static GlintEffect glint(Col glintColor) {
+        return new GlintEffect(1f,1f,glintColor);
+    }
+
+    public static class GlintEffect extends DotStyle.DotStyleEffect {
+        public float speed = 1f;
+        public float scl = 1f;
+
+        public Col glintColor;
+
+        TextColor col;
+
+        public GlintEffect(float speed, float scl, Col glintColor) {
+            this.speed = speed;
+            this.scl = scl;
+            this.glintColor = glintColor;
+        }
+
+        @Override
+        public void beforeGlyph(StringRenderOutput self, DotStyle style, int index) {
+            col = style.color;
+
+            float value = - index/scl + ClientTick.getTotal()*speed;
+            value /= 40f;
+            value %= 1f;
+
+            style.color(Tmp.c1.set(Col.fromARGB(col.getValue())).lerp(glintColor,value > 0.8f ? 1f : 0f));
+        }
+
+        @Override
+        public void afterGlyph(StringRenderOutput self, DotStyle style, int index, FontSet fontset, GlyphInfo glyphinfo, BakedGlyph bakedglyph, TextColor textcolor, float f, float f1, float f2, float f3, float f6, float f7) {
+            style.color(col);
+        }
+    }
+
     public static class SpinEffect extends DotStyle.DotStyleEffect {
         public float speed = 1f;
 
