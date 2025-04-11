@@ -9,6 +9,7 @@ import net.minecraftforge.event.*;
 import net.minecraftforge.eventbus.api.*;
 import pro.komaru.tridot.api.render.text.DotText;
 import pro.komaru.tridot.client.gfx.postprocess.*;
+import pro.komaru.tridot.client.gfx.text.*;
 import pro.komaru.tridot.client.model.render.item.bow.*;
 import pro.komaru.tridot.client.render.screenshake.*;
 import pro.komaru.tridot.util.Col;
@@ -26,6 +27,11 @@ public class ClientEvents {
             PostProcessHandler.tick();
         }
     }
+
+//    @SubscribeEvent
+//    public void render(RenderGuiEvent event) {
+//        DotText.create("Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello").color(Col.red).effects(DotText.glint(1f, 1f, Col.white)).render(event.getGuiGraphics(),100,100);
+//    }
 
     @SubscribeEvent
     public void renderTick(TickEvent.RenderTickEvent event){

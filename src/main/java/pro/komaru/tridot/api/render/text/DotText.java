@@ -118,11 +118,9 @@ public class DotText {
         public void beforeGlyph(StringRenderOutput self, DotStyle style, int index) {
             col = style.color;
 
-            float value = - index/scl + ClientTick.getTotal()*speed;
-            value /= 40f;
-            value %= 1f;
-
-            style.color(Tmp.c1.set(Col.fromARGB(col.getValue())).lerp(glintColor,value > 0.8f ? 1f : 0f));
+            float t = (ClientTick.getTotal() * speed - index / scl) / 60f;
+            t = (Mathf.sin(t * Mathf.PI));
+            style.color(Col.fromARGB(col.getValue()).lerp(glintColor, t));
         }
 
         @Override
