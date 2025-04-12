@@ -31,5 +31,6 @@ public class TagsRegistry{
         return TagKey.create(Registries.PAINTING_VARIANT, name);
     }
 
+    public static final TagKey<Item> BOWS = item(new ResourceLocation(TridotLib.ID, "bows"));
     public static final TagKey<Item> CAN_DISABLE_SHIELD = item(new ResourceLocation(TridotLib.ID, "can_disable_shield"));
 }
