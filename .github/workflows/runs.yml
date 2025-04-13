@@ -46,24 +46,23 @@ jobs:
           current_version=$(grep '^version=' gradle.properties | cut -d'=' -f2)
           echo "Current version: $current_version"
 
-          # Split the version into base and last parts
+          # Split into base and suffix
           IFS='-' read -ra parts <<< "$current_version"
           base_version="${parts[0]}"
-          last_version="${parts[1]}"
+          
+          # Parse suffix and bump last segment
+          IFS='.' read -ra suffix_parts <<< "${parts[1]}"
+          suffix_parts[-1]=$((suffix_parts[-1] + 1))
 
-          # Split the last version part into segments and increment the last segment
-          IFS='.' read -ra last_parts <<< "$last_version"
-          last_parts[-1]=$((last_parts[-1] + 1))
-
-          # Construct the new version
-          new_last_version="${last_parts[*]}"
-          new_last_version="${new_last_version// /.}"
-          new_version="$base_version-$new_last_version"
+          # Rebuild new version
+          new_suffix="${suffix_parts[*]}"
+          new_suffix="${new_suffix// /.}"
+          new_version="$base_version-$new_suffix"
           echo "New version: $new_version"
           
           echo "TAG_NAME=${new_version}" >> $GITHUB_ENV
           
-          # Update the version line in gradle.properties
+          # Update gradle.properties
           sed -i "s/^version=.*/version=$new_version/" gradle.properties
           cat gradle.properties
 
