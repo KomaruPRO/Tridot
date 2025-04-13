@@ -45,6 +45,7 @@ dependencies {
 ### Flexible, builder-based systems
 > Robust modding with new systems will be even easier
 - Armor Builders
+- Command Builder
 - Particle Builders
 - Rendering Builders
 - - cubes, beams, vertices, etc.
