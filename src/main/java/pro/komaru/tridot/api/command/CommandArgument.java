@@ -1,5 +1,6 @@
 package pro.komaru.tridot.api.command;
 
+import com.mojang.authlib.*;
 import com.mojang.brigadier.arguments.*;
 import com.mojang.brigadier.builder.ArgumentBuilder;
 import com.mojang.brigadier.builder.RequiredArgumentBuilder;
@@ -8,7 +9,7 @@ import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.mojang.brigadier.suggestion.SuggestionProvider;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
-import net.minecraft.commands.arguments.EntityArgument;
+import net.minecraft.commands.arguments.*;
 import net.minecraft.commands.arguments.coordinates.BlockPosArgument;
 import net.minecraft.commands.arguments.coordinates.Vec2Argument;
 import net.minecraft.commands.arguments.coordinates.Vec3Argument;
@@ -77,6 +78,10 @@ public class CommandArgument extends CommandPart{
         return new CommandArgument(name, type);
     }
 
+    public static CommandArgument gameProfile(String name){
+        return new CommandArgument(name, GameProfileArgument.gameProfile());
+    }
+
     public static CommandArgument players(String name){
         return new CommandArgument(name, EntityArgument.players());
     }
@@ -92,6 +97,10 @@ public class CommandArgument extends CommandPart{
     public CommandArgument suggestion(SuggestionProvider suggestionProvider){
         this.suggestionProvider = suggestionProvider;
         return this;
+    }
+
+    public Collection<GameProfile> getGameProfile(CommandContext<CommandSourceStack> pContext) throws CommandSyntaxException{
+        return GameProfileArgument.getGameProfiles(pContext, getArgumentName());
     }
 
     public int getInt(CommandContext<CommandSourceStack> context){
