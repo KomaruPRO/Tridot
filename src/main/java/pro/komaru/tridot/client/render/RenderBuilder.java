@@ -168,9 +168,9 @@ public class RenderBuilder{
     }
 
     public RenderBuilder setFirstColor(float r, float g, float b){
-        this.r1 = r / 255f;
-        this.g1 = g / 255f;
-        this.b1 = b / 255f;
+        this.r1 = r;
+        this.g1 = g;
+        this.b1 = b;
         return this;
     }
 
@@ -204,9 +204,9 @@ public class RenderBuilder{
     }
 
     public RenderBuilder setSecondColor(float r, float g, float b){
-        this.r2 = r / 255f;
-        this.g2 = g / 255f;
-        this.b2 = b / 255f;
+        this.r2 = r;
+        this.g2 = g;
+        this.b2 = b;
         return this;
     }
 
@@ -240,9 +240,9 @@ public class RenderBuilder{
     }
 
     public RenderBuilder setThirdColor(float r, float g, float b){
-        this.r3 = r / 255f;
-        this.g3 = g / 255f;
-        this.b3 = b / 255f;
+        this.r3 = r;
+        this.g3 = g;
+        this.b3 = b;
         return this;
     }
 
