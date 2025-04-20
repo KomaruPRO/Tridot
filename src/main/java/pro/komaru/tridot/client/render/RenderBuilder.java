@@ -13,6 +13,7 @@ import pro.komaru.tridot.api.*;
 import pro.komaru.tridot.client.ClientTick;
 import pro.komaru.tridot.client.gfx.trail.TrailPoint;
 import pro.komaru.tridot.client.gfx.trail.TrailRenderPoint;
+import pro.komaru.tridot.util.*;
 
 import javax.annotation.*;
 import java.awt.*;
@@ -126,11 +127,11 @@ public class RenderBuilder{
         return supplier;
     }
 
-    public RenderBuilder setColor(Color color){
-        return setColor(color.getRed(), color.getGreen(), color.getBlue());
+    public RenderBuilder setColor(Col color){
+        return setColor(color.r, color.g, color.b);
     }
 
-    public RenderBuilder setColor(Color color, float a){
+    public RenderBuilder setColor(Col color, float a){
         return setFirstColor(color).setFirstAlpha(a).setSecondColor(color).setSecondAlpha(a).setThirdColor(color).setThirdAlpha(a);
     }
 
@@ -155,11 +156,11 @@ public class RenderBuilder{
         return setFirstLight(light).setSecondLight(light);
     }
 
-    public RenderBuilder setFirstColor(Color color){
-        return setFirstColor(color.getRed(), color.getGreen(), color.getBlue());
+    public RenderBuilder setFirstColor(Col color){
+        return setFirstColor(color.r, color.g, color.b);
     }
 
-    public RenderBuilder setFirstColor(Color color, float a){
+    public RenderBuilder setFirstColor(Col color, float a){
         return setFirstColor(color).setFirstAlpha(a);
     }
 
@@ -191,11 +192,11 @@ public class RenderBuilder{
         return this;
     }
 
-    public RenderBuilder setSecondColor(Color color){
-        return setSecondColor(color.getRed(), color.getGreen(), color.getBlue());
+    public RenderBuilder setSecondColor(Col color){
+        return setSecondColor(color.r, color.g, color.b);
     }
 
-    public RenderBuilder setSecondColor(Color color, float a){
+    public RenderBuilder setSecondColor(Col color, float a){
         return setSecondColor(color).setSecondAlpha(a);
     }
 
@@ -227,11 +228,11 @@ public class RenderBuilder{
         return this;
     }
 
-    public RenderBuilder setThirdColor(Color color){
-        return setThirdColor(color.getRed(), color.getGreen(), color.getBlue());
+    public RenderBuilder setThirdColor(Col color){
+        return setThirdColor(color.r, color.g, color.b);
     }
 
-    public RenderBuilder setThirdColor(Color color, float a){
+    public RenderBuilder setThirdColor(Col color, float a){
         return setThirdColor(color).setThirdAlpha(a);
     }
 

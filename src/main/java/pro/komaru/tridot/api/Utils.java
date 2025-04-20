@@ -1306,11 +1306,27 @@ public class Utils {
             Minecraft.getInstance().getItemRenderer().render(new ItemStack(net.minecraft.world.item.Items.DIRT), displayContext, leftHand, poseStack, buffer, combinedLight, combinedOverlay, bakedmodel);
         }
 
-        public static TextureAtlasSprite getSprite(ResourceLocation resourceLocation){
+        public static TextureAtlasSprite getBlockSprite(ResourceLocation resourceLocation) {
             return Minecraft.getInstance().getTextureAtlas(TextureAtlas.LOCATION_BLOCKS).apply(resourceLocation);
         }
 
-        public static TextureAtlasSprite getSprite(String modId, String sprite){
+        public static TextureAtlasSprite getBlockSprite(String modId, String sprite) {
+            return getBlockSprite(new ResourceLocation(modId, sprite));
+        }
+
+        public static TextureAtlasSprite getParticleSprite(ResourceLocation resourceLocation) {
+            return Minecraft.getInstance().getTextureAtlas(TextureAtlas.LOCATION_PARTICLES).apply(resourceLocation);
+        }
+
+        public static TextureAtlasSprite getParticleSprite(String modId, String sprite) {
+            return getParticleSprite(new ResourceLocation(modId, sprite));
+        }
+
+        public static TextureAtlasSprite getSprite(ResourceLocation resourceLocation) {
+            return Minecraft.getInstance().getTextureAtlas(TextureAtlas.LOCATION_BLOCKS).apply(resourceLocation);
+        }
+
+        public static TextureAtlasSprite getSprite(String modId, String sprite) {
             return getSprite(new ResourceLocation(modId, sprite));
         }
 
@@ -1318,7 +1334,7 @@ public class Utils {
             renderFluid(stack, fluidStack, size, size, size, texSize, texSize, texSize, flowing, light);
         }
 
-        public static void renderFluid(PoseStack stack, FluidStack fluidStack, float size, float texSize, java.awt.Color color, boolean flowing, int light){
+        public static void renderFluid(PoseStack stack, FluidStack fluidStack, float size, float texSize, Col color, boolean flowing, int light){
             renderFluid(stack, fluidStack, size, size, size, texSize, texSize, texSize, color, flowing, light);
         }
 
@@ -1329,7 +1345,7 @@ public class Utils {
             }
         }
 
-        public static void renderFluid(PoseStack stack, FluidStack fluidStack, float width, float height, float length, float texWidth, float texHeight, float texLength, java.awt.Color color, boolean flowing, int light){
+        public static void renderFluid(PoseStack stack, FluidStack fluidStack, float width, float height, float length, float texWidth, float texHeight, float texLength, Col color, boolean flowing, int light){
             if(!fluidStack.isEmpty()){
                 RenderBuilder builder = getFluidRenderBuilder(fluidStack, texWidth, texHeight, texLength, flowing, light);
                 builder.setColor(color).renderCube(stack, width, height, length);
@@ -1340,7 +1356,7 @@ public class Utils {
             renderCenteredFluid(stack, fluidStack, size, size, size, texSize, texSize, texSize, flowing, light);
         }
 
-        public static void renderCenteredFluid(PoseStack stack, FluidStack fluidStack, float size, float texSize, java.awt.Color color, boolean flowing, int light){
+        public static void renderCenteredFluid(PoseStack stack, FluidStack fluidStack, float size, float texSize, Col color, boolean flowing, int light){
             renderCenteredFluid(stack, fluidStack, size, size, size, texSize, texSize, texSize, color, flowing, light);
         }
 
@@ -1351,7 +1367,7 @@ public class Utils {
             }
         }
 
-        public static void renderCenteredFluid(PoseStack stack, FluidStack fluidStack, float width, float height, float length, float texWidth, float texHeight, float texLength, java.awt.Color color, boolean flowing, int light){
+        public static void renderCenteredFluid(PoseStack stack, FluidStack fluidStack, float width, float height, float length, float texWidth, float texHeight, float texLength, Col color, boolean flowing, int light){
             if(!fluidStack.isEmpty()){
                 RenderBuilder builder = getFluidRenderBuilder(fluidStack, texWidth, texHeight, texLength, flowing, light);
                 builder.setColor(color).renderCenteredCube(stack, width, height, length);
@@ -1362,7 +1378,7 @@ public class Utils {
             renderWavyFluid(stack, fluidStack, size, size, size, texSize, texSize, texSize, flowing, light, strength, time);
         }
 
-        public static void renderWavyFluid(PoseStack stack, FluidStack fluidStack, float size, float texSize, java.awt.Color color, boolean flowing, int light, float strength, float time){
+        public static void renderWavyFluid(PoseStack stack, FluidStack fluidStack, float size, float texSize, Col color, boolean flowing, int light, float strength, float time){
             renderWavyFluid(stack, fluidStack, size, size, size, texSize, texSize, texSize, color, flowing, light, strength, time);
         }
 
@@ -1373,7 +1389,7 @@ public class Utils {
             }
         }
 
-        public static void renderWavyFluid(PoseStack stack, FluidStack fluidStack, float width, float height, float length, float texWidth, float texHeight, float texLength, java.awt.Color color, boolean flowing, int light, float strength, float time){
+        public static void renderWavyFluid(PoseStack stack, FluidStack fluidStack, float width, float height, float length, float texWidth, float texHeight, float texLength, Col color, boolean flowing, int light, float strength, float time){
             if(!fluidStack.isEmpty()){
                 RenderBuilder builder = getFluidRenderBuilder(fluidStack, texWidth, texHeight, texLength, flowing, light);
                 builder.setColor(color).renderWavyCube(stack, width, height, length, strength, time);
@@ -1391,13 +1407,13 @@ public class Utils {
                 builder.setFirstUV(sprite.getU0(), sprite.getV0(), sprite.getU0() + ((sprite.getU1() - sprite.getU0()) * texLength), sprite.getV0() + ((sprite.getV1() - sprite.getV0()) * texWidth))
                 .setSecondUV(sprite.getU0(), sprite.getV0(), sprite.getU0() + ((sprite.getU1() - sprite.getU0()) * texWidth), sprite.getV0() + ((sprite.getV1() - sprite.getV0()) * texHeight))
                 .setThirdUV(sprite.getU0(), sprite.getV0(), sprite.getU0() + ((sprite.getU1() - sprite.getU0()) * texLength), sprite.getV0() + ((sprite.getV1() - sprite.getV0()) * texHeight))
-                .setColor(new Color(clientType.getTintColor(fluidStack)))
+                .setColor(new Col(clientType.getTintColor(fluidStack)))
                 .setLight(Math.max(type.getLightLevel(fluidStack) << 4, light));
             }
             return builder;
         }
 
-        public static void renderConnectLine(PoseStack stack, Vec3 from, Vec3 to, java.awt.Color color, float alpha){
+        public static void renderConnectLine(PoseStack stack, Vec3 from, Vec3 to, Col color, float alpha){
             double dX = to.x() - from.x();
             double dY = to.y() - from.y();
             double dZ = to.z() - from.z();
@@ -1415,18 +1431,18 @@ public class Utils {
             stack.popPose();
         }
 
-        public static void renderConnectLine(PoseStack stack, BlockPos posFrom, BlockPos posTo, java.awt.Color color, float alpha){
+        public static void renderConnectLine(PoseStack stack, BlockPos posFrom, BlockPos posTo, Col color, float alpha){
             renderConnectLine(stack, posFrom.getCenter(), posTo.getCenter(), color, alpha);
         }
 
-        public static void renderConnectLineOffset(PoseStack stack, Vec3 from, Vec3 to, java.awt.Color color, float alpha){
+        public static void renderConnectLineOffset(PoseStack stack, Vec3 from, Vec3 to, Col color, float alpha){
             stack.pushPose();
             stack.translate(from.x(), from.y(), from.z());
             renderConnectLine(stack, from, to, color, alpha);
             stack.popPose();
         }
 
-        public static void renderConnectBoxLines(PoseStack stack, Vec3 size, java.awt.Color color, float alpha){
+        public static void renderConnectBoxLines(PoseStack stack, Vec3 size, Col color, float alpha){
             renderConnectLineOffset(stack, new Vec3(0, 0, 0), new Vec3(size.x(), 0, 0), color, alpha);
             renderConnectLineOffset(stack, new Vec3(size.x(), 0, 0), new Vec3(size.x(), 0, size.z()), color, alpha);
             renderConnectLineOffset(stack, new Vec3(size.x(), 0, size.z()), new Vec3(0, 0, size.z()), color, alpha);
@@ -1451,7 +1467,7 @@ public class Utils {
             stack.popPose();
         }
 
-        public static void renderConnectSideLines(PoseStack stack, Vec3 size, java.awt.Color color, float alpha){
+        public static void renderConnectSideLines(PoseStack stack, Vec3 size, Col color, float alpha){
             renderConnectLineOffset(stack, new Vec3(0, 0, 0), new Vec3(size.x(), 0, 0), color, alpha);
             renderConnectLineOffset(stack, new Vec3(size.x(), 0, 0), new Vec3(size.x(), 0, size.z()), color, alpha);
             renderConnectLineOffset(stack, new Vec3(size.x(), 0, size.z()), new Vec3(0, 0, size.z()), color, alpha);
@@ -1466,7 +1482,7 @@ public class Utils {
             stack.popPose();
         }
 
-        public static void renderConnectSide(PoseStack stack, Direction side, java.awt.Color color, float alpha){
+        public static void renderConnectSide(PoseStack stack, Direction side, Col color, float alpha){
             Vec3 size = new Vec3(1, 1, 1);
             stack.pushPose();
             stack.translate(0.5f, 0.5f, 0.5f);
