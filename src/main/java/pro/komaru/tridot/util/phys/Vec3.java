@@ -1,454 +1,262 @@
 package pro.komaru.tridot.util.phys;
 
-import net.minecraft.nbt.*;
-import net.minecraft.world.entity.*;
+import net.minecraft.nbt.CompoundTag;
+import pro.komaru.tridot.util.comps.phys.Pos3;
+import pro.komaru.tridot.util.comps.phys.X;
+import pro.komaru.tridot.util.comps.phys.Y;
+import pro.komaru.tridot.util.comps.phys.Z;
 import pro.komaru.tridot.util.math.Interp;
-import pro.komaru.tridot.util.math.Mathf;
 
 import java.io.*;
 
-public class Vec3 implements Serializable {
-    public float x, y, z;
+public class Vec3 implements Pos3,Serializable {
 
-    /**
-     * Constructs a vector with specified x, y, and z coordinates.
-     * @param x X coordinate
-     * @param y Y coordinate
-     * @param z Z coordinate
-     */
+    public float x,y,z;
+
     public Vec3(float x, float y, float z) {
-        this.x = x;
-        this.y = y;
-        this.z = z;
+        set(x,y,z);
     }
-
-    /**
-     * Constructs a vector with specified x, y, and z coordinates (using double inputs).
-     * @param x X coordinate
-     * @param y Y coordinate
-     * @param z Z coordinate
-     */
     public Vec3(double x, double y, double z) {
-        this((float) x, (float) y, (float) z);
+        set((float) x, (float) y, (float) z);
+    }
+    public Vec3(Pos3 pos) {
+        set(pos);
+    }
+    public Vec3() {
+        set(0f,0f,0f);
     }
 
-    // Static methods
+    public static Vec3 from(net.minecraft.world.phys.Vec3 mc) {
+        return new Vec3((float) mc.x, (float) mc.y, (float) mc.z);
+    }
 
-    /**
-     * Creates a vector with all coordinates set to zero.
-     * @return a zero vector
-     */
     public static Vec3 zero() {
-        return new Vec3(0, 0, 0);
+        return new Vec3();
     }
 
-    /**
-     * Creates a vector from a CompoundTag.
-     * @param tag CompoundTag containing "x", "y", and "z" values
-     * @return a vector created from the tag
-     */
-    public static Vec3 from(CompoundTag tag) {
-        return new Vec3(tag.getFloat("x"), tag.getFloat("y"), tag.getFloat("z"));
+    public Vec3 cpy() {
+        return new Vec3(this);
     }
 
-    /**
-     * Creates a vector from an Entity's position.
-     * @param entity Entity to extract position from
-     * @return a vector representing the entity's position
-     */
-    public static Vec3 from(Entity entity) {
-        return new Vec3((float) entity.getX(), (float) entity.getY(), (float) entity.getZ());
-    }
-
-    /**
-     * Creates a vector from a Minecraft Vec3
-     * @param position Minecraft Vec3 object
-     * @return converted vector
-     */
-    public static Vec3 from(net.minecraft.world.phys.Vec3 position) {
-        return new Vec3(position.x,position.y,position.z);
-    }
-
-    // Getters and Setters
-
-    /** @return the X coordinate */
-    public float x() {
+    @Override
+    public float cx() {
         return x;
     }
 
-    /**
-     * Sets the X coordinate.
-     * @param x New X coordinate
-     * @return this vector for chaining
-     */
-    public Vec3 x(float x) {
-        this.x = x;
+    @Override
+    public Vec3 cx(float value) {
+        x = value;
         return this;
     }
 
-    /** @return the Y coordinate */
-    public float y() {
+    @Override
+    public float cy() {
         return y;
     }
 
-    /**
-     * Sets the Y coordinate.
-     * @param y New Y coordinate
-     * @return this vector for chaining
-     */
-    public Vec3 y(float y) {
-        this.y = y;
+    @Override
+    public Vec3 cy(float value) {
+        y = value;
         return this;
     }
 
-    /** @return the Z coordinate */
+    @Override
     public float z() {
         return z;
     }
 
-    /**
-     * Sets the Z coordinate.
-     * @param z New Z coordinate
-     * @return this vector for chaining
-     */
-    public Vec3 z(float z) {
-        this.z = z;
+    @Override
+    public Vec3 z(float value) {
+        z = value;
         return this;
     }
 
-    /**
-     * Sets the X, Y, and Z coordinates.
-     * @param x New X coordinate
-     * @param y New Y coordinate
-     * @param z New Z coordinate
-     * @return this vector for chaining
-     */
+    public Vec3 add(Pos3 xyz) {
+        return add((X & Y & Z) xyz);
+    }
+    public <XYZ extends X & Y & Z> Vec3 add(XYZ xyz) {
+        return add(xyz, xyz, xyz);
+    }
+    public Vec3 add(X x, Y y, Z z) {
+        return add(x.cx(), y.cy(), z.z());
+    }
+    public Vec3 add(float x, float y, float z) {
+        set(cx() + x, cy() + y, z() + z);
+        return this;
+    }
+
+    public Vec3 sub(Pos3 xyz) {
+        return sub((X & Y & Z) xyz);
+    }
+    public <XYZ extends X & Y & Z> Vec3 sub(XYZ xyz) {
+        return sub(xyz, xyz, xyz);
+    }
+    public Vec3 sub(X x, Y y, Z z) {
+        return sub(x.cx(), y.cy(), z.z());
+    }
+    public Vec3 sub(float x, float y, float z) {
+        return add(-x, -y, -z);
+    }
+
+    public Vec3 set(Pos3 other) {
+        return set(other.cx(),other.cy(),other.z());
+    }
     public Vec3 set(float x, float y, float z) {
-        this.x(x);
-        this.y(y);
-        this.z(z);
+        cx(x);
+        this.cy(y);
+        z(z);
         return this;
     }
 
-    // Utility methods
-
-    /**
-     * Creates a copy of this vector.
-     * @return a new vector with the same coordinates
-     */
-    public Vec3 cpy() {
-        return new Vec3(x, y, z);
+    public Vec3 scale(float scl) {
+        return scale(scl, scl, scl);
+    }
+    public Vec3 scale(Pos3 xyz) {
+        return scale((X & Y & Z) xyz);
+    }
+    public <XYZ extends X & Y & Z> Vec3 scale(XYZ xyz) {
+        return scale(xyz,xyz,xyz);
+    }
+    public Vec3 scale(X x, Y y, Z z) {
+        return scale(x.cx(), y.cy(), z.z());
+    }
+    public Vec3 scale(float x, float y, float z) {
+        set(cx() * x, cy() * y, z() * z);
+        return this;
     }
 
-    /**
-     * Normalizes this vector.
-     * @return this vector after normalization
-     */
+    public float len2() {
+        return cx() * cx() + cy() * cy() + z() * z();
+    }
+    public float len() {
+        return (float) Math.sqrt(len2());
+    }
+
     public Vec3 nor() {
         return scale(1 / len());
     }
 
-    /**
-     * Calculates the length (magnitude) of this vector.
-     * @return the vector's length
-     */
-    public float len() {
-        return (float) Math.sqrt(x * x + y * y + z * z);
-    }
-
-    /**
-     * Saves this vector to a CompoundTag.
-     * @return a CompoundTag containing "x", "y", and "z" values
-     */
-    public CompoundTag save() {
-        CompoundTag tag = new CompoundTag();
-        tag.putFloat("x", x);
-        tag.putFloat("y", y);
-        tag.putFloat("z", z);
-        return tag;
-    }
-
-    /**
-     * Converts this vector to a Minecraft Vec3.
-     * @return a Minecraft Vec3 instance
-     */
     public net.minecraft.world.phys.Vec3 mcVec() {
-        return new net.minecraft.world.phys.Vec3(x, y, z);
+        return new net.minecraft.world.phys.Vec3(cx(), cy(), z());
+    }
+    public CompoundTag toNbtVec() {
+        var nbt = new CompoundTag();
+        nbt.putFloat("x", cx());
+        nbt.putFloat("y", cy());
+        nbt.putFloat("z", z());
+        return nbt;
+    }
+    public Vec3 fromNbtVec(CompoundTag nbt) {
+        return set(nbt.getFloat("x"), nbt.getFloat("y"), nbt.getFloat("z"));
     }
 
-    // Transformation methods
-
-    /**
-     * Scales this vector by the given factors.
-     * @param sx Scale factor for X
-     * @param sy Scale factor for Y
-     * @param sz Scale factor for Z
-     * @return this vector after scaling
-     */
-    public Vec3 scale(float sx, float sy, float sz) {
-        return set(x * sx, y * sy, z * sz);
+    public Vec3 lerp(Pos3 pos, float progress) {
+        return lerp(pos,progress,Interp.linear);
+    }
+    public Vec3 lerp(Pos3 pos, float progress, Interp interp) {
+        float x = interp.apply(progress, cx(), pos.cx());
+        float y = interp.apply(progress, cy(), pos.cy());
+        float z = interp.apply(progress, z(), pos.z());
+        return set(x, y, z);
     }
 
-    /**
-     * Scales this vector uniformly by the given factor.
-     * @param s Scale factor
-     * @return this vector after scaling
-     */
-    public Vec3 scale(float s) {
-        return scale(s, s, s);
+    public Vec3 rotate(float degX, float degY, float degZ) {
+        float radiansX = (float) Math.toRadians(degX);
+        float radiansY = (float) Math.toRadians(degY);
+        float radiansZ = (float) Math.toRadians(degZ);
+
+        float cosX = (float) Math.cos(radiansX);
+        float sinX = (float) Math.sin(radiansX);
+
+        float cosY = (float) Math.cos(radiansY);
+        float sinY = (float) Math.sin(radiansY);
+
+        float cosZ = (float) Math.cos(radiansZ);
+        float sinZ = (float) Math.sin(radiansZ);
+
+        float x = cx();
+        float y = cy();
+        float z = z();
+
+        float tempY = y * cosX - z * sinX;
+        float tempZ = y * sinX + z * cosX;
+
+        float tempX = x * cosY + tempZ * sinY;
+        tempZ = -x * sinY + tempZ * cosY;
+
+        set(tempX * cosZ - tempY * sinZ, tempX * sinZ + tempY * cosZ, tempZ);
+
+        return this;
     }
 
-    /**
-     * Uses a distance constraint to correct the position of this vector
-     * @param to vector linked to
-     * @param constraint max/min distance
-     * @return Constrained pos
-     */
-    public Vec3 constraintMin(Vec3 to, float constraint) {
-        return constraintMin(to,constraint,1f);
-    }
-    /**
-     * Uses a distance constraint to correct the position of this vector
-     * @param to vector linked to
-     * @param constraint max/min distance
-     * @param speed Step (0.0-1.0)
-     * @return Constrained pos
-     */
-    public Vec3 constraintMin(Vec3 to, float constraint,float speed) {
-        return constraint(to,constraint,true,false,speed);
-    }
-    /**
-     * Uses a distance constraint to correct the position of this vector
-     * @param to vector linked to
-     * @param constraint max/min distance
-     * @return Constrained pos
-     */
-    public Vec3 constraintMax(Vec3 to, float constraint) {
-        return constraintMax(to,constraint,1f);
-    }
-    /**
-     * Uses a distance constraint to correct the position of this vector
-     * @param to vector linked to
-     * @param constraint max/min distance
-     * @param speed Step (0.0-1.0)
-     * @return Constrained pos
-     */
-    public Vec3 constraintMax(Vec3 to, float constraint,float speed) {
-        return constraint(to,constraint,false,true,speed);
+    public Vec3 angle() {
+        Pos3 normalized = cpy().nor();
+        float yaw = (float) Math.atan2(normalized.z(), normalized.cx());
+        float pitch = (float) Math.asin(normalized.cy());
+        return set(pitch,yaw,0);
     }
 
-    /**
-     * Uses a distance constraint to correct the position of this vector
-     * @param to vector linked to
-     * @param constraint max/min distance
-     * @param min  Clamp pos if distance is smaller
-     * @param max Clamp pos if distance is bigger
-     * @param speed Step (0.0-1.0)
-     * @return Constrained pos
-     */
-    public Vec3 constraint(Vec3 to, float constraint,boolean min,boolean max,float speed) {
-        Vec3 vec = to.cpy().sub(this);
-        float len = vec.len();
-        if((max && len > constraint) || (min && len < constraint)) {
-            float step = (len-constraint)*speed;
-            Vec3 norVec = vec.cpy().nor().scale(step);
-            add(norVec);
+    public Vec3 angleBetween(Pos3 other) {
+        return other.cpypos().vec().sub(this).angle().rotationFix();
+    }
+
+    public float cross(Pos3 other) {
+        return cx() * other.cy() - cy() * other.cx();
+    }
+
+    public Vec3 rotationFix() {
+        if (cx() > 180) cx(cx() - 360);
+        if (cy() > 180) this.cy(cy() - 360);
+        if (z() > 180) z(z() - 360);
+        return this;
+    }
+
+    public float dst(Pos3 b) {
+        return cpy().sub(b).len();
+    }
+
+    public float dst2(Pos3 b) {
+        return cpy().sub(b).len2();
+    }
+
+    public boolean posEquals(Pos3 b) {
+        return b.cx() == cx() && b.cy() == cy() && b.z() == z();
+    }
+
+    public void constrain(Vec3 target, float targetDist, boolean less, boolean greater) {
+        var delta = target.cpy().sub(this);
+        float dst = delta.len();
+
+        if(less && dst < targetDist) return;
+        if(greater && dst > targetDist) return;
+        if (dst == 0) {
+            add(targetDist, 0, 0);
+            return;
         }
-        return this;
+
+        float scale = targetDist / dst;
+        float newX = target.cx() + delta.cx() * scale;
+        float newY = target.cy() + delta.cy() * scale;
+        float newZ = target.z() + delta.z() * scale;
+
+        set(newX, newY, newZ);
     }
 
-    /**
-     * Rotates this vector around the Z-axis by the given angle.
-     * @param angle Rotation angle in radians
-     * @return this vector after rotation
-     */
-    public Vec3 rotate(float angle) {
-        double cosTheta = Math.cos(angle);
-        double sinTheta = Math.sin(angle);
+    public void constrain2(Vec3 b, float targetDist, boolean less, boolean greater) {
+        var delta = b.cpy().sub(this);
+        float dst = delta.len();
 
-        float xNew = (float) (x * cosTheta - y * sinTheta);
-        float yNew = (float) (x * sinTheta + y * cosTheta);
+        if(less && dst < targetDist) return;
+        if(greater && dst > targetDist) return;
+        if (dst == 0) return;
 
-        return set(xNew, yNew, z);
-    }
+        float diff = (dst - targetDist) / dst / 2f;
 
-    /**
-     * Rotates this vector around the X, Y, and Z axes by the given angles.
-     * @param x Rotation angle around X axis in radians
-     * @param y Rotation angle around Y axis in radians
-     * @param z Rotation angle around Z axis in radians
-     * @return this vector after rotation
-     */
-    public Vec3 rotate(float x, float y, float z) {
-        double cosX = Math.cos(x);
-        double sinX = Math.sin(x);
-        float yNew = (float) (this.y * cosX - this.z * sinX);
-        float zNew = (float) (this.y * sinX + this.z * cosX);
-        this.y = yNew;
-        this.z = zNew;
+        float offsetX = delta.cx() * diff;
+        float offsetY = delta.cy() * diff;
+        float offsetZ = delta.z() * diff;
 
-        // Rotate around Y axis
-        double cosY = Math.cos(y);
-        double sinY = Math.sin(y);
-        float xNew = (float) (this.x * cosY + this.z * sinY);
-        zNew = (float) (-this.x * sinY + this.z * cosY);
-        this.x = xNew;
-        this.z = zNew;
-
-        // Rotate around Z axis
-        double cosZ = Math.cos(z);
-        double sinZ = Math.sin(z);
-        xNew = (float) (this.x * cosZ - this.y * sinZ);
-        yNew = (float) (this.x * sinZ + this.y * cosZ);
-        this.x = xNew;
-        this.y = yNew;
-
-        return this;
-    }
-
-    /**
-     * Rotates this vector around the X, Y, and Z axes by the given angles.
-     * @param vec Rotation angles around X, Y, and Z axes in radians
-     * @return this vector after rotation
-     */
-    public Vec3 rotate(Vec3 vec) {
-        return rotate(vec.x, vec.y, vec.z);
-    }
-
-    /**
-     * Rotates this vector around the X, Y, and Z axes by the given angles.
-     * @param x Rotation angle around X axis in degrees
-     * @param y Rotation angle around Y axis in degrees
-     * @param z Rotation angle around Z axis in degrees
-     * @return this vector after rotation
-     */
-    public Vec3 rotateDeg(float x, float y, float z) {
-        return rotate(x * Mathf.degRad, y * Mathf.degRad, z * Mathf.degRad);
-    }
-
-    /**
-     * Rotates this vector around the X, Y, and Z axes by the given angles.
-     * @param vec Rotation angles around X, Y, and Z axes in degrees
-     * @return this vector after rotation
-     */
-    public Vec3 rotateDeg(Vec3 vec) {
-        return rotateDeg(vec.x, vec.y, vec.z);
-    }
-
-
-    /**
-     * Adds the specified values to this vector.
-     * @param dx Value to add to X
-     * @param dy Value to add to Y
-     * @param dz Value to add to Z
-     * @return this vector after addition
-     */
-    public Vec3 add(float dx, float dy, float dz) {
-        return set(x + dx, y + dy, z + dz);
-    }
-
-    /**
-     * Adds the specified values to this vector.
-     * @param dx Value to add to X
-     * @param dy Value to add to Y
-     * @param dz Value to add to Z
-     * @return this vector after addition
-     */
-    public Vec3 add(double dx, double dy, double dz) {
-        return set(x + (float) dx, y + (float) dy, z + (float) dz);
-    }
-
-    /**
-     * Adds another vector to this vector.
-     * @param vec Vector to add
-     * @return this vector after addition
-     */
-    public Vec3 add(Vec3 vec) {
-        return add(vec.x, vec.y, vec.z);
-    }
-
-    /**
-     * Subtracts the specified values from this vector.
-     * @param dx Value to subtract from X
-     * @param dy Value to subtract from Y
-     * @param dz Value to subtract from Z
-     * @return this vector after subtraction
-     */
-    public Vec3 sub(float dx, float dy, float dz) {
-        return add(-dx, -dy, -dz);
-    }
-
-    /**
-     * Subtracts another vector from this vector.
-     * @param vec Vector to subtract
-     * @return this vector after subtraction
-     */
-    public Vec3 sub(Vec3 vec) {
-        return sub(vec.x, vec.y, vec.z);
-    }
-
-    public Vec3 cross(Vec3 pVec) {
-        return new Vec3(this.y * pVec.z - this.z * pVec.y, this.z * pVec.x - this.x * pVec.z, this.x * pVec.y - this.y * pVec.x);
-    }
-
-    /**
-     * Linearly interpolates between this vector and another vector.
-     * @param target Target vector
-     * @param progress Interpolation progress (0 to 1)
-     * @return this vector after interpolation
-     */
-    public Vec3 lerp(Vec3 target, float progress) {
-        return set(
-                Mathf.lerp(x, target.x, progress),
-                Mathf.lerp(y, target.y, progress),
-                Mathf.lerp(z, target.z, progress)
-        );
-    }
-
-    /**
-     * Interpolates between this vector and another vector with a custom interpolation function.
-     * @param target Target vector
-     * @param progress Interpolation progress (0 to 1)
-     * @param interp Interpolation function
-     * @return this vector after interpolation
-     */
-    public Vec3 lerp(Vec3 target, float progress, Interp interp) {
-        return set(
-                interp.apply(progress, x, target.x),
-                interp.apply(progress, y, target.y),
-                interp.apply(progress, z, target.z)
-        );
-    }
-
-    /**
-     * Calculates angles between this vector and another.
-     * @param orig Origin vector
-     * @param target Target vector
-     * @return a vector representing the angles (pitch, yaw, 0)
-     */
-    public Vec3 anglesBetween(Vec3 orig, Vec3 target) {
-        return target.cpy().sub(orig).angles();
-    }
-
-    /**
-     * Calculates the pitch and yaw angles of this vector.
-     * @return a vector containing pitch (X) and yaw (Y)
-     */
-    public Vec3 angles() {
-        Vec3 normalized = cpy().nor();
-        double yaw = Math.atan2(normalized.z, normalized.x);
-        double pitch = Math.asin(normalized.y);
-        return new Vec3((float) pitch, (float) yaw, 0);
-    }
-
-    /**
-     * Ensures angles are within the range of -180 to 180 degrees.
-     * @return this vector after fixing angles
-     */
-    public Vec3 fixAngles() {
-        if (x > 180) x -= 360;
-        if (y > 180) y -= 360;
-        if (z > 180) z -= 360;
-        return this;
+        add(offsetX, offsetY, offsetZ);
+        b.sub(offsetX, offsetY, offsetZ);
     }
 }

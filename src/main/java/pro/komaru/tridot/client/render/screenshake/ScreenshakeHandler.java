@@ -11,6 +11,7 @@ import pro.komaru.tridot.TridotLib;
 import pro.komaru.tridot.client.ClientTick;
 import pro.komaru.tridot.common.config.ClientConfig;
 import pro.komaru.tridot.util.Tmp;
+import pro.komaru.tridot.util.comps.phys.Pos3;
 import pro.komaru.tridot.util.math.ArcRandom;
 import pro.komaru.tridot.util.math.Mathf;
 import pro.komaru.tridot.util.math.raycast.RayCast;
@@ -57,8 +58,8 @@ public class ScreenshakeHandler{
                 RayHitResult hitResult = RayCast.getHit(level, new RayCastContext(cameraPos, pos).setBlockShape(RayCastContext.Block.VISUAL));
                 double distance = Math.max(0f,cameraPos.cpy().sub(hitResult.getPos()).len() - 0.1f);
 
-                float dX = cameraPos.x() - hitResult.getPos().x();
-                float dY = cameraPos.y() - hitResult.getPos().y();
+                float dX = cameraPos.cx() - hitResult.getPos().cx();
+                float dY = cameraPos.cy() - hitResult.getPos().cy();
                 float dZ = cameraPos.z() - hitResult.getPos().z();
 
                 float pitch = (float) (Math.atan2(Math.sqrt(dZ * dZ + dX * dX), dY) + Math.PI);
@@ -68,21 +69,21 @@ public class ScreenshakeHandler{
                 pos = cameraPos.cpy().add(x,y,z);
             }
 
-            camera.setPosition(pos.x(), pos.y(), pos.z());
+            camera.setPosition(pos.cx(), pos.cy(), pos.z());
         }
     }
 
-    private static @NotNull Vec3 intensityVec(Vec3 pos) {
-        return pos.cpy().add(intensityVectorOld.cpy().lerp(intensityVector,ClientTick.partialTicks));
+    private static @NotNull Vec3 intensityVec(Pos3 pos) {
+        return pos.cpypos().vec().add(intensityVectorOld.cpy().lerp(intensityVector,ClientTick.partialTicks)).vec();
     }
 
-    private static @NotNull Vec3 intensityPosVec(Vec3 pos) {
+    private static @NotNull Vec3 intensityPosVec(Pos3 pos) {
         float angleA = rand.nextFloat() * Mathf.pi * 2f;
         float angleB = rand.nextFloat() * Mathf.pi * 2f;
         float x = (float)(Math.cos(angleA) * Math.cos(angleB)) * randomizeOffset(intensityPosition);
         float y = (float)(Math.sin(angleA) * Math.cos(angleB)) * randomizeOffset(intensityPosition);
         float z = (float)Math.sin(angleB) * randomizeOffset(intensityPosition);
-        return pos.cpy().add(x,y,z);
+        return pos.cpypos().vec().add(x,y,z).vec();
     }
 
     public static void fovTick(ComputeFovModifierEvent event){

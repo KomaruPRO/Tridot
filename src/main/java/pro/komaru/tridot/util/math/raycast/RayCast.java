@@ -20,9 +20,9 @@ public class RayCast{
         boolean entityEnd = context.getEntityEnd();
         Predicate<BlockPos> blockPosFilter = context.getBlockPosFilter();
         Predicate<Entity> entityFilter = context.getEntityFilter();
-        double distance = Math.sqrt(Math.pow(start.x() - end.x(), 2) + Math.pow(start.y() - end.y(), 2) + Math.pow(start.z() - end.z(), 2));
-        double X = start.x();
-        double Y = start.y();
+        double distance = Math.sqrt(Math.pow(start.cx() - end.cx(), 2) + Math.pow(start.cy() - end.cy(), 2) + Math.pow(start.z() - end.z(), 2));
+        double X = start.cx();
+        double Y = start.cy();
         double Z = start.z();
         double oldX = X;
         double oldY = Y;
@@ -33,16 +33,16 @@ public class RayCast{
         for(float i = 0; i < distance * 160; i++){
             double dst = (distance * 160);
 
-            double dX = start.x() - end.x();
-            double dY = start.y() - end.y();
+            double dX = start.cx() - end.cx();
+            double dY = start.cy() - end.cy();
             double dZ = start.z() - end.z();
 
             double x = -(dX / (dst)) * i;
             double y = -(dY / (dst)) * i;
             double z = -(dZ / (dst)) * i;
 
-            X = (start.x() + x);
-            Y = (start.y() + y);
+            X = (start.cx() + x);
+            Y = (start.cy() + y);
             Z = (start.z() + z);
 
             boolean canEntity = true;
@@ -86,20 +86,20 @@ public class RayCast{
 
     public static List<Entity> getHitEntities(Level level, Vec3 start, Vec3 endPos, float distance){
         List<Entity> list = new ArrayList<>();
-        float ds = (float)Math.sqrt(Math.pow(start.x() - endPos.x(), 2) + Math.pow(start.y() - endPos.y(), 2) + Math.pow(start.z() - endPos.z(), 2));
+        float ds = (float)Math.sqrt(Math.pow(start.cx() - endPos.cx(), 2) + Math.pow(start.cy() - endPos.cy(), 2) + Math.pow(start.z() - endPos.z(), 2));
         for(float i = 0; i < ds * 10; i++){
             float dst = (ds * 10);
 
-            double dX = start.x() - endPos.x();
-            double dY = start.y() - endPos.y();
+            double dX = start.cx() - endPos.cx();
+            double dY = start.cy() - endPos.cy();
             double dZ = start.z() - endPos.z();
 
             float x = (float)-(dX / (dst)) * i;
             float y = (float)-(dY / (dst)) * i;
             float z = (float)-(dZ / (dst)) * i;
 
-            float X = (float)(start.x() + x);
-            float Y = (float)(start.y() + y);
+            float X = (float)(start.cx() + x);
+            float Y = (float)(start.cy() + y);
             float Z = (float)(start.z() + z);
 
             List<Entity> entityList = level.getEntitiesOfClass(Entity.class, new AABB(X - distance, Y - distance, Z - distance, X + distance, Y + distance, Z + distance));
