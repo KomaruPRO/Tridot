@@ -3,11 +3,13 @@ package pro.komaru.tridot.client.gfx.particle;
 import net.minecraft.client.multiplayer.*;
 import net.minecraft.client.renderer.texture.*;
 import net.minecraft.world.level.material.*;
+import net.minecraftforge.api.distmarker.*;
 import net.minecraftforge.client.extensions.common.*;
 import net.minecraftforge.fluids.*;
 import pro.komaru.tridot.api.*;
 import pro.komaru.tridot.client.gfx.particle.options.FluidParticleOptions;
 
+@OnlyIn(Dist.CLIENT)
 public class FluidParticle extends GenericParticle{
 
     public FluidParticle(ClientLevel level, FluidParticleOptions options, double x, double y, double z, double vx, double vy, double vz){

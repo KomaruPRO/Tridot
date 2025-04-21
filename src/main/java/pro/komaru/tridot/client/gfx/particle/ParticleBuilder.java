@@ -18,15 +18,9 @@ import pro.komaru.tridot.util.math.*;
 import java.util.*;
 import java.util.function.*;
 
-public class ParticleBuilder{
+public class ParticleBuilder extends AbstractParticleBuilder<ParticleBuilder>{
     public static final ArcRandom random = Tmp.rnd;
     public final GenericParticleOptions options;
-    double vx = 0, vy = 0, vz = 0;
-    double fvx = 0, fvy = 0, fvz = 0;
-    double fdx = 0, fdy = 0, fdz = 0;
-    double maxXSpeed = 0, maxYSpeed = 0, maxZSpeed = 0;
-    double maxXDist = 0, maxYDist = 0, maxZDist = 0;
-
     boolean force = true;
     boolean distanceSpawn = true;
     double distance = 100;
@@ -195,61 +189,6 @@ public class ParticleBuilder{
 
     public ParticleBuilder setHasPhysics(boolean hasPhysics){
         options.hasPhysics = hasPhysics;
-        return this;
-    }
-
-    public ParticleBuilder randomVelocity(double maxSpeed){
-        randomVelocity(maxSpeed, maxSpeed, maxSpeed);
-        return this;
-    }
-
-    public ParticleBuilder randomVelocity(double maxHSpeed, double maxVSpeed){
-        randomVelocity(maxHSpeed, maxVSpeed, maxHSpeed);
-        return this;
-    }
-
-    public ParticleBuilder randomVelocity(double maxXSpeed, double maxYSpeed, double maxZSpeed){
-        this.maxXSpeed = maxXSpeed;
-        this.maxYSpeed = maxYSpeed;
-        this.maxZSpeed = maxZSpeed;
-        return this;
-    }
-
-    public ParticleBuilder flatRandomVelocity(double fvx, double fvy, double fvz){
-        this.fvx = fvx;
-        this.fvy = fvy;
-        this.fvz = fvz;
-        return this;
-    }
-
-    public ParticleBuilder addVelocity(double vx, double vy, double vz){
-        this.vx += vx;
-        this.vy += vy;
-        this.vz += vz;
-        return this;
-    }
-
-    public ParticleBuilder setVelocity(double vx, double vy, double vz){
-        this.vx = vx;
-        this.vy = vy;
-        this.vz = vz;
-        return this;
-    }
-
-    public ParticleBuilder randomOffset(double maxDistance){
-        randomOffset(maxDistance, maxDistance, maxDistance);
-        return this;
-    }
-
-    public ParticleBuilder randomOffset(double maxHDist, double maxVDist){
-        randomOffset(maxHDist, maxVDist, maxHDist);
-        return this;
-    }
-
-    public ParticleBuilder randomOffset(double maxXDist, double maxYDist, double maxZDist){
-        this.maxXDist = maxXDist;
-        this.maxYDist = maxYDist;
-        this.maxZDist = maxZDist;
         return this;
     }
 

@@ -10,7 +10,6 @@
     "common.CreeperMixin",
     "common.ForgeHooksMixin",
     "common.ItemEntityMixin",
-    "common.ThrownTridentMixin",
     "common.TntBlockMixin"
   ],
   "client": [
@@ -22,6 +21,7 @@
     "client.ForgeGuiMixin",
     "client.GameRendererMixin",
     "client.GuiGraphicsMixin",
+    "client.GuiMixin",
     "client.HumanoidModelMixin",
     "client.ItemEntityMixin",
     "client.ItemInHandLayerMixin",

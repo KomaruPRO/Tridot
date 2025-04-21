@@ -2,9 +2,11 @@ package pro.komaru.tridot.client.gfx.particle;
 
 import net.minecraft.client.*;
 import net.minecraft.client.multiplayer.*;
+import net.minecraftforge.api.distmarker.*;
 import net.minecraftforge.client.model.data.*;
 import pro.komaru.tridot.client.gfx.particle.options.ItemParticleOptions;
 
+@OnlyIn(Dist.CLIENT)
 public class ItemParticle extends GenericParticle{
 
     public ItemParticle(ClientLevel level, ItemParticleOptions options, double x, double y, double z, double vx, double vy, double vz){

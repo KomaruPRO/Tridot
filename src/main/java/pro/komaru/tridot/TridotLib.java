@@ -1,5 +1,6 @@
 package pro.komaru.tridot;
 
+import net.minecraft.resources.*;
 import net.minecraft.world.item.*;
 import net.minecraftforge.api.distmarker.*;
 import net.minecraftforge.fml.config.ModConfig.*;
@@ -70,6 +71,10 @@ public class TridotLib{
 
         MinecraftForge.EVENT_BUS.register(this);
         MinecraftForge.EVENT_BUS.register(new Events());
+    }
+
+    public static ResourceLocation loc(String path) {
+        return new ResourceLocation(ID, path);
     }
 
     private void setup(final FMLCommonSetupEvent event){

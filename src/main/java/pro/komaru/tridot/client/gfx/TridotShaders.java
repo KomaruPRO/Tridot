@@ -15,7 +15,7 @@ import pro.komaru.tridot.client.gfx.postprocess.PostProcessHandler;
 import java.io.*;
 
 public class TridotShaders{
-    public static ShaderInstance ADDITIVE_TEXTURE, ADDITIVE, TRANSLUCENT_TEXTURE, TRANSLUCENT;
+    public static ShaderInstance ADDITIVE_TEXTURE, ADDITIVE, TRANSLUCENT_TEXTURE, TRANSLUCENT, SCREEN_PARTICLE;
 
     @Mod.EventBusSubscriber(modid = TridotLib.ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
     public static class ClientRegistryEvents{
@@ -30,6 +30,7 @@ public class TridotShaders{
             event.registerShader(new ShaderInstance(event.getResourceProvider(), new ResourceLocation(TridotLib.ID, "additive"), DefaultVertexFormat.POSITION_COLOR), shader -> ADDITIVE = shader);
             event.registerShader(new ShaderInstance(event.getResourceProvider(), new ResourceLocation(TridotLib.ID, "translucent_texture"), DefaultVertexFormat.PARTICLE), shader -> TRANSLUCENT_TEXTURE = shader);
             event.registerShader(new ShaderInstance(event.getResourceProvider(), new ResourceLocation(TridotLib.ID, "translucent"), DefaultVertexFormat.PARTICLE), shader -> TRANSLUCENT = shader);
+            event.registerShader(new ShaderInstance(event.getResourceProvider(), new ResourceLocation(TridotLib.ID, "screen_particle"), DefaultVertexFormat.POSITION_TEX_COLOR), shader -> SCREEN_PARTICLE = shader);
         }
     }
 
@@ -43,6 +44,10 @@ public class TridotShaders{
 
     public static ShaderInstance getTranslucentTexture(){
         return TRANSLUCENT_TEXTURE;
+    }
+
+    public static ShaderInstance getScreenParticle(){
+        return SCREEN_PARTICLE;
     }
 
     public static ShaderInstance getTranslucent(){

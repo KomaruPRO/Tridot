@@ -9,10 +9,12 @@ import net.minecraftforge.api.distmarker.*;
 import net.minecraftforge.eventbus.api.*;
 import net.minecraftforge.fml.common.*;
 import net.minecraftforge.fml.event.lifecycle.*;
+import org.lwjgl.opengl.*;
 import pro.komaru.tridot.TridotLib;
 import pro.komaru.tridot.client.gfx.*;
 
 import java.util.*;
+import java.util.function.*;
 
 public class TridotRenderTypes{
 
@@ -161,5 +163,74 @@ public class TridotRenderTypes{
 
     public static void addCustomItemRenderBuilderFirst(RenderBuilder renderBuilder){
         customItemRenderBuilderFirst.add(renderBuilder);
+    }
+
+    public interface ScreenParticleRenderType{
+        ScreenParticleRenderType ADDITIVE = new ScreenParticleRenderType() {
+            @Override
+            public void begin(BufferBuilder builder, TextureManager manager) {
+                RenderSystem.depthMask(false);
+                RenderSystem.enableBlend();
+                RenderSystem.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE);
+                RenderSystem.setShader(TridotShaders::getScreenParticle);
+                RenderSystem.setShaderTexture(0, TextureAtlas.LOCATION_PARTICLES);
+                builder.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_TEX_COLOR);
+            }
+
+            @Override
+            public void end(Tesselator tesselator) {
+                tesselator.end();
+                RenderSystem.depthMask(true);
+                RenderSystem.disableBlend();
+                RenderSystem.defaultBlendFunc();
+            }
+        };
+        ScreenParticleRenderType TRANSPARENT = new ScreenParticleRenderType() {
+            @Override
+            public void begin(BufferBuilder builder, TextureManager manager) {
+                RenderSystem.depthMask(false);
+                RenderSystem.enableBlend();
+                RenderSystem.setShader(TridotShaders::getScreenParticle);
+                RenderSystem.setShaderTexture(0, TextureAtlas.LOCATION_PARTICLES);
+                RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
+                builder.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_TEX_COLOR);
+            }
+
+            @Override
+            public void end(Tesselator tesselator) {
+                tesselator.end();
+                RenderSystem.depthMask(true);
+                RenderSystem.disableBlend();
+                RenderSystem.defaultBlendFunc();
+            }
+        };
+
+        ScreenParticleRenderType LUMITRANSPARENT = new ScreenParticleRenderType() {
+            @Override
+            public void begin(BufferBuilder builder, TextureManager manager) {
+                RenderSystem.depthMask(false);
+                RenderSystem.enableBlend();
+                Supplier<ShaderInstance> instance = TridotShaders::getScreenParticle;
+                RenderSystem.setShader(instance);
+                instance.get().safeGetUniform("LumiTransparency").set(1f);
+                RenderSystem.setShaderTexture(0, TextureAtlas.LOCATION_PARTICLES);
+                RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
+                builder.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_TEX_COLOR);
+            }
+
+            @Override
+            public void end(Tesselator tesselator) {
+                tesselator.end();
+                RenderSystem.depthMask(true);
+                RenderSystem.disableBlend();
+                RenderSystem.defaultBlendFunc();
+                Supplier<ShaderInstance> instance = TridotShaders::getScreenParticle;
+                instance.get().safeGetUniform("LumiTransparency").set(0f);
+            }
+        };
+
+        void begin(BufferBuilder pBuilder, TextureManager pTextureManager);
+
+        void end(Tesselator pTesselator);
     }
 }

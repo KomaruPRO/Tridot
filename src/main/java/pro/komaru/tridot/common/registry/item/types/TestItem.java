@@ -31,7 +31,8 @@ public class TestItem extends Item{
             .setLifetime(100)
             .setColorData(ColorParticleData.create(particleColor, particleColorTo).build())
             .setVelocity((Tmp.rnd.nextDouble() / 5), 0.05f, (Tmp.rnd.nextDouble() / 5))
-            .repeat(worldIn, pos.x, pos.y, pos.z, 1);
+            .randomOffset(5)
+            .repeat(worldIn, pos.x, pos.y, pos.z, 5);
 
 
         return InteractionResultHolder.consume(itemstack);

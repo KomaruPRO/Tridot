@@ -4,9 +4,11 @@ import com.mojang.blaze3d.systems.*;
 import com.mojang.blaze3d.vertex.*;
 import net.minecraft.client.particle.*;
 import net.minecraft.client.renderer.texture.*;
+import net.minecraftforge.api.distmarker.*;
 import pro.komaru.tridot.client.compatibility.*;
 import pro.komaru.tridot.client.render.LevelRenderHandler;
 
+@OnlyIn(Dist.CLIENT)
 public class GenericParticleRenderType implements ParticleRenderType{
     public static final GenericParticleRenderType INSTANCE = new GenericParticleRenderType();
 

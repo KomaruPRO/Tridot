@@ -2,6 +2,7 @@ package pro.komaru.tridot.client.gfx.particle;
 
 import com.mojang.blaze3d.vertex.*;
 import net.minecraft.util.*;
+import net.minecraftforge.api.distmarker.*;
 import pro.komaru.tridot.client.gfx.particle.data.*;
 import net.minecraft.client.*;
 import net.minecraft.client.multiplayer.*;
@@ -18,6 +19,7 @@ import java.awt.*;
 import java.util.*;
 import java.util.function.*;
 
+@OnlyIn(Dist.CLIENT)
 public class GenericParticle extends TextureSheetParticle{
 
     public static final Random random = new Random();

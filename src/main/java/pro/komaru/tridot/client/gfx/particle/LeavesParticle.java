@@ -2,11 +2,12 @@ package pro.komaru.tridot.client.gfx.particle;
 
 import net.minecraft.client.multiplayer.*;
 import net.minecraft.client.particle.*;
+import net.minecraftforge.api.distmarker.*;
 import pro.komaru.tridot.client.gfx.particle.data.GenericParticleData;
 import pro.komaru.tridot.client.gfx.particle.options.GenericParticleOptions;
 
+@OnlyIn(Dist.CLIENT)
 public class LeavesParticle extends GenericParticle{
-
     private float rotSpeed;
     private final float particleRandom;
     private final float spinAcceleration;
