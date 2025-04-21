@@ -1,6 +1,8 @@
 package pro.komaru.tridot.util.comps.phys;
 
 
+import pro.komaru.tridot.util.phys.AbsRect;
+import pro.komaru.tridot.util.phys.CenteredRect;
 import pro.komaru.tridot.util.phys.Vec2;
 
 public interface Rectc extends X,Y {
@@ -122,5 +124,12 @@ public interface Rectc extends X,Y {
     }
     default Vec2 botRight() {
         return new Vec2(cx(), cy()).add(w()/2f,h()/2f);
+    }
+
+    default CenteredRect centered() {
+        return new CenteredRect(cx(),cy(),w(),h());
+    }
+    default AbsRect absolute() {
+        return AbsRect.xywhCent(cx(),cy(),w(),h());
     }
 }
