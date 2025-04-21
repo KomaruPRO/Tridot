@@ -223,10 +223,12 @@ public class Vec3 implements Pos3,Serializable {
         return b.cx() == cx() && b.cy() == cy() && b.z() == z();
     }
 
-    public void constrain(Vec3 target, float targetDist) {
+    public void constrain(Vec3 target, float targetDist, boolean less, boolean greater) {
         var delta = target.cpy().sub(this);
         float dst = delta.len();
 
+        if(less && dst < targetDist) return;
+        if(greater && dst > targetDist) return;
         if (dst == 0) {
             add(targetDist, 0, 0);
             return;
@@ -240,10 +242,12 @@ public class Vec3 implements Pos3,Serializable {
         set(newX, newY, newZ);
     }
 
-    public void constrain2(Vec3 b, float targetDist) {
+    public void constrain2(Vec3 b, float targetDist, boolean less, boolean greater) {
         var delta = b.cpy().sub(this);
         float dst = delta.len();
 
+        if(less && dst < targetDist) return;
+        if(greater && dst > targetDist) return;
         if (dst == 0) return;
 
         float diff = (dst - targetDist) / dst / 2f;

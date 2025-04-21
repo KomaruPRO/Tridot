@@ -154,10 +154,12 @@ public class Vec2 implements Pos2, Serializable {
         return b.cx() == cx() && b.cy() == cy();
     }
 
-    public void constrain(Vec2 target, float targetDist) {
+    public void constrain(Vec2 target, float targetDist, boolean less, boolean greater) {
         var delta = target.cpy().sub(this);
         float dst = delta.len();
 
+        if(less && dst < targetDist) return;
+        if(greater && dst > targetDist) return;
         if (dst == 0) {
             add(targetDist, 0);
             return;
@@ -169,10 +171,12 @@ public class Vec2 implements Pos2, Serializable {
 
         set(newX, newY);
     }
-    public void constrain2(Vec2 b, float targetDist) {
+    public void constrain2(Vec2 b, float targetDist, boolean less, boolean greater) {
         var delta = b.cpy().sub(this);
         float dst = delta.len();
 
+        if(less && dst < targetDist) return;
+        if(greater && dst > targetDist) return;
         if (dst == 0) return;
 
         float diff = (dst - targetDist) / dst / 2f;
