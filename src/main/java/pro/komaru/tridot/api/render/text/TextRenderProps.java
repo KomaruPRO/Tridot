@@ -1,6 +1,6 @@
 package pro.komaru.tridot.api.render.text;
 
-import pro.komaru.tridot.util.phys.Rect;
+import pro.komaru.tridot.util.phys.AbsRect;
 
 public class TextRenderProps {
     public boolean xCentered = false;
@@ -8,7 +8,7 @@ public class TextRenderProps {
     public boolean shadow = true;
 
     public float maxWidth = -1f;
-    public Rect clipRect = Rect.ZERO;
+    public AbsRect clipRect = AbsRect.ZERO;
     public boolean persistentClip = true;
 
     public float alpha = 1f;
@@ -32,7 +32,7 @@ public class TextRenderProps {
         maxWidth = val;
         return this;
     }
-    public TextRenderProps clipRect(Rect val) {
+    public TextRenderProps clipRect(AbsRect val) {
         clipRect = val;
         return this;
     }

@@ -15,7 +15,7 @@ import pro.komaru.tridot.api.render.GuiDraw;
 import pro.komaru.tridot.client.gfx.text.DotStyle;
 import pro.komaru.tridot.util.Col;
 import pro.komaru.tridot.util.Tmp;
-import pro.komaru.tridot.util.phys.Rect;
+import pro.komaru.tridot.util.phys.AbsRect;
 
 import java.awt.*;
 import java.util.List;
@@ -120,13 +120,13 @@ public class TextBuilder {
         d.move(x,y);
         d.scale(renderProps.scaleX, renderProps.scaleY);
 
-        if(renderProps.clipRect != null && renderProps.clipRect != Rect.ZERO) {
+        if(renderProps.clipRect != null && renderProps.clipRect != AbsRect.ZERO) {
             if(renderProps.persistentClip) {
                 d.move(-tmp[0], -tmp[1]);
             }
 
             PoseStack pose = g.pose();
-            Rect r = renderProps.clipRect.pose(pose);
+            AbsRect r = renderProps.clipRect.pose(pose);
 
             if(renderProps.persistentClip) {
                 d.move(tmp[0], tmp[1]);
@@ -145,7 +145,7 @@ public class TextBuilder {
             i++;
         }
 
-        if(renderProps.clipRect != null && renderProps.clipRect != Rect.ZERO) {
+        if(renderProps.clipRect != null && renderProps.clipRect != AbsRect.ZERO) {
             d.scissorsOff();
         }
 
