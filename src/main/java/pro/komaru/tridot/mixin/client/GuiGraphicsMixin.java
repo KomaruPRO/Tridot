@@ -24,7 +24,7 @@ public abstract class GuiGraphicsMixin{
         if(ClientConfig.ITEM_GUI_PARTICLE.get()){
             if(stack.getItem() instanceof IGuiRenderItem guiParticleItem){
                 GuiGraphics self = (GuiGraphics)((Object)this);
-                guiParticleItem.render(self, entity, level, stack, x, y, seed, guiOffset);
+                guiParticleItem.onGuiRender(self, entity, level, stack, x, y, seed, guiOffset);
             }
         }
 
