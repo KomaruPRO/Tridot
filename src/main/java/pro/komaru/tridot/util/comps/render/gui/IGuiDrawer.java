@@ -83,6 +83,20 @@ public interface IGuiDrawer extends RenderStackc {
 
         return this;
     };
+    default IGuiDrawer rect(String texture, float x, float y, float sclx, float scly, float rotation, float rotpx, float rotpy, int clipX, int clipY, int clipW, int clipH, int tw, int th) {
+        push();
+
+        move(x,y);
+        scale(sclx,scly);
+        rotate(rotation,tw/2f+rotpx,th/2f+rotpy);
+
+        graphics().blit(texturePath(texture),
+                0,0,clipX,clipY,clipW,clipH,tw,th);
+
+        pop();
+
+        return this;
+    };
 
     default ResourceLocation texturePath(String path) {
         if(path.contains(":")) return new ResourceLocation(path).withPath(s -> "textures/"+s+".png");

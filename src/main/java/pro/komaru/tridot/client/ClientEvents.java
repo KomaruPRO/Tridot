@@ -35,13 +35,13 @@ public class ClientEvents {
         }
     }
 
-    @SubscribeEvent
+    /*@SubscribeEvent
     public void render(RenderGuiEvent event) {
         BaseDrawer draw = new BaseDrawer(event.getGuiGraphics(), event.getGuiGraphics().pose(), "tridot");
 
         draw.color(Col.red);
         draw.rect("particle/skull",100f,100f, 2f, 2f, ClientTick.getTotal());
-    }
+    }*/
 
     @SubscribeEvent
     public void renderTick(TickEvent.RenderTickEvent event){
