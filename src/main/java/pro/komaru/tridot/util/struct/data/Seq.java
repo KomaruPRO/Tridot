@@ -178,7 +178,6 @@ public class Seq<T> implements Iterable<T>, Serializable {
     public void each(Itering<? super T> iterator) {
         for(int i = 0; i < size; i++){
             iterator.get(i, items[i]);
-            iterator.get(items[i]);
         }
     }
 
