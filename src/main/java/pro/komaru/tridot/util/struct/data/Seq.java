@@ -175,6 +175,18 @@ public class Seq<T> implements Iterable<T>, Serializable {
         }
     }
 
+    public void each(Itering<? super T> iterator) {
+        for(int i = 0; i < size; i++){
+            iterator.get(i, items[i]);
+        }
+    }
+
+    public void eachNNull(Itering<? super T> iterator) {
+        for(int i = 0; i < size; i++){
+            if(items[i] != null) iterator.get(i, items[i]);
+        }
+    }
+
     /** Replaces values without creating a new array. */
     public void replace(Func<T, T> mapper){
         for(int i = 0; i < size; i++){
