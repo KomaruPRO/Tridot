@@ -95,7 +95,12 @@ public class AbsRect implements Rectc {
     }
 
     public static AbsRect xywhDef(float x, float y, float w, float h) {
-        return (AbsRect) new AbsRect().xywhTopLeft(x,y,w,h);
+        var abs = new AbsRect();
+        abs.x = x;
+        abs.y = y;
+        abs.x2 = x+w;
+        abs.y2 = y+h;
+        return abs;
     }
     public static AbsRect xywhCent(float x, float y, float w, float h) {
         return (AbsRect) new AbsRect().xywh(x,y,w,h);
