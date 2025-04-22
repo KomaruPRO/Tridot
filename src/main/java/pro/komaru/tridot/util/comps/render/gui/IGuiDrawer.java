@@ -62,6 +62,11 @@ public interface IGuiDrawer extends RenderStackc {
     default IGuiDrawer rect(String texture, float x, float y, float sclx, float scly, float rotation) {
         return rect(texture,x,y,sclx,scly,rotation,0,0,-1,-1);
     }
+    default IGuiDrawer rect(String texture, float x, float y, float sclx, float scly, float rotation, float clipX, float clipY, float clipW, float clipH) {
+        float tw = textureSize(texturePath(texture)).x;
+        float th = textureSize(texturePath(texture)).y;
+        return rect(texture,x,y,sclx,scly,rotation,(int) (clipX*tw),(int) (clipY*th),(int) (clipW*tw),(int) (clipH*th));
+    }
     default IGuiDrawer rect(String texture, float x, float y, float sclx, float scly, float rotation, int clipX, int clipY, int clipW, int clipH) {
         clipW = clipW == -1 ? (int) textureSize(texturePath(texture)).x : clipW;
         clipH = clipH == -1 ? (int) textureSize(texturePath(texture)).y : clipH;
