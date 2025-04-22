@@ -16,7 +16,7 @@ import pro.komaru.tridot.util.math.*;
 
 public abstract class Book{
     public ArcRandom random = Tmp.rnd;
-    private ItemStack book = ItemStack.EMPTY;
+    public ItemStack book;
 
     public Book(ItemStack book) {
         this.book = book;
@@ -26,7 +26,9 @@ public abstract class Book{
         return this.book;
     }
 
-    public abstract boolean hasBook();
+    public boolean hasBook(ItemStack book) {
+        return book.is(this.book.getItem());
+    }
 
     public BookComponent getComponent() {
         return new BookComponent();
