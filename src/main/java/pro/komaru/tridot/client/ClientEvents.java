@@ -18,6 +18,7 @@ import pro.komaru.tridot.client.model.render.item.bow.*;
 import pro.komaru.tridot.client.render.gui.particle.*;
 import pro.komaru.tridot.client.render.screenshake.*;
 import pro.komaru.tridot.util.Col;
+import pro.komaru.tridot.util.render.BaseDrawer;
 
 public class ClientEvents {
 
@@ -34,10 +35,13 @@ public class ClientEvents {
         }
     }
 
-//    @SubscribeEvent
-//    public void render(RenderGuiEvent event) {
-//        DotText.create("Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello").color(Col.red).effects(DotText.glint(1f, 1f, Col.white)).render(event.getGuiGraphics(),100,100);
-//    }
+    @SubscribeEvent
+    public void render(RenderGuiEvent event) {
+        BaseDrawer draw = new BaseDrawer(event.getGuiGraphics(), event.getGuiGraphics().pose(), "tridot");
+
+        draw.color(Col.red);
+        draw.rect("particle/skull",100f,100f, 2f, 2f, ClientTick.getTotal());
+    }
 
     @SubscribeEvent
     public void renderTick(TickEvent.RenderTickEvent event){

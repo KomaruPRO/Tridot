@@ -143,7 +143,7 @@ public class Seq<T> implements Iterable<T>, Serializable {
 
     public ArrayList<T> list(){
         ArrayList<T> list = new ArrayList<>(size);
-        each(list::add);
+        each((Cons<? super T>) list::add);
         return list;
     }
 
