@@ -14,23 +14,23 @@ public class CenteredRect implements Rectc {
     }
 
     @Override
-    public float cx() {
+    public float x() {
         return x;
     }
 
     @Override
-    public Rectc cx(float value) {
+    public Rectc x(float value) {
         x = value;
         return this;
     }
 
     @Override
-    public float cy() {
+    public float y() {
         return y;
     }
 
     @Override
-    public Rectc cy(float value) {
+    public Rectc y(float value) {
         y = value;
         return this;
     }

@@ -58,8 +58,8 @@ public class ScreenshakeHandler{
                 RayHitResult hitResult = RayCast.getHit(level, new RayCastContext(cameraPos, pos).setBlockShape(RayCastContext.Block.VISUAL));
                 double distance = Math.max(0f,cameraPos.cpy().sub(hitResult.getPos()).len() - 0.1f);
 
-                float dX = cameraPos.cx() - hitResult.getPos().cx();
-                float dY = cameraPos.cy() - hitResult.getPos().cy();
+                float dX = cameraPos.x() - hitResult.getPos().x();
+                float dY = cameraPos.y() - hitResult.getPos().y();
                 float dZ = cameraPos.z() - hitResult.getPos().z();
 
                 float pitch = (float) (Math.atan2(Math.sqrt(dZ * dZ + dX * dX), dY) + Math.PI);
@@ -69,7 +69,7 @@ public class ScreenshakeHandler{
                 pos = cameraPos.cpy().add(x,y,z);
             }
 
-            camera.setPosition(pos.cx(), pos.cy(), pos.z());
+            camera.setPosition(pos.x(), pos.y(), pos.z());
         }
     }
 

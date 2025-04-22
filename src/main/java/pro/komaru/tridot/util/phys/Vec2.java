@@ -27,23 +27,23 @@ public class Vec2 implements Pos2, Serializable {
     }
 
     @Override
-    public float cx() {
+    public float x() {
         return x;
     }
 
     @Override
-    public Vec2 cx(float value) {
+    public Vec2 x(float value) {
         x = value;
         return this;
     }
 
     @Override
-    public float cy() {
+    public float y() {
         return y;
     }
 
     @Override
-    public Vec2 cy(float value) {
+    public Vec2 y(float value) {
         y = value;
         return this;
     }
@@ -52,10 +52,10 @@ public class Vec2 implements Pos2, Serializable {
         return add(xy,xy);
     }
     public Vec2 add(X x, Y y) {
-        return add(x.cx(),y.cy());
+        return add(x.x(),y.y());
     }
     public Vec2 add(float x, float y) {
-        set(cx()+x, cy()+y);
+        set(x()+x, y()+y);
         return this;
     }
 
@@ -63,17 +63,17 @@ public class Vec2 implements Pos2, Serializable {
         return sub(xy,xy);
     }
     public Vec2 sub(X x, Y y) {
-        return sub(x.cx(),y.cy());
+        return sub(x.x(),y.y());
     }
     public Vec2 sub(float x, float y) {
         return add(-x,-y);
     }
 
     public Vec2 set(Pos2 other) {
-        return set(other.cx(),other.cy());
+        return set(other.x(),other.y());
     }
     public Vec2 set(float x, float y) {
-        cx(x); this.cy(y);
+        x(x); this.y(y);
         return this;
     }
 
@@ -84,15 +84,15 @@ public class Vec2 implements Pos2, Serializable {
         return scale(xy,xy);
     }
     public Vec2 scale(X x, Y y) {
-        return scale(x.cx(),y.cy());
+        return scale(x.x(),y.y());
     }
     public Vec2 scale(float x, float y) {
-        set(cx()*x, cy()*y);
+        set(x()*x, y()*y);
         return this;
     }
 
     public float len2() {
-        return cx()* cx()+ cy()* cy();
+        return x()* x()+ y()* y();
     }
     public float len() {
         return (float) Math.sqrt(len2());
@@ -103,12 +103,12 @@ public class Vec2 implements Pos2, Serializable {
     }
 
     public net.minecraft.world.phys.Vec2 mcVec() {
-        return new net.minecraft.world.phys.Vec2(cx(), cy());
+        return new net.minecraft.world.phys.Vec2(x(), y());
     }
     public CompoundTag toNbtVec() {
         var nbt = new CompoundTag();
-        nbt.putFloat("x", cx());
-        nbt.putFloat("y", cy());
+        nbt.putFloat("x", x());
+        nbt.putFloat("y", y());
         return nbt;
     }
     public Vec2 fromNbtVec(CompoundTag nbt) {
@@ -116,8 +116,8 @@ public class Vec2 implements Pos2, Serializable {
     }
 
     public Vec2 lerp(Pos2 pos, float progress, Interp interp) {
-        float x = interp.apply(progress, cx(),pos.cx());
-        float y = interp.apply(progress, cy(),pos.cy());
+        float x = interp.apply(progress, x(),pos.x());
+        float y = interp.apply(progress, y(),pos.y());
         return set(x,y);
     }
 
@@ -125,22 +125,22 @@ public class Vec2 implements Pos2, Serializable {
         float radians = (float) Math.toRadians(degrees);
         float cos = (float) Math.cos(radians);
         float sin = (float) Math.sin(radians);
-        float x = cx(), y = cy();
+        float x = x(), y = y();
         set(x * cos - y * sin, x * sin + y * cos);
         return this;
     }
     public float angle() {
-        return (float) Math.toDegrees(Math.atan2(cy(), cx()));
+        return (float) Math.toDegrees(Math.atan2(y(), x()));
     }
     public float angleBetween(Pos2 other) {
         return other.cpypos().vec().sub(this).angle();
     }
     public float cross(Pos2 other) {
-        return cx() * other.cy() - cy() * other.cx();
+        return x() * other.y() - y() * other.x();
     }
     public Vec2 rotationFix() {
-        if(cx() > 180) cx(cx()-360);
-        if(cy() > 180) this.cy(cy()-360);
+        if(x() > 180) x(x()-360);
+        if(y() > 180) this.y(y()-360);
         return this;
     }
     public float dst(Pos2 b) {
@@ -151,7 +151,7 @@ public class Vec2 implements Pos2, Serializable {
     }
 
     public boolean posEquals(Pos2 b) {
-        return b.cx() == cx() && b.cy() == cy();
+        return b.x() == x() && b.y() == y();
     }
 
     public void constrain(Vec2 target, float targetDist, boolean less, boolean greater) {
@@ -166,8 +166,8 @@ public class Vec2 implements Pos2, Serializable {
         }
 
         float scale = targetDist / dst;
-        float newX = target.cx() + delta.cx() * scale;
-        float newY = target.cy() + delta.cy() * scale;
+        float newX = target.x() + delta.x() * scale;
+        float newY = target.y() + delta.y() * scale;
 
         set(newX, newY);
     }
@@ -181,8 +181,8 @@ public class Vec2 implements Pos2, Serializable {
 
         float diff = (dst - targetDist) / dst / 2f;
 
-        float offsetX = delta.cx() * diff;
-        float offsetY = delta.cy() * diff;
+        float offsetX = delta.x() * diff;
+        float offsetY = delta.y() * diff;
 
         add(offsetX, offsetY);
         b.sub(offsetX, offsetY);

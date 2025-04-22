@@ -26,12 +26,12 @@ public class AbsRect implements Rectc {
     }
 
     @Override
-    public float cx() {
+    public float x() {
         return (x+x2)/2f;
     }
 
     @Override
-    public AbsRect cx(float value) {
+    public AbsRect x(float value) {
         final float w = w();
         x = value-w/2f;
         x2 = value+w/2f;
@@ -39,12 +39,12 @@ public class AbsRect implements Rectc {
     }
 
     @Override
-    public float cy() {
+    public float y() {
         return (y+y2)/2f;
     }
 
     @Override
-    public AbsRect cy(float value) {
+    public AbsRect y(float value) {
         final float h = h();
         y = value-h/2f;
         y2 = value+h/2f;
@@ -63,7 +63,7 @@ public class AbsRect implements Rectc {
 
     @Override
     public AbsRect w(float w) {
-        final float c = cx();
+        final float c = x();
         x = c-w/2f;
         x2 = c+w/2f;
         return this;
@@ -71,7 +71,7 @@ public class AbsRect implements Rectc {
 
     @Override
     public AbsRect h(float h) {
-        final float c = cy();
+        final float c = y();
         y = c-h/2f;
         y2 = c+h/2f;
         return this;

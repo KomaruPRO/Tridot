@@ -9,14 +9,14 @@ public interface Pos2 extends X,Y {
     }
 
     @Override
-    Pos2 cx(float value);
+    Pos2 x(float value);
     @Override
-    Pos2 cy(float value);
+    Pos2 y(float value);
 
 
     default Pos2 cpypos() {
-        float x = cx();
-        float y = cy();
+        float x = x();
+        float y = y();
         return init(x,y);
     }
 

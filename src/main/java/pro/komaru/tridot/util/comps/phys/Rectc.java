@@ -7,9 +7,9 @@ import pro.komaru.tridot.util.phys.Vec2;
 
 public interface Rectc extends X,Y {
     @Override
-    Rectc cx(float value);
+    Rectc x(float value);
     @Override
-    Rectc cy(float value);
+    Rectc y(float value);
 
     float w();
     float h();
@@ -23,13 +23,13 @@ public interface Rectc extends X,Y {
             float xo = x,yo = y,wo = w,ho = h;
 
             @Override
-            public Rectc cx(float value) {
+            public Rectc x(float value) {
                 xo = value;
                 return this;
             }
 
             @Override
-            public Rectc cy(float value) {
+            public Rectc y(float value) {
                 yo = value;
                 return this;
             }
@@ -57,19 +57,19 @@ public interface Rectc extends X,Y {
             }
 
             @Override
-            public float cx() {
+            public float x() {
                 return xo;
             }
 
             @Override
-            public float cy() {
+            public float y() {
                 return yo;
             }
         };
     }
 
     default Rectc xywh(float x, float y, float w, float h) {
-        cx(x); cy(y); w(w); h(h);
+        x(x); y(y); w(w); h(h);
         return this;
     }
     default Rectc xywhTopLeft(float x, float y, float w, float h) {
@@ -77,7 +77,7 @@ public interface Rectc extends X,Y {
     }
 
     default Rectc translate(float x, float y) {
-        cx(cx()+x); cy(cy()+y);
+        x(x()+x); y(y()+y);
         return this;
     }
 
@@ -85,7 +85,7 @@ public interface Rectc extends X,Y {
         return scale(whscl,whscl);
     }
     default Rectc scale(X wscl, Y hscl) {
-        return scale(wscl.cx(),hscl.cy());
+        return scale(wscl.x(),hscl.y());
     }
     default Rectc scale(float wscl, float hscl) {
         w(w()*wscl);
@@ -97,39 +97,39 @@ public interface Rectc extends X,Y {
         Pos2 tl1 = topLeft(), tr1 = topRight(), bl1 = botLeft(), br1 = botRight();
         Pos2 tl2 = rect.topLeft(), tr2 = rect.topRight(), bl2 = rect.botLeft(), br2 = rect.botRight();
 
-        return tr1.cx() > tl2.cx() && tl1.cx() < tr2.cx() && br1.cy() > tl2.cy() && bl1.cy() < tr2.cy();
+        return tr1.x() > tl2.x() && tl1.x() < tr2.x() && br1.y() > tl2.y() && bl1.y() < tr2.y();
     }
 
     default <XY extends X & Y> boolean inside(XY xy) {
         return inside(xy,xy);
     }
     default boolean inside(X x, Y y) {
-        return inside(x.cx(),y.cy());
+        return inside(x.x(),y.y());
     }
     default boolean inside(float x, float y) {
-        float otherX = x - cx();
-        float otherY = y - cy();
+        float otherX = x - x();
+        float otherY = y - y();
         return -w()/2f <= otherX && otherY <= w()/2f &&
                 -h()/2f <= otherY && otherY <= h()/2f;
     }
 
     default Vec2 topLeft() {
-        return new Vec2(cx(), cy()).add(-w()/2f,-h()/2f);
+        return new Vec2(x(), y()).add(-w()/2f,-h()/2f);
     }
     default Vec2 topRight() {
-        return new Vec2(cx(), cy()).add(w()/2f,-h()/2f);
+        return new Vec2(x(), y()).add(w()/2f,-h()/2f);
     }
     default Vec2 botLeft() {
-        return new Vec2(cx(), cy()).add(-w()/2f,h()/2f);
+        return new Vec2(x(), y()).add(-w()/2f,h()/2f);
     }
     default Vec2 botRight() {
-        return new Vec2(cx(), cy()).add(w()/2f,h()/2f);
+        return new Vec2(x(), y()).add(w()/2f,h()/2f);
     }
 
     default CenteredRect centered() {
-        return new CenteredRect(cx(),cy(),w(),h());
+        return new CenteredRect(x(), y(),w(),h());
     }
     default AbsRect absolute() {
-        return AbsRect.xywhCent(cx(),cy(),w(),h());
+        return AbsRect.xywhCent(x(), y(),w(),h());
     }
 }

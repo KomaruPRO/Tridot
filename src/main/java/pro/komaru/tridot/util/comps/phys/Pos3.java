@@ -4,9 +4,9 @@ import pro.komaru.tridot.util.phys.Vec3;
 
 public interface Pos3 extends X,Y,Z {
     @Override
-    Pos3 cx(float value);
+    Pos3 x(float value);
     @Override
-    Pos3 cy(float value);
+    Pos3 y(float value);
     @Override
     Pos3 z(float value);
 
@@ -15,8 +15,8 @@ public interface Pos3 extends X,Y,Z {
     }
 
     default Pos3 cpypos() {
-        float x = cx();
-        float y = cy();
+        float x = x();
+        float y = y();
         float z = z();
         return init(x,y,z);
     }
