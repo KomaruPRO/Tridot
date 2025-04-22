@@ -71,10 +71,10 @@ public abstract class DrawerScreen extends Screen implements IGuiDrawer {
 
     @Override
     public PoseStack stack() {
-        return null;
+        return cacheStack;
     }
     @Override
     public GuiGraphics graphics() {
-        return null;
+        return cacheGraphics;
     }
 }
