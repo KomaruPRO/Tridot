@@ -14,19 +14,25 @@ import pro.komaru.tridot.client.model.book.*;
 import pro.komaru.tridot.util.*;
 import pro.komaru.tridot.util.math.*;
 
-public class Book{
+public abstract class Book{
     public ArcRandom random = Tmp.rnd;
-    public boolean isBook(Level level, Vec3 pos, ItemStack stack) {
-        return false;
+    private ItemStack book = ItemStack.EMPTY;
+
+    public Book(ItemStack book) {
+        this.book = book;
     }
+
+    public ItemStack getBook() {
+        return this.book;
+    }
+
+    public abstract boolean hasBook();
 
     public BookComponent getComponent() {
         return new BookComponent();
     }
 
-    public ResourceLocation getTexture(Level level, Vec3 pos, ItemStack stack, BookComponent component) {
-        return null;
-    }
+    public abstract ResourceLocation getTexture(Level level, Vec3 pos, ItemStack stack, BookComponent component);
 
     @OnlyIn(Dist.CLIENT)
     public CustomBookModel getModel(Level level, Vec3 pos, ItemStack stack, BookComponent component) {
@@ -34,14 +40,10 @@ public class Book{
     }
 
     @OnlyIn(Dist.CLIENT)
-    public void openGui(Level level, ItemStack stack) {
-
-    }
+    public abstract void openGui(Level level, ItemStack stack);
 
     @OnlyIn(Dist.CLIENT)
-    public void openGui(Level level, Vec3 pos, ItemStack stack) {
-
-    }
+    public abstract void openGui(Level level, Vec3 pos, ItemStack stack);
 
     public void tick(Level level, Vec3 pos, ItemStack stack, BookComponent component, double distance) {
         component.oOpen = component.open;
