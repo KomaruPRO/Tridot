@@ -33,12 +33,15 @@ public interface IGuiDrawer extends RenderStackc {
     }
 
     default IGuiDrawer alpha(float a) {
-        return color(color(),a);
+        return color(getColor(),a);
     }
 
-    default Col color() {
+    default Col getColor() {
         float[] color = RenderSystem.getShaderColor();
         return new Col(color[0],color[1],color[2],color[3]);
+    }
+    default IGuiDrawer color() {
+        return color(1f,1f,1f,1f);
     }
     default IGuiDrawer color(Col rgb, float a) {
         return color(rgb.r,rgb.g,rgb.b,a);
