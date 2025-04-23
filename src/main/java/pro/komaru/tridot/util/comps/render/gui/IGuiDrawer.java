@@ -33,12 +33,15 @@ public interface IGuiDrawer extends RenderStackc {
     }
 
     default IGuiDrawer alpha(float a) {
-        return color(color(),a);
+        return color(getColor(),a);
     }
 
-    default Col color() {
+    default Col getColor() {
         float[] color = RenderSystem.getShaderColor();
         return new Col(color[0],color[1],color[2],color[3]);
+    }
+    default IGuiDrawer color() {
+        return color(1f,1f,1f,1f);
     }
     default IGuiDrawer color(Col rgb, float a) {
         return color(rgb.r,rgb.g,rgb.b,a);
@@ -61,6 +64,11 @@ public interface IGuiDrawer extends RenderStackc {
     }
     default IGuiDrawer rect(String texture, float x, float y, float sclx, float scly, float rotation) {
         return rect(texture,x,y,sclx,scly,rotation,0,0,-1,-1);
+    }
+    default IGuiDrawer rect(String texture, float x, float y, float sclx, float scly, float rotation, float clipX, float clipY, float clipW, float clipH) {
+        float tw = textureSize(texturePath(texture)).x;
+        float th = textureSize(texturePath(texture)).y;
+        return rect(texture,x,y,sclx,scly,rotation,(int) (clipX*tw),(int) (clipY*th),(int) (clipW*tw),(int) (clipH*th));
     }
     default IGuiDrawer rect(String texture, float x, float y, float sclx, float scly, float rotation, int clipX, int clipY, int clipW, int clipH) {
         clipW = clipW == -1 ? (int) textureSize(texturePath(texture)).x : clipW;
