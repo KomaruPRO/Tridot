@@ -16,7 +16,7 @@ import java.util.*;
 import java.util.function.Supplier;
 
 public class TridotBlocks{
-    public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, TridotLib.ID);
+    public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, Tridot.ID);
 
     public static void register(IEventBus eventBus){
         BLOCKS.register(eventBus);

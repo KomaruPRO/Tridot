@@ -25,12 +25,12 @@ public abstract class AbstractBossbar{
     }
 
     public AbstractBossbar(Col color){
-        this.texture = new ResourceLocation(TridotLib.ID, "textures/gui/bossbars/base.png");
+        this.texture = new ResourceLocation(Tridot.ID, "textures/gui/bossbars/base.png");
         this.color = color;
     }
 
     public AbstractBossbar(boolean rainbow){
-        this.texture = new ResourceLocation(TridotLib.ID, "textures/gui/bossbars/base.png");
+        this.texture = new ResourceLocation(Tridot.ID, "textures/gui/bossbars/base.png");
         this.color = new Col(1, 1, 1);
         this.rainbow = rainbow;
     }

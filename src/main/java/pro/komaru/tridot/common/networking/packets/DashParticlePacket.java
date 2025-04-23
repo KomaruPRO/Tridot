@@ -53,7 +53,7 @@ public class DashParticlePacket {
     public static void handle(DashParticlePacket msg, Supplier<Context> ctx) {
         if (ctx.get().getDirection().getReceptionSide().isClient()) {
             ctx.get().enqueueWork(() -> {
-                Level level = TridotLib.PROXY.getLevel();
+                Level level = Tridot.PROXY.getLevel();
                 Player player = level.getPlayerByUUID(msg.id);
                 if (player != null) {
                     ArcRandom rand = Tmp.rnd;

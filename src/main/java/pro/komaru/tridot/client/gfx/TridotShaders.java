@@ -8,7 +8,7 @@ import net.minecraftforge.client.event.*;
 import net.minecraftforge.eventbus.api.*;
 import net.minecraftforge.fml.common.*;
 import net.minecraftforge.fml.event.lifecycle.*;
-import pro.komaru.tridot.TridotLib;
+import pro.komaru.tridot.Tridot;
 import pro.komaru.tridot.client.gfx.postprocess.GlowPostProcess;
 import pro.komaru.tridot.client.gfx.postprocess.PostProcessHandler;
 
@@ -17,7 +17,7 @@ import java.io.*;
 public class TridotShaders{
     public static ShaderInstance ADDITIVE_TEXTURE, ADDITIVE, TRANSLUCENT_TEXTURE, TRANSLUCENT, SCREEN_PARTICLE;
 
-    @Mod.EventBusSubscriber(modid = TridotLib.ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
+    @Mod.EventBusSubscriber(modid = Tridot.ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
     public static class ClientRegistryEvents{
         @SubscribeEvent
         public static void registerShaders(FMLClientSetupEvent event){
@@ -26,11 +26,11 @@ public class TridotShaders{
 
         @SubscribeEvent
         public static void shaderRegistry(RegisterShadersEvent event) throws IOException{
-            event.registerShader(new ShaderInstance(event.getResourceProvider(), new ResourceLocation(TridotLib.ID, "additive_texture"), DefaultVertexFormat.POSITION_TEX_COLOR), shader -> ADDITIVE_TEXTURE = shader);
-            event.registerShader(new ShaderInstance(event.getResourceProvider(), new ResourceLocation(TridotLib.ID, "additive"), DefaultVertexFormat.POSITION_COLOR), shader -> ADDITIVE = shader);
-            event.registerShader(new ShaderInstance(event.getResourceProvider(), new ResourceLocation(TridotLib.ID, "translucent_texture"), DefaultVertexFormat.PARTICLE), shader -> TRANSLUCENT_TEXTURE = shader);
-            event.registerShader(new ShaderInstance(event.getResourceProvider(), new ResourceLocation(TridotLib.ID, "translucent"), DefaultVertexFormat.PARTICLE), shader -> TRANSLUCENT = shader);
-            event.registerShader(new ShaderInstance(event.getResourceProvider(), new ResourceLocation(TridotLib.ID, "screen_particle"), DefaultVertexFormat.POSITION_TEX_COLOR), shader -> SCREEN_PARTICLE = shader);
+            event.registerShader(new ShaderInstance(event.getResourceProvider(), new ResourceLocation(Tridot.ID, "additive_texture"), DefaultVertexFormat.POSITION_TEX_COLOR), shader -> ADDITIVE_TEXTURE = shader);
+            event.registerShader(new ShaderInstance(event.getResourceProvider(), new ResourceLocation(Tridot.ID, "additive"), DefaultVertexFormat.POSITION_COLOR), shader -> ADDITIVE = shader);
+            event.registerShader(new ShaderInstance(event.getResourceProvider(), new ResourceLocation(Tridot.ID, "translucent_texture"), DefaultVertexFormat.PARTICLE), shader -> TRANSLUCENT_TEXTURE = shader);
+            event.registerShader(new ShaderInstance(event.getResourceProvider(), new ResourceLocation(Tridot.ID, "translucent"), DefaultVertexFormat.PARTICLE), shader -> TRANSLUCENT = shader);
+            event.registerShader(new ShaderInstance(event.getResourceProvider(), new ResourceLocation(Tridot.ID, "screen_particle"), DefaultVertexFormat.POSITION_TEX_COLOR), shader -> SCREEN_PARTICLE = shader);
         }
     }
 

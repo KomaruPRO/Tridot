@@ -90,7 +90,7 @@ public class TextBuilder {
     public TextBuilder effects() {
         return style(DotStyle::effects);
     }
-    public TextBuilder effects(DotStyle.DotStyleEffect... effs) {
+    public TextBuilder effects(DotStyle.StyleEffect... effs) {
         return style(s -> s.effects(effs));
     }
     public TextBuilder effects(ResourceLocation... effs) {

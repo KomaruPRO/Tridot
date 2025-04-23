@@ -37,14 +37,14 @@ import net.minecraftforge.fml.javafmlmod.*;
 import java.util.*;
 
 @Mod("tridot")
-public class TridotLib{
+public class Tridot {
     public static final String ID = "tridot";
     public static UUID BASE_PROJECTILE_DAMAGE_UUID = UUID.fromString("5334b818-69d4-417e-b4b8-1869d4917e29");
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, ID);
     public static final RegistryObject<Item> TEST = ITEMS.register("test", () -> new TestItem(new Item.Properties().rarity(Rarity.EPIC)));
 
     public static final ISidedProxy PROXY = DistExecutor.unsafeRunForDist(() -> ClientProxy::new, () -> ServerProxy::new);
-    public TridotLib(){
+    public Tridot(){
         IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
         EnchantmentsRegistry.register(eventBus);
         AttributeRegistry.register(eventBus);
@@ -73,7 +73,7 @@ public class TridotLib{
         MinecraftForge.EVENT_BUS.register(new Events());
     }
 
-    public static ResourceLocation loc(String path) {
+    public static ResourceLocation ofTridot(String path) {
         return new ResourceLocation(ID, path);
     }
 

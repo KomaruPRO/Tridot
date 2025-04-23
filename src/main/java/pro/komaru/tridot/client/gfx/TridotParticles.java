@@ -1,5 +1,6 @@
 package pro.komaru.tridot.client.gfx;
 
+import pro.komaru.tridot.Tridot;
 import pro.komaru.tridot.client.gfx.particle.type.*;
 import net.minecraft.client.*;
 import net.minecraft.client.particle.*;
@@ -9,14 +10,13 @@ import net.minecraftforge.client.event.*;
 import net.minecraftforge.eventbus.api.*;
 import net.minecraftforge.fml.common.*;
 import net.minecraftforge.registries.*;
-import pro.komaru.tridot.TridotLib;
 import pro.komaru.tridot.client.gfx.particle.GenericParticle;
 import pro.komaru.tridot.client.gfx.particle.ICustomParticleRender;
 import pro.komaru.tridot.client.gfx.particle.behavior.ICustomBehaviorParticleRender;
 import pro.komaru.tridot.client.render.LevelRenderHandler;
 
 public class TridotParticles{
-    public static final DeferredRegister<ParticleType<?>> PARTICLES = DeferredRegister.create(ForgeRegistries.PARTICLE_TYPES, TridotLib.ID);
+    public static final DeferredRegister<ParticleType<?>> PARTICLES = DeferredRegister.create(ForgeRegistries.PARTICLE_TYPES, Tridot.ID);
     public static RegistryObject<GenericParticleType> WISP = PARTICLES.register("wisp", GenericParticleType::new);
     public static RegistryObject<GenericParticleType> TINY_WISP = PARTICLES.register("tiny_wisp", GenericParticleType::new);
     public static RegistryObject<GenericParticleType> SPARKLE = PARTICLES.register("sparkle", GenericParticleType::new);
@@ -40,7 +40,7 @@ public class TridotParticles{
         PARTICLES.register(eventBus);
     }
 
-    @Mod.EventBusSubscriber(modid = TridotLib.ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
+    @Mod.EventBusSubscriber(modid = Tridot.ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
     public static class ClientRegistryEvents{
         @SubscribeEvent
         public static void registerParticles(RegisterParticleProvidersEvent event){

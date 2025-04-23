@@ -8,7 +8,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.item.*;
 import net.minecraftforge.api.distmarker.*;
-import pro.komaru.tridot.TridotLib;
+import pro.komaru.tridot.Tridot;
 import pro.komaru.tridot.client.gfx.text.DotStyle;
 import pro.komaru.tridot.client.model.TridotModels;
 import pro.komaru.tridot.client.model.armor.ArmorModel;
@@ -93,7 +93,7 @@ public class ItemSkin{
         return Structs.safeGet(
                 entries.find(e -> e.appliesOn(stack)),
                 e -> e.armorTexture(entity,stack,slot,type),
-                () -> TridotLib.ID + ":textures/models/armor/skin/empty.png");
+                () -> Tridot.ID + ":textures/models/armor/skin/empty.png");
     }
     @OnlyIn(Dist.CLIENT)
     public String getItemModelName(ItemStack stack){

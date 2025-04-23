@@ -15,7 +15,7 @@ import pro.komaru.tridot.client.sound.LoopedSoundInstance;
 import pro.komaru.tridot.client.sound.TridotSoundInstance;
 import pro.komaru.tridot.client.compatibility.ShadersIntegration;
 
-import static pro.komaru.tridot.TridotLib.*;
+import static pro.komaru.tridot.Tridot.*;
 
 public class TridotLibClient{
     public static LoopedSoundInstance BOSS_MUSIC;

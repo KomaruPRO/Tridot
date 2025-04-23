@@ -21,7 +21,7 @@ public class TridotModels{
     public static CustomBookModel BOOK = null;
     public static EmptyArmorModel EMPTY_ARMOR = null;
 
-    @Mod.EventBusSubscriber(modid = TridotLib.ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
+    @Mod.EventBusSubscriber(modid = Tridot.ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
     public static class ClientRegistryEvents{
         @SubscribeEvent
         public static void registerLayers(EntityRenderersEvent.RegisterLayerDefinitions event){
@@ -37,7 +37,7 @@ public class TridotModels{
     }
 
     public static ModelLayerLocation addLayer(String layer){
-        return addLayer(TridotLib.ID, layer);
+        return addLayer(Tridot.ID, layer);
     }
 
     public static ModelLayerLocation addLayer(String modId, String layer){

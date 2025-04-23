@@ -12,23 +12,28 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 import pro.komaru.tridot.client.gfx.text.DotStyle;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @Mixin(Font.StringRenderOutput.class)
 public class StringRenderOutputMixin {
     @Unique DotStyle tridot$style;
+    @Unique
+    Map<String,Object> tridot$buffer = new HashMap<>();
 
     @Inject(method = "accept", at = @At("TAIL"), locals = LocalCapture.CAPTURE_FAILSOFT)
     public void accept(int index, Style pStyle, int pCodePoint, CallbackInfoReturnable<Boolean> cir, FontSet fontset, GlyphInfo glyphinfo, BakedGlyph bakedglyph, boolean flag, float f3, TextColor textcolor, float f, float f1, float f2, float f6, float f7) {
         if(pStyle instanceof DotStyle ds) {
-            for (DotStyle.DotStyleEffect effect : ds.effects) {
-                effect.afterGlyph(tridot$self(),ds,index,fontset,glyphinfo,bakedglyph,textcolor,f,f1,f2,f3,f6,f7);
+            for (DotStyle.StyleEffect effect : ds.effects) {
+                effect.afterGlyph(tridot$self(),ds,index,fontset,glyphinfo,bakedglyph,textcolor,f,f1,f2,f3,f6,f7,tridot$buffer);
             }
         }
     }
     @Inject(method = "accept", at = @At(value = "INVOKE", target = "Lnet/minecraft/network/chat/Style;isStrikethrough()Z"), locals = LocalCapture.CAPTURE_FAILSOFT)
     public void acceptBeforeEffects(int index, Style pStyle, int pCodePoint, CallbackInfoReturnable<Boolean> cir, FontSet fontset, GlyphInfo glyphinfo, BakedGlyph bakedglyph, boolean flag, float f3, TextColor textcolor, float f, float f1, float f2, float f6, float f7) {
         if(pStyle instanceof DotStyle ds) {
-            for (DotStyle.DotStyleEffect effect : ds.effects) {
-                effect.beforeGlyphEffects(tridot$self(),ds,index,fontset,glyphinfo,bakedglyph,textcolor,f,f1,f2,f3,f6,f7);
+            for (DotStyle.StyleEffect effect : ds.effects) {
+                effect.beforeGlyphEffects(tridot$self(),ds,index,fontset,glyphinfo,bakedglyph,textcolor,f,f1,f2,f3,f6,f7,tridot$buffer);
             }
         }
     }
@@ -36,7 +41,7 @@ public class StringRenderOutputMixin {
     @ModifyVariable(method = "accept", at = @At(value = "INVOKE", target = "Lnet/minecraft/network/chat/Style;getColor()Lnet/minecraft/network/chat/TextColor;"), name = "f3")
     public float changeF3(float value) {
         if(tridot$style != null) {
-            for (DotStyle.DotStyleEffect effect : tridot$style.effects)
+            for (DotStyle.StyleEffect effect : tridot$style.effects)
                 value = effect.alpha(value);
         }
         return value;
@@ -44,7 +49,7 @@ public class StringRenderOutputMixin {
     @ModifyVariable(method = "accept", at = @At(value = "INVOKE", target = "Lnet/minecraft/network/chat/Style;isStrikethrough()Z"), name = "f6")
     public float changeF6(float value) {
         if(tridot$style != null) {
-            for (DotStyle.DotStyleEffect effect : tridot$style.effects)
+            for (DotStyle.StyleEffect effect : tridot$style.effects)
                 value = effect.advance(value);
         }
         return value;
@@ -55,8 +60,9 @@ public class StringRenderOutputMixin {
         tridot$style = null;
         if(pStyle instanceof DotStyle ds) {
             tridot$style = ds;
-            for (DotStyle.DotStyleEffect effect : ds.effects) {
-                effect.beforeGlyph(tridot$self(),ds,index);
+            for (DotStyle.StyleEffect effect : ds.effects) {
+                tridot$buffer.clear();
+                effect.beforeGlyph(tridot$self(),ds,index,tridot$buffer);
             }
         }
     }

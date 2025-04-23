@@ -18,8 +18,8 @@ public class ForgeHooksMixin{
     @Inject(method = "loadLootTable", at = @At("HEAD"), cancellable = true, remap = false)
     private static void tridot$loadLootTable(Gson gson, ResourceLocation name, JsonElement data, boolean custom, CallbackInfoReturnable<LootTable> cir){
         JsonObject json = data.getAsJsonObject();
-        if(json.has(TridotLib.ID + ":conditions")){
-            if(!CraftingHelper.processConditions(GsonHelper.getAsJsonArray(json, TridotLib.ID + ":conditions"), ICondition.IContext.EMPTY)){
+        if(json.has(Tridot.ID + ":conditions")){
+            if(!CraftingHelper.processConditions(GsonHelper.getAsJsonArray(json, Tridot.ID + ":conditions"), ICondition.IContext.EMPTY)){
                 cir.setReturnValue(null);
             }
         }

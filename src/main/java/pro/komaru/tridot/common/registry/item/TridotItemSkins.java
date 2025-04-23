@@ -6,7 +6,7 @@ import net.minecraftforge.api.distmarker.*;
 import net.minecraftforge.client.event.*;
 import net.minecraftforge.eventbus.api.*;
 import net.minecraftforge.fml.common.*;
-import pro.komaru.tridot.TridotLib;
+import pro.komaru.tridot.Tridot;
 import pro.komaru.tridot.client.model.item.CustomModel;
 import pro.komaru.tridot.client.model.item.ItemSkinItemOverrides;
 import pro.komaru.tridot.client.model.item.ItemSkinModels;
@@ -16,7 +16,7 @@ import java.util.*;
 
 public class TridotItemSkins{
 
-    @Mod.EventBusSubscriber(modid = TridotLib.ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
+    @Mod.EventBusSubscriber(modid = Tridot.ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
     public static class ClientRegistryEvents{
         @SubscribeEvent
         public static void modelRegistrySkins(ModelEvent.RegisterAdditional event){

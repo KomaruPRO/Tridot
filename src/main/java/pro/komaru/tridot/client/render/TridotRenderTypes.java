@@ -10,7 +10,7 @@ import net.minecraftforge.eventbus.api.*;
 import net.minecraftforge.fml.common.*;
 import net.minecraftforge.fml.event.lifecycle.*;
 import org.lwjgl.opengl.*;
-import pro.komaru.tridot.TridotLib;
+import pro.komaru.tridot.Tridot;
 import pro.komaru.tridot.client.gfx.*;
 
 import java.util.*;
@@ -62,57 +62,57 @@ public class TridotRenderTypes{
     public static final RenderStateShard.ShaderStateShard TRANSLUCENT_TEXTURE_SHADER = new RenderStateShard.ShaderStateShard(TridotShaders::getTranslucentTexture);
     public static final RenderStateShard.ShaderStateShard TRANSLUCENT_SHADER = new RenderStateShard.ShaderStateShard(TridotShaders::getTranslucent);
 
-    public static RenderType ADDITIVE_PARTICLE = DotRenderType.createRenderType(TridotLib.ID + ":additive_particle",
+    public static RenderType ADDITIVE_PARTICLE = DotRenderType.createRenderType(Tridot.ID + ":additive_particle",
     DefaultVertexFormat.PARTICLE, VertexFormat.Mode.QUADS, 256, false, true, RenderType.CompositeState.builder()
     .setWriteMaskState(COLOR_WRITE).setLightmapState(NO_LIGHTMAP).setTransparencyState(ADDITIVE_TRANSPARENCY)
     .setTextureState(PARTICLE_SHEET).setShaderState(ADDITIVE_TEXTURE_SHADER).createCompositeState(true));
 
-    public static RenderType ADDITIVE_BLOCK_PARTICLE = DotRenderType.createRenderType(TridotLib.ID + ":additive_block_particle",
+    public static RenderType ADDITIVE_BLOCK_PARTICLE = DotRenderType.createRenderType(Tridot.ID + ":additive_block_particle",
     DefaultVertexFormat.PARTICLE, VertexFormat.Mode.QUADS, 256, false, true, RenderType.CompositeState.builder()
     .setWriteMaskState(COLOR_WRITE).setLightmapState(NO_LIGHTMAP).setTransparencyState(ADDITIVE_TRANSPARENCY)
     .setTextureState(BLOCK_SHEET).setShaderState(ADDITIVE_TEXTURE_SHADER).createCompositeState(true));
 
-    public static RenderType ADDITIVE_PARTICLE_TEXTURE = DotRenderType.createRenderType(TridotLib.ID + ":additive_particle_texture",
+    public static RenderType ADDITIVE_PARTICLE_TEXTURE = DotRenderType.createRenderType(Tridot.ID + ":additive_particle_texture",
     DefaultVertexFormat.PARTICLE, VertexFormat.Mode.QUADS, 256, false, true, RenderType.CompositeState.builder()
     .setWriteMaskState(COLOR_WRITE).setLightmapState(NO_LIGHTMAP).setTransparencyState(ADDITIVE_TRANSPARENCY)
     .setTextureState(PARTICLE_SHEET).setShaderState(ADDITIVE_TEXTURE_SHADER).createCompositeState(true));
 
-    public static RenderType ADDITIVE_TEXTURE = DotRenderType.createRenderType(TridotLib.ID + ":additive_texture",
+    public static RenderType ADDITIVE_TEXTURE = DotRenderType.createRenderType(Tridot.ID + ":additive_texture",
     DefaultVertexFormat.POSITION_TEX_COLOR, VertexFormat.Mode.QUADS, 256, false, true, RenderType.CompositeState.builder()
     .setWriteMaskState(COLOR_WRITE).setLightmapState(NO_LIGHTMAP).setTransparencyState(NORMAL_TRANSPARENCY)
     .setTextureState(BLOCK_SHEET).setShaderState(ADDITIVE_TEXTURE_SHADER).createCompositeState(true));
 
-    public static RenderType ADDITIVE = DotRenderType.createRenderType(TridotLib.ID + ":additive",
+    public static RenderType ADDITIVE = DotRenderType.createRenderType(Tridot.ID + ":additive",
     DefaultVertexFormat.POSITION_COLOR, VertexFormat.Mode.QUADS, 256, false, true, RenderType.CompositeState.builder()
     .setWriteMaskState(COLOR_WRITE).setLightmapState(NO_LIGHTMAP).setTransparencyState(ADDITIVE_TRANSPARENCY)
     .setShaderState(ADDITIVE_SHADER).createCompositeState(true));
 
-    public static RenderType TRANSLUCENT_PARTICLE = DotRenderType.createRenderType(TridotLib.ID + ":translucent_particle",
+    public static RenderType TRANSLUCENT_PARTICLE = DotRenderType.createRenderType(Tridot.ID + ":translucent_particle",
     DefaultVertexFormat.PARTICLE, VertexFormat.Mode.QUADS, 256, false, false, RenderType.CompositeState.builder()
     .setWriteMaskState(COLOR_WRITE).setLightmapState(LIGHTMAP).setTransparencyState(NORMAL_TRANSPARENCY)
     .setTextureState(PARTICLE_SHEET).setShaderState(TRANSLUCENT_TEXTURE_SHADER).createCompositeState(true));
 
-    public static RenderType TRANSLUCENT_BLOCK_PARTICLE = DotRenderType.createRenderType(TridotLib.ID + ":translucent_block_particle",
+    public static RenderType TRANSLUCENT_BLOCK_PARTICLE = DotRenderType.createRenderType(Tridot.ID + ":translucent_block_particle",
     DefaultVertexFormat.PARTICLE, VertexFormat.Mode.QUADS, 256, false, true, RenderType.CompositeState.builder()
     .setWriteMaskState(COLOR_WRITE).setLightmapState(LIGHTMAP).setTransparencyState(NORMAL_TRANSPARENCY)
     .setTextureState(BLOCK_SHEET).setShaderState(TRANSLUCENT_TEXTURE_SHADER).createCompositeState(true));
 
-    public static RenderType TRANSLUCENT_PARTICLE_TEXTURE = DotRenderType.createRenderType(TridotLib.ID + ":translucent_particle_texture",
+    public static RenderType TRANSLUCENT_PARTICLE_TEXTURE = DotRenderType.createRenderType(Tridot.ID + ":translucent_particle_texture",
     DefaultVertexFormat.PARTICLE, VertexFormat.Mode.QUADS, 256, false, true, RenderType.CompositeState.builder()
     .setWriteMaskState(COLOR_WRITE).setLightmapState(LIGHTMAP).setTransparencyState(NORMAL_TRANSPARENCY)
     .setTextureState(PARTICLE_SHEET).setShaderState(TRANSLUCENT_TEXTURE_SHADER).createCompositeState(true));
 
-    public static RenderType TRANSLUCENT_TEXTURE = DotRenderType.createRenderType(TridotLib.ID + ":translucent_texture",
+    public static RenderType TRANSLUCENT_TEXTURE = DotRenderType.createRenderType(Tridot.ID + ":translucent_texture",
     DefaultVertexFormat.PARTICLE, VertexFormat.Mode.QUADS, 256, false, true, RenderType.CompositeState.builder()
     .setWriteMaskState(COLOR_WRITE).setLightmapState(LIGHTMAP).setTransparencyState(NORMAL_TRANSPARENCY)
     .setTextureState(BLOCK_SHEET).setShaderState(TRANSLUCENT_TEXTURE_SHADER).createCompositeState(true));
 
-    public static RenderType TRANSLUCENT = DotRenderType.createRenderType(TridotLib.ID + ":translucent",
+    public static RenderType TRANSLUCENT = DotRenderType.createRenderType(Tridot.ID + ":translucent",
     DefaultVertexFormat.PARTICLE, VertexFormat.Mode.QUADS, 256, false, true, RenderType.CompositeState.builder()
     .setWriteMaskState(COLOR_WRITE).setLightmapState(LIGHTMAP).setTransparencyState(NORMAL_TRANSPARENCY)
     .setShaderState(TRANSLUCENT_SHADER).createCompositeState(true));
 
-    @Mod.EventBusSubscriber(modid = TridotLib.ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
+    @Mod.EventBusSubscriber(modid = Tridot.ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
     public static class ClientRegistryEvents{
         @SubscribeEvent
         public static void registerRenderTypes(FMLClientSetupEvent event){

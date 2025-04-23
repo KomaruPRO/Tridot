@@ -4,6 +4,7 @@ import com.mojang.blaze3d.font.GlyphInfo;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.font.FontSet;
 import net.minecraft.client.gui.font.glyphs.BakedGlyph;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.ClickEvent;
 import net.minecraft.network.chat.HoverEvent;
 import net.minecraft.network.chat.Style;
@@ -13,12 +14,14 @@ import org.jetbrains.annotations.Nullable;
 import pro.komaru.tridot.api.render.text.DotText;
 import pro.komaru.tridot.util.Col;
 import pro.komaru.tridot.util.struct.data.Seq;
+import pro.komaru.tridot.util.struct.func.Prov;
 
 import java.awt.*;
+import java.util.Map;
 
 public class DotStyle extends Style {
 
-    public Seq<DotStyleEffect> effects = Seq.with();
+    public Seq<StyleEffect> effects = Seq.with();
 
     public DotStyle(@Nullable TextColor pColor, @Nullable Boolean pBold, @Nullable Boolean pItalic, @Nullable Boolean pUnderlined, @Nullable Boolean pStrikethrough, @Nullable Boolean pObfuscated, @Nullable ClickEvent pClickEvent, @Nullable HoverEvent pHoverEvent, @Nullable String pInsertion, @Nullable ResourceLocation pFont) {
         super(pColor, pBold, pItalic, pUnderlined, pStrikethrough, pObfuscated, pClickEvent, pHoverEvent, pInsertion, pFont);
@@ -107,31 +110,30 @@ public class DotStyle extends Style {
         this.effects.clear();
         return this;
     }
-    public DotStyle effects(DotStyleEffect ...effects) {
+    public DotStyle effects(StyleEffect...effects) {
         this.effects.addAll(effects);
         return this;
     }
     public DotStyle effects(ResourceLocation ...effects) {
-        Seq<DotStyleEffect> fx = Seq.with();
+        Seq<StyleEffect> fx = Seq.with();
         for (ResourceLocation effect : effects)
-            fx.add(DotText.EFFECTS.get(effect.toString()));
+            fx.add(DotText.EFFECTS.get(effect.toString()).get());
         return effects(fx.toArray());
     }
-
-    public DotStyle effect(DotStyleEffect effect) {
+    public DotStyle effect(StyleEffect effect) {
         effects.add(effect);
         return this;
     }
     public DotStyle effect(ResourceLocation location) {
-        return effect(DotText.EFFECTS.get(location.toString()));
+        return effect(DotText.EFFECTS.get(location.toString()).get());
     }
     public DotStyle effect(String modId, String id) {
         return effect(new ResourceLocation(modId,id));
     }
 
 
-    public static class DotStyleEffect {
-        public ResourceLocation id;
+    public static abstract class StyleEffect {
+        public StyleEffect() {}
 
         public float advance(float advance) {
             return advance;
@@ -140,14 +142,33 @@ public class DotStyle extends Style {
             return alpha;
         }
 
-        public void beforeGlyph(Font.StringRenderOutput self, DotStyle style, int index) {
+        public void beforeGlyph(Font.StringRenderOutput self, DotStyle style, int index, Map<String,Object> buffer) {
 
         }
-        public void beforeGlyphEffects(Font.StringRenderOutput self, DotStyle style, int index, FontSet fontset, GlyphInfo glyphinfo, BakedGlyph bakedglyph, TextColor textcolor, float f, float f1, float f2, float f3, float f6, float f7) {
+        public void beforeGlyphEffects(Font.StringRenderOutput self, DotStyle style, int index, FontSet fontset, GlyphInfo glyphinfo, BakedGlyph bakedglyph, TextColor textcolor, float f, float f1, float f2, float f3, float f6, float f7, Map<String,Object> buffer) {
 
         }
-        public void afterGlyph(Font.StringRenderOutput self, DotStyle style, int index, FontSet fontset, GlyphInfo glyphinfo, BakedGlyph bakedglyph, TextColor textcolor, float f, float f1, float f2, float f3, float f6, float f7) {
+        public void afterGlyph(Font.StringRenderOutput self, DotStyle style, int index, FontSet fontset, GlyphInfo glyphinfo, BakedGlyph bakedglyph, TextColor textcolor, float f, float f1, float f2, float f3, float f6, float f7, Map<String,Object> buffer) {
             
+        }
+
+        public abstract ResourceLocation id();
+        public abstract void write(CompoundTag tag);
+        public abstract void read(CompoundTag tag);
+    }
+
+    public static class EffectEntry implements Prov<StyleEffect> {
+        public Prov<StyleEffect> initializer;
+        public ResourceLocation identifier;
+
+        public EffectEntry(Prov<StyleEffect> initializer, ResourceLocation location) {
+            this.initializer = initializer;
+            this.identifier = location;
+        }
+
+        @Override
+        public StyleEffect get() {
+            return initializer.get();
         }
     }
 }

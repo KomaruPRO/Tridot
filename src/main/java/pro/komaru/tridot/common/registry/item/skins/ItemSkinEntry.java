@@ -21,7 +21,7 @@ public class ItemSkinEntry{
 
     @OnlyIn(Dist.CLIENT)
     public String armorTexture(Entity entity, ItemStack stack, EquipmentSlot slot, String type){
-        return TridotLib.ID + ":textures/models/armor/skin/empty.png";
+        return Tridot.ID + ":textures/models/armor/skin/empty.png";
     }
 
     @OnlyIn(Dist.CLIENT)

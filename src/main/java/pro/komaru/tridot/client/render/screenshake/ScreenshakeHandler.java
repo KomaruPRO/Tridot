@@ -7,7 +7,7 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.client.event.ComputeFovModifierEvent;
 import org.jetbrains.annotations.NotNull;
-import pro.komaru.tridot.TridotLib;
+import pro.komaru.tridot.Tridot;
 import pro.komaru.tridot.client.ClientTick;
 import pro.komaru.tridot.common.config.ClientConfig;
 import pro.komaru.tridot.util.Tmp;
@@ -53,7 +53,7 @@ public class ScreenshakeHandler{
         }
 
         if(cameraUpdate){
-            Level level = TridotLib.PROXY.getLevel();
+            Level level = Tridot.PROXY.getLevel();
             if(level != null){
                 RayHitResult hitResult = RayCast.getHit(level, new RayCastContext(cameraPos, pos).setBlockShape(RayCastContext.Block.VISUAL));
                 double distance = Math.max(0f,cameraPos.cpy().sub(hitResult.getPos()).len() - 0.1f);

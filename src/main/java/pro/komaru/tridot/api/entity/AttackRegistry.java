@@ -54,5 +54,5 @@ public class AttackRegistry{
         return color;
     }
 
-    public static final AttackRegistry NONE = new AttackRegistry(TridotLib.ID, "none");
+    public static final AttackRegistry NONE = new AttackRegistry(Tridot.ID, "none");
 }

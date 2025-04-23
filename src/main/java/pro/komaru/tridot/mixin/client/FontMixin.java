@@ -19,7 +19,7 @@ public class FontMixin {
             float adv = tridot$self().getFontSet(style.getFont())
                     .getGlyphInfo(ch, tridot$self().filterFishyGlyphs).getAdvance(style.isBold());
             if(style instanceof DotStyle ds)
-                for (DotStyle.DotStyleEffect effect : ds.effects) adv = effect.advance(adv);
+                for (DotStyle.StyleEffect effect : ds.effects) adv = effect.advance(adv);
             return adv;
         });
     }

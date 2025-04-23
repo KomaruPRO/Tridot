@@ -37,7 +37,7 @@ public class BasicBossbar extends AbstractBossbar{
             if(i > 0){
                 if(event.getOverlay() == BossEvent.BossBarOverlay.PROGRESS){
                     RenderSystem.enableBlend();
-                    if(Objects.equals(abstractBossbar.getTexture(), new ResourceLocation(TridotLib.ID, "textures/gui/bossbars/base.png"))){
+                    if(Objects.equals(abstractBossbar.getTexture(), new ResourceLocation(Tridot.ID, "textures/gui/bossbars/base.png"))){
                         Col color = abstractBossbar.rainbow ? Col.rainbow(mc.level.getGameTime() / 1.5f) : abstractBossbar.getColor();
                         pGuiGraphics.setColor(color.r,color.g,color.b, 1);
                     }
@@ -60,7 +60,7 @@ public class BasicBossbar extends AbstractBossbar{
             int i = (int)(event.getProgress() * 177.0F);
             if(i > 0){
                 if(event.getOverlay() == BossEvent.BossBarOverlay.PROGRESS){
-                    if(Objects.equals(abstractBossbar.getTexture(), new ResourceLocation(TridotLib.ID, "textures/gui/bossbars/base.png"))){
+                    if(Objects.equals(abstractBossbar.getTexture(), new ResourceLocation(Tridot.ID, "textures/gui/bossbars/base.png"))){
                         Col color = abstractBossbar.rainbow ? Col.rainbow(mc.level.getGameTime() / 1.5f) : abstractBossbar.getColor();
                         pGuiGraphics.setColor(color.r, color.g, color.b, 1);
                     }
