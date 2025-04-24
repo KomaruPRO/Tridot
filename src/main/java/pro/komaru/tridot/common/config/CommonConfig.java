@@ -17,6 +17,6 @@ public class CommonConfig{
     public static final ForgeConfigSpec SPEC;
 
     public CommonConfig(ForgeConfigSpec.Builder builder) {
-        PERCENT_ARMOR = builder.comment("When enabled armor is defined as percent (Default: true)").comment("keep in mind that Minecraft attributes are limited, so you'll need to download some mod that removes the limits, otherwise high tier armor will be a nonsense thanks to Mojang... that's the reason why percentage armor is implemented").define("PercentArmor", false);
+        PERCENT_ARMOR = builder.comment("When enabled armor is defined as percent (Default: true)").comment("keep in mind that Minecraft attributes are limited, so you'll need to download some mod that removes the limits, otherwise high tier armor will be a nonsense thanks to Mojang... that's the reason why percentage armor is implemented").define("PercentArmor", true);
     }
 }

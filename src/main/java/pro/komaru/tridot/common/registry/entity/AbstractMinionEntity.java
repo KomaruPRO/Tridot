@@ -40,7 +40,7 @@ public abstract class AbstractMinionEntity extends Monster implements TraceableE
             }
         }
 
-        if(this.shouldRenderAtSqrDistance(4)){
+        if(this.shouldRenderAtSqrDistance(4) && this.level().isClientSide){
             spawnParticlesTrail();
         }
     }

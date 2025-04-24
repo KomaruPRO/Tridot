@@ -78,7 +78,7 @@ public class PercentageArmorItem extends ArmorItem{
         if(CommonConfig.PERCENT_ARMOR.get() != null && CommonConfig.PERCENT_ARMOR.get()){
             pStack.hideTooltipPart(TooltipPart.MODIFIERS);
             pTooltipComponents.add(Component.translatable("tooltip.tridot.total_armor", getTotalDefense(((PercentageArmorItem)pStack.getItem()).getMaterial()) + "%").withStyle(ChatFormatting.GRAY));
-//            pTooltipComponents.add(Component.translatable("attribute.modifier.plus.1", defense, Component.translatable("attribute.name.generic.armor")).withStyle(ChatFormatting.BLUE));
+            pTooltipComponents.add(Component.translatable("attribute.modifier.plus.1", defense, Component.translatable("attribute.name.generic.armor")).withStyle(ChatFormatting.BLUE));
             Player pPlayer = Minecraft.getInstance().player;
             for(EquipmentSlot equipmentslot : EquipmentSlot.values()){
                 Multimap<Attribute, AttributeModifier> multimap = this.getAttributeModifiers(equipmentslot, pStack);
