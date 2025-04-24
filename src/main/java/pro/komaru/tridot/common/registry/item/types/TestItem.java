@@ -1,10 +1,15 @@
 package pro.komaru.tridot.common.registry.item.types;
 
+import net.minecraft.network.chat.ChatType;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.*;
 import net.minecraft.world.entity.player.*;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.*;
+import net.minecraftforge.server.ServerLifecycleHooks;
 import org.jetbrains.annotations.*;
+import pro.komaru.tridot.api.render.text.DotStyleEffects;
+import pro.komaru.tridot.api.render.text.DotText;
 import pro.komaru.tridot.client.gfx.*;
 import pro.komaru.tridot.client.gfx.particle.*;
 import pro.komaru.tridot.client.gfx.particle.data.*;
@@ -33,6 +38,18 @@ public class TestItem extends Item{
             .setVelocity((Tmp.rnd.nextDouble() / 5), 0.05f, (Tmp.rnd.nextDouble() / 5))
             .randomOffset(5)
             .repeat(worldIn, pos.x, pos.y, pos.z, 5);
+
+        if(!worldIn.isClientSide) {
+            var a = Component.Serializer.toJson(DotText.create("Test Item")
+                .color(Col.pink)
+                    .style(b -> b.bold(true).italic(true).effects(
+                            DotStyleEffects.ShakeFX.of(1f),
+                            DotStyleEffects.OutlineFX.of(Col.black,true)
+                    ))
+                .get());
+            var b = Component.Serializer.fromJson(a);
+            playerIn.sendSystemMessage(b);
+        }
 
 
         return InteractionResultHolder.consume(itemstack);

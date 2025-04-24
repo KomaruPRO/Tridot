@@ -30,10 +30,10 @@ public class Col {
     }
 
     public TextColor toTextColor() {
-        return TextColor.fromRgb(toMC());
+        return TextColor.fromRgb(toARGB());
     }
 
-    public int toMC() {
+    public int toARGB() {
         return Col.intArgb(this);
     }
 

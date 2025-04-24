@@ -18,14 +18,12 @@ import java.util.Map;
 @Mixin(Font.StringRenderOutput.class)
 public class StringRenderOutputMixin {
     @Unique DotStyle tridot$style;
-    @Unique
-    Map<String,Object> tridot$buffer = new HashMap<>();
 
     @Inject(method = "accept", at = @At("TAIL"), locals = LocalCapture.CAPTURE_FAILSOFT)
     public void accept(int index, Style pStyle, int pCodePoint, CallbackInfoReturnable<Boolean> cir, FontSet fontset, GlyphInfo glyphinfo, BakedGlyph bakedglyph, boolean flag, float f3, TextColor textcolor, float f, float f1, float f2, float f6, float f7) {
         if(pStyle instanceof DotStyle ds) {
             for (DotStyle.StyleEffect effect : ds.effects) {
-                effect.afterGlyph(tridot$self(),ds,index,fontset,glyphinfo,bakedglyph,textcolor,f,f1,f2,f3,f6,f7,tridot$buffer);
+                effect.afterGlyph(tridot$self(),ds,index,fontset,glyphinfo,bakedglyph,textcolor,f,f1,f2,f3,f6,f7);
             }
         }
     }
@@ -33,7 +31,7 @@ public class StringRenderOutputMixin {
     public void acceptBeforeEffects(int index, Style pStyle, int pCodePoint, CallbackInfoReturnable<Boolean> cir, FontSet fontset, GlyphInfo glyphinfo, BakedGlyph bakedglyph, boolean flag, float f3, TextColor textcolor, float f, float f1, float f2, float f6, float f7) {
         if(pStyle instanceof DotStyle ds) {
             for (DotStyle.StyleEffect effect : ds.effects) {
-                effect.beforeGlyphEffects(tridot$self(),ds,index,fontset,glyphinfo,bakedglyph,textcolor,f,f1,f2,f3,f6,f7,tridot$buffer);
+                effect.beforeGlyphEffects(tridot$self(),ds,index,fontset,glyphinfo,bakedglyph,textcolor,f,f1,f2,f3,f6,f7);
             }
         }
     }
@@ -61,8 +59,7 @@ public class StringRenderOutputMixin {
         if(pStyle instanceof DotStyle ds) {
             tridot$style = ds;
             for (DotStyle.StyleEffect effect : ds.effects) {
-                tridot$buffer.clear();
-                effect.beforeGlyph(tridot$self(),ds,index,tridot$buffer);
+                effect.beforeGlyph(tridot$self(),ds,index);
             }
         }
     }
