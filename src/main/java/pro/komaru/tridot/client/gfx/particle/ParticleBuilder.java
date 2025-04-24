@@ -1,5 +1,6 @@
 package pro.komaru.tridot.client.gfx.particle;
 
+import net.minecraftforge.api.distmarker.*;
 import pro.komaru.tridot.client.gfx.particle.data.*;
 import net.minecraft.client.*;
 import net.minecraft.client.particle.*;

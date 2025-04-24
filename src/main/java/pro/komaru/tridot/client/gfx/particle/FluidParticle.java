@@ -9,7 +9,6 @@ import net.minecraftforge.fluids.*;
 import pro.komaru.tridot.api.*;
 import pro.komaru.tridot.client.gfx.particle.options.FluidParticleOptions;
 
-@OnlyIn(Dist.CLIENT)
 public class FluidParticle extends GenericParticle{
 
     public FluidParticle(ClientLevel level, FluidParticleOptions options, double x, double y, double z, double vx, double vy, double vz){

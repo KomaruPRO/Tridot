@@ -6,7 +6,6 @@ import net.minecraftforge.api.distmarker.*;
 import net.minecraftforge.client.model.data.*;
 import pro.komaru.tridot.client.gfx.particle.options.BlockParticleOptions;
 
-@OnlyIn(Dist.CLIENT)
 public class BlockParticle extends GenericParticle{
 
     public BlockParticle(ClientLevel level, BlockParticleOptions options, double x, double y, double z, double vx, double vy, double vz){

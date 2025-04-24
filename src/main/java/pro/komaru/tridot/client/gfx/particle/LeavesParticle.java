@@ -6,7 +6,6 @@ import net.minecraftforge.api.distmarker.*;
 import pro.komaru.tridot.client.gfx.particle.data.GenericParticleData;
 import pro.komaru.tridot.client.gfx.particle.options.GenericParticleOptions;
 
-@OnlyIn(Dist.CLIENT)
 public class LeavesParticle extends GenericParticle{
     private float rotSpeed;
     private final float particleRandom;

@@ -8,7 +8,6 @@ import net.minecraftforge.api.distmarker.*;
 import pro.komaru.tridot.client.compatibility.*;
 import pro.komaru.tridot.client.render.LevelRenderHandler;
 
-@OnlyIn(Dist.CLIENT)
 public class GenericParticleRenderType implements ParticleRenderType{
     public static final GenericParticleRenderType INSTANCE = new GenericParticleRenderType();
 

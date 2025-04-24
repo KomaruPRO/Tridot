@@ -19,7 +19,6 @@ import java.awt.*;
 import java.util.*;
 import java.util.function.*;
 
-@OnlyIn(Dist.CLIENT)
 public class GenericParticle extends TextureSheetParticle{
 
     public static final Random random = new Random();
