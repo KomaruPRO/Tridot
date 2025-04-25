@@ -165,6 +165,6 @@ public class ConfigurableBowItem extends BowItem{
             .append(Component.literal(getDefaultType().getDescription().getString()).withStyle(pStack.getRarity().getStyleModifier())));
         }
 
-        pTooltipComponents.add(Component.translatable("tooltip.tridot.bow_damage", damage).withStyle(ChatFormatting.GRAY));
+        pTooltipComponents.add(Component.translatable("tooltip.tridot.bow_damage", Math.floor(damage)).withStyle(ChatFormatting.GRAY));
     }
 }
