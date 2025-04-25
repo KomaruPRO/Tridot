@@ -78,7 +78,6 @@ public class PercentageArmorItem extends ArmorItem{
         if(CommonConfig.PERCENT_ARMOR.get() != null && CommonConfig.PERCENT_ARMOR.get()){
             pStack.hideTooltipPart(TooltipPart.MODIFIERS);
             pTooltipComponents.add(Component.translatable("tooltip.tridot.total_armor", getTotalDefense(((PercentageArmorItem)pStack.getItem()).getMaterial()) + "%").withStyle(ChatFormatting.GRAY));
-            pTooltipComponents.add(Component.translatable("attribute.modifier.plus.1", defense, Component.translatable("attribute.name.generic.armor")).withStyle(ChatFormatting.BLUE));
             Player pPlayer = Minecraft.getInstance().player;
             for(EquipmentSlot equipmentslot : EquipmentSlot.values()){
                 Multimap<Attribute, AttributeModifier> multimap = this.getAttributeModifiers(equipmentslot, pStack);
@@ -114,7 +113,7 @@ public class PercentageArmorItem extends ArmorItem{
                         if(flag){
                             pTooltipComponents.add(CommonComponents.space().append(Component.translatable("attribute.modifier.equals." + attributemodifier.getOperation().toValue(), ATTRIBUTE_MODIFIER_FORMAT.format(d1), Component.translatable(entry.getKey().getDescriptionId()))).withStyle(ChatFormatting.DARK_GREEN));
                         }else if(d0 > 0.0D){
-                            pTooltipComponents.add(Component.translatable("attribute.modifier.plus." + attributemodifier.getOperation().toValue(), ATTRIBUTE_MODIFIER_FORMAT.format(d1), Component.translatable(entry.getKey().getDescriptionId())).withStyle(ChatFormatting.BLUE));
+                            pTooltipComponents.add(Component.translatable("attribute.modifier.plus.1", ATTRIBUTE_MODIFIER_FORMAT.format(d1), Component.translatable(entry.getKey().getDescriptionId())).withStyle(ChatFormatting.BLUE));
                         }else if(d0 < 0.0D){
                             d1 *= -1.0D;
                             pTooltipComponents.add(Component.translatable("attribute.modifier.take." + attributemodifier.getOperation().toValue(), ATTRIBUTE_MODIFIER_FORMAT.format(d1), Component.translatable(entry.getKey().getDescriptionId())).withStyle(ChatFormatting.RED));
