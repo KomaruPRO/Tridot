@@ -17,35 +17,34 @@ import pro.komaru.tridot.util.struct.Structs;
 import pro.komaru.tridot.util.struct.data.Seq;
 
 public class ItemSkin{
-
     public ResourceLocation id;
     public Col color;
     public Seq<ItemSkinEntry> entries = Seq.with();
-
-    public static Col loreCol = new Col(249/255f, 210/255f, 129/255f);
+    public static Col loreCol = Col.fromHex("F9D281");
 
     public ItemSkin(ResourceLocation id, Col color) {
         this.id = id;
         this.color = color;
     }
+
     public ItemSkin(ResourceLocation id) {
         this(id,Col.white);
     }
+
     public ItemSkin(String id, Col color) {
         this(new ResourceLocation(id),color);
     }
+
     public ItemSkin(String id) {
         this(id,Col.white);
     }
 
-    public void setupSkinEntries(){
-
-    }
-
+    public void setupSkinEntries(){}
 
     public boolean appliesOn(ItemStack stack) {
         return entries.contains(e -> e.appliesOn(stack));
     }
+
     public ItemStack apply(ItemStack stack) {
         stack.getOrCreateTag().putString("skin",id.toString());
         return stack;
@@ -59,26 +58,29 @@ public class ItemSkin{
     public Seq<ItemSkinEntry> skinEntries(){
         return entries;
     }
+
     public ResourceLocation id() {
         return id;
     }
+
     public Col color() {
         return color;
     }
+
     public String translatedName(){
         return Component.translatable("item_skin."+id.toLanguageKey()).getString();
     }
+
     public String translatedLoreName(){
         return Component.translatable("item_skin."+id.toLanguageKey()+".lore").getString();
     }
 
     public Component skinName(){
-        return Component.translatable(translatedName())
-                .setStyle(DotStyle.of().color(color()));
+        return Component.translatable(translatedName()).setStyle(DotStyle.of().color(color()));
     }
+
     public Component skinComponent(){
-        return Component.translatable("lore.tridot.skin")
-                .setStyle(DotStyle.of().color(loreCol)).append(" ").append(skinName());
+        return Component.translatable("lore.tridot.skin").setStyle(DotStyle.of().color(loreCol)).append(" ").append(skinName());
     }
 
     @OnlyIn(Dist.CLIENT)
@@ -88,6 +90,7 @@ public class ItemSkin{
                 e -> e.armorModel(entity,stack,slot,_default),
                 () -> TridotModels.EMPTY_ARMOR);
     }
+
     @OnlyIn(Dist.CLIENT)
     public String getArmorTexture(ItemStack stack, Entity entity, EquipmentSlot slot, String type){
         return Structs.safeGet(
@@ -95,12 +98,14 @@ public class ItemSkin{
                 e -> e.armorTexture(entity,stack,slot,type),
                 () -> Tridot.ID + ":textures/models/armor/skin/empty.png");
     }
+
     @OnlyIn(Dist.CLIENT)
     public String getItemModelName(ItemStack stack){
         return Structs.safeGet(
                 entries.find(e -> e.appliesOn(stack)),
                 e -> e.itemModel(stack));
     }
+
     @OnlyIn(Dist.CLIENT)
     public static boolean defaultModel(Entity entity){
         if(entity instanceof AbstractClientPlayer player){

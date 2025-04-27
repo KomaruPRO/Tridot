@@ -71,11 +71,10 @@ import pro.komaru.tridot.util.struct.func.Boolf;
 import pro.komaru.tridot.util.struct.func.Cons;
 import pro.komaru.tridot.util.math.ArcRandom;
 import pro.komaru.tridot.common.registry.EnchantmentsRegistry;
-import pro.komaru.tridot.common.registry.item.skins.AuthoredItemSkin;
+import pro.komaru.tridot.common.registry.item.skins.DetailedItemSkin;
 import pro.komaru.tridot.common.registry.item.skins.ItemSkin;
 
 import javax.annotation.*;
-import java.awt.*;
 import java.lang.Math;
 import java.util.List;
 import java.util.*;
@@ -768,13 +767,14 @@ public class Utils {
         public static void addContributorTooltip(ItemStack stack, List<Component> tooltip){
             ItemSkin skin = ItemSkin.itemSkin(stack);
             if (skin != null) {
-                if(skin instanceof AuthoredItemSkin authored){
+                if(skin instanceof DetailedItemSkin details){
                     tooltip.remove(0);
-                    tooltip.add(0, Component.literal(stack.getHoverName().getString()).append(authored.getContributorComponent()));
+                    tooltip.add(0, Component.literal(stack.getHoverName().getString()).append(details.getHoverName()));
                 }
 
                 tooltip.add(1, skin.skinComponent());
                 tooltip.add(2, Component.empty());
+                if(skin instanceof DetailedItemSkin details) tooltip.addAll(details.getComponents()); // meant to be added into third index, but I think this way is safer
             }
         }
 
