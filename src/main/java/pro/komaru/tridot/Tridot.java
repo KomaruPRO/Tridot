@@ -52,6 +52,7 @@ public class Tridot {
         TridotBlockEntities.register(eventBus);
         TridotParticles.register(eventBus);
         TridotLootModifier.register(eventBus);
+        LootConditionsRegistry.init(eventBus);
         ITEMS.register(eventBus);
 
         IEventBus forgeBus = MinecraftForge.EVENT_BUS;
@@ -80,7 +81,6 @@ public class Tridot {
     private void setup(final FMLCommonSetupEvent event){
         TridotBlocks.setFireBlock();
         PacketHandler.init();
-        LootConditionsRegistry.register();
         for(ItemSkin skin : ItemSkinHandler.getSkins()){
             skin.setupSkinEntries();
         }
