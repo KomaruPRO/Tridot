@@ -20,7 +20,7 @@ public class LocalDateCondition implements LootItemCondition{
 
     @NotNull
     public LootItemConditionType getType(){
-        return LootConditionsRegistry.LOCAL_DATE_CONDITION;
+        return LootConditionsRegistry.LOCAL_DATE_CONDITION.get();
     }
 
     public boolean test(LootContext lootContext){

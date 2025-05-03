@@ -24,7 +24,7 @@ public class MobCategoryCondition implements LootItemCondition{
 
     @Override
     public LootItemConditionType getType(){
-        return LootConditionsRegistry.MOB_CATEGORY_CONDITION;
+        return LootConditionsRegistry.MOB_CATEGORY_CONDITION.get();
     }
 
     public static class Serializer implements net.minecraft.world.level.storage.loot.Serializer<MobCategoryCondition>{
