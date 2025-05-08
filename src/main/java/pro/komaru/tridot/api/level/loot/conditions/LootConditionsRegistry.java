@@ -6,9 +6,10 @@ import net.minecraft.resources.*;
 import net.minecraft.world.level.storage.loot.predicates.*;
 import net.minecraftforge.eventbus.api.*;
 import net.minecraftforge.registries.*;
+import pro.komaru.tridot.*;
 
 public class LootConditionsRegistry{
-    public static final DeferredRegister<LootItemConditionType> LOOT_CONDITION_TYPES = DeferredRegister.create(Registries.LOOT_CONDITION_TYPE, "valoria");
+    public static final DeferredRegister<LootItemConditionType> LOOT_CONDITION_TYPES = DeferredRegister.create(Registries.LOOT_CONDITION_TYPE, Tridot.ID);
     public static final RegistryObject<LootItemConditionType> LOCAL_DATE_CONDITION = LOOT_CONDITION_TYPES.register("local_date", () -> new LootItemConditionType(new LocalDateCondition.Serializer()));
     public static final RegistryObject<LootItemConditionType> MOB_CATEGORY_CONDITION = LOOT_CONDITION_TYPES.register("mob_category", () -> new LootItemConditionType(new MobCategoryCondition.Serializer()));
 
