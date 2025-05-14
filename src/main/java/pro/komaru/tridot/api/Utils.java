@@ -718,7 +718,7 @@ public class Utils {
             for (Entity entity : entities) {
                 if (entity instanceof LivingEntity enemy) {
                     if (!enemy.equals(player)) {
-                        enemy.hurt(level.damageSources().generic(), damage);
+                        enemy.hurt(level.damageSources().explosion(player, player), damage);
                         enemy.knockback(knockback, player.getX() + clipPos.x - entity.getX(), player.getZ() + clipPos.z - entity.getZ());
                         if (EnchantmentHelper.getTagEnchantmentLevel(Enchantments.FIRE_ASPECT, itemstack) > 0) {
                             int i = EnchantmentHelper.getFireAspect(player);
