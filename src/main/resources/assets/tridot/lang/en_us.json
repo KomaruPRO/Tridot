@@ -12,5 +12,8 @@
   "tooltip.tridot.applies_with_chance": "Applies with chance: %s",
   "tooltip.tridot.applies": "Applies: ",
   "tooltip.tridot.special_arrow": "Convert Default arrow to ",
-  "tooltip.tridot.bow_damage": "Damage on full tension %s+, with a Default Arrow used"
+  "tooltip.tridot.bow_damage": "Damage on full tension %s+, with a Default Arrow used",
+  "tooltip.tridot.equipped": "Equipped:",
+  "tooltip.tridot.shift_for_details": "> [%s] - to get more details <",
+  "tooltip.tridot.applies_fullkit": "Applies on full Armor set:"
 }

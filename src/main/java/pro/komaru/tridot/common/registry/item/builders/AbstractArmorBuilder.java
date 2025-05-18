@@ -1,9 +1,12 @@
 package pro.komaru.tridot.common.registry.item.builders;
 
 import net.minecraft.sounds.*;
+import net.minecraft.world.effect.*;
+import net.minecraft.world.entity.player.*;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.crafting.*;
 
+import java.util.*;
 import java.util.function.*;
 
 //example: public static final ArmorRegistry COBALT = new ArmorRegistry.Builder("cobalt").protection(18).mul(46).enchantValue(18).knockbackRes(0.05f).ingredient(() -> Ingredient.of(ItemsRegistry.cobaltIngot.get())).build();
@@ -24,9 +27,18 @@ public abstract class AbstractArmorBuilder<T extends ArmorMaterial>{
     public float knockbackResistance;
     public Supplier<Ingredient> repairIngredient;
     public int[] durability = {11, 16, 16, 13};
+    public List<ArmorEffectData> data;
 
     public AbstractArmorBuilder(String name){
         this.name = name;
+    }
+
+    /**
+     * Placeholder for armor set bonuses
+     * @param effect Effect that will be applied to player
+     * @param condition Condition, ex Entity::isInWater
+     */
+    public record ArmorEffectData(Supplier<MobEffect> effect, Predicate<Player> condition) {
     }
 
     public AbstractArmorBuilder<T> mul(int durabilityMul){

@@ -1,4 +1,4 @@
-package pro.komaru.tridot.common.registry.item;
+package pro.komaru.tridot.common.registry.item.armor;
 
 import com.google.common.collect.*;
 import org.jetbrains.annotations.Nullable;
@@ -14,6 +14,7 @@ import net.minecraft.world.item.ItemStack.*;
 import net.minecraft.world.item.enchantment.*;
 import net.minecraft.world.level.*;
 import net.minecraftforge.api.distmarker.*;
+import pro.komaru.tridot.common.registry.item.*;
 
 import java.text.*;
 import java.util.*;
