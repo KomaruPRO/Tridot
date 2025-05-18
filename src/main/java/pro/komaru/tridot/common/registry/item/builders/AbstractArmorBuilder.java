@@ -41,6 +41,11 @@ public abstract class AbstractArmorBuilder<T extends ArmorMaterial>{
     public record ArmorEffectData(Supplier<MobEffect> effect, Predicate<Player> condition) {
     }
 
+    public AbstractArmorBuilder<T> effects(List<ArmorEffectData> data) {
+        this.data = data;
+        return this;
+    }
+
     public AbstractArmorBuilder<T> mul(int durabilityMul){
         this.durabilityMultiplier = durabilityMul;
         return this;
