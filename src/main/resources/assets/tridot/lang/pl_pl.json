@@ -9,6 +9,8 @@
   "enchantment.tridot.overdrive": "Przegrzew",
   "enchantment.tridot.overdrive.desc": "Redukcja czekania",
   "attribute.tridot.projectile_damage": "Projectile Damage",
+  "tooltip.tridot.shift_for_details": "> [%s] - aby uzyskać więcej szczegółów <",
+  "tooltip.tridot.applies_fullkit": "Działa na pełnym zestawie zbroi: ",
   "tooltip.tridot.applies_with_chance": "Stosuje się z szansą: %s",
   "tooltip.tridot.applies": "Stosuje się: ",
   "tooltip.tridot.special_arrow": "Konwertowanie domyślnej strzałki na ",
