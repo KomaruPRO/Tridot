@@ -40,7 +40,7 @@ public abstract class AbstractTridotArrow extends AbstractArrow{
 
     public void tick(){
         super.tick();
-        if(this.level().isClientSide()){
+        if(this.level().isClientSide() && !(this.isInWater() || this.isInWall())){
             this.spawnParticlesTrail();
         }
     }

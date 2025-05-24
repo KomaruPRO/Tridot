@@ -1004,31 +1004,27 @@ public class Utils {
          *                    <pre>{@code new AABB(projectile.getX() - 3.5, projectile.getY() - 0.5, projectile.getZ() - 3.5, projectile.getX() + 3.5, projectile.getY() + 0.5, projectile.getZ() + 3.5);
          *                    }</pre>
          */
-        public static void homingTo(double pSpeed, Entity projectile, Level level, Entity pOwner, AABB boundingBox) {
-            List<LivingEntity> livingEntities = level.getEntitiesOfClass(LivingEntity.class, boundingBox);
-            if (!level.isClientSide) {
-                if (!livingEntities.isEmpty()) {
-                    LivingEntity nearestEntity = null;
-                    double nearestDistance = Double.MAX_VALUE;
-                    for (LivingEntity livingEntity : livingEntities) {
-                        double distance = projectile.distanceTo(livingEntity);
-                        if (livingEntity != pOwner) {
-                            if (distance < nearestDistance) {
-                                nearestEntity = livingEntity;
-                                nearestDistance = distance;
-                            }
-                        }
-                    }
+        public static void homingTo(double strength, Entity projectile, Level level, Entity pOwner, AABB boundingBox) {
+            if (level.isClientSide) return;
 
-                    if (nearestEntity != null) {
-                        Vec3 targetPos = nearestEntity.position();
-                        double dX = targetPos.x - projectile.getX();
-                        double dY = targetPos.y - projectile.getY();
-                        double dZ = targetPos.z - projectile.getZ();
-                        projectile.hurtMarked = true;
-                        projectile.setDeltaMovement(projectile.getDeltaMovement().add(dX / Math.sqrt(dX * dX) * pSpeed, dY / Math.sqrt(dY * dY) * pSpeed, dZ / Math.sqrt(dZ * dZ) * pSpeed));
-                    }
+            List<LivingEntity> targets = level.getEntitiesOfClass(LivingEntity.class, boundingBox);
+            LivingEntity nearest = null;
+            double nearestDist = Double.MAX_VALUE;
+            for (LivingEntity target : targets) {
+                if (target == pOwner || !target.isAlive()) continue;
+                double dist = projectile.distanceToSqr(target);
+                if (dist < nearestDist) {
+                    nearest = target;
+                    nearestDist = dist;
                 }
+            }
+
+            if (nearest != null) {
+                Vec3 currentVelocity = projectile.getDeltaMovement();
+                Vec3 toTarget = nearest.position().add(0, 1, 0).subtract(projectile.position()).normalize();
+                Vec3 newVelocity = currentVelocity.add(toTarget.scale(strength)).normalize().scale(currentVelocity.length());
+                projectile.setDeltaMovement(newVelocity);
+                projectile.hurtMarked = true;
             }
         }
 
