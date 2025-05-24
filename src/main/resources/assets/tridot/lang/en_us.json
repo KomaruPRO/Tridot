@@ -16,5 +16,7 @@
   "tooltip.tridot.equipped": "Equipped:",
   "tooltip.tridot.shift_for_details": "> [%s] - to get more details <",
   "tooltip.tridot.applies_fullkit": "Applies on full Armor set: ",
-  "tooltip.tridot.applies_to_target": "Applies to target: "
+  "tooltip.tridot.applies_to_target": "Applies to target: ",
+  "tooltip.tridot.applies_to_attacker": "Applies to attacker: ",
+  "tooltip.tridot.applies_with_chance_target": "Applies with chance to target: %s"
 }
