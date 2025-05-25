@@ -1,6 +1,7 @@
 package pro.komaru.tridot.common.registry.entity.projectiles;
 
 import com.google.common.collect.*;
+import net.minecraft.core.*;
 import net.minecraft.nbt.*;
 import net.minecraft.network.protocol.*;
 import net.minecraft.network.protocol.game.*;
@@ -10,6 +11,8 @@ import net.minecraft.world.entity.projectile.*;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.alchemy.*;
 import net.minecraft.world.level.*;
+import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.state.*;
 import net.minecraftforge.api.distmarker.*;
 import net.minecraftforge.network.*;
 import org.jetbrains.annotations.*;
@@ -41,6 +44,9 @@ public abstract class AbstractTridotArrow extends AbstractArrow{
     public void tick(){
         super.tick();
         if(this.level().isClientSide() && !(this.isInWaterOrBubble() || this.isInWall())){
+            BlockPos below = this.blockPosition().below();
+            BlockState state = this.level().getBlockState(below);
+            if (state.is(Blocks.BUBBLE_COLUMN)) return;
             this.spawnParticlesTrail();
         }
     }
