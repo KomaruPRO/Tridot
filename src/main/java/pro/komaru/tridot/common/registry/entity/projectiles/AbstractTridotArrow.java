@@ -13,6 +13,7 @@ import net.minecraft.world.item.alchemy.*;
 import net.minecraft.world.level.*;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.*;
+import net.minecraft.world.phys.*;
 import net.minecraftforge.api.distmarker.*;
 import net.minecraftforge.network.*;
 import org.jetbrains.annotations.*;
@@ -39,6 +40,12 @@ public abstract class AbstractTridotArrow extends AbstractArrow{
     }
 
     public void doPostSpawn(){
+    }
+
+    @Override
+    protected void onHit(HitResult pResult){
+        if(this.level().isClientSide) return; // sync
+        super.onHit(pResult);
     }
 
     public void tick(){
