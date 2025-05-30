@@ -1,4 +1,9 @@
 {
+  "commands.tridot.skin.applied.single": "Applied skin for %s",
+  "commands.tridot.skin.applied.multiple": "Applied skin for %s players",
+  "commands.tridot.skin.remove.single": "Removed skin from %s",
+  "commands.tridot.skin.remove.multiple": "Removed skin from %s players",
+  "commands.tridot.skin.unknown": "Unknown skin",
   "tooltip.tridot.total_armor": "Total Armor Percentage %s",
   "tooltip.tridot.value": "%s",
   "lore.tridot.skin": "Skin:",

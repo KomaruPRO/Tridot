@@ -12,6 +12,7 @@ import pro.komaru.tridot.client.ClientTick;
 import pro.komaru.tridot.client.gfx.*;
 import pro.komaru.tridot.client.render.gui.*;
 import pro.komaru.tridot.common.Events;
+import pro.komaru.tridot.common.commands.*;
 import pro.komaru.tridot.common.config.ClientConfig;
 import pro.komaru.tridot.common.config.CommonConfig;
 import pro.komaru.tridot.common.networking.proxy.ClientProxy;
@@ -53,6 +54,8 @@ public class Tridot {
         TridotParticles.register(eventBus);
         TridotLootModifier.register(eventBus);
         LootConditionsRegistry.init(eventBus);
+
+        ModArgumentTypes.register(eventBus);
         ITEMS.register(eventBus);
 
         IEventBus forgeBus = MinecraftForge.EVENT_BUS;
