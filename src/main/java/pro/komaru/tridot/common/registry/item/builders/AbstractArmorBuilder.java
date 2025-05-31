@@ -38,17 +38,13 @@ public abstract class AbstractArmorBuilder<T extends ArmorMaterial>{
      * @param instance Effect instance that will be applied to player
      * @param condition Condition, ex Entity::isInWater
      */
-    public record ArmorEffectData(MobEffectInstance instance, Predicate<Player> condition) {
-        public static ArmorEffectData createData(MobEffect effect) {
-            return new ArmorEffectData(new MobEffectInstance(effect, 400), (player) -> true);
-        }
-
-        public static ArmorEffectData createData(MobEffectInstance instance) {
+    public record ArmorEffectData(Supplier<MobEffectInstance> instance, Predicate<Player> condition) {
+        public static ArmorEffectData createData(Supplier<MobEffectInstance> instance) {
             return new ArmorEffectData(instance, (player) -> true);
         }
 
-        public static ArmorEffectData createData(MobEffect effect, Predicate<Player> condition) {
-            return new ArmorEffectData(new MobEffectInstance(effect, 400), condition);
+        public static ArmorEffectData createData(Supplier<MobEffectInstance> instance, Predicate<Player> condition) {
+            return new ArmorEffectData(instance, condition);
         }
     }
 
