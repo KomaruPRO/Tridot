@@ -35,7 +35,8 @@ public class EffectArmorItem extends SuitArmorItem{
             if (effects != null) {
                 var component = Component.translatable("tooltip.tridot.applies_fullkit").withStyle(ChatFormatting.GRAY);
                 for (int i = 0; i < effects.size(); i++) {
-                    var effectName = effects.get(i).effect().get().getDisplayName().getString();
+                    MobEffect effect = effects.get(i).instance().getEffect();
+                    var effectName = effect.getDisplayName().getString();
                     component.append(Component.literal(effectName).withStyle(stack.getRarity().getStyleModifier()));
                     if (i < effects.size() - 1) {
                         component.append(Component.literal(", ").withStyle(ChatFormatting.GRAY));
@@ -54,9 +55,9 @@ public class EffectArmorItem extends SuitArmorItem{
 
             for (var effectData : entry.getValue()) {
                 if (effectData.condition().test(player)) {
-                    MobEffect effect = effectData.effect().get();
+                    MobEffect effect = effectData.instance().getEffect();
                     if (!player.hasEffect(effect)) {
-                        player.addEffect(new MobEffectInstance(effect, 400));
+                        player.addEffect(effectData.instance());
                         if (Tmp.rnd.nextFloat() > 0.4f) {
                             player.getInventory().hurtArmor(player.damageSources().magic(), 2f, Inventory.ALL_ARMOR_SLOTS);
                         }
