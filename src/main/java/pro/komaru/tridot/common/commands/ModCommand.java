@@ -41,15 +41,15 @@ public class ModCommand{
             if (!stack.isEmpty()) {
                 if (itemSkin.appliesOn(stack)) {
                     itemSkin.apply(stack);
+                    if(targetPlayers.size() == 1){
+                        command.sendSuccess(() -> Component.translatable("commands.tridot.skin.applied.single", targetPlayers.iterator().next().getDisplayName()), true);
+                    }else{
+                        command.sendSuccess(() -> Component.translatable("commands.tridot.skin.applied.multiple", targetPlayers.size()), true);
+                    }
+
                 } else {
                     command.sendFailure(Component.translatable("commands.tridot.skin.fail"));
                 }
-            }
-
-            if(targetPlayers.size() == 1){
-                command.sendSuccess(() -> Component.translatable("commands.tridot.skin.applied.single", targetPlayers.iterator().next().getDisplayName()), true);
-            }else{
-                command.sendSuccess(() -> Component.translatable("commands.tridot.skin.applied.multiple", targetPlayers.size()), true);
             }
         }
     }
