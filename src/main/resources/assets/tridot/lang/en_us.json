@@ -1,4 +1,5 @@
 {
+  "commands.tridot.skin.fail": "Cannot be applied to this item",
   "commands.tridot.skin.applied.single": "Applied skin for %s",
   "commands.tridot.skin.applied.multiple": "Applied skin for %s players",
   "commands.tridot.skin.remove.single": "Removed skin from %s",

@@ -41,6 +41,8 @@ public class ModCommand{
             if (!stack.isEmpty()) {
                 if (itemSkin.appliesOn(stack)) {
                     itemSkin.apply(stack);
+                } else {
+                    command.sendFailure(Component.translatable("commands.tridot.skin.fail"));
                 }
             }
 
