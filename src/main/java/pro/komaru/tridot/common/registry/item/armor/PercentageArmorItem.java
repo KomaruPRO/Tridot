@@ -103,7 +103,7 @@ public class PercentageArmorItem extends ArmorItem{
                         double d1;
                         if(attributemodifier.getOperation() != AttributeModifier.Operation.MULTIPLY_BASE && attributemodifier.getOperation() != AttributeModifier.Operation.MULTIPLY_TOTAL){
                             if(entry.getKey().equals(Attributes.KNOCKBACK_RESISTANCE)){
-                                d1 = d0 * 10.0D;
+                                d1 = d0 * 100.0D;
                             }else{
                                 d1 = d0;
                             }
