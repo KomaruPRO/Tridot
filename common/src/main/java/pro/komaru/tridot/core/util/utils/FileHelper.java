@@ -8,17 +8,21 @@ import java.io.*;
 import java.nio.charset.StandardCharsets;
 
 public class FileHelper {
-    public static @Nullable InputStreamReader reader(File f)
+    private static final FileHelper instance = new FileHelper();
+    public static FileHelper get() {
+        return instance;
+    }
+    public @Nullable InputStreamReader reader(File f)
     {
         if(!f.exists()) return null;
         return new InputStreamReader(inputStream(f), StandardCharsets.UTF_8);
     }
-    public static @Nullable OutputStreamWriter writer(File f)
+    public @Nullable OutputStreamWriter writer(File f)
     {
         if(!f.exists()) return null;
         return new OutputStreamWriter(outputStream(f), StandardCharsets.UTF_8);
     }
-    public static @Nullable FileInputStream inputStream(File f)
+    public @Nullable FileInputStream inputStream(File f)
     {
         if(!f.exists()) return null;
         try {
@@ -27,7 +31,7 @@ public class FileHelper {
             return null;
         }
     }
-    public static @Nullable FileOutputStream outputStream(File f)
+    public @Nullable FileOutputStream outputStream(File f)
     {
         if(!f.exists()) return null;
         try {
@@ -37,7 +41,7 @@ public class FileHelper {
         }
     }
 
-    public static @Nullable String read(File f) {
+    public @Nullable String read(File f) {
         try (InputStreamReader reader = reader(f)) {
             if (reader == null) return null;
             StringBuilder sb = new StringBuilder();
@@ -51,7 +55,7 @@ public class FileHelper {
             return null;
         }
     }
-    public static boolean write(File f, String content) {
+    public boolean write(File f, String content) {
         try (OutputStreamWriter writer = writer(f)) {
             if (writer == null) return false;
             writer.write(content);
@@ -61,11 +65,11 @@ public class FileHelper {
         }
     }
 
-    public static Seq<File> dirs(File dir) {
+    public Seq<File> dirs(File dir) {
         File[] dirs = dir.listFiles(File::isDirectory);
         return Seq.with(dirs);
     }
-    public static Seq<File> walk(File dir, Cons3<File, String, String> callback) {
+    public Seq<File> walk(File dir, Cons3<File, String, String> callback) {
         if(!dir.isDirectory()) return Seq.empty();
         Seq<File> walked = walk(dir);
         for (File file : walked) {
@@ -73,7 +77,7 @@ public class FileHelper {
         }
         return walked;
     }
-    public static Seq<File> walk(File dir) {
+    public Seq<File> walk(File dir) {
         if(!dir.isDirectory()) return Seq.empty();
         File[] listed = dir.listFiles();
         Seq<File> walked = Seq.empty();
@@ -86,7 +90,7 @@ public class FileHelper {
         }
         return walked;
     }
-    public static String lazyName(File root, File file) {
+    public String lazyName(File root, File file) {
         if(file == null) return "";
         String path = file.getAbsolutePath();
         String rootPath = root.getAbsolutePath();
@@ -95,12 +99,12 @@ public class FileHelper {
         }
         return name(path).replace("\\", "/").trim();
     }
-    public static String name(String name) {
+    public String name(String name) {
         int dotIndex = name.lastIndexOf(".");
         if (dotIndex != -1) name = name.substring(0, dotIndex);
         return name;
     }
-    public static String name(File file) {
+    public String name(File file) {
         if(file == null) return "";
         String name = file.getName();
         int dotIndex = name.lastIndexOf('.');
@@ -109,7 +113,7 @@ public class FileHelper {
         }
         return name;
     }
-    public static String ext(File file) {
+    public String ext(File file) {
         if(file == null) return "";
         String name = file.getName();
         int dotIndex = name.lastIndexOf('.');
