@@ -87,6 +87,16 @@ public class Mathf {
     public static float cos(float radians){
         return sinTable[(int)((radians + PI / 2) * radToIndex) & sinMask];
     }
+    /** Returns the sine in radians from a lookup table. */
+    public static float sinDeg(float degrees){
+        return sinTable[(int)(degrees * degToIndex) & sinMask];
+    }
+
+    /** Returns the cosine in radians from a lookup table. */
+    public static float cosDeg(float degrees){
+        return sinTable[(int)((degrees + 90) * degToIndex) & sinMask];
+    }
+
     /** Returns: the input 0-1 value scaled to 0-1-0. */
     public static float slope(float fin){
         return 1f - Math.abs(fin - 0.5f) * 2f;
@@ -164,5 +174,60 @@ public class Mathf {
         }
 
         return length;
+    }
+
+    /** A variant on atan that does not tolerate infinite inputs for speed reasons, and because infinite inputs
+     * should never occur where this is used (only in {@link #atan2(float, float)}).
+     * @param i any finite float
+     * @return an output from the inverse tangent function, from PI/-2.0 to PI/2.0 inclusive */
+    private static float atn(final double i){
+        // We use double precision internally, because some constants need double precision.
+        final double n = Math.abs(i);
+        // c uses the "equally-good" formulation that permits n to be from 0 to almost infinity.
+        final double c = (n - 1.0) / (n + 1.0);
+        // The approximation needs 6 odd powers of c.
+        final double c2 = c * c, c3 = c * c2, c5 = c3 * c2, c7 = c5 * c2, c9 = c7 * c2, c11 = c9 * c2;
+        return (float)Math.copySign((Math.PI * 0.25)
+                + (0.99997726 * c - 0.33262347 * c3 + 0.19354346 * c5 - 0.11643287 * c7 + 0.05265332 * c9 - 0.0117212 * c11), i);
+    }
+    /** Close approximation of the frequently-used trigonometric method atan2, with higher precision than libGDX's atan2
+     * approximation. Average error is 1.057E-6 radians; maximum error is 1.922E-6. Takes y and x (in that unusual order) as
+     * floats, and returns the angle from the origin to that point in radians. It is about 4 times faster than
+     * {@link Math#atan2(double, double)} (roughly 15 ns instead of roughly 60 ns for Math, on Java 8 HotSpot). <br>
+     * Credit for this goes to the 1955 research study "Approximations for Digital Computers," by RAND Corporation. This is sheet
+     * 11's algorithm, which is the fourth-fastest and fourth-least precise. The algorithms on sheets 8-10 are faster, but only by
+     * a very small degree, and are considerably less precise. That study provides an atan method, and that cleanly
+     * translates to atan2().
+     * @param y y-component of the point to find the angle towards; note the parameter order is unusual by convention
+     * @param x x-component of the point to find the angle towards; note the parameter order is unusual by convention
+     * @return the angle to the given point, in radians as a float; ranges from -PI to PI */
+    public static float atan2(float x, final float y){
+        float n = y / x;
+        if(n != n){
+            n = (y == x ? 1f : -1f); // if both y and x are infinite, n would be NaN
+        }else if(n - n != n - n){
+            x = 0f; // if n is infinite, y is infinitely larger than x.
+        }
+
+        if(x > 0){
+            return atn(n);
+        }else if(x < 0){
+            return y >= 0 ? atn(n) + PI : atn(n) - PI;
+        }else if(y > 0){
+            return x + halfPi;
+        }else if(y < 0){
+            return x - halfPi;
+        }else{
+            return x + y; // returns 0 for 0,0 or NaN if either y or x is NaN
+        }
+    }
+    /** Mod function that works properly for negative numbers. */
+    public static float mod(float f, float n){
+        return ((f % n) + n) % n;
+    }
+
+    /** Mod function that works properly for negative numbers. */
+    public static int mod(int x, int n){
+        return ((x % n) + n) % n;
     }
 }

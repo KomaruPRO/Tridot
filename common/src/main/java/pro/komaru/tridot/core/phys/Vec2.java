@@ -192,4 +192,14 @@ public class Vec2 implements Pos2 {
         add(offsetX, offsetY);
         b.sub(offsetX, offsetY);
     }
+    public float dot(float ox, float oy){
+        return x * ox + y * oy;
+    }
+    public Vec2 trns(float angle, float amount){
+        return set(amount, 0).rotate(angle);
+    }
+
+    public Vec2 trns(float angle, float x, float y){
+        return set(x, y).rotate(angle);
+    }
 }
