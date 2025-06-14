@@ -83,6 +83,18 @@ public class RaycastHelper {
     public HitResult raycastEntities(Level level, Vec3 start, Vec3 end, Boolf<Entity> entityFilter, float lookupEntityRadius) {
         return raycast(level, new Context(start, end, entityFilter, lookupEntityRadius, -1));
     }
+    public HitResult raycastEntityBlocking(Level level, Vec3 start, Vec3 end, Boolf<Entity> entityFilter, float lookupEntityRadius) {
+        var ctx = new Context(start, end, entityFilter, lookupEntityRadius).withBlockfilter((w, b) -> !w.getBlockState(b).isAir());
+        return raycast(level, ctx);
+    }
+    public HitResult raycastEntitiesBlocking(Level level, Vec3 start, Vec3 end, Boolf<Entity> entityFilter, float lookupEntityRadius, int maxCount) {
+        var ctx = new Context(start, end, entityFilter, lookupEntityRadius, maxCount).withBlockfilter((w, b) -> !w.getBlockState(b).isAir());
+        return raycast(level, ctx);
+    }
+    public HitResult raycastEntitiesBlocking(Level level, Vec3 start, Vec3 end, Boolf<Entity> entityFilter, float lookupEntityRadius) {
+        var ctx = new Context(start, end, entityFilter, lookupEntityRadius, -1).withBlockfilter((w, b) -> !w.getBlockState(b).isAir());
+        return raycast(level, ctx);
+    }
 
     public record HitResult(Vec3 origin, Vec3 hit,
                             BlockPos block, Direction dir, boolean notAirBlock,
@@ -150,6 +162,24 @@ public class RaycastHelper {
 
         public VoxelShape fluidShape(FluidState state, BlockGetter level, BlockPos pos){
             return fluidFilter.get(state) ? state.getShape(level, pos) : Shapes.empty();
+        }
+        public Context withBlockfilter(Func2<Level, BlockPos, Boolean> blockPosFilter) {
+            return new Context(start, end, blockPosFilter, fluidFilter, entityFilter,
+                    true, checkFluids, checkEntities,
+                    maxEntities, lookupEntityRadius, stopOnMaxEntities,
+                    clipShape, collisionCtx);
+        }
+        public Context withFluidFilter(Boolf<FluidState> fluidFilter) {
+            return new Context(start, end, blockPosFilter, fluidFilter, entityFilter,
+                    checkBlocks, true, checkEntities,
+                    maxEntities, lookupEntityRadius, stopOnMaxEntities,
+                    clipShape, collisionCtx);
+        }
+        public Context withEntityFilter(Boolf<Entity> entityFilter) {
+            return new Context(start, end, blockPosFilter, fluidFilter, entityFilter,
+                    checkBlocks, checkFluids, true,
+                    maxEntities, lookupEntityRadius, stopOnMaxEntities,
+                    clipShape, collisionCtx);
         }
     }
 
