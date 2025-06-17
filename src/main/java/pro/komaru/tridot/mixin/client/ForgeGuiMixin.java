@@ -35,7 +35,7 @@ public class ForgeGuiMixin{
             RenderSystem.disableBlend();
             String component = I18n.get("tooltip.tridot.value", armor + "%");
             guiGraphics.blit(GUI_ICONS_LOCATION, left, top - 1, 34, 9, 9, 9);
-            guiGraphics.drawString(tridot$self().getMinecraft().font, component, left + 10, top - 1, Color.WHITE.getRGB());
+            guiGraphics.drawString(tridot$self().getMinecraft().font, component, left + 10, top - 2, Color.WHITE.getRGB());
             tridot$self().leftHeight += 10;
             RenderSystem.disableBlend();
             ci.cancel();
