@@ -105,8 +105,13 @@ public abstract class AbstractMinionEntity extends Monster implements TraceableE
 
     @Override
     public boolean hurt(DamageSource pSource, float pAmount){
-        if(pSource.getEntity() instanceof Allied  && !(this.owner instanceof Player)) return false;
+        if(pSource.getDirectEntity() instanceof Allied  && !(this.owner instanceof Player)) return false;
         return super.hurt(pSource, pAmount);
+    }
+
+    @Override
+    protected boolean shouldDropLoot(){
+        return super.shouldDropLoot() && owner == null;
     }
 
     @Override
@@ -115,7 +120,7 @@ public abstract class AbstractMinionEntity extends Monster implements TraceableE
     }
 
     public boolean canAttack(LivingEntity pTarget){
-        return !this.isOwnedBy(pTarget) && super.canAttack(pTarget) && !isAlliedTo(pTarget);
+        return !this.isOwnedBy(pTarget) && super.canAttack(pTarget) && !isAlliedTo(pTarget) && (owner != null && owner.canAttack(pTarget));
     }
 
     public boolean isOwnedBy(LivingEntity pEntity){
