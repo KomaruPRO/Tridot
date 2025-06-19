@@ -120,7 +120,8 @@ public abstract class AbstractMinionEntity extends Monster implements TraceableE
     }
 
     public boolean canAttack(LivingEntity pTarget){
-        return !this.isOwnedBy(pTarget) && super.canAttack(pTarget) && !isAlliedTo(pTarget) && (owner != null && owner.canAttack(pTarget));
+        boolean flag = !this.isOwnedBy(pTarget) && !isAlliedTo(pTarget);
+        return  super.canAttack(pTarget) && (flag || (owner != null && owner.canAttack(pTarget)));
     }
 
     public boolean isOwnedBy(LivingEntity pEntity){
