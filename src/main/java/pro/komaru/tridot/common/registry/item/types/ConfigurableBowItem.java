@@ -82,7 +82,6 @@ public class ConfigurableBowItem extends BowItem{
             abstractarrow.setCritArrow(true);
         }
 
-        abstractarrow.setOwner(player);
         if(infiniteArrows || player.getAbilities().instabuild && (itemstack.is(Items.SPECTRAL_ARROW) || itemstack.is(Items.TIPPED_ARROW))){
             abstractarrow.pickup = AbstractArrow.Pickup.CREATIVE_ONLY;
         }
@@ -91,6 +90,7 @@ public class ConfigurableBowItem extends BowItem{
     public AbstractArrow createArrow(Level pLevel, Player player){
         AbstractArrow customArrow = arrow.get().create(pLevel);
         customArrow.moveTo(new Vec3(player.getEyePosition().x, player.getEyePosition().y - 0.1f, player.getEyePosition().z));
+        customArrow.setOwner(player);
         if(customArrow instanceof AbstractTridotArrow valor) valor.doPostSpawn();
         return customArrow;
     }
@@ -115,6 +115,7 @@ public class ConfigurableBowItem extends BowItem{
                     if(!pLevel.isClientSide()){
                         ArrowItem arrowitem = (ArrowItem)(itemstack.getItem() instanceof ArrowItem ? itemstack.getItem() : Items.ARROW);
                         AbstractArrow abstractarrow = arrowitem == Items.ARROW && arrow.get() != EntityType.ARROW ? createArrow(pLevel, player) : arrowitem.createArrow(pLevel, itemstack, player);
+                        abstractarrow.setOwner(player);
                         doPreSpawn(abstractarrow, player, itemstack, power, infiniteArrows);
                         int enchantmentPower = EnchantmentHelper.getTagEnchantmentLevel(Enchantments.POWER_ARROWS, pStack);
                         if(enchantmentPower > 0){

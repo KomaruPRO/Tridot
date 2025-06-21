@@ -42,12 +42,6 @@ public abstract class AbstractTridotArrow extends AbstractArrow{
     public void doPostSpawn(){
     }
 
-    @Override
-    protected void onHit(HitResult pResult){
-        if(this.level().isClientSide) return; // sync
-        super.onHit(pResult);
-    }
-
     public void tick(){
         super.tick();
         if(this.level().isClientSide() && !(this.isInWaterOrBubble() || this.isInWall())){
