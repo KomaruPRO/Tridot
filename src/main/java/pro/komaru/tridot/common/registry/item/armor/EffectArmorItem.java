@@ -48,7 +48,7 @@ public class EffectArmorItem extends SuitArmorItem{
         }
     }
 
-    private void evaluateArmorEffects(Player player){
+    public void evaluateArmorEffects(Player player){
         for (var entry : AbstractArmorRegistry.EFFECTS.entrySet()) {
             ArmorMaterial material = entry.getKey();
             if (!hasCorrectArmorOn(material, player)) continue;
@@ -58,9 +58,6 @@ public class EffectArmorItem extends SuitArmorItem{
                     MobEffect effect = effectData.instance().get().getEffect();
                     if (!player.hasEffect(effect)) {
                         player.addEffect(effectData.instance().get());
-                        if (Tmp.rnd.nextFloat() > 0.4f) {
-                            player.getInventory().hurtArmor(player.damageSources().magic(), 2f, Inventory.ALL_ARMOR_SLOTS);
-                        }
                     }
                 }
             }
