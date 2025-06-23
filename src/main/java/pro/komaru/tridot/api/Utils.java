@@ -742,6 +742,12 @@ public class Utils {
             Item item = ForgeRegistries.ITEMS.getValue(new ResourceLocation(modId, id));
             return item != null ? item : net.minecraft.world.item.Items.DIRT;
         }
+
+        public boolean getAttackStrengthScale(Player player, float powerPercent) {
+            float f2 = player.getAttackStrengthScale(0.5F);
+            return f2 > powerPercent;
+        }
+
         /**
          * Applies a cooldown to item list
          *
