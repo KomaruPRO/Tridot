@@ -743,7 +743,7 @@ public class Utils {
             return item != null ? item : net.minecraft.world.item.Items.DIRT;
         }
 
-        public boolean getAttackStrengthScale(Player player, float powerPercent) {
+        public static boolean getAttackStrengthScale(Player player, float powerPercent) {
             float f2 = player.getAttackStrengthScale(0.5F);
             return f2 > powerPercent;
         }
