@@ -31,7 +31,6 @@ jobs:
           echo "TAG_NAME=${current_version}" >> $GITHUB_ENV
       - name: Build Mod
         run: |
-          ./gradlew clean
           ./gradlew build --stacktrace
       - name: Increment version
         if: ${{ github.repository == 'KomaruPRO/Tridot' }}
