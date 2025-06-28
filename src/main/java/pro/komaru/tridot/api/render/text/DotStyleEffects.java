@@ -248,57 +248,65 @@ public class DotStyleEffects {
             intensity = tag.getFloat("intensity");
             shiftSymbols = tag.getBoolean("shift_symbols");}
     }
-    public static class GlintFX extends StyleEffect {
-        public static GlintFX of(float speed, float scl, Col glintColor) {
+
+    public static class GlintFX extends StyleEffect{
+        public float speed = 1f;
+        public float scl = 1f;
+        public Col glintColor;
+        Col col;
+
+        public static GlintFX of(float speed, float scl, Col glintColor){
             GlintFX fx = new GlintFX();
             fx.speed = speed;
             fx.scl = scl;
             fx.glintColor = glintColor;
             return fx;
         }
-        public static GlintFX of(float speed, float scl) {
-            return of(speed,scl,Col.white);
-        }
-        public static GlintFX of(float speed) {
-            return of(speed,1f,Col.white);
-        }
-        public static GlintFX of() {
-            return of(1f,1f,Col.white);
+
+        public static GlintFX of(float speed, float scl){
+            return of(speed, scl, Col.white);
         }
 
-        public float speed = 1f;
-        public float scl = 1f;
+        public static GlintFX of(float speed){
+            return of(speed, 1f, Col.white);
+        }
 
-        public Col glintColor;
-
-        Col col;
+        public static GlintFX of(){
+            return of(1f, 1f, Col.white);
+        }
 
         @Override
-        public void beforeGlyph(Font.StringRenderOutput self, DotStyle style, int index) {
+        public void beforeGlyph(Font.StringRenderOutput self, DotStyle style, int index){
             col = style.color();
 
             float t = (ClientTick.getTotal() * speed - index / scl) / 60f;
             t = (Mathf.sin(t * Mathf.PI));
-            style.color(col.lerp(glintColor, t));
+            style.color(col.copy().lerp(glintColor, t));
         }
 
         @Override
-        public void afterGlyph(Font.StringRenderOutput self, DotStyle style, int index, FontSet fontset, GlyphInfo glyphinfo, BakedGlyph bakedglyph, TextColor textcolor, float f, float f1, float f2, float f3, float f6, float f7) {
+        public void afterGlyph(Font.StringRenderOutput self, DotStyle style, int index, FontSet fontset, GlyphInfo glyphinfo, BakedGlyph bakedglyph, TextColor textcolor, float f, float f1, float f2, float f3, float f6, float f7){
             style.color(col);
         }
 
-        @Override public ResourceLocation id() {return ofTridot("glint");}
+        @Override
+        public ResourceLocation id(){
+            return ofTridot("glint");
+        }
 
-        @Override public void write(CompoundTag tag) {
-            tag.putFloat("speed",speed);
-            tag.putFloat("scl",scl);
-            tag.putInt("glint_color",glintColor.toARGB());}
+        @Override
+        public void write(CompoundTag tag){
+            tag.putFloat("speed", speed);
+            tag.putFloat("scl", scl);
+        }
 
-        @Override public void read(CompoundTag tag) {
+        @Override
+        public void read(CompoundTag tag){
             speed = tag.getFloat("speed");
             scl = tag.getFloat("scl");
-            glintColor = Col.fromARGB(tag.getInt("glint_color"));}
+        }
     }
+
     public static class SpinFX extends StyleEffect {
         public static SpinFX of(float speed) {
             SpinFX fx = new SpinFX();
