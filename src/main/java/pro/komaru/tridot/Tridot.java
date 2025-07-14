@@ -54,6 +54,7 @@ public class Tridot {
         TridotParticles.register(eventBus);
         TridotLootModifier.register(eventBus);
         LootConditionsRegistry.init(eventBus);
+        ItemTabRegistry.register(eventBus);
 
         ModArgumentTypes.register(eventBus);
         ITEMS.register(eventBus);
@@ -72,6 +73,7 @@ public class Tridot {
         ModLoadingContext.get().registerConfig(Type.CLIENT, ClientConfig.SPEC);
         eventBus.addListener(this::setup);
         eventBus.addListener(TridotLibClient::clientSetup);
+        eventBus.addListener(ItemTabRegistry::addCreative);
 
         MinecraftForge.EVENT_BUS.register(this);
         MinecraftForge.EVENT_BUS.register(new Events());

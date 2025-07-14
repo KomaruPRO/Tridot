@@ -1,6 +1,8 @@
 package pro.komaru.tridot.client;
 
 import net.minecraft.client.*;
+import net.minecraft.client.gui.screens.*;
+import net.minecraft.client.gui.screens.inventory.*;
 import net.minecraft.util.*;
 import net.minecraft.world.entity.player.*;
 import net.minecraft.world.item.*;
@@ -10,6 +12,7 @@ import net.minecraftforge.event.*;
 import net.minecraftforge.eventbus.api.*;
 import net.minecraftforge.fml.common.*;
 import pro.komaru.tridot.api.render.text.DotText;
+import pro.komaru.tridot.api.tabs.*;
 import pro.komaru.tridot.client.gfx.*;
 import pro.komaru.tridot.client.gfx.particle.options.*;
 import pro.komaru.tridot.client.gfx.postprocess.*;
@@ -20,7 +23,32 @@ import pro.komaru.tridot.client.render.screenshake.*;
 import pro.komaru.tridot.util.Col;
 import pro.komaru.tridot.util.render.BaseDrawer;
 
+import java.util.*;
+
 public class ClientEvents {
+    public static ArrayList<SubCreativeTabButton> subCreativeTabButtons = new ArrayList<>();
+
+    @SubscribeEvent
+    public void onScreenInitPost(ScreenEvent.Init.Post event) {
+        Screen screen = event.getScreen();
+        if (screen instanceof CreativeModeInventoryScreen creativeScreen) {
+            subCreativeTabButtons.clear();
+            int i = creativeScreen.getGuiLeft();
+            int j = creativeScreen.getGuiTop();
+            for (CreativeModeTab tab : CreativeModeTabs.allTabs()) {
+                if (tab instanceof MultiCreativeTab multiCreativeTab) {
+                    int tabsCount = 0;
+                    for (SubCreativeTab subTab : multiCreativeTab.getSortedSubTabs()) {
+                        SubCreativeTabButton button = new SubCreativeTabButton(creativeScreen, multiCreativeTab, subTab, i - 19, j + 3 + (tabsCount * 24), j + 3);
+                        subCreativeTabButtons.add(button);
+
+                        event.addListener(button);
+                        tabsCount++;
+                    }
+                }
+            }
+        }
+    }
 
     @SubscribeEvent
     public void clientTick(TickEvent.ClientTickEvent event){
@@ -34,14 +62,6 @@ public class ClientEvents {
             ScreenParticleHandler.tickParticles();
         }
     }
-
-    /*@SubscribeEvent
-    public void render(RenderGuiEvent event) {
-        BaseDrawer draw = new BaseDrawer(event.getGuiGraphics(), event.getGuiGraphics().pose(), "tridot");
-
-        draw.color(Col.red);
-        draw.rect("particle/skull",100f,100f, 2f, 2f, ClientTick.getTotal());
-    }*/
 
     @SubscribeEvent
     public void renderTick(TickEvent.RenderTickEvent event){

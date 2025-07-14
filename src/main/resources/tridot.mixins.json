@@ -7,6 +7,7 @@
   "mixins": [
     "common.BlockItemMixin",
     "common.BlocksMixin",
+    "common.CreativeModeTabsMixin",
     "common.CreeperMixin",
     "common.ForgeHooksMixin",
     "common.ItemEntityMixin",
@@ -30,7 +31,8 @@
     "client.LivingEntityRendererMixin",
     "client.SplashManagerMixin",
     "client.StringRenderOutputMixin",
-    "client.curios.CurioTooltipMixin"
+    "client.curios.CurioTooltipMixin",
+    "client.CreativeModeInventoryScreenMixin"
   ],
   "injectors": {
     "defaultRequire": 1
