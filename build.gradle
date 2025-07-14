@@ -109,6 +109,8 @@ dependencies{
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
     compileOnly fg.deobf("top.theillusivec4.curios:curios-forge:5.9.1+1.20.1")
     compileOnly fg.deobf("curse.maven:oculus-581495:5299671")
+    compileOnly fg.deobf("curse.maven:mmmmmmmmmmmm-225738:6608233")
+    compileOnly fg.deobf("curse.maven:selene-499980:6740431")
 
     runtimeOnly fg.deobf("mezz.jei:jei-1.20.1-forge:15.8.2.25")
     runtimeOnly fg.deobf("curse.maven:jade-324717:5493390")

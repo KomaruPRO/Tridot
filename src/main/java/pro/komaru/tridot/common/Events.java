@@ -109,8 +109,9 @@ public class Events{
         if(!event.getSource().is(DamageTypeTags.BYPASSES_ARMOR)){
             float incomingDamage = event.getAmount();
             float totalMultiplier;
-            if(CommonConfig.PERCENT_ARMOR.get() && event.getEntity() instanceof Player player){
-                float armor = (float)player.getAttributeValue(AttributeRegistry.PERCENT_ARMOR.get()) / 100;
+            if(CommonConfig.PERCENT_ARMOR.get()){
+                if(event.getEntity().getAttribute(AttributeRegistry.PERCENT_ARMOR.get()) == null) return;
+                float armor = (float)event.getEntity().getAttributeValue(AttributeRegistry.PERCENT_ARMOR.get()) / 100;
                 totalMultiplier = Math.max(Math.min(1 - (armor), 1), 0);
                 float reducedDamage = incomingDamage * totalMultiplier;
                 event.setAmount(reducedDamage);

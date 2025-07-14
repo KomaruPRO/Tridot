@@ -1,5 +1,7 @@
 package pro.komaru.tridot;
 
+import net.mehvahdjukaar.dummmmmmy.*;
+import net.mehvahdjukaar.dummmmmmy.common.*;
 import net.minecraft.resources.*;
 import net.minecraft.world.item.*;
 import net.minecraftforge.api.distmarker.*;
@@ -95,6 +97,9 @@ public class Tridot {
         public static void attachAttribute(EntityAttributeModificationEvent event) {
             event.add(EntityType.PLAYER, AttributeRegistry.PROJECTILE_DAMAGE.get());
             event.add(EntityType.PLAYER, AttributeRegistry.PERCENT_ARMOR.get());
+            if(ModList.get().isLoaded("dummmmmmy")) {
+                event.add(Dummmmmmy.TARGET_DUMMY.get(), AttributeRegistry.PERCENT_ARMOR.get());
+            }
         }
     }
 }
