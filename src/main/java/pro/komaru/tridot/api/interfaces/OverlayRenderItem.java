@@ -39,7 +39,7 @@ public interface OverlayRenderItem{
             if(item.toRender()){
                 gui.pose().pushPose();
                 gui.pose().translate(0, isEmbeddiumPlusLoaded() ? 10 : 0, -200);
-                item.render(mc.player.getMainHandItem().getOrCreateTag(), gui, item.mainHandOffset(), 0);
+                item.render(mc.player.getMainHandItem().getOrCreateTag(), gui, 0, 0);
                 gui.pose().popPose();
             }
         }
