@@ -59,10 +59,6 @@ public abstract class MultiAttackMob extends PathfinderMob{
 
     protected void customServerAiStep(){
         super.customServerAiStep();
-        if(this.globalCooldown > 0){
-            --this.globalCooldown;
-        }
-
         if(this.preparingTickCount > 0){
             --this.preparingTickCount;
         }
@@ -157,7 +153,7 @@ public abstract class MultiAttackMob extends PathfinderMob{
             MultiAttackMob.this.setAggressive(true);
             MultiAttackMob.this.setCurrentAttack(this.getAttack());
             this.attackWarmupDelay = this.adjustedTickDelay(this.getPreparingTime());
-            MultiAttackMob.this.globalCooldown = 40; // prevents attack spam
+            MultiAttackMob.this.globalCooldown = 20; // prevents attack spam
             MultiAttackMob.this.preparingTickCount = this.getPreparingTime();
             this.nextAttackTickCount = MultiAttackMob.this.tickCount + this.getAttackInterval();
             SoundEvent soundevent = this.getPrepareSound();
@@ -178,6 +174,7 @@ public abstract class MultiAttackMob extends PathfinderMob{
          */
         public void tick(){
             --this.attackWarmupDelay;
+            --MultiAttackMob.this.globalCooldown;
             if(this.attackWarmupDelay == 0 && MultiAttackMob.this.globalCooldown == 0){
                 this.performAttack();
                 MultiAttackMob.this.playSound(this.getAttackSound(), 1.0F, 1.0F);
