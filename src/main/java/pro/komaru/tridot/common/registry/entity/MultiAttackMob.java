@@ -16,6 +16,7 @@ public abstract class MultiAttackMob extends PathfinderMob{
     private static final EntityDataAccessor<String> DATA_ID = SynchedEntityData.defineId(MultiAttackMob.class, EntityDataSerializers.STRING);
     protected int preparingTickCount;
     protected int globalCooldown;
+    protected int attackWarmupDelay;
     public AttackRegistry currentAttack = AttackRegistry.NONE;
 
     public MultiAttackMob(EntityType<? extends PathfinderMob> pEntityType, Level pLevel){
@@ -59,6 +60,14 @@ public abstract class MultiAttackMob extends PathfinderMob{
 
     protected void customServerAiStep(){
         super.customServerAiStep();
+        if(this.globalCooldown > 0){
+            --this.globalCooldown;
+        }
+
+        if(this.attackWarmupDelay > 0){
+            --this.attackWarmupDelay;
+        }
+
         if(this.preparingTickCount > 0){
             --this.preparingTickCount;
         }
@@ -118,7 +127,6 @@ public abstract class MultiAttackMob extends PathfinderMob{
     }
 
     public abstract class AttackGoal extends Goal{
-        protected int attackWarmupDelay;
         protected int nextAttackTickCount;
 
         /**
@@ -143,7 +151,7 @@ public abstract class MultiAttackMob extends PathfinderMob{
          */
         public boolean canContinueToUse(){
             LivingEntity livingentity = MultiAttackMob.this.getTarget();
-            return livingentity != null && livingentity.isAlive() && this.attackWarmupDelay > 0;
+            return livingentity != null && livingentity.isAlive() && MultiAttackMob.this.attackWarmupDelay > 0;
         }
 
         /**
@@ -152,8 +160,6 @@ public abstract class MultiAttackMob extends PathfinderMob{
         public void start(){
             MultiAttackMob.this.setAggressive(true);
             MultiAttackMob.this.setCurrentAttack(this.getAttack());
-            this.attackWarmupDelay = this.adjustedTickDelay(this.getPreparingTime());
-            MultiAttackMob.this.globalCooldown = 20; // prevents attack spam
             MultiAttackMob.this.preparingTickCount = this.getPreparingTime();
             this.nextAttackTickCount = MultiAttackMob.this.tickCount + this.getAttackInterval();
             SoundEvent soundevent = this.getPrepareSound();
@@ -173,10 +179,10 @@ public abstract class MultiAttackMob extends PathfinderMob{
          * Keep ticking a continuous task that has already been started
          */
         public void tick(){
-            --this.attackWarmupDelay;
-            --MultiAttackMob.this.globalCooldown;
-            if(this.attackWarmupDelay == 0 && MultiAttackMob.this.globalCooldown == 0){
+            if(MultiAttackMob.this.attackWarmupDelay == 0 && MultiAttackMob.this.globalCooldown == 0){
                 this.performAttack();
+                MultiAttackMob.this.attackWarmupDelay = this.adjustedTickDelay(this.getPreparingTime());
+                MultiAttackMob.this.globalCooldown = 20; // prevents attack spam
                 MultiAttackMob.this.playSound(this.getAttackSound(), 1.0F, 1.0F);
             }
         }
