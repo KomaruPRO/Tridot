@@ -10,19 +10,35 @@ public class Col {
     private static final float[] tmpHsv = new float[3];
 
     // --- Static Color Constants ---
-    public static final Col WHITE = new Col(1f, 1f, 1f, 1f);
-    public static final Col LIGHT_GRAY = new Col(192, 192, 192);
-    public static final Col GRAY = new Col(128, 128, 128);
-    public static final Col DARK_GRAY = new Col(64, 64, 64);
-    public static final Col BLACK = new Col(0, 0, 0);
-    public static final Col RED = new Col(255, 0, 0);
-    public static final Col PINK = new Col(255, 175, 175);
-    public static final Col ORANGE = new Col(255, 200, 0);
-    public static final Col YELLOW = new Col(255, 255, 0);
-    public static final Col GREEN = new Col(0, 255, 0);
-    public static final Col MAGENTA = new Col(255, 0, 255);
-    public static final Col CYAN = new Col(0, 255, 255);
-    public static final Col BLUE = new Col(0, 0, 255);
+    public static Col
+            white = new Col(1f, 1f, 1f, 1f),
+            lightGray = new Col(192, 192, 192),
+            gray = new Col(64, 64, 64),
+            darkGray = new Col(64, 64, 64),
+            black = new Col(0, 0, 0),
+            red = new Col(255, 0, 0),
+            pink = new Col(255, 175, 175),
+            orange = new Col(255, 200, 0),
+            yellow = new Col(255, 255, 0),
+            green = new Col(0, 255, 0),
+            magenta = new Col(255, 0, 255),
+            cyan = new Col(0, 255, 255),
+            blue = new Col(0, 0, 255),
+
+            WHITE = white,
+            LIGHT_GRAY = lightGray,
+            GRAY = gray,
+            DARK_GRAY = darkGray,
+            BLACK = black,
+            RED = red,
+            PINK = pink,
+            ORANGE = orange,
+            YELLOW = yellow,
+            GREEN = green,
+            MAGENTA = magenta,
+            CYAN = cyan,
+            BLUE = blue
+         ;
 
     // --- Constructors ---
 

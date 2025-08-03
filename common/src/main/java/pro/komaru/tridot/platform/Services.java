@@ -1,6 +1,6 @@
 package pro.komaru.tridot.platform;
 
-import pro.komaru.tridot.TridotConst;
+import pro.komaru.tridot.TridotCommon;
 import pro.komaru.tridot.platform.services.IPlatformHelper;
 
 import java.util.ServiceLoader;
@@ -12,7 +12,7 @@ public class Services {
         final T loadedService = ServiceLoader.load(clazz)
                 .findFirst()
                 .orElseThrow(() -> new NullPointerException("Failed to load service for " + clazz.getName()));
-        TridotConst.LOG.debug("Loaded {} for service {}", loadedService, clazz);
+        TridotCommon.LOG.debug("Loaded {} for service {}", loadedService, clazz);
         return loadedService;
     }
 }

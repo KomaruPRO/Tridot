@@ -5,6 +5,7 @@ import pro.komaru.tridot.core.struct.func.Func;
 import pro.komaru.tridot.core.struct.func.Prov;
 
 import java.util.HashMap;
+import java.util.Map;
 
 public class Structs {
     public static  <T> T or(T a, T b) {
@@ -52,7 +53,7 @@ public class Structs {
         n.slice();
         return n.toArray();
     }
-    public static <K,V> HashMap<V,K> inv(HashMap<K,V> mapOrig) {
+    public static <K,V> HashMap<V,K> reverse(Map<K,V> mapOrig) {
         HashMap<V,K> map = new HashMap<>();
         mapOrig.forEach((k,v) -> map.put(v,k));
         return map;

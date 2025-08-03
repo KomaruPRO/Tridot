@@ -192,6 +192,9 @@ public class Vec2 implements Pos2 {
         add(offsetX, offsetY);
         b.sub(offsetX, offsetY);
     }
+    public float dot(Pos2 other) {
+        return dot(other.x(), other.y());
+    }
     public float dot(float ox, float oy){
         return x * ox + y * oy;
     }

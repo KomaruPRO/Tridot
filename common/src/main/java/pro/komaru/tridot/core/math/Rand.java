@@ -1,7 +1,5 @@
 package pro.komaru.tridot.core.math;
 
-import pro.komaru.tridot.anno.Caution;
-
 import java.util.*;
 
 /**
@@ -49,9 +47,8 @@ public class Rand extends Random{
      * to be distinct from any other invocation of this constructor.
      * <p>
      * This implementation creates a {@link Random} instance to generate the initial seed.
-     * @Caution Please use Rand.of(int instanceId) or Tmp.rnd instead to avoid creating multiple instances of Rand.
+     * @Caution: Please use Rand.of(int instanceId) or Tmp.rnd instead to avoid creating multiple instances of Rand.
      */
-    @Caution(reason = "Please use Rand.of(int instanceId) or Tmp.rnd instead to avoid creating multiple instances of Rand.")
     public Rand(){
         setSeed(new Random().nextLong());
     }
