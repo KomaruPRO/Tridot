@@ -66,15 +66,26 @@ public abstract class MultiAttackMob extends PathfinderMob{
         if (attackAnimationTick > 0) {
             attackAnimationTick--;
 
-            if (attackAnimationTick == 5 && this.getTarget() != null && getTarget().isAlive()) {
+            if (attackAnimationTick == attackDelay() && this.getTarget() != null && getTarget().isAlive()) {
                 double distSq = this.getPerceivedTargetDistanceSquareForMeleeAttack(this.getTarget());
                 if (distSq <= getAttackReachSqr(this.getTarget())){
                     swing(InteractionHand.MAIN_HAND);
                     doHurtTarget(getTarget());
-                    playSound(SoundEvents.PLAYER_ATTACK_STRONG, 1.0F, 1.0F);
+                    playSound(attackSound(), 1.0F, 1.0F);
                 }
             }
         }
+    }
+
+    /**
+     * Animation delay
+     */
+    public int attackDelay() {
+        return 5;
+    }
+
+    public SoundEvent attackSound() {
+        return SoundEvents.PLAYER_ATTACK_STRONG;
     }
 
     protected double getAttackReachSqr(LivingEntity pAttackTarget){
@@ -150,10 +161,10 @@ public abstract class MultiAttackMob extends PathfinderMob{
     }
 
     public abstract class MeleeAttackGoal extends AttackGoal {
-        private final MultiAttackMob mob;
-        private final double speedModifier;
-        private int ticksUntilNextPathRecalc;
-        private double lastTargetX, lastTargetY, lastTargetZ;
+        public final MultiAttackMob mob;
+        public final double speedModifier;
+        public int ticksUntilNextPathRecalc;
+        public double lastTargetX, lastTargetY, lastTargetZ;
 
         public MeleeAttackGoal(MultiAttackMob mob, double speedModifier) {
             this.mob = mob;
@@ -211,11 +222,6 @@ public abstract class MultiAttackMob extends PathfinderMob{
                     mob.playSound(getAttackSound(), 1.0F, 1.0F);
                 }
             }
-        }
-
-        @Override
-        public void stop() {
-            super.stop();
         }
 
         private void storeTargetPosition() {
