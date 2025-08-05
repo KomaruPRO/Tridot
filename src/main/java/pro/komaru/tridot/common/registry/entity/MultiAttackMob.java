@@ -65,16 +65,19 @@ public abstract class MultiAttackMob extends PathfinderMob{
         super.tick();
         if (attackAnimationTick > 0) {
             attackAnimationTick--;
-
             if (attackAnimationTick == attackDelay() && this.getTarget() != null && getTarget().isAlive()) {
                 double distSq = this.getPerceivedTargetDistanceSquareForMeleeAttack(this.getTarget());
                 if (distSq <= getAttackReachSqr(this.getTarget())){
-                    swing(InteractionHand.MAIN_HAND);
-                    doHurtTarget(getTarget());
-                    playSound(attackSound(), 1.0F, 1.0F);
+                    performMeleeAttack();
                 }
             }
         }
+    }
+
+    public void performMeleeAttack() {
+        swing(InteractionHand.MAIN_HAND);
+        doHurtTarget(getTarget());
+        playSound(attackSound(), 1.0F, 1.0F);
     }
 
     /**
