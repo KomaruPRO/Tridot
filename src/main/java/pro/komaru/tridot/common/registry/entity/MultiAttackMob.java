@@ -3,6 +3,7 @@ package pro.komaru.tridot.common.registry.entity;
 import net.minecraft.nbt.*;
 import net.minecraft.network.syncher.*;
 import net.minecraft.sounds.*;
+import net.minecraft.world.*;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.level.*;
@@ -18,6 +19,7 @@ public abstract class MultiAttackMob extends PathfinderMob{
     protected int globalCooldown;
     protected int attackWarmupDelay;
     public AttackRegistry currentAttack = AttackRegistry.NONE;
+    private int attackAnimationTick;
 
     public MultiAttackMob(EntityType<? extends PathfinderMob> pEntityType, Level pLevel){
         super(pEntityType, pLevel);
@@ -56,6 +58,27 @@ public abstract class MultiAttackMob extends PathfinderMob{
 
     public AttackRegistry getCurrentAttack(){
         return !this.level().isClientSide ? this.currentAttack : AttackRegistry.byId(this.entityData.get(DATA_ID));
+    }
+
+    @Override
+    public void tick(){
+        super.tick();
+        if (attackAnimationTick > 0) {
+            attackAnimationTick--;
+
+            if (attackAnimationTick == 5 && this.getTarget() != null && getTarget().isAlive()) {
+                double distSq = this.getPerceivedTargetDistanceSquareForMeleeAttack(this.getTarget());
+                if (distSq <= getAttackReachSqr(this.getTarget())){
+                    swing(InteractionHand.MAIN_HAND);
+                    doHurtTarget(getTarget());
+                    playSound(SoundEvents.PLAYER_ATTACK_STRONG, 1.0F, 1.0F);
+                }
+            }
+        }
+    }
+
+    protected double getAttackReachSqr(LivingEntity pAttackTarget){
+        return this.getBbWidth() * 2.0F * this.getBbWidth() * 2.0F + pAttackTarget.getBbWidth();
     }
 
     protected void customServerAiStep(){
@@ -125,6 +148,104 @@ public abstract class MultiAttackMob extends PathfinderMob{
             }
         }
     }
+
+    public abstract class MeleeAttackGoal extends AttackGoal {
+        private final MultiAttackMob mob;
+        private final double speedModifier;
+        private int ticksUntilNextPathRecalc;
+        private double lastTargetX, lastTargetY, lastTargetZ;
+
+        public MeleeAttackGoal(MultiAttackMob mob, double speedModifier) {
+            this.mob = mob;
+            this.speedModifier = speedModifier;
+        }
+
+        @Override
+        public boolean canUse() {
+            LivingEntity target = mob.getTarget();
+            if (target == null || !target.isAlive()) return false;
+            if (mob.isPreparingAttack()) return false;
+            if(this.mob.getPerceivedTargetDistanceSquareForMeleeAttack(target) >= getAttackReachSqr(target)) return false;
+            return mob.tickCount >= this.nextAttackTickCount;
+        }
+
+        @Override
+        public boolean canContinueToUse() {
+            LivingEntity target = mob.getTarget();
+            return target != null && target.isAlive() && MultiAttackMob.this.attackWarmupDelay > 0;
+        }
+
+        @Override
+        public void start() {
+            super.start();
+            this.ticksUntilNextPathRecalc = 0;
+            this.mob.getNavigation().moveTo(mob.getTarget(), speedModifier);
+            storeTargetPosition();
+        }
+
+        @Override
+        public void tick() {
+            LivingEntity target = mob.getTarget();
+            if (target == null) return;
+            mob.getLookControl().setLookAt(target, 30.0F, 30.0F);
+
+            if (--ticksUntilNextPathRecalc <= 0 &&
+            (distanceToStoredTargetSqr(target) >= 1.0D || mob.getRandom().nextFloat() < 0.05F)) {
+                storeTargetPosition();
+                this.ticksUntilNextPathRecalc += 5;
+                mob.getNavigation().moveTo(target, speedModifier);
+            }
+
+            if (MultiAttackMob.this.attackWarmupDelay == 0 && MultiAttackMob.this.globalCooldown == 0 && MultiAttackMob.this.attackAnimationTick <= 5) {
+                double distSq = this.mob.getPerceivedTargetDistanceSquareForMeleeAttack(target);
+                if(distSq > 1024.0D){
+                    this.ticksUntilNextPathRecalc += 10;
+                }else if(distSq > 256.0D){
+                    this.ticksUntilNextPathRecalc += 5;
+                }
+
+                if (distSq <= getAttackReachSqr(target)) {
+                    MultiAttackMob.this.attackAnimationTick = 0;
+                    MultiAttackMob.this.attackWarmupDelay = adjustedTickDelay(getPreparingTime());
+                    MultiAttackMob.this.globalCooldown = 20;
+                    mob.playSound(getAttackSound(), 1.0F, 1.0F);
+                }
+            }
+        }
+
+        @Override
+        public void stop() {
+            super.stop();
+        }
+
+        private void storeTargetPosition() {
+            LivingEntity target = mob.getTarget();
+            this.lastTargetX = target.getX();
+            this.lastTargetY = target.getY();
+            this.lastTargetZ = target.getZ();
+        }
+
+        private double distanceToStoredTargetSqr(LivingEntity target) {
+            return target.distanceToSqr(lastTargetX, lastTargetY, lastTargetZ);
+        }
+
+        @Override
+        protected void performAttack() {
+            LivingEntity target = mob.getTarget();
+            if (target != null && target.isAlive()) {
+                mob.swing(InteractionHand.MAIN_HAND);
+                mob.doHurtTarget(target);
+            }
+        }
+
+        public abstract int attackAnimationTick();
+
+        @Override
+        public void onPrepare() {
+            MultiAttackMob.this.attackAnimationTick = attackAnimationTick();
+        }
+    }
+
 
     public abstract class AttackGoal extends Goal{
         protected int nextAttackTickCount;
@@ -205,7 +326,7 @@ public abstract class MultiAttackMob extends PathfinderMob{
         public abstract SoundEvent getPrepareSound();
 
         public SoundEvent getAttackSound(){
-            return SoundEvents.EVOKER_CAST_SPELL;
+            return SoundEvents.EMPTY;
         }
 
         /**
