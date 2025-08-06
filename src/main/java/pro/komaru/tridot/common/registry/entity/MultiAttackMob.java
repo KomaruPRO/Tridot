@@ -186,13 +186,17 @@ public abstract class MultiAttackMob extends PathfinderMob{
             return target != null && target.isAlive() && MultiAttackMob.this.attackWarmupDelay > 0;
         }
 
-        @Override
         public void start() {
-            super.start();
+            MultiAttackMob.this.setAggressive(true);
+            MultiAttackMob.this.setCurrentAttack(this.getAttack());
+            MultiAttackMob.this.preparingTickCount = this.getPreparingTime();
+            this.nextAttackTickCount = MultiAttackMob.this.tickCount + this.getAttackInterval();
+            this.onPrepare();
             this.ticksUntilNextPathRecalc = 0;
             this.mob.getNavigation().moveTo(mob.getTarget(), speedModifier);
             storeTargetPosition();
         }
+
 
         @Override
         public void tick() {
@@ -249,6 +253,11 @@ public abstract class MultiAttackMob extends PathfinderMob{
 
         public void beforeAttack() {
             MultiAttackMob.this.attackAnimationTick = attackAnimationTick();
+            SoundEvent soundevent = this.getPrepareSound();
+
+            if (soundevent != null) {
+                MultiAttackMob.this.playSound(soundevent, 1.0F, 1.0F);
+            }
         }
 
         @Override
