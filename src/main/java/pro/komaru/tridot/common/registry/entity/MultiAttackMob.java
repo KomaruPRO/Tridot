@@ -6,9 +6,14 @@ import net.minecraft.sounds.*;
 import net.minecraft.world.*;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.goal.*;
+import net.minecraft.world.entity.monster.*;
+import net.minecraft.world.entity.projectile.*;
 import net.minecraft.world.level.*;
 import net.minecraft.world.level.pathfinder.*;
+import net.minecraft.world.phys.*;
+import pro.komaru.tridot.api.*;
 import pro.komaru.tridot.api.entity.*;
+import pro.komaru.tridot.util.*;
 
 import javax.annotation.*;
 import java.util.*;
@@ -66,8 +71,7 @@ public abstract class MultiAttackMob extends PathfinderMob{
         if (attackAnimationTick > 0) {
             attackAnimationTick--;
             if (attackAnimationTick == attackDelay() && this.getTarget() != null && getTarget().isAlive()) {
-                double distSq = this.getPerceivedTargetDistanceSquareForMeleeAttack(this.getTarget());
-                if (distSq <= getAttackReachSqr(this.getTarget())){
+                if (isWithinMeleeAttackRange(this.getTarget())){
                     performMeleeAttack();
                 }
             }
@@ -89,10 +93,6 @@ public abstract class MultiAttackMob extends PathfinderMob{
 
     public SoundEvent attackSound() {
         return SoundEvents.PLAYER_ATTACK_STRONG;
-    }
-
-    protected double getAttackReachSqr(LivingEntity pAttackTarget){
-        return this.getBbWidth() * 2.0F * this.getBbWidth() * 2.0F + pAttackTarget.getBbWidth();
     }
 
     protected void customServerAiStep(){
@@ -163,13 +163,13 @@ public abstract class MultiAttackMob extends PathfinderMob{
         }
     }
 
-    public abstract class MeleeAttackGoal extends AttackGoal {
+    public abstract class TridotMeleeAttackGoal extends AttackGoal {
         public final MultiAttackMob mob;
         public final double speedModifier;
         public int ticksUntilNextPathRecalc;
         public double lastTargetX, lastTargetY, lastTargetZ;
 
-        public MeleeAttackGoal(MultiAttackMob mob, double speedModifier) {
+        public TridotMeleeAttackGoal(MultiAttackMob mob, double speedModifier) {
             this.mob = mob;
             this.speedModifier = speedModifier;
         }
@@ -179,7 +179,7 @@ public abstract class MultiAttackMob extends PathfinderMob{
             LivingEntity target = mob.getTarget();
             if (target == null || !target.isAlive()) return false;
             if (mob.isPreparingAttack()) return false;
-            if(this.mob.getPerceivedTargetDistanceSquareForMeleeAttack(target) >= getAttackReachSqr(target)) return false;
+            if(isWithinMeleeAttackRange(target)) return false;
             return mob.tickCount >= this.nextAttackTickCount;
         }
 
@@ -218,7 +218,7 @@ public abstract class MultiAttackMob extends PathfinderMob{
                     this.ticksUntilNextPathRecalc += 5;
                 }
 
-                if (distSq <= getAttackReachSqr(target)) {
+                if (isWithinMeleeAttackRange(target)) {
                     MultiAttackMob.this.attackAnimationTick = 0;
                     MultiAttackMob.this.attackWarmupDelay = adjustedTickDelay(getPreparingTime());
                     MultiAttackMob.this.globalCooldown = 20;
