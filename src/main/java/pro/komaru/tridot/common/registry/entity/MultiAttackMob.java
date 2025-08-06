@@ -71,7 +71,7 @@ public abstract class MultiAttackMob extends PathfinderMob{
         if (attackAnimationTick > 0) {
             attackAnimationTick--;
             if (attackAnimationTick == attackDelay() && this.getTarget() != null && getTarget().isAlive()) {
-                if (isWithinMeleeAttackRange(this.getTarget())){
+                if (    isWithinMeleeAttackRange(this.getTarget())){
                     performMeleeAttack();
                 }
             }
@@ -179,7 +179,7 @@ public abstract class MultiAttackMob extends PathfinderMob{
             LivingEntity target = mob.getTarget();
             if (target == null || !target.isAlive()) return false;
             if (mob.isPreparingAttack()) return false;
-            if(isWithinMeleeAttackRange(target)) return false;
+            if(!isWithinMeleeAttackRange(target)) return false;
             return mob.tickCount >= this.nextAttackTickCount;
         }
 
