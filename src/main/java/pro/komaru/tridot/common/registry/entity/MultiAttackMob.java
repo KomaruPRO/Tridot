@@ -23,8 +23,8 @@ public abstract class MultiAttackMob extends PathfinderMob{
     protected int preparingTickCount;
     protected int globalCooldown;
     protected int attackWarmupDelay;
+    protected int attackAnimationTick;
     public AttackRegistry currentAttack = AttackRegistry.NONE;
-    private int attackAnimationTick;
 
     public MultiAttackMob(EntityType<? extends PathfinderMob> pEntityType, Level pLevel){
         super(pEntityType, pLevel);
@@ -71,7 +71,7 @@ public abstract class MultiAttackMob extends PathfinderMob{
         if (attackAnimationTick > 0) {
             attackAnimationTick--;
             if (attackAnimationTick == attackDelay() && this.getTarget() != null && getTarget().isAlive()) {
-                if (    isWithinMeleeAttackRange(this.getTarget())){
+                if (isWithinMeleeAttackRange(this.getTarget())){
                     performMeleeAttack();
                 }
             }
@@ -177,10 +177,7 @@ public abstract class MultiAttackMob extends PathfinderMob{
         @Override
         public boolean canUse() {
             LivingEntity target = mob.getTarget();
-            if (target == null || !target.isAlive()) return false;
-            if (mob.isPreparingAttack()) return false;
-            if(!isWithinMeleeAttackRange(target)) return false;
-            return mob.tickCount >= this.nextAttackTickCount;
+            return target != null && target.isAlive() && !mob.isPreparingAttack();
         }
 
         @Override
@@ -210,7 +207,7 @@ public abstract class MultiAttackMob extends PathfinderMob{
                 mob.getNavigation().moveTo(target, speedModifier);
             }
 
-            if (MultiAttackMob.this.attackWarmupDelay == 0 && MultiAttackMob.this.globalCooldown == 0 && MultiAttackMob.this.attackAnimationTick <= 5) {
+            if (!mob.isPreparingAttack() && mob.attackWarmupDelay == 0 && mob.globalCooldown == 0 && mob.attackAnimationTick <= 5) {
                 double distSq = this.mob.getPerceivedTargetDistanceSquareForMeleeAttack(target);
                 if(distSq > 1024.0D){
                     this.ticksUntilNextPathRecalc += 10;
@@ -219,10 +216,11 @@ public abstract class MultiAttackMob extends PathfinderMob{
                 }
 
                 if (isWithinMeleeAttackRange(target)) {
-                    MultiAttackMob.this.attackAnimationTick = 0;
-                    MultiAttackMob.this.attackWarmupDelay = adjustedTickDelay(getPreparingTime());
-                    MultiAttackMob.this.globalCooldown = 20;
+                    mob.attackAnimationTick = 0;
+                    mob.attackWarmupDelay = adjustedTickDelay(getPreparingTime());
+                    mob.globalCooldown = 20;
                     mob.playSound(getAttackSound(), 1.0F, 1.0F);
+                    onPrepare();
                 }
             }
         }
@@ -249,12 +247,17 @@ public abstract class MultiAttackMob extends PathfinderMob{
 
         public abstract int attackAnimationTick();
 
-        @Override
-        public void onPrepare() {
+        public void beforeAttack() {
             MultiAttackMob.this.attackAnimationTick = attackAnimationTick();
         }
-    }
 
+        @Override
+        public void onPrepare() {
+            if (mob.getTarget() != null && isWithinMeleeAttackRange(mob.getTarget())) {
+                beforeAttack();
+            }
+        }
+    }
 
     public abstract class AttackGoal extends Goal{
         protected int nextAttackTickCount;
