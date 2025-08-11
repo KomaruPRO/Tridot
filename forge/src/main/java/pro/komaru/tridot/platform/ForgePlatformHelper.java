@@ -1,5 +1,6 @@
 package pro.komaru.tridot.platform;
 
+import pro.komaru.tridot.core.struct.enums.GameSide;
 import pro.komaru.tridot.platform.services.IPlatformHelper;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.loading.FMLLoader;

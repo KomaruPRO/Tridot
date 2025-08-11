@@ -1,13 +1,11 @@
 package pro.komaru.tridot.core.struct;
 
+import it.unimi.dsi.fastutil.objects.ObjectSet;
 import pro.komaru.tridot.core.math.sort.Sort;
 import pro.komaru.tridot.core.struct.func.*;
 
 import javax.annotation.Nullable;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.Iterator;
-import java.util.NoSuchElementException;
+import java.util.*;
 
 public class Seq<T> implements Iterable<T> {
     /** Debugging variable to count total number of iterators allocated. */
@@ -887,6 +885,40 @@ public class Seq<T> implements Iterable<T> {
         for(int i = newSize; i < size; i++)
             items[i] = null;
         size = newSize;
+    }
+
+    public Seq<T> topoSort(Func<T, Seq<T>> dependencyGetter) {
+        Seq<T> result = Seq.empty();
+        Set<T> visited = new HashSet<>();
+        Set<T> visiting = new HashSet<>();
+
+        for (T item : this) {
+            visit(item, dependencyGetter, result, visited, visiting);
+        }
+        set(result);
+        return result;
+    }
+
+    private void visit(T item,
+                       Func<T, Seq<T>> dependencyGetter,
+                       Seq<T> result,
+                       Set<T> visited,
+                       Set<T> visiting) {
+        if (visited.contains(item)) return;
+
+        if (visiting.contains(item)) {
+            throw new IllegalStateException("Dependency loop for item: " + item);
+        }
+
+        visiting.add(item);
+
+        for (T dep : dependencyGetter.get(item)) {
+            visit(dep, dependencyGetter, result, visited, visiting);
+        }
+
+        visiting.remove(item);
+        visited.add(item);
+        result.add(item);
     }
 
 
