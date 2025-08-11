@@ -1,6 +1,6 @@
 {
     "schemaVersion": 1,
-    "id": "mod_id",
+    "id": "tridot",
     "version": "${version}",
     "name": "${mod_name}",
     "description": "${description}",
