@@ -10,9 +10,9 @@ import pro.komaru.tridot.core.ecs.*;
 import pro.komaru.tridot.core.struct.Seq;
 
 @Mixin(Entity.class)
-public abstract class EntityMixin implements EntityCompAccessor {
+public abstract class EntityMixin implements EntityCompContainer {
     @Unique
-    private final EntityCompContainer tridot$componentContainer = new EntityCompContainer((Entity) (Object) this);
+    private final EntityCompContainerImpl tridot$componentContainer = new EntityCompContainerImpl((Entity) (Object) this);
 
     @Override public Entity entity() {return tridot$componentContainer.entity();}
     @Override public Seq<EntityComp> components() {return tridot$componentContainer.components();}
