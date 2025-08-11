@@ -22,6 +22,9 @@ public interface EntityCompAccessor {
      * @throws IllegalStateException if the component is a dependency for other components.
      */
      void removeComponent(EntityComp component);
+
+    void removeAllComponents();
+
     /** * Returns the entity this container is assigned to.
      * @return the entity this container is assigned to.
      */

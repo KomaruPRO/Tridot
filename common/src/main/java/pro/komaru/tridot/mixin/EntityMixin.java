@@ -21,7 +21,6 @@ public abstract class EntityMixin implements EntityCompAccessor {
     @Override public void addComponent(EntityComp component) {tridot$componentContainer.addComponent(component);}
     @Override public void removeComponent(EntityComp component) {tridot$componentContainer.removeComponent(component);}
 
-
     @Inject(method = "<init>", at = @At("RETURN"))
     private void tridot$onInit(CallbackInfo ci) {
         Entity entity = (Entity) (Object) this;
@@ -34,7 +33,7 @@ public abstract class EntityMixin implements EntityCompAccessor {
     }
     @Inject(method = "remove", at = @At("HEAD"))
     private void tridot$onRemove(CallbackInfo ci) {
-        components().each(tridot$componentContainer::removeComponent);
+        tridot$componentContainer.removeAllComponents();
     }
 
     @Inject(method = "tick", at = @At("HEAD"))

@@ -110,6 +110,25 @@ public class EntityCompContainer implements EntityCompAccessor {
         component.onRemoved();
     }
 
+    @Override
+    public void removeAllComponents() {
+        try {
+            components.topoSort(comp -> {
+                Seq<EntityComp> deps = Seq.empty();
+                for (Class<? extends EntityComp> depClass : comp.dependencies()) {
+                    EntityComp found = components.find(c -> depClass.isAssignableFrom(c.getClass()));
+                    if (found != null) deps.add(found);
+                }
+                return deps;
+            }).reverse();
+            components.each(this::removeComponent);
+        } catch (IllegalArgumentException e) {
+            components.each(EntityComp::onRemoved);
+            components.clear();
+            throw new IllegalArgumentException("Components cannot be removed safely due to dependency issues: " + e.getMessage());
+        }
+    }
+
     /** * Returns the entity this container is assigned to.
      * @return the entity this container is assigned to.
      */
