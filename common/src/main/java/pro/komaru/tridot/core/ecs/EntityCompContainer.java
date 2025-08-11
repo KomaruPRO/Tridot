@@ -120,8 +120,11 @@ public class EntityCompContainer implements EntityCompAccessor {
                     if (found != null) deps.add(found);
                 }
                 return deps;
-            }).reverse();
-            components.each(this::removeComponent);
+            });
+            for (int i = components.size-1; i >= 0; i--) {
+                EntityComp comp = components.get(i);
+                if (comp != null) removeComponent(comp);
+            }
         } catch (IllegalArgumentException e) {
             components.each(EntityComp::onRemoved);
             components.clear();
