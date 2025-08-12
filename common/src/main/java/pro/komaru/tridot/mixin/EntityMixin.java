@@ -21,6 +21,13 @@ public abstract class EntityMixin implements EntityCompContainer {
     @Override public void addComponent(EntityComp component) {tridot$componentContainer.addComponent(component);}
     @Override public void removeComponent(EntityComp component) {tridot$componentContainer.removeComponent(component);}
 
+    @Override public void removeAllComponents() {tridot$componentContainer.removeAllComponents();}
+    @Override public <T> T getComponent(Class<T> compType) {return tridot$componentContainer.getComponent(compType);}
+    @Override public <T> Seq<T> getComponents(Class<T> compType) {return tridot$componentContainer.getComponents(compType);}
+    @Override public <T> boolean hasComponent(Class<T> compType) {return tridot$componentContainer.hasComponent(compType);}
+
+    @Override public Seq<EntityComp> componentsPriorityOrdered() {return tridot$componentContainer.componentsPriorityOrdered();}
+
     @Inject(method = "<init>", at = @At("RETURN"))
     private void tridot$onInit(CallbackInfo ci) {
         Entity entity = (Entity) (Object) this;
@@ -38,6 +45,6 @@ public abstract class EntityMixin implements EntityCompContainer {
 
     @Inject(method = "tick", at = @At("HEAD"))
     private void tridot$onTick(CallbackInfo ci) {
-        components().each(EntityComp::onTick);
+        componentsPriorityOrdered().each(EntityComp::onTick);
     }
 }

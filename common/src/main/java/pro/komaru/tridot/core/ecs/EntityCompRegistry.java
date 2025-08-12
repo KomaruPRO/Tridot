@@ -6,6 +6,10 @@ import pro.komaru.tridot.core.struct.Seq;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * EntityCompRegistry is a registry for component initializers associated with specific entity types.
+ * It allows registering component initializers for entities and retrieving them, including those from superclasses.
+ */
 public class EntityCompRegistry {
     private static Map<Class<? extends Entity>, PerEntityRegistry<?>> registries = new HashMap<>();
 

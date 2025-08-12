@@ -20,8 +20,21 @@ public enum GameSide {
     }
 
     public boolean applies(GameSide side) {
-        if (side == null) throw new IllegalArgumentException("GameSide cannot be null.");
         return this == BOTH || this == side || side == BOTH;
+    }
+    public boolean appliesStrict(GameSide side) {
+        return this == side || side == BOTH;
+    }
+    public boolean appliesStricti(GameSide side) {
+        return this == side || this == BOTH;
+    }
+
+    public String toStringColored() {
+        return switch (this) {
+            case CLIENT -> "\u001B[31m";
+            case SERVER -> "\u001B[36m";
+            case BOTH -> "\u001B[33m";
+        } + name() + "\u001B[0m";
     }
 
     public boolean client() {return this == CLIENT || this == BOTH;}
