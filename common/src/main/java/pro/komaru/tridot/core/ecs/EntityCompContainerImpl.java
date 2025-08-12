@@ -11,6 +11,7 @@ import pro.komaru.tridot.core.struct.enums.GameSide;
  */
 public class EntityCompContainerImpl implements EntityCompContainer {
     private final Seq<EntityComp> components = Seq.empty();
+    private Seq<EntityComp> componentsSortedPriority = null;
     private final Entity entity;
 
     public EntityCompContainerImpl(Entity entity) {
@@ -91,11 +92,13 @@ public class EntityCompContainerImpl implements EntityCompContainer {
             );
 
         components.add(component);
+        componentsSortedPriority = null;
         component.assignEntity(entity);
         try {
             component.onAdded();
         } catch (Exception e) {
             components.remove(component);
+            componentsSortedPriority = null;
             throw new IllegalStateException("Failed to add component " + component.name() + ": " + e.getMessage(), e);
         }
     }
@@ -132,6 +135,7 @@ public class EntityCompContainerImpl implements EntityCompContainer {
         }
 
         components.remove(component);
+        componentsSortedPriority = null;
         component.onRemoved();
     }
 
@@ -160,6 +164,7 @@ public class EntityCompContainerImpl implements EntityCompContainer {
         } catch (IllegalArgumentException e) {
             components.each(EntityComp::onRemoved);
             components.clear();
+            componentsSortedPriority = null;
             throw new IllegalArgumentException("Components cannot be removed safely due to dependency issues: " + e.getMessage());
         }
     }
@@ -178,7 +183,9 @@ public class EntityCompContainerImpl implements EntityCompContainer {
 
     @Override
     public Seq<EntityComp> componentsPriorityOrdered() {
-        return components.copy().sort((a, b) -> Integer.compare(b.priority(), a.priority()));
+        if(componentsSortedPriority == null)
+            componentsSortedPriority = components.copy().sort((a, b) -> Integer.compare(b.priority(), a.priority()));
+        return componentsSortedPriority;
     }
 
 
