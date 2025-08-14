@@ -1,4 +1,4 @@
-package pro.komaru.tridot.core.ecs;
+package pro.komaru.tridot.core.entity.ecs;
 
 import net.minecraft.world.entity.Entity;
 import pro.komaru.tridot.core.struct.Seq;

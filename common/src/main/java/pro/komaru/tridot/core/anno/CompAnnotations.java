@@ -1,6 +1,6 @@
 package pro.komaru.tridot.core.anno;
 
-import pro.komaru.tridot.core.ecs.EntityComp;
+import pro.komaru.tridot.core.entity.ecs.EntityComp;
 import pro.komaru.tridot.core.struct.enums.GameSide;
 
 import java.lang.annotation.ElementType;
