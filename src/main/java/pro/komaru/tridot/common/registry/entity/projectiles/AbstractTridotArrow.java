@@ -90,6 +90,12 @@ public abstract class AbstractTridotArrow extends AbstractArrow{
         }
     }
 
+    @Override
+    protected void onHitEntity(EntityHitResult pResult){
+        if (this.level().isClientSide()) return; // causes desync issues
+        super.onHitEntity(pResult);
+    }
+
     public void setEffectsFromList(ImmutableList<MobEffectInstance> effects){
         for(MobEffectInstance mobeffectinstance : effects){
             this.effects.add(new MobEffectInstance(mobeffectinstance));
