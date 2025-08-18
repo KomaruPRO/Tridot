@@ -37,6 +37,7 @@ public abstract class BaseSpawner{
     }
 
     public void serverTick(ServerLevel pServerLevel, BlockPos pPos) {
+        if(getEntityType().getCategory() == MobCategory.MONSTER && pServerLevel.getDifficulty() == Difficulty.PEACEFUL) return;
         if (this.isNearPlayer(pServerLevel, pPos)) {
             if (this.spawnDelay == -1) {
                 this.delay(pServerLevel, pPos);
