@@ -109,6 +109,7 @@ public abstract class AbstractProjectile extends AbstractTridotArrow{
 
     @Override
     protected void onHit(HitResult pResult){
+        if(level().isClientSide) return;
         super.onHit(pResult);
         if(discardOnHit) discard();
     }

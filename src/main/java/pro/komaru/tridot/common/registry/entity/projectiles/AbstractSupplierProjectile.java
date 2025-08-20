@@ -217,6 +217,7 @@ public abstract class AbstractSupplierProjectile extends AbstractTridotArrow imp
 
     @Override
     public void onHitEntity(EntityHitResult result){
+        if(level().isClientSide) return;
         Entity entity = result.getEntity();
         Entity shooter = this.getOwner();
         if (this.getPierceLevel() > 0) {
