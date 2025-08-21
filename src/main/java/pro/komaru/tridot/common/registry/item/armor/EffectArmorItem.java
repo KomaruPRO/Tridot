@@ -1,29 +1,28 @@
 package pro.komaru.tridot.common.registry.item.armor;
 
 import net.minecraft.*;
+import net.minecraft.nbt.*;
 import net.minecraft.network.chat.*;
+import net.minecraft.resources.*;
+import net.minecraft.server.level.*;
 import net.minecraft.world.effect.*;
+import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.player.*;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.*;
 import net.minecraftforge.api.distmarker.*;
+import net.minecraftforge.event.entity.*;
+import net.minecraftforge.event.entity.living.*;
+import net.minecraftforge.event.entity.player.*;
+import net.minecraftforge.eventbus.api.*;
+import net.minecraftforge.registries.*;
 import pro.komaru.tridot.util.*;
 
 import java.util.*;
 
-@SuppressWarnings("removal")
 public class EffectArmorItem extends SuitArmorItem{
     public EffectArmorItem(ArmorMaterial material, Type type, Properties settings){
         super(material, type, settings);
-    }
-
-    @Override
-    public void onArmorTick(ItemStack stack, Level level, Player player){
-        if(!level.isClientSide()){
-            if(hasFullSuitOfArmorOn(player)){
-                evaluateArmorEffects(player);
-            }
-        }
     }
 
     @Override
@@ -44,22 +43,6 @@ public class EffectArmorItem extends SuitArmorItem{
                 }
 
                 list.add(component);
-            }
-        }
-    }
-
-    public void evaluateArmorEffects(Player player){
-        for (var entry : AbstractArmorRegistry.EFFECTS.entrySet()) {
-            ArmorMaterial material = entry.getKey();
-            if (!hasCorrectArmorOn(material, player)) continue;
-
-            for (var effectData : entry.getValue()) {
-                if (effectData.condition().test(player)) {
-                    MobEffect effect = effectData.instance().get().getEffect();
-                    if (!player.hasEffect(effect)) {
-                        player.addEffect(effectData.instance().get());
-                    }
-                }
             }
         }
     }

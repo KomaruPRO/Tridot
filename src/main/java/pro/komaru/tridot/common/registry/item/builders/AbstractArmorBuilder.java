@@ -22,11 +22,12 @@ public abstract class AbstractArmorBuilder<T extends ArmorMaterial>{
     public int leggingsProtectionAmount;
     public int bootsProtectionAmount;
     public int enchantmentValue;
-    public SoundEvent equipSound = SoundEvents.ARMOR_EQUIP_IRON;
+    public int[] durability = {11, 16, 16, 13};
     public float toughness;
     public float knockbackResistance;
+
+    public SoundEvent equipSound = SoundEvents.ARMOR_EQUIP_IRON;
     public Supplier<Ingredient> repairIngredient;
-    public int[] durability = {11, 16, 16, 13};
     public List<ArmorEffectData> data;
 
     public AbstractArmorBuilder(String name){
@@ -34,13 +35,16 @@ public abstract class AbstractArmorBuilder<T extends ArmorMaterial>{
     }
 
     /**
-     * Placeholder for armor set bonuses
-     * @param instance Effect instance that will be applied to player
-     * @param condition Condition, ex Entity::isInWater
+     * Represents an effect that can be applied by wearing a specific armor set.
+     * @param instance Supplier for the MobEffectInstance to apply.
+     * @param condition Predicate determining when the effect should apply.
      */
     public record ArmorEffectData(Supplier<MobEffectInstance> instance, Predicate<Player> condition) {
-        public static ArmorEffectData createData(Supplier<MobEffectInstance> instance) {
-            return new ArmorEffectData(instance, (player) -> true);
+        public static final Predicate<Player> ALWAYS_TRUE = player -> true;
+        public static final int INFINITE_DURATION = -1;
+
+        public static ArmorEffectData createData(Supplier<MobEffect> effectSupplier) {
+            return new ArmorEffectData(() -> new MobEffectInstance(effectSupplier.get(), INFINITE_DURATION), ALWAYS_TRUE);
         }
 
         public static ArmorEffectData createData(Supplier<MobEffectInstance> instance, Predicate<Player> condition) {

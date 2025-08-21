@@ -9,13 +9,15 @@ import net.minecraft.client.gui.components.*;
 import net.minecraft.client.gui.screens.*;
 import net.minecraft.client.renderer.*;
 import net.minecraft.client.resources.language.*;
+import net.minecraft.nbt.*;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.*;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.*;
 import net.minecraft.tags.*;
 import net.minecraft.util.*;
 import net.minecraft.world.*;
+import net.minecraft.world.effect.*;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.*;
 import net.minecraft.world.entity.player.*;
@@ -25,9 +27,12 @@ import net.minecraftforge.api.distmarker.*;
 import net.minecraftforge.client.event.*;
 import net.minecraftforge.client.gui.overlay.*;
 import net.minecraftforge.event.TickEvent;
+import net.minecraftforge.event.TickEvent.*;
+import net.minecraftforge.event.entity.*;
 import net.minecraftforge.event.entity.living.*;
 import net.minecraftforge.event.entity.player.*;
 import net.minecraftforge.eventbus.api.*;
+import net.minecraftforge.registries.*;
 import pro.komaru.tridot.*;
 import pro.komaru.tridot.api.render.bossbars.*;
 import pro.komaru.tridot.client.sound.MusicHandler;
@@ -37,6 +42,7 @@ import pro.komaru.tridot.common.config.CommonConfig;
 import pro.komaru.tridot.common.networking.proxy.ClientProxy;
 import pro.komaru.tridot.common.registry.TagsRegistry;
 import pro.komaru.tridot.common.registry.item.*;
+import pro.komaru.tridot.common.registry.item.armor.*;
 import pro.komaru.tridot.mixin.client.BossHealthOverlayAccessor;
 import pro.komaru.tridot.api.networking.PacketHandler;
 import pro.komaru.tridot.common.networking.packets.DungeonSoundPacket;
@@ -48,6 +54,96 @@ import java.util.stream.*;
 
 public class Events{
     public static final ResourceLocation GUI_ICONS_LOCATION = new ResourceLocation("textures/gui/icons.png");
+
+    @SubscribeEvent(priority = EventPriority.HIGH)
+    public void onJoinServer(EntityJoinLevelEvent event) {
+        Entity entity = event.getEntity();
+        if(!event.isCanceled() && entity instanceof ServerPlayer player){
+            evaluateArmorEffects(player);
+        }
+    }
+
+    @SubscribeEvent(priority = EventPriority.HIGH)
+    public void onChangeDimension(PlayerEvent.PlayerChangedDimensionEvent event) {
+        if(!event.isCanceled()) {
+            evaluateArmorEffects(event.getEntity());
+        }
+    }
+
+    @SubscribeEvent(priority = EventPriority.HIGH)
+    public void onRespawn(PlayerEvent.PlayerRespawnEvent event) {
+        if(!event.isCanceled()) {
+            evaluateArmorEffects(event.getEntity());
+        }
+    }
+
+    @SubscribeEvent
+    public void onEquipmentChanged(LivingEquipmentChangeEvent event) {
+        LivingEntity entity = event.getEntity();
+        EquipmentSlot slot = event.getSlot();
+        if(slot.isArmor() && entity instanceof Player player) {
+            evaluateArmorEffects(player);
+        }
+    }
+
+    @SubscribeEvent
+    public void onPlayerTick(PlayerTickEvent e) {
+        Player player = e.player;
+        if(!e.isCanceled()) {
+            if(!player.level().isClientSide()){
+                evaluateArmorEffects(player);
+            }
+        }
+    }
+
+    public void evaluateArmorEffects(Player player) {
+        Set<MobEffect> currentlyApplied = getTrackedEffects(player);
+        Set<MobEffect> newApplied = new HashSet<>();
+        for (var entry : AbstractArmorRegistry.EFFECTS.entrySet()) {
+            ArmorMaterial material = entry.getKey();
+            if (SuitArmorItem.hasCorrectArmorOn(material, player)) {
+                for (var effectData : entry.getValue()) {
+                    if (effectData.condition().test(player)) {
+                        MobEffect effect = effectData.instance().get().getEffect();
+                        newApplied.add(effect);
+                        if (!player.hasEffect(effect)) {
+                            MobEffectInstance instance = effectData.instance().get();
+                            player.addEffect(instance);
+                        }
+                    }
+                }
+            }
+        }
+
+        for (MobEffect oldEffect : currentlyApplied) {
+            if (!newApplied.contains(oldEffect) && player.hasEffect(oldEffect)) {
+                player.removeEffect(oldEffect);
+            }
+        }
+
+        saveTrackedEffects(player, newApplied);
+    }
+
+    private static final String ARMOR_EFFECTS_TAG = "ArmorEffects";
+    public Set<MobEffect> getTrackedEffects(Player player) {
+        CompoundTag tag = player.getPersistentData().getCompound(ARMOR_EFFECTS_TAG);
+        Set<MobEffect> effects = new HashSet<>();
+        for (String key : tag.getAllKeys()) {
+            MobEffect effect = ForgeRegistries.MOB_EFFECTS.getValue(new ResourceLocation(key));
+            if (effect != null) effects.add(effect);
+        }
+
+        return effects;
+    }
+
+    public void saveTrackedEffects(Player player, Set<MobEffect> effects) {
+        CompoundTag tag = new CompoundTag();
+        for (MobEffect effect : effects) {
+            tag.putBoolean(ForgeRegistries.MOB_EFFECTS.getKey(effect).toString(), true);
+        }
+
+        player.getPersistentData().put(ARMOR_EFFECTS_TAG, tag);
+    }
 
     @SubscribeEvent
     public static void onServerTick(TickEvent.ServerTickEvent event) {
