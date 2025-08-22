@@ -24,8 +24,8 @@ public class ItemSkinArgumentType implements ArgumentType<ItemSkin>{
 
     @Override
     public <S> CompletableFuture<Suggestions> listSuggestions(final CommandContext<S> context, final SuggestionsBuilder builder) {
-        for (ItemSkin itemSkin : ItemSkinHandler.getSkins()) {
-            builder.suggest(String.valueOf(itemSkin.id));
+        for (ItemSkin itemSkin : SkinRegistryManager.getSkins()) {
+            builder.suggest(String.valueOf(itemSkin.id()));
         }
 
         return builder.buildFuture();
@@ -34,7 +34,7 @@ public class ItemSkinArgumentType implements ArgumentType<ItemSkin>{
     @Override
     public ItemSkin parse(StringReader reader) throws CommandSyntaxException {
         ResourceLocation resourceLocation = ResourceLocation.read(reader);
-        ItemSkin itemSkin = ItemSkinHandler.get(resourceLocation.toString());
+        ItemSkin itemSkin = SkinRegistryManager.get(resourceLocation.toString());
         if (itemSkin == null) throw UNKNOWN.create(resourceLocation.toString());
         return itemSkin;
     }

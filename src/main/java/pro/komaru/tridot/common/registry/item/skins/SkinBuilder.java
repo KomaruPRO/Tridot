@@ -1,26 +1,35 @@
 package pro.komaru.tridot.common.registry.item.skins;
 
 import net.minecraft.network.chat.*;
+import net.minecraft.resources.*;
 import pro.komaru.tridot.util.Col;
 
 import java.util.*;
 
 public class SkinBuilder{
-    public String name;
-    public List<ItemSkinEntry> skinEntries = new ArrayList<>();
+    public String id;
+    public List<SkinEntry> skinEntries = new ArrayList<>();
     public Col color;
     public List<MutableComponent> component;
     public Component hoverName;
-    public SkinBuilder(String id, String name){
-        this.name = id + ":" + name;
+
+    public SkinBuilder(String namespace, String id){
+        this.id = namespace + ":" + id;
     }
 
+    public SkinBuilder(ResourceLocation loc){
+        this.id = loc.toString();
+    }
+
+    /**
+     * Lore color, used in tooltips
+     */
     public SkinBuilder color(Col color){
         this.color = color;
         return this;
     }
 
-    public SkinBuilder add(ItemSkinEntry entry){
+    public SkinBuilder add(SkinEntry entry){
         this.skinEntries.add(entry);
         return this;
     }
@@ -46,9 +55,9 @@ public class SkinBuilder{
     }
 
     public ItemSkin build() {
-        ItemSkin skin = component != null ? new DetailedItemSkin(this) : new ItemSkin(name, color);
-        for(ItemSkinEntry entry : skinEntries)
-            skin.entries.add(entry);
+        ItemSkin skin = new ItemSkin(this);
+        SkinRegistryManager.add(skin);
+        for(SkinEntry entry : skinEntries) skin.entries.add(entry);
         return skin;
     }
 }

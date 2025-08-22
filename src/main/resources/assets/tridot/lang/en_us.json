@@ -24,5 +24,7 @@
   "tooltip.tridot.applies_fullkit": "Applies on full Armor set: ",
   "tooltip.tridot.applies_to_target": "Applies to target: ",
   "tooltip.tridot.applies_to_attacker": "Applies to attacker: ",
-  "tooltip.tridot.applies_with_chance_target": "Applies with chance %s to target: "
+  "tooltip.tridot.applies_with_chance_target": "Applies with chance %s to target: ",
+  "tooltip.tridot.shield.block": "Blocks %s of incoming damage",
+  "tooltip.tridot.shield.time": "Can be used for %s"
 }

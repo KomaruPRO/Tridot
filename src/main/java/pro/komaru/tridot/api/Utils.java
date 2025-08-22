@@ -71,7 +71,6 @@ import pro.komaru.tridot.util.struct.func.Boolf;
 import pro.komaru.tridot.util.struct.func.Cons;
 import pro.komaru.tridot.util.math.ArcRandom;
 import pro.komaru.tridot.common.registry.EnchantmentsRegistry;
-import pro.komaru.tridot.common.registry.item.skins.DetailedItemSkin;
 import pro.komaru.tridot.common.registry.item.skins.ItemSkin;
 
 import javax.annotation.*;
@@ -770,17 +769,17 @@ public class Utils {
             return i > 0 ? (float) i / 2 : 0.0F;
         }
 
-        public static void addContributorTooltip(ItemStack stack, List<Component> tooltip){
+        public static void addSkinTooltip(ItemStack stack, List<Component> tooltip){
             ItemSkin skin = ItemSkin.itemSkin(stack);
             if (skin != null) {
-                if(skin instanceof DetailedItemSkin details){
+                if(skin.getHoverName() != null) {
                     tooltip.remove(0);
-                    tooltip.add(0, Component.literal(stack.getHoverName().getString()).append(details.getHoverName()));
+                    tooltip.add(0, Component.literal(stack.getHoverName().getString()).append(skin.getHoverName()));
                 }
 
                 tooltip.add(1, skin.skinComponent());
                 tooltip.add(2, Component.empty());
-                if(skin instanceof DetailedItemSkin details) tooltip.addAll(details.getComponents()); // meant to be added into third index, but I think this way is safer
+                if(skin.getComponents() != null) tooltip.addAll(skin.getComponents()); // meant to be added into third index, but I think this way is safer
             }
         }
 
@@ -1066,8 +1065,8 @@ public class Utils {
         public static void applyWithChance(LivingEntity pTarget, ImmutableList<MobEffectInstance> effects, float chance, ArcRandom arcRandom) {
             if (!effects.isEmpty()) {
                 if (chance < 1) {
-                    for (MobEffectInstance effectInstance : effects) {
-                        if (arcRandom.chance(chance)) {
+                    if (arcRandom.chance(chance)) {
+                        for (MobEffectInstance effectInstance : effects) {
                             pTarget.addEffect(new MobEffectInstance(effectInstance));
                         }
                     }
@@ -1079,6 +1078,7 @@ public class Utils {
             }
         }
     }
+
     /**Schedule utils*/
     //todo redo
     public static class Schedule {

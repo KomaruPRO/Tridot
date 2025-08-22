@@ -10,6 +10,7 @@ import net.minecraft.world.item.*;
 import pro.komaru.tridot.api.command.*;
 import pro.komaru.tridot.common.commands.parts.*;
 import pro.komaru.tridot.common.registry.item.skins.*;
+import pro.komaru.tridot.util.struct.data.*;
 
 import java.util.*;
 
@@ -20,6 +21,11 @@ public class ModCommand{
         CommandBuilder skin = new CommandBuilder("skin").permission((p) -> p.hasPermission(2));
         CommandBuilder builder = new CommandBuilder("tridot").variants(
         skin.variants(
+                        new CommandVariant(CommandPart.create("canApply"), targets).execute((p) -> {
+                            canApply(p.getSource(), targets.getPlayers(p));
+                            return 1;
+                        }),
+
                         new CommandVariant(CommandPart.create("apply"), targets, skinArg).execute((p) -> {
                             applySkin(p.getSource(), targets.getPlayers(p), skinArg.getSkin(p, "skin"));
                             return 1;
@@ -50,6 +56,24 @@ public class ModCommand{
                 } else {
                     command.sendFailure(Component.translatable("commands.tridot.skin.fail"));
                 }
+            }
+        }
+    }
+
+    private static void canApply(CommandSourceStack command, Collection<? extends ServerPlayer> targetPlayers) throws CommandSyntaxException{
+        for(ServerPlayer player : targetPlayers){
+            ItemStack stack = player.getMainHandItem();
+            if(!stack.isEmpty()){
+                List<String> skinIds = new ArrayList<>();
+                for(ItemSkin skin : SkinRegistryManager.getApplicableSkins(stack)){
+                    skinIds.add(String.valueOf(skin.id()));
+                }
+
+                String formattedSkins = String.join(", ", skinIds);
+                command.sendSuccess(() -> Component.literal(formattedSkins), true);
+
+            }else{
+                command.sendFailure(Component.translatable("commands.tridot.skin.fail"));
             }
         }
     }

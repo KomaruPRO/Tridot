@@ -1,31 +1,25 @@
 package pro.komaru.tridot.common;
 
 import com.mojang.blaze3d.systems.*;
-import com.mojang.blaze3d.vertex.*;
 import net.minecraft.*;
 import net.minecraft.client.*;
 import net.minecraft.client.gui.*;
 import net.minecraft.client.gui.components.*;
 import net.minecraft.client.gui.screens.*;
-import net.minecraft.client.renderer.*;
-import net.minecraft.client.resources.language.*;
 import net.minecraft.nbt.*;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.*;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.*;
 import net.minecraft.tags.*;
-import net.minecraft.util.*;
 import net.minecraft.world.*;
 import net.minecraft.world.effect.*;
 import net.minecraft.world.entity.*;
-import net.minecraft.world.entity.ai.attributes.*;
 import net.minecraft.world.entity.player.*;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.block.state.*;
 import net.minecraftforge.api.distmarker.*;
 import net.minecraftforge.client.event.*;
-import net.minecraftforge.client.gui.overlay.*;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.TickEvent.*;
 import net.minecraftforge.event.entity.*;
@@ -43,12 +37,12 @@ import pro.komaru.tridot.common.networking.proxy.ClientProxy;
 import pro.komaru.tridot.common.registry.TagsRegistry;
 import pro.komaru.tridot.common.registry.item.*;
 import pro.komaru.tridot.common.registry.item.armor.*;
+import pro.komaru.tridot.common.registry.item.types.*;
 import pro.komaru.tridot.mixin.client.BossHealthOverlayAccessor;
 import pro.komaru.tridot.api.networking.PacketHandler;
 import pro.komaru.tridot.common.networking.packets.DungeonSoundPacket;
 import pro.komaru.tridot.api.Utils;
 
-import java.awt.*;
 import java.util.*;
 import java.util.stream.*;
 
@@ -93,6 +87,20 @@ public class Events{
             if(!player.level().isClientSide()){
                 evaluateArmorEffects(player);
             }
+        }
+    }
+
+    @SubscribeEvent
+    public void onShieldBlock(ShieldBlockEvent ev) {
+        LivingEntity entity = ev.getEntity();
+        ItemStack stack = entity.getUseItem();
+        if(stack.getItem() instanceof ConfiguredShield shieldItem) {
+            float armor = shieldItem.blockedPercent / 100.0F;
+            armor = shieldItem.onPostBlock(stack, armor);
+            float totalMultiplier = Math.max(Math.min(1 - (armor), 1), 0);
+            float reducedDamage = ev.getOriginalBlockedDamage() * totalMultiplier;
+            shieldItem.onShieldBlock(ev.getDamageSource(), ev.getOriginalBlockedDamage(), stack, entity);
+            ev.setBlockedDamage(reducedDamage);
         }
     }
 
@@ -171,8 +179,9 @@ public class Events{
 
     @SubscribeEvent
     public void onTooltip(ItemTooltipEvent e){
+        ItemStack itemStack = e.getItemStack();
+        Utils.Items.addSkinTooltip(itemStack, e.getToolTip());
         if(Utils.isDevelopment){
-            ItemStack itemStack = e.getItemStack();
             Stream<ResourceLocation> itemTagStream = itemStack.getTags().map(TagKey::location);
             if(Minecraft.getInstance().options.advancedItemTooltips){
                 if(Screen.hasControlDown()){

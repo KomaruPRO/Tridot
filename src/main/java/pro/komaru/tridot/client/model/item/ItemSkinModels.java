@@ -13,8 +13,16 @@ public class ItemSkinModels{
         modelsSkins.put(id, model);
     }
 
-    public static void addSkin(String id){
+    public static void add(ResourceLocation loc){
+        skins.add(loc.toString());
+    }
+
+    public static void addBowSkin(ResourceLocation loc){
+        String id = loc.toString();
         skins.add(id);
+        skins.add(id + "_pulling_0");
+        skins.add(id + "_pulling_1");
+        skins.add(id + "_pulling_2");
     }
 
     public static Map<String, BakedModel> getModelsSkins(){
@@ -31,19 +39,5 @@ public class ItemSkinModels{
 
     public static String getSkin(int id){
         return skins.get(id);
-    }
-
-    public static ModelResourceLocation getModelLocationSkin(String id){
-        int i = id.indexOf(":");
-        String modId = id.substring(0, i);
-        String skinId = id.substring(i + 1);
-        return new ModelResourceLocation(new ResourceLocation(modId, "skin/" + skinId), "inventory");
-    }
-
-    public static void addBowSkin(String id){
-        skins.add(id);
-        skins.add(id + "_pulling_0");
-        skins.add(id + "_pulling_1");
-        skins.add(id + "_pulling_2");
     }
 }

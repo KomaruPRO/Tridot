@@ -1,7 +1,6 @@
 package pro.komaru.tridot;
 
 import net.mehvahdjukaar.dummmmmmy.*;
-import net.mehvahdjukaar.dummmmmmy.common.*;
 import net.minecraft.resources.*;
 import net.minecraft.world.item.*;
 import net.minecraftforge.api.distmarker.*;
@@ -25,8 +24,7 @@ import pro.komaru.tridot.common.registry.TridotLootModifier;
 import pro.komaru.tridot.common.registry.block.TridotBlockEntities;
 import pro.komaru.tridot.common.registry.block.TridotBlocks;
 import pro.komaru.tridot.common.registry.item.AttributeRegistry;
-import pro.komaru.tridot.common.registry.item.skins.ItemSkin;
-import pro.komaru.tridot.common.registry.item.skins.ItemSkinHandler;
+import pro.komaru.tridot.common.registry.item.skins.*;
 import pro.komaru.tridot.common.registry.item.types.TestItem;
 import net.minecraft.world.entity.*;
 import net.minecraftforge.common.*;
@@ -86,7 +84,7 @@ public class Tridot {
     private void setup(final FMLCommonSetupEvent event){
         TridotBlocks.setFireBlock();
         PacketHandler.init();
-        for(ItemSkin skin : ItemSkinHandler.getSkins()){
+        for(ItemSkin skin : SkinRegistryManager.getSkins()){
             skin.setupSkinEntries();
         }
     }

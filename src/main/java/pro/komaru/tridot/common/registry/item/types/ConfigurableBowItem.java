@@ -22,7 +22,7 @@ import javax.annotation.*;
 import java.util.*;
 import java.util.function.Supplier;
 
-import static pro.komaru.tridot.api.Utils.Items.addContributorTooltip;
+import static pro.komaru.tridot.api.Utils.Items.addSkinTooltip;
 
 public class ConfigurableBowItem extends BowItem{
     public double baseDamage;
@@ -159,7 +159,7 @@ public class ConfigurableBowItem extends BowItem{
     @Override
     public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> pTooltipComponents, TooltipFlag pIsAdvanced){
         super.appendHoverText(pStack, pLevel, pTooltipComponents, pIsAdvanced);
-        addContributorTooltip(pStack, pTooltipComponents);
+        addSkinTooltip(pStack, pTooltipComponents);
         double damage = calculateAverageDamage(pStack);
         if(arrow.get() != EntityType.ARROW){
             pTooltipComponents.add(Component.translatable("tooltip.tridot.special_arrow").withStyle(ChatFormatting.GRAY)

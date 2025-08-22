@@ -54,6 +54,41 @@ public class TridotModels{
         map.replace(new ModelResourceLocation(item, "inventory"), customModel);
     }
 
+    public static void addCrossbowItemModel(Map<ResourceLocation, BakedModel> map, ResourceLocation item, CrossbowItemOverrides itemOverrides) {
+        BakedModel model = map.get(new ModelResourceLocation(item, "inventory"));
+        CustomModel customModel = new CustomModel(model, itemOverrides);
+
+        for (int i = 0; i < 3; i++) {
+            BakedModel pullModel = map.get(new ModelResourceLocation(new ResourceLocation(item + "_pulling_" + i), "inventory"));
+            itemOverrides.pullingModels.add(pullModel);
+        }
+        itemOverrides.arrowModel = map.get(new ModelResourceLocation(new ResourceLocation(item + "_arrow"), "inventory"));
+        itemOverrides.fireworkModel = map.get(new ModelResourceLocation(new ResourceLocation(item + "_firework"), "inventory"));
+
+        map.replace(new ModelResourceLocation(item, "inventory"), customModel);
+    }
+
+    public static void addCrossbowItemModel(Map<ResourceLocation, BakedModel> map, ResourceLocation item) {
+        addCrossbowItemModel(map, item, new CrossbowItemOverrides());
+    }
+
+    public static ArrayList<ModelResourceLocation> getCrossbowModels(String modId, String item) {
+        ArrayList<ModelResourceLocation> models = new ArrayList<>();
+        models.add(new ModelResourceLocation(new ResourceLocation(modId, item), "inventory"));
+        models.add(new ModelResourceLocation(new ResourceLocation(modId, item + "_pulling_0"), "inventory"));
+        models.add(new ModelResourceLocation(new ResourceLocation(modId, item + "_pulling_1"), "inventory"));
+        models.add(new ModelResourceLocation(new ResourceLocation(modId, item + "_pulling_2"), "inventory"));
+        models.add(new ModelResourceLocation(new ResourceLocation(modId, item + "_arrow"), "inventory"));
+        models.add(new ModelResourceLocation(new ResourceLocation(modId, item + "_firework"), "inventory"));
+        return models;
+    }
+
+    public static void addCrossbowItemModel(ModelEvent.RegisterAdditional event, String modId, String item) {
+        for (ModelResourceLocation model : getCrossbowModels(modId, item)) {
+            event.register(model);
+        }
+    }
+
     public static void addBowItemModel(Map<ResourceLocation, BakedModel> map, ResourceLocation item, BowItemOverrides itemOverrides){
         BakedModel model = map.get(new ModelResourceLocation(item, "inventory"));
         CustomModel customModel = new CustomModel(model, itemOverrides);

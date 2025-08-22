@@ -33,7 +33,7 @@ public class SkinableArmorItem extends PercentageArmorItem implements IForgeItem
     @Override
     public void appendHoverText(ItemStack stack, Level world, List<Component> tooltip, TooltipFlag flags){
         super.appendHoverText(stack, world, tooltip, flags);
-        Utils.Items.addContributorTooltip(stack, tooltip);
+        Utils.Items.addSkinTooltip(stack, tooltip);
     }
 
     @OnlyIn(Dist.CLIENT)

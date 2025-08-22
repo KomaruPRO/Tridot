@@ -1,5 +1,6 @@
-package pro.komaru.tridot.common.registry.item.skins;
+package pro.komaru.tridot.common.registry.item.skins.entries;
 
+import net.minecraft.resources.*;
 import pro.komaru.tridot.client.model.*;
 import pro.komaru.tridot.client.model.armor.*;
 import net.minecraft.client.model.*;
@@ -9,23 +10,21 @@ import net.minecraftforge.api.distmarker.*;
 
 import java.util.*;
 
-public class ArmorExtendingSkinEntry extends ItemExtendingSkinEntry {
+public class ArmorExtendingSkinEntry extends ItemExtendingSkinEntry{
     public Map<EquipmentSlot, String> skins = new HashMap<>();
 
-    public ArmorExtendingSkinEntry(Class<? extends Item> item, String skin){
-        super(item, skin);
+    public ArmorExtendingSkinEntry(Class<? extends Item> item, ResourceLocation modelLoc){
+        super(item, modelLoc);
     }
 
-    public ArmorExtendingSkinEntry skinFor(EquipmentSlot armorSlot, String skin){
-        skins.put(armorSlot, skin);
+    public ArmorExtendingSkinEntry skinFor(EquipmentSlot armorSlot, ResourceLocation modelLoc){
+        skins.put(armorSlot, modelLoc.toString());
         return this;
     }
 
     @Override
     public boolean appliesOn(ItemStack stack){
-        return super.appliesOn(stack)
-                && stack.getItem() instanceof ArmorItem armor
-                && skins.containsKey(armor.getEquipmentSlot());
+        return super.appliesOn(stack) && stack.getItem() instanceof ArmorItem armor && skins.containsKey(armor.getEquipmentSlot());
     }
 
     @OnlyIn(Dist.CLIENT)
