@@ -24,7 +24,7 @@ public class SuitArmorItem extends SkinableArmorItem{
     public void appendHoverText(ItemStack stack, Level world, List<Component> list, TooltipFlag flags){
         super.appendHoverText(stack, world, list, flags);
         var player = Minecraft.getInstance().player;
-        if(player != null && flags.isAdvanced()){
+        if(player != null){
             if(Screen.hasShiftDown()){
                 list.add(Component.translatable("tooltip.tridot.equipped").withStyle(ChatFormatting.GRAY));
                 list.add(getArmorSetItemComponent(player, stack, EquipmentSlot.HEAD));
