@@ -1,4 +1,4 @@
-package pro.komaru.tridot.core.entity.ecs;
+package pro.komaru.tridot.core.entity.entc;
 
 import pro.komaru.tridot.core.struct.Seq;
 
@@ -7,16 +7,14 @@ import pro.komaru.tridot.core.struct.Seq;
  * This interface provides methods to add, remove, and retrieve components from the container.
  * It also ensures that components are managed in a way that respects their dependencies.
  */
-public interface EntityCompAccessor {
-    default EntityCompContainer componentContainer() {
-        return (EntityCompContainer) this;
-    }
+public interface EntcDispatcher {
+    EntcCompContainer componentContainer();
 
     /** * Adds a component to this container.
      * @param component the component to add.
      * @throws IllegalArgumentException if the component is null or if it depends on components that are not present in the container.
      */
-    default void addComponent(EntityComp component) {
+    default void addComponent(EntcComp component) {
         componentContainer().addComponent(component);
     };
 
@@ -26,7 +24,7 @@ public interface EntityCompAccessor {
      * @throws IllegalArgumentException if the component is null or not present in the container.
      * @throws IllegalStateException if the component is a dependency for other components.
      */
-    default void removeComponent(EntityComp component) {
+    default void removeComponent(EntcComp component) {
         componentContainer().removeComponent(component);
     };
 
@@ -43,7 +41,7 @@ public interface EntityCompAccessor {
     /** * Returns the components in this container.
      * @return a copy of the internal components list.
      */
-    default Seq<EntityComp> getComponents() {
+    default Seq<EntcComp> getComponents() {
         return componentContainer().components();
     }
 

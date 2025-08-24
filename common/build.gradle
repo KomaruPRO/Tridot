@@ -17,6 +17,14 @@ legacyForge {
 dependencies {
     compileOnly group: 'org.spongepowered', name: 'mixin', version: '0.8.5'
     implementation group: 'com.google.code.findbugs', name: 'jsr305', version: '3.0.1'
+
+    annotationProcessor project(":processor")
+    implementation 'com.moandjiezana.toml:toml4j:0.7.2'
+
+    compileOnly 'org.projectlombok:lombok:1.18.30'
+    annotationProcessor 'org.projectlombok:lombok:1.18.30'
+    testCompileOnly 'org.projectlombok:lombok:1.18.30'
+    testAnnotationProcessor 'org.projectlombok:lombok:1.18.30'
 }
 
 configurations {
@@ -33,4 +41,12 @@ configurations {
 artifacts {
     commonJava sourceSets.main.java.sourceDirectories.singleFile
     commonResources sourceSets.main.resources.sourceDirectories.singleFile
+}
+
+tasks.withType(JavaCompile).configureEach {
+    if (name.toLowerCase().contains("java")) {
+        options.compilerArgs += [
+                "-AoutRefMap=${project.buildDir}/mixin/${mod_id}.refmap.json"
+        ]
+    }
 }

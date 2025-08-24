@@ -47,7 +47,7 @@ public class Rand extends Random{
      * to be distinct from any other invocation of this constructor.
      * <p>
      * This implementation creates a {@link Random} instance to generate the initial seed.
-     * @Caution: Please use Rand.of(int instanceId) or Tmp.rnd instead to avoid creating multiple instances of Rand.
+     * Please use Rand.of(int instanceId) or Tmp.rnd instead to avoid creating multiple instances of Rand.
      */
     public Rand(){
         setSeed(new Random().nextLong());

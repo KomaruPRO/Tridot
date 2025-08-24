@@ -1,6 +1,6 @@
 package pro.komaru.tridot.core.anno;
 
-import pro.komaru.tridot.core.entity.ecs.EntityComp;
+import pro.komaru.tridot.core.entity.entc.EntcComp;
 import pro.komaru.tridot.core.struct.enums.GameSide;
 
 import java.lang.annotation.ElementType;
@@ -26,14 +26,14 @@ public class CompAnnotations {
     @Retention(RetentionPolicy.RUNTIME)
     @Target(ElementType.TYPE)
     public @interface DependsOn {
-        Class<? extends EntityComp>[] value();
+        Class<? extends EntcComp>[] value();
     }
     /**
      * Indicates that the component should ignore dependencies' sides.
      * This annotation is used to allow components to be added without checking their dependencies or the game side.
      * Use with caution, as it can lead to unexpected behavior if not managed properly.
      * <p>
-     * @implNote You can not use this annotation on component which side isn't BOTH
+     * You can not use this annotation on component which side isn't BOTH
      */
     @Retention(RetentionPolicy.RUNTIME)
     @Target(ElementType.TYPE)

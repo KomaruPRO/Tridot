@@ -5,7 +5,7 @@ import pro.komaru.tridot.core.entity.ai.AITaskSelectionContext;
 import pro.komaru.tridot.core.entity.ai.Sensor;
 import pro.komaru.tridot.core.entity.ai.Task;
 import pro.komaru.tridot.core.entity.ai.TaskSelector;
-import pro.komaru.tridot.core.entity.ecs.EntityComp;
+import pro.komaru.tridot.core.entity.entc.EntcComp;
 import pro.komaru.tridot.core.struct.CallInfo;
 import pro.komaru.tridot.core.struct.Seq;
 import pro.komaru.tridot.core.struct.enums.GameSide;
@@ -14,7 +14,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @ApplyOn(GameSide.SERVER)
-public class AIComp extends EntityComp {
+public class AIComp extends EntcComp {
     private TaskSelector taskSelector = TaskSelector.STATE_AVAILABLE_HIGHEST_PRIORITY;
     private Seq<Sensor> sensors = Seq.empty();
     private Seq<Task> tasks = Seq.empty();

@@ -1,4 +1,4 @@
-package pro.komaru.tridot.core.comp;
+package pro.komaru.tridot.core.primitive;
 
 public interface Pos2 {
     float x();

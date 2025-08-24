@@ -74,7 +74,7 @@ public class Reads implements Closeable{
         }
     }
 
-    /** allocate & read byte array */
+    /** allocate and read byte array */
     public byte[] b(int length){
         try{
             byte[] array = new byte[length];

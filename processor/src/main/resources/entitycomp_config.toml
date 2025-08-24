@@ -1,0 +1,18 @@
+[[onTick]]
+    name = "tick"
+    args = []
+    cancellable = true
+    order = "START"
+    returns = "void"
+[[onTickEnded]]
+    name = "tick"
+    args = []
+    cancellable = false
+    order = "END"
+    returns = "void"
+[[onDamage]]
+    name = "hurt"
+    args = ["net.minecraft.world.damagesource.DamageSource", "float"]
+    cancellable = true
+    order = "START"
+    returns = "boolean"

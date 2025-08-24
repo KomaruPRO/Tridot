@@ -1,0 +1,20 @@
+plugins {
+    id 'java'
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'com.squareup:javapoet:1.13.0'
+    annotationProcessor 'com.squareup:javapoet:1.13.0'
+    implementation "org.projectlombok:lombok:1.18.28"
+    annotationProcessor "org.projectlombok:lombok:1.18.28"
+    implementation 'com.moandjiezana.toml:toml4j:0.7.2'
+}

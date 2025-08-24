@@ -1,4 +1,4 @@
-package pro.komaru.tridot.core.entity.ecs;
+package pro.komaru.tridot.core.entity.entc;
 
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.damagesource.DamageSource;
@@ -7,19 +7,21 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.Vec3;
-import pro.komaru.tridot.core.anno.CompAnnotations;
 import pro.komaru.tridot.core.struct.CallInfo;
 import pro.komaru.tridot.core.struct.CallInfoReturnable;
 import pro.komaru.tridot.core.struct.Seq;
 import pro.komaru.tridot.core.struct.enums.GameSide;
+
+import java.util.Objects;
 
 /**
  * Base class for components that can be assigned to entities.
  * Components are used to add functionality to entities in a modular way.
  * Each component can have its own priority, game side, dependencies, and lifecycle methods.
  */
-public abstract class EntityComp implements EntityCompAccessor {
+public abstract class EntcComp implements EntcDispatcher {
     private Entity entity;
+    private EntcRegistry.EntcCompEntry entry;
 
     /** Returns the priority of this component.
      * Components with higher priority process events first.
@@ -90,15 +92,15 @@ public abstract class EntityComp implements EntityCompAccessor {
      * Components that are listed here will be processed before this component.
      * @return a sequence of component classes that this component depends on, default is an empty sequence.
      */
-    public final Seq<Class<? extends EntityComp>> dependencies() {
-        return dependenciesOf(getClass());
+    public final Seq<EntcRegistry.EntcCompEntry> dependencies() {
+        return getEntry().getProperties().getDependencies().map(EntcRegistry::get).select(Objects::nonNull);
     }
     /** Returns the game side on which this component should be applied.
      * This is used to determine whether the component should be added on the client, server, or both.
      * @return the game side for this component, default is GameSide.BOTH.
      */
     public final GameSide side() {
-        return sideOf(getClass());
+        return getEntry().getProperties().getSide();
     }
 
     /** Returns the entity this component is assigned to.
@@ -119,6 +121,24 @@ public abstract class EntityComp implements EntityCompAccessor {
 
         this.entity = entity;
     }
+    /** Returns the entry of this component
+     * @throws IllegalStateException if the entry is not set.
+     */
+    public EntcRegistry.EntcCompEntry getEntry() {
+        if(entry == null) throw new IllegalStateException("Entry is not set for this component.");
+        return entry;
+    }
+    /** Assigns this component's entry.
+     * @param entry the entry of this component
+     * @throws IllegalStateException if the entry is already set for this component.
+     * @throws IllegalArgumentException if the entry is null.
+     */
+    public void assignEntity(EntcRegistry.EntcCompEntry entry) {
+        if(this.entry != null) throw new IllegalStateException("Entry is already set for this component.");
+        if(entry == null) throw new IllegalArgumentException("Entry cannot be null.");
+
+        this.entry = entry;
+    }
 
     @Override
     public String toString() {
@@ -126,27 +146,11 @@ public abstract class EntityComp implements EntityCompAccessor {
     }
 
     public String name() {
-        return getClass().getSimpleName();
-    }
-
-    public static Seq<Class<? extends EntityComp>> dependenciesOf(Class<? extends EntityComp> compClass) {
-        if(compClass == null) return Seq.empty();
-        CompAnnotations.DependsOn dependsOn = compClass.getAnnotation(CompAnnotations.DependsOn.class);
-        if(dependsOn == null) return Seq.empty();
-        return Seq.with(dependsOn.value());
-    }
-    public static GameSide sideOf(Class<? extends EntityComp> compClass) {
-        if(!compClass.isAnnotationPresent(CompAnnotations.ApplyOn.class)) return GameSide.BOTH;
-        CompAnnotations.ApplyOn applyOn = compClass.getAnnotation(CompAnnotations.ApplyOn.class);
-        if(applyOn == null) return GameSide.BOTH;
-        return applyOn.value();
-    }
-    public static boolean ignoreDependenciesSideOf(Class<? extends EntityComp> dep) {
-        return dep.isAnnotationPresent(CompAnnotations.IgnoreDependenciesSide.class);
+        return getEntry().getId().toString();
     }
 
     @Override
-    public EntityCompContainer componentContainer() {
-        return (EntityCompContainer) entity;
+    public EntcCompContainer componentContainer() {
+        return ((EntcDispatcher) entity).componentContainer();
     }
 }

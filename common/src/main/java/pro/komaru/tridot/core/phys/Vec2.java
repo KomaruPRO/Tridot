@@ -1,7 +1,7 @@
 package pro.komaru.tridot.core.phys;
 
 import net.minecraft.nbt.CompoundTag;
-import pro.komaru.tridot.core.comp.Pos2;
+import pro.komaru.tridot.core.primitive.Pos2;
 import pro.komaru.tridot.core.math.Interp;
 
 public class Vec2 implements Pos2 {

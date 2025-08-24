@@ -1,10 +1,10 @@
-package pro.komaru.tridot.core.entity.ecs;
+package pro.komaru.tridot.core.entity.entc;
 
 import net.minecraft.world.entity.Entity;
 import pro.komaru.tridot.core.struct.Seq;
 import pro.komaru.tridot.core.struct.func.Func;
 
-public interface EntityCompsInitializer extends Func<Entity, Seq<EntityComp>> {
+public interface EntcCompsInitializer extends Func<Entity, Seq<EntcComp>> {
     /**
      * Initializes the component sequence for the given entity.
      * This method is called when the entity is created or loaded.
@@ -13,5 +13,5 @@ public interface EntityCompsInitializer extends Func<Entity, Seq<EntityComp>> {
      * @return the initialized component sequence
      */
     @Override
-    Seq<EntityComp> get(Entity entity);
+    Seq<EntcComp> get(Entity entity);
 }
