@@ -53,12 +53,13 @@ public abstract class AbstractMultiAttackMinion extends MultiAttackMob implement
 
     @Override
     public boolean isAlliedTo(Entity pEntity){
-        return super.isAlliedTo(pEntity) || (pEntity instanceof Allied && !(this.owner instanceof Player));
+        return super.isAlliedTo(pEntity) || pEntity instanceof Allied || (pEntity instanceof LivingEntity target && this.isOwnedBy(target));
     }
 
     public boolean canAttack(LivingEntity pTarget){
         if(!Utils.Entities.canHitTarget(this, pTarget)) return false;
-        return !this.isOwnedBy(pTarget) && super.canAttack(pTarget) && !isAlliedTo(pTarget);
+        boolean flag = !this.isOwnedBy(pTarget) || !isAlliedTo(pTarget);
+        return  super.canAttack(pTarget) && (flag || (owner != null && owner.canAttack(pTarget)));
     }
 
     /**
