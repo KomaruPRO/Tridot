@@ -11,6 +11,7 @@ import net.minecraft.world.entity.monster.*;
 import net.minecraft.world.entity.player.*;
 import net.minecraft.world.level.*;
 import net.minecraft.world.scores.*;
+import pro.komaru.tridot.api.*;
 import pro.komaru.tridot.api.interfaces.*;
 
 import javax.annotation.*;
@@ -120,6 +121,7 @@ public abstract class AbstractMinionEntity extends Monster implements TraceableE
     }
 
     public boolean canAttack(LivingEntity pTarget){
+        if(!Utils.Entities.canHitTarget(this, pTarget)) return false;
         boolean flag = !this.isOwnedBy(pTarget) && !isAlliedTo(pTarget);
         return  super.canAttack(pTarget) && (flag || (owner != null && owner.canAttack(pTarget)));
     }
@@ -159,7 +161,7 @@ public abstract class AbstractMinionEntity extends Monster implements TraceableE
         }
 
         public boolean canUse(){
-            return AbstractMinionEntity.this.owner != null && getOwnerTarget() != null && this.canAttack(getOwnerTarget(), this.copyOwnerTargeting);
+            return AbstractMinionEntity.this.owner != null && getOwnerTarget() != null && AbstractMinionEntity.this.canAttack(getOwnerTarget()) && this.canAttack(getOwnerTarget(), this.copyOwnerTargeting);
         }
 
         public void start(){

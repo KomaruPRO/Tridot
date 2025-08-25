@@ -10,6 +10,7 @@ import net.minecraft.world.entity.ai.targeting.*;
 import net.minecraft.world.entity.player.*;
 import net.minecraft.world.level.*;
 import net.minecraft.world.scores.*;
+import pro.komaru.tridot.api.*;
 import pro.komaru.tridot.api.interfaces.*;
 
 import javax.annotation.*;
@@ -56,6 +57,7 @@ public abstract class AbstractMultiAttackMinion extends MultiAttackMob implement
     }
 
     public boolean canAttack(LivingEntity pTarget){
+        if(!Utils.Entities.canHitTarget(this, pTarget)) return false;
         return !this.isOwnedBy(pTarget) && super.canAttack(pTarget) && !isAlliedTo(pTarget);
     }
 
@@ -152,7 +154,7 @@ public abstract class AbstractMultiAttackMinion extends MultiAttackMob implement
         }
 
         public boolean canUse(){
-            return AbstractMultiAttackMinion.this.owner != null && getOwnerTarget() != null && this.canAttack(getOwnerTarget(), this.copyOwnerTargeting);
+            return AbstractMultiAttackMinion.this.owner != null && getOwnerTarget() != null && AbstractMultiAttackMinion.this.canAttack(getOwnerTarget()) && this.canAttack(getOwnerTarget(), this.copyOwnerTargeting);
         }
 
         public void start(){
