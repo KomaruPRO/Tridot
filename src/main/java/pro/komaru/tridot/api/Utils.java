@@ -33,6 +33,7 @@ import net.minecraft.server.level.*;
 import net.minecraft.sounds.*;
 import net.minecraft.tags.*;
 import net.minecraft.util.*;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.*;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.*;
@@ -52,6 +53,8 @@ import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.phys.*;
 import net.minecraftforge.client.extensions.common.IClientFluidTypeExtensions;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidType;
 import net.minecraftforge.fml.loading.*;
@@ -1059,8 +1062,43 @@ public class Utils {
             return null;
         }
     }
+
     /**Entities utils*/
     public static class Entities {
+
+        /**
+         * Checks whether an attacker can hit a target.
+         * Internally fires a {@link LivingAttackEvent} to let other mods cancel the attack, such as Cadmus, WG, etc.
+         *
+         * @param target   the entity being attacked
+         * @param attacker the entity performing the attack
+         * @return {@code true} if the attack is allowed, {@code false} if canceled
+         */
+        public static boolean canHitTarget(LivingEntity target, LivingEntity attacker) {
+            return canHitTarget(target, attacker, 0.0F);
+        }
+
+        /**
+         * Same as {@link #canHitTarget(LivingEntity, LivingEntity)} but with a custom damage amount.
+         * <p>
+         * Can be useful if we need to check if an attacker can deal a specific amount of damage to a target.
+         */
+        public static boolean canHitTarget(LivingEntity target, LivingEntity attacker, float amount) {
+            DamageSource source = createDamageSource(attacker);
+            LivingAttackEvent event = new LivingAttackEvent(target, source, amount);
+            return !MinecraftForge.EVENT_BUS.post(event);
+        }
+
+        /**
+         * Utility needed for {@link #canHitTarget(LivingEntity, LivingEntity)}.
+         * <p>
+         * Can be used for any other ways tho.
+         */
+        public static DamageSource createDamageSource(LivingEntity attacker) {
+            if (attacker instanceof Player player) return attacker.damageSources().playerAttack(player);
+
+            return attacker.damageSources().mobAttack(attacker);
+        }
 
         public static void applyWithChance(LivingEntity pTarget, ImmutableList<MobEffectInstance> effects, float chance, ArcRandom arcRandom) {
             if (!effects.isEmpty()) {
