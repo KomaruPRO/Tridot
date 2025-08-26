@@ -125,6 +125,8 @@ public class PercentageArmorItem extends ArmorItem{
         }
     }
 
+    //fixme
+    //sleepy ass tried to code, COMPLETE FAIL
     public Multimap<Attribute, AttributeModifier> getDefaultAttributeModifiers(EquipmentSlot pEquipmentSlot) {
         var map = super.getDefaultAttributeModifiers(pEquipmentSlot);
         if(material instanceof AbstractArmorRegistry armorRegistry){
