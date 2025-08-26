@@ -32,7 +32,7 @@ public abstract class AbstractArmorBuilder<T extends ArmorMaterial>{
     public Supplier<Ingredient> repairIngredient;
     public List<ArmorEffectData> data;
     public List<HitEffectData> hitData;
-    public Multimap<Supplier<Attribute>, AttributeModifier> attributeMap;
+    public ImmutableMultimap.Builder<Supplier<Attribute>, AttributeModifier> attributeMap = ImmutableMultimap.builder();
 
     public AbstractArmorBuilder(String name){
         this.name = name;
@@ -76,7 +76,7 @@ public abstract class AbstractArmorBuilder<T extends ArmorMaterial>{
         return this;
     }
 
-    public AbstractArmorBuilder<T> setAttrs(Multimap<Supplier<Attribute>, AttributeModifier> map) {
+    public AbstractArmorBuilder<T> setAttrs(ImmutableMultimap.Builder<Supplier<Attribute>, AttributeModifier> map) {
         attributeMap = map;
         return this;
     }

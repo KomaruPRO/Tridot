@@ -128,9 +128,7 @@ public class PercentageArmorItem extends ArmorItem{
     public Multimap<Attribute, AttributeModifier> getDefaultAttributeModifiers(EquipmentSlot pEquipmentSlot) {
         var map = super.getDefaultAttributeModifiers(pEquipmentSlot);
         if(material instanceof AbstractArmorRegistry armorRegistry){
-            armorRegistry.builder.attributeMap.forEach((a, m) -> {
-                map.put(a.get(), m);
-            });
+            armorRegistry.builder.attributeMap.build().forEach((a, m) -> map.put(a.get(), m));
         }
 
         if(pEquipmentSlot != this.type.getSlot()) return map;
@@ -142,9 +140,7 @@ public class PercentageArmorItem extends ArmorItem{
             }
 
             if(material instanceof AbstractArmorRegistry armorRegistry) {
-                armorRegistry.builder.attributeMap.forEach((a, m) -> {
-                    builder.put(a.get(), m);
-                });
+                armorRegistry.builder.attributeMap.build().forEach((a, m) -> map.put(a.get(), m));
             }
 
             builder.put(Attributes.ARMOR, new AttributeModifier(uuid, "Armor", this.defense, AttributeModifier.Operation.ADDITION));
