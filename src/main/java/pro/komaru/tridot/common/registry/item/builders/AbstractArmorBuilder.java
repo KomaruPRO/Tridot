@@ -31,6 +31,7 @@ public abstract class AbstractArmorBuilder<T extends ArmorMaterial>{
     public SoundEvent equipSound = SoundEvents.ARMOR_EQUIP_IRON;
     public Supplier<Ingredient> repairIngredient;
     public List<ArmorEffectData> data;
+    public List<HitEffectData> hitData;
     public Multimap<Attribute, AttributeModifier> attributeMap;
 
     public AbstractArmorBuilder(String name){
@@ -85,8 +86,8 @@ public abstract class AbstractArmorBuilder<T extends ArmorMaterial>{
         return this;
     }
 
-    public AbstractArmorBuilder<T> hitEffects(List<ArmorEffectData> data) {
-        this.data = data;
+    public AbstractArmorBuilder<T> hitEffects(List<HitEffectData> data) {
+        this.hitData = data;
         return this;
     }
 
