@@ -1075,7 +1075,7 @@ public class Utils {
          * @return {@code true} if the attack is allowed, {@code false} if canceled
          */
         public static boolean canHitTarget(LivingEntity target, LivingEntity attacker) {
-            return canHitTarget(target, attacker, 0.0F);
+            return canHitTarget(target, attacker, 100F);
         }
 
         /**

@@ -126,11 +126,18 @@ public class PercentageArmorItem extends ArmorItem{
     }
 
     public Multimap<Attribute, AttributeModifier> getDefaultAttributeModifiers(EquipmentSlot pEquipmentSlot) {
-        if(pEquipmentSlot != this.type.getSlot()) return super.getDefaultAttributeModifiers(pEquipmentSlot);
+        var map = super.getDefaultAttributeModifiers(pEquipmentSlot);
+        if(material instanceof AbstractArmorRegistry armorRegistry) map.putAll(armorRegistry.builder.attributeMap);
+        if(pEquipmentSlot != this.type.getSlot()) return map;
+
         if(!CommonConfig.PERCENT_ARMOR.get()){
             ImmutableMultimap.Builder<Attribute, AttributeModifier> builder = ImmutableMultimap.builder();
             if (this.knockbackResistance > 0) {
                 builder.put(Attributes.KNOCKBACK_RESISTANCE, new AttributeModifier(uuid, "Armor knockback resistance", this.knockbackResistance, AttributeModifier.Operation.ADDITION));
+            }
+
+            if(material instanceof AbstractArmorRegistry armorRegistry) {
+                builder.putAll(armorRegistry.builder.attributeMap);
             }
 
             builder.put(Attributes.ARMOR, new AttributeModifier(uuid, "Armor", this.defense, AttributeModifier.Operation.ADDITION));

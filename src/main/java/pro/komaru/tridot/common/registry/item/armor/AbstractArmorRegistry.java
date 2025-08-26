@@ -13,10 +13,12 @@ import java.util.*;
 public abstract class AbstractArmorRegistry implements ArmorMaterial{
     public AbstractArmorBuilder<?> builder;
     public static final Map<ArmorMaterial, List<ArmorEffectData>> EFFECTS = new HashMap<>();
+    public static final Map<ArmorMaterial, List<HitEffectData>> HIT_EFFECTS = new HashMap<>();
 
-    public AbstractArmorRegistry(AbstractArmorBuilder<?> builder, List<ArmorEffectData> data){
+    public AbstractArmorRegistry(AbstractArmorBuilder<?> builder, List<ArmorEffectData> data, List<HitEffectData> hitData){
         this.builder = builder;
         if(data != null) EFFECTS.put(this, data);
+        if(hitData != null) HIT_EFFECTS.put(this, hitData);
     }
 
     @Override

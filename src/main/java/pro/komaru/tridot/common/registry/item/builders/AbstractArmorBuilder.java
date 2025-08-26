@@ -1,7 +1,9 @@
 package pro.komaru.tridot.common.registry.item.builders;
 
+import com.google.common.collect.*;
 import net.minecraft.sounds.*;
 import net.minecraft.world.effect.*;
+import net.minecraft.world.entity.ai.attributes.*;
 import net.minecraft.world.entity.player.*;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.crafting.*;
@@ -29,6 +31,7 @@ public abstract class AbstractArmorBuilder<T extends ArmorMaterial>{
     public SoundEvent equipSound = SoundEvents.ARMOR_EQUIP_IRON;
     public Supplier<Ingredient> repairIngredient;
     public List<ArmorEffectData> data;
+    public Multimap<Attribute, AttributeModifier> attributeMap;
 
     public AbstractArmorBuilder(String name){
         this.name = name;
@@ -42,7 +45,6 @@ public abstract class AbstractArmorBuilder<T extends ArmorMaterial>{
     public record ArmorEffectData(Supplier<MobEffectInstance> instance, Predicate<Player> condition) {
         public static final Predicate<Player> ALWAYS_TRUE = player -> true;
         public static final int INFINITE_DURATION = -1;
-
         public static ArmorEffectData createData(Supplier<MobEffect> effectSupplier) {
             return new ArmorEffectData(() -> new MobEffectInstance(effectSupplier.get(), INFINITE_DURATION), ALWAYS_TRUE);
         }
@@ -50,6 +52,42 @@ public abstract class AbstractArmorBuilder<T extends ArmorMaterial>{
         public static ArmorEffectData createData(Supplier<MobEffectInstance> instance, Predicate<Player> condition) {
             return new ArmorEffectData(instance, condition);
         }
+    }
+
+    public record HitEffectData(Supplier<MobEffectInstance> instance, Predicate<Player> condition, float chance) {
+        public static final Predicate<Player> ALWAYS_TRUE = player -> true;
+        public static final int INFINITE_DURATION = -1;
+        public static HitEffectData createData(Supplier<MobEffect> effectSupplier) {
+            return new HitEffectData(() -> new MobEffectInstance(effectSupplier.get(), INFINITE_DURATION), ALWAYS_TRUE, 1);
+        }
+
+        public static HitEffectData createData(Supplier<MobEffectInstance> instance, Predicate<Player> condition, float chance) {
+            return new HitEffectData(instance, condition, chance);
+        }
+
+        public static HitEffectData createData(Supplier<MobEffectInstance> instance, Predicate<Player> condition) {
+            return new HitEffectData(instance, condition, 1);
+        }
+    }
+
+    public AbstractArmorBuilder<T> addAttrs(Multimap<Attribute, AttributeModifier> map) {
+        attributeMap.putAll(map);
+        return this;
+    }
+
+    public AbstractArmorBuilder<T> setAttrs(Multimap<Attribute, AttributeModifier> map) {
+        attributeMap = map;
+        return this;
+    }
+
+    public AbstractArmorBuilder<T> addAttr(Attribute attribute, AttributeModifier mod) {
+        attributeMap.put(attribute, mod);
+        return this;
+    }
+
+    public AbstractArmorBuilder<T> hitEffects(List<ArmorEffectData> data) {
+        this.data = data;
+        return this;
     }
 
     public AbstractArmorBuilder<T> effects(List<ArmorEffectData> data) {

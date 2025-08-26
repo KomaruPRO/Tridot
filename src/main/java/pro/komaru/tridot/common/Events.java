@@ -42,6 +42,7 @@ import pro.komaru.tridot.mixin.client.BossHealthOverlayAccessor;
 import pro.komaru.tridot.api.networking.PacketHandler;
 import pro.komaru.tridot.common.networking.packets.DungeonSoundPacket;
 import pro.komaru.tridot.api.Utils;
+import pro.komaru.tridot.util.*;
 
 import java.util.*;
 import java.util.stream.*;
@@ -162,6 +163,22 @@ public class Events{
                 if(modifier instanceof MusicModifier.DungeonMusic dungeonMusic) {
                     if (dungeonMusic.isPlayerInStructure(player, (ServerLevel) player.level()) && TridotLibClient.DUNGEON_MUSIC_INSTANCE == null) PacketHandler.sendTo(player, new DungeonSoundPacket(dungeonMusic.music, player.getX(), player.getY() + (player.getBbHeight() / 2), player.getZ()));
                 }
+            }
+        }
+    }
+
+    @SubscribeEvent
+    public void onAttack(AttackEntityEvent event) {
+        Entity target = event.getTarget();
+        Player attacker = event.getEntity();
+        if (!(target instanceof LivingEntity living)) return;
+        for (var entry : AbstractArmorRegistry.HIT_EFFECTS.entrySet()) {
+            ArmorMaterial material = entry.getKey();
+            if (!SuitArmorItem.hasCorrectArmorOn(material, attacker)) return;
+            for (var effectData : entry.getValue()) {
+                float chance = effectData.chance();
+                if (!Tmp.rnd.chance(chance) || !effectData.condition().test(attacker)) continue;
+                living.addEffect(effectData.instance().get());
             }
         }
     }
