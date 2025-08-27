@@ -148,7 +148,7 @@ public class PercentageArmorItem extends ArmorItem{
             m.putAll(getModifiedMultimap());
             if(this.getMaterial() instanceof TridotArmorMat armorRegistry){
                 armorRegistry.builder().attributeMap.forEach((attrSupplier, data) -> {
-                    AttributeModifier modifier1 = new AttributeModifier(UUID.randomUUID(), "Attribute Modifier", attrDist(armorRegistry.builder(), pEquipmentSlot, data.value()), data.operation());
+                    AttributeModifier modifier1 = new AttributeModifier(uuid, "Attribute Modifier", attrDist(armorRegistry.builder(), pEquipmentSlot, data.value()), data.operation());
                     m.put(attrSupplier.get(), modifier1);
                 });
             }
