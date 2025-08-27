@@ -10,7 +10,7 @@ import pro.komaru.tridot.common.registry.item.builders.AbstractArmorBuilder.*;
 
 import java.util.*;
 
-public abstract class AbstractArmorRegistry implements ArmorMaterial{
+public abstract class AbstractArmorRegistry implements ArmorMaterial, TridotArmorMat{
     public AbstractArmorBuilder<?> builder;
     public static final Map<ArmorMaterial, List<ArmorEffectData>> EFFECTS = new HashMap<>();
     public static final Map<ArmorMaterial, List<HitEffectData>> HIT_EFFECTS = new HashMap<>();
@@ -22,17 +22,31 @@ public abstract class AbstractArmorRegistry implements ArmorMaterial{
     }
 
     @Override
+    public AbstractArmorBuilder<?> builder(){
+        return builder;
+    }
+
+    @Override
     public int getDurabilityForType(Type pType){
         return builder.durability[pType.ordinal()] * builder.durabilityMultiplier;
     }
 
-    @Override
-    public int getDefenseForType(Type pType){
+    public float getPercentDefenseForType(Type pType){
         return switch(pType){
             case HELMET -> builder.headProtectionAmount;
             case CHESTPLATE -> builder.chestplateProtectionAmount;
             case LEGGINGS -> builder.leggingsProtectionAmount;
             case BOOTS -> builder.bootsProtectionAmount;
+        };
+    }
+
+    @Override
+    public int getDefenseForType(Type pType){
+        return switch(pType){
+            case HELMET -> (int)builder.headProtectionAmount;
+            case CHESTPLATE -> (int)builder.chestplateProtectionAmount;
+            case LEGGINGS -> (int)builder.leggingsProtectionAmount;
+            case BOOTS -> (int)builder.bootsProtectionAmount;
         };
     }
 

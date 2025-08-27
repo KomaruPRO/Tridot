@@ -1,7 +1,7 @@
 package pro.komaru.tridot.common.registry.item.armor;
 
 import com.google.common.collect.*;
-import org.jetbrains.annotations.Nullable;
+import org.jetbrains.annotations.*;
 import pro.komaru.tridot.common.config.CommonConfig;
 import net.minecraft.*;
 import net.minecraft.client.*;
@@ -15,6 +15,7 @@ import net.minecraft.world.item.enchantment.*;
 import net.minecraft.world.level.*;
 import net.minecraftforge.api.distmarker.*;
 import pro.komaru.tridot.common.registry.item.*;
+import pro.komaru.tridot.common.registry.item.builders.*;
 
 import java.text.*;
 import java.util.*;
@@ -40,7 +41,10 @@ public class PercentageArmorItem extends ArmorItem{
         super(pMaterial, pType, pProperties);
         this.material = pMaterial;
         this.toughness = pMaterial.getToughness();
-        this.defense = pMaterial.getDefenseForType(pType);
+        if(pMaterial instanceof TridotArmorMat mat) {
+            this.defense = mat.getPercentDefenseForType(pType);
+        } else this.defense = pMaterial.getDefenseForType(pType);
+
         this.knockbackResistance = pMaterial.getKnockbackResistance();
         this.uuid = ARMOR_MODIFIER_UUID_PER_TYPE.get(pType);
         ImmutableMultimap.Builder<Attribute, AttributeModifier> builder = ImmutableMultimap.builder();
@@ -57,19 +61,16 @@ public class PercentageArmorItem extends ArmorItem{
         return Math.round(this.defense);
     }
 
-    public float getPercentDefense() {
-        return this.defense / 100;
-    }
-
     public float getToughness() {
         return toughness;
     }
 
-    public int getTotalDefense(ArmorMaterial material) {
-        return material.getDefenseForType(Type.HELMET) +
-        material.getDefenseForType(Type.CHESTPLATE) +
-        material.getDefenseForType(Type.LEGGINGS) +
-        material.getDefenseForType(Type.BOOTS);
+    public float getTotalDefense(ArmorMaterial material) {
+        if(material instanceof TridotArmorMat tridotArmorMat) {
+            return tridotArmorMat.getPercentDefenseForType(Type.HELMET) + tridotArmorMat.getPercentDefenseForType(Type.CHESTPLATE) + tridotArmorMat.getPercentDefenseForType(Type.LEGGINGS) + tridotArmorMat.getPercentDefenseForType(Type.BOOTS);
+        }
+
+        return material.getDefenseForType(Type.HELMET) + material.getDefenseForType(Type.CHESTPLATE) + material.getDefenseForType(Type.LEGGINGS) + material.getDefenseForType(Type.BOOTS);
     }
 
     @Override
@@ -125,31 +126,51 @@ public class PercentageArmorItem extends ArmorItem{
         }
     }
 
-    //fixme
-    //sleepy ass tried to code, COMPLETE FAIL
-    public Multimap<Attribute, AttributeModifier> getDefaultAttributeModifiers(EquipmentSlot pEquipmentSlot) {
-        var map = super.getDefaultAttributeModifiers(pEquipmentSlot);
-        if(material instanceof AbstractArmorRegistry armorRegistry){
-            armorRegistry.builder.attributeMap.build().forEach((a, m) -> map.put(a.get(), m));
+    public float attrDist(AbstractArmorBuilder<?> builder, EquipmentSlot pEquipmentSlot, float percent) {
+        float head = (percent * builder.headAtrPercent) / 100;
+        float chest = (percent * builder.chestAtrPercent) / 100;
+        float leggings = (percent * builder.leggingsAtrPercent) / 100;
+        float boots = (percent * builder.bootsAtrPercent) / 100;
+        float remainder = percent - (head + chest + leggings + boots);
+        chest += remainder;
+        return switch(pEquipmentSlot) {
+            case HEAD ->  head;
+            case CHEST -> chest;
+            case LEGS -> leggings;
+            case FEET -> boots;
+            default -> 0;
+        };
+    }
+
+    public Multimap<Attribute, AttributeModifier> getDefaultAttributeModifiers(EquipmentSlot pEquipmentSlot){
+        if(pEquipmentSlot == this.type.getSlot()){
+            ImmutableMultimap.Builder<Attribute, AttributeModifier> m = ImmutableMultimap.builder();
+            m.putAll(getModifiedMultimap());
+            if(this.getMaterial() instanceof TridotArmorMat armorRegistry){
+                armorRegistry.builder().attributeMap.forEach((attrSupplier, data) -> {
+                    AttributeModifier modifier1 = new AttributeModifier(UUID.randomUUID(), "Attribute Modifier", attrDist(armorRegistry.builder(), pEquipmentSlot, data.value()), data.operation());
+                    m.put(attrSupplier.get(), modifier1);
+                });
+            }
+
+            return m.build();
         }
 
-        if(pEquipmentSlot != this.type.getSlot()) return map;
+        return super.getDefaultAttributeModifiers(pEquipmentSlot);
+    }
 
+    private @NotNull Multimap<Attribute, AttributeModifier> getModifiedMultimap(){
+        Multimap<Attribute, AttributeModifier> map = HashMultimap.create();
         if(!CommonConfig.PERCENT_ARMOR.get()){
-            ImmutableMultimap.Builder<Attribute, AttributeModifier> builder = ImmutableMultimap.builder();
-            if (this.knockbackResistance > 0) {
-                builder.put(Attributes.KNOCKBACK_RESISTANCE, new AttributeModifier(uuid, "Armor knockback resistance", this.knockbackResistance, AttributeModifier.Operation.ADDITION));
+            map.put(Attributes.ARMOR, new AttributeModifier(uuid, "Armor modifier", this.defense, AttributeModifier.Operation.ADDITION));
+            map.put(Attributes.ARMOR_TOUGHNESS, new AttributeModifier(uuid, "Armor toughness", this.toughness, AttributeModifier.Operation.ADDITION));
+            if(this.knockbackResistance > 0){
+                map.put(Attributes.KNOCKBACK_RESISTANCE, new AttributeModifier(uuid, "Armor knockback resistance", this.knockbackResistance, AttributeModifier.Operation.ADDITION));
             }
-
-            if(material instanceof AbstractArmorRegistry armorRegistry) {
-                armorRegistry.builder.attributeMap.build().forEach((a, m) -> map.put(a.get(), m));
-            }
-
-            builder.put(Attributes.ARMOR, new AttributeModifier(uuid, "Armor", this.defense, AttributeModifier.Operation.ADDITION));
-            builder.put(Attributes.ARMOR_TOUGHNESS, new AttributeModifier(uuid, "Armor toughness", this.toughness, AttributeModifier.Operation.ADDITION));
-            return builder.build();
+        } else {
+            map = this.defaultModifiers;
         }
 
-        return this.defaultModifiers;
+        return map;
     }
 }

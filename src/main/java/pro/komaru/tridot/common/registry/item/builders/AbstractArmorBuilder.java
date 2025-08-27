@@ -4,6 +4,7 @@ import com.google.common.collect.*;
 import net.minecraft.sounds.*;
 import net.minecraft.world.effect.*;
 import net.minecraft.world.entity.ai.attributes.*;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier.*;
 import net.minecraft.world.entity.player.*;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.crafting.*;
@@ -14,25 +15,32 @@ import java.util.function.*;
 //example: public static final ArmorRegistry COBALT = new ArmorRegistry.Builder("cobalt").protection(18).mul(46).enchantValue(18).knockbackRes(0.05f).ingredient(() -> Ingredient.of(ItemsRegistry.cobaltIngot.get())).build();
 public abstract class AbstractArmorBuilder<T extends ArmorMaterial>{
     public String name;
-    public int durabilityMultiplier;
-    public int headPercent = 20;
-    public int chestPercent = 35;
-    public int leggingsPercent = 25;
-    public int bootsPercent = 20;
-    public int headProtectionAmount;
-    public int chestplateProtectionAmount;
-    public int leggingsProtectionAmount;
-    public int bootsProtectionAmount;
-    public int enchantmentValue;
-    public int[] durability = {11, 16, 16, 13};
+    public float headPercent = 20;
+    public float chestPercent = 35;
+    public float leggingsPercent = 25;
+    public float bootsPercent = 20;
+    public float headProtectionAmount;
+    public float chestplateProtectionAmount;
+    public float leggingsProtectionAmount;
+    public float bootsProtectionAmount;
+
     public float toughness;
     public float knockbackResistance;
+
+    public int enchantmentValue;
+    public int[] durability = {11, 16, 16, 13};
+    public int durabilityMultiplier;
 
     public SoundEvent equipSound = SoundEvents.ARMOR_EQUIP_IRON;
     public Supplier<Ingredient> repairIngredient;
     public List<ArmorEffectData> data;
     public List<HitEffectData> hitData;
-    public ImmutableMultimap.Builder<Supplier<Attribute>, AttributeModifier> attributeMap = ImmutableMultimap.builder();
+
+    public float headAtrPercent = 20;
+    public float chestAtrPercent = 35;
+    public float leggingsAtrPercent = 25;
+    public float bootsAtrPercent = 20;
+    public Multimap<Supplier<Attribute>, AttributeData> attributeMap = HashMultimap.create();
 
     public AbstractArmorBuilder(String name){
         this.name = name;
@@ -57,9 +65,8 @@ public abstract class AbstractArmorBuilder<T extends ArmorMaterial>{
 
     public record HitEffectData(Supplier<MobEffectInstance> instance, Predicate<Player> condition, float chance) {
         public static final Predicate<Player> ALWAYS_TRUE = player -> true;
-        public static final int INFINITE_DURATION = -1;
         public static HitEffectData createData(Supplier<MobEffect> effectSupplier) {
-            return new HitEffectData(() -> new MobEffectInstance(effectSupplier.get(), INFINITE_DURATION), ALWAYS_TRUE, 1);
+            return new HitEffectData(() -> new MobEffectInstance(effectSupplier.get(), 120), ALWAYS_TRUE, 1);
         }
 
         public static HitEffectData createData(Supplier<MobEffectInstance> instance, Predicate<Player> condition, float chance) {
@@ -71,17 +78,18 @@ public abstract class AbstractArmorBuilder<T extends ArmorMaterial>{
         }
     }
 
-    public AbstractArmorBuilder<T> addAttrs(Multimap<Supplier<Attribute>, AttributeModifier> map) {
+    public record AttributeData(float value, Operation operation){}
+    public AbstractArmorBuilder<T> addAttrs(Multimap<Supplier<Attribute>, AttributeData> map) {
         attributeMap.putAll(map);
         return this;
     }
 
-    public AbstractArmorBuilder<T> setAttrs(ImmutableMultimap.Builder<Supplier<Attribute>, AttributeModifier> map) {
+    public AbstractArmorBuilder<T> setAttrs(Multimap<Supplier<Attribute>, AttributeData> map){
         attributeMap = map;
         return this;
     }
 
-    public AbstractArmorBuilder<T> addAttr(Supplier<Attribute> attribute, AttributeModifier mod) {
+    public AbstractArmorBuilder<T> addAttr(Supplier<Attribute> attribute, AttributeData mod) {
         attributeMap.put(attribute, mod);
         return this;
     }
@@ -106,12 +114,12 @@ public abstract class AbstractArmorBuilder<T extends ArmorMaterial>{
         return this;
     }
 
-    public AbstractArmorBuilder<T> protection(int percent) {
-        int head = (percent * headPercent) / 100;
-        int chest = (percent * chestPercent) / 100;
-        int leggings = (percent * leggingsPercent) / 100;
-        int boots = (percent * bootsPercent) / 100;
-        int remainder = percent - (head + chest + leggings + boots);
+    public AbstractArmorBuilder<T> protection(float percent) {
+        float head = (percent * headPercent) / 100;
+        float chest = (percent * chestPercent) / 100;
+        float leggings = (percent * leggingsPercent) / 100;
+        float boots = (percent * bootsPercent) / 100;
+        float remainder = percent - (head + chest + leggings + boots);
         chest += remainder;
 
         this.headProtectionAmount = head;
@@ -122,10 +130,22 @@ public abstract class AbstractArmorBuilder<T extends ArmorMaterial>{
     }
 
     /**
+     * Attribute percent distribution between parts
+     * @apiNote Default: 20, 35, 25, 20
+     */
+    public AbstractArmorBuilder<T> atrDistribution(float head, float chest, float leggings, float boots) {
+        this.headAtrPercent = head;
+        this.chestAtrPercent = chest;
+        this.leggingsAtrPercent = leggings;
+        this.bootsAtrPercent = boots;
+        return this;
+    }
+
+    /**
      * Armor percent distribution between parts
      * @apiNote Default: 20, 35, 25, 20
      */
-    public AbstractArmorBuilder<T> distribution(int head, int chest, int leggings, int boots) {
+    public AbstractArmorBuilder<T> distribution(float head, float chest, float leggings, float boots) {
         this.headPercent = head;
         this.chestPercent = chest;
         this.leggingsPercent = leggings;
@@ -133,7 +153,7 @@ public abstract class AbstractArmorBuilder<T extends ArmorMaterial>{
         return this;
     }
 
-    public AbstractArmorBuilder<T> protection(int head, int chest, int leggings, int boots) {
+    public AbstractArmorBuilder<T> protection(float head, float chest, float leggings, float boots) {
         this.headProtectionAmount = head;
         this.chestplateProtectionAmount = chest;
         this.leggingsProtectionAmount = leggings;
