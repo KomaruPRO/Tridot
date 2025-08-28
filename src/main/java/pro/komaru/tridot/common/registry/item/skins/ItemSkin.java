@@ -83,7 +83,12 @@ public class ItemSkin{
     }
 
     @OnlyIn(Dist.CLIENT)
-    public ArmorModel getArmorModel(LivingEntity entity, ItemStack stack, EquipmentSlot slot, HumanoidModel _default){
+    public HumanoidModel<?> getHumanoidModel(LivingEntity entity, ItemStack stack, EquipmentSlot slot, HumanoidModel<?> _default){
+        return Structs.safeGet(entries.find(e -> e.appliesOn(stack)), e -> e.humanoidModel(entity,stack,slot,_default), () -> getArmorModel(entity, stack, slot, _default));
+    }
+
+    @OnlyIn(Dist.CLIENT)
+    public ArmorModel getArmorModel(LivingEntity entity, ItemStack stack, EquipmentSlot slot, HumanoidModel<?> _default){
         return Structs.safeGet(entries.find(e -> e.appliesOn(stack)), e -> e.armorModel(entity,stack,slot,_default), () -> TridotModels.EMPTY_ARMOR);
     }
 

@@ -15,7 +15,12 @@ public interface SkinEntry{
     }
 
     @OnlyIn(Dist.CLIENT)
-    default ArmorModel armorModel(LivingEntity entity, ItemStack itemStack, EquipmentSlot armorSlot, HumanoidModel _default){
+    default HumanoidModel<?> humanoidModel(LivingEntity entity, ItemStack itemStack, EquipmentSlot armorSlot, HumanoidModel<?> _default){
+        return TridotModels.EMPTY_ARMOR;
+    }
+
+    @OnlyIn(Dist.CLIENT)
+    default ArmorModel armorModel(LivingEntity entity, ItemStack itemStack, EquipmentSlot armorSlot, HumanoidModel<?> _default){
         return TridotModels.EMPTY_ARMOR;
     }
 
