@@ -35,26 +35,12 @@ public class SkinableArmorItem extends PercentageArmorItem implements IForgeItem
         consumer.accept(new IClientItemExtensions(){
             @Override
             public HumanoidModel<?> getHumanoidArmorModel(LivingEntity entity, ItemStack itemStack, EquipmentSlot armorSlot, HumanoidModel original){
-                HumanoidModel<?> model = getModel(entity, itemStack, armorSlot, original);
+                ArmorModel model = getArmorModel(entity, itemStack, armorSlot, original);
                 if(model != null) return model;
 
                 return original;
             }
         });
-    }
-
-    public HumanoidModel<?> getModel(LivingEntity entity, ItemStack itemStack, EquipmentSlot armorSlot, HumanoidModel<?> original) {
-        ItemSkin skin = ItemSkin.itemSkin(itemStack);
-        if(skin != null){
-            HumanoidModel<?> model =  skin.getHumanoidModel(entity, itemStack, armorSlot, original);
-            if(model instanceof ArmorModel) {
-                return getArmorModel(entity, itemStack, armorSlot, original);
-            }
-
-            return model;
-        }
-
-        return null;
     }
 
     public ArmorModel getArmorModel(LivingEntity entity, ItemStack itemStack, EquipmentSlot armorSlot, HumanoidModel<?> original){
