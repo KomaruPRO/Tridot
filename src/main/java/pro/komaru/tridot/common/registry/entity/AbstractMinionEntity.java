@@ -2,14 +2,21 @@ package pro.komaru.tridot.common.registry.entity;
 
 import net.minecraft.core.*;
 import net.minecraft.nbt.*;
+import net.minecraft.network.syncher.*;
 import net.minecraft.server.level.*;
+import net.minecraft.server.players.*;
 import net.minecraft.world.damagesource.*;
 import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.ai.goal.target.*;
+import net.minecraft.world.entity.ai.navigation.*;
 import net.minecraft.world.entity.ai.targeting.*;
 import net.minecraft.world.entity.monster.*;
 import net.minecraft.world.entity.player.*;
 import net.minecraft.world.level.*;
+import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.state.*;
+import net.minecraft.world.level.pathfinder.*;
 import net.minecraft.world.scores.*;
 import pro.komaru.tridot.api.*;
 import pro.komaru.tridot.api.interfaces.*;
@@ -18,14 +25,13 @@ import javax.annotation.*;
 import java.awt.*;
 import java.util.*;
 
-public abstract class AbstractMinionEntity extends Monster implements TraceableEntity, Allied{
-    @Nullable
-    public LivingEntity owner;
+public abstract class AbstractMinionEntity extends Monster implements OwnableEntity, Allied{
     @Nullable
     public BlockPos boundOrigin;
     public boolean hasLimitedLife;
     public int limitedLifeTicks;
     public static final Map<EntityType<? extends AbstractMinionEntity>, Color> minionColors = new HashMap<>();
+    protected static final EntityDataAccessor<Optional<UUID>> DATA_OWNERUUID_ID = SynchedEntityData.defineId(AbstractMinionEntity.class, EntityDataSerializers.OPTIONAL_UUID);
 
     protected AbstractMinionEntity(EntityType<? extends Monster> pEntityType, Level pLevel){
         super(pEntityType, pLevel);
@@ -59,6 +65,12 @@ public abstract class AbstractMinionEntity extends Monster implements TraceableE
         return minionColors.getOrDefault(entityType, Color.WHITE);
     }
 
+    @Override
+    protected void defineSynchedData(){
+        super.defineSynchedData();
+        this.entityData.define(DATA_OWNERUUID_ID, Optional.empty());
+    }
+
     /**
      * (abstract) Protected helper method to read subclass entity data from NBT.
      */
@@ -66,6 +78,20 @@ public abstract class AbstractMinionEntity extends Monster implements TraceableE
         super.readAdditionalSaveData(pCompound);
         if(pCompound.contains("BoundX")){
             this.boundOrigin = new BlockPos(pCompound.getInt("BoundX"), pCompound.getInt("BoundY"), pCompound.getInt("BoundZ"));
+        }
+
+        UUID uuid;
+        if (pCompound.hasUUID("Owner")) {
+            uuid = pCompound.getUUID("Owner");
+        } else {
+            String s = pCompound.getString("Owner");
+            uuid = OldUsersConverter.convertMobOwnerIfNecessary(this.getServer(), s);
+        }
+
+        if (uuid != null) {
+            try {
+                this.setOwnerUUID(uuid);
+            } catch (Throwable ignored){}
         }
 
         if(pCompound.contains("LifeTicks")){
@@ -81,38 +107,61 @@ public abstract class AbstractMinionEntity extends Monster implements TraceableE
             pCompound.putInt("BoundZ", this.boundOrigin.getZ());
         }
 
+        if (this.getOwnerUUID() != null) {
+            pCompound.putUUID("Owner", this.getOwnerUUID());
+        }
+
         if(this.hasLimitedLife){
             pCompound.putInt("LifeTicks", this.limitedLifeTicks);
         }
     }
 
-    @Nullable
-    public LivingEntity getOwner(){
-        return this.owner;
+    public boolean isOwned() {
+        return this.getOwner() != null;
     }
 
-    public void setOwner(LivingEntity pOwner){
-        this.owner = pOwner;
-    }
-
-    public Team getTeam(){
-        LivingEntity livingentity = this.getOwner();
-        if(livingentity != null){
-            return livingentity.getTeam();
+    public Team getTeam() {
+        if (this.isOwned()) {
+            LivingEntity livingentity = this.getOwner();
+            if (livingentity != null) {
+                return livingentity.getTeam();
+            }
         }
 
         return super.getTeam();
     }
 
+    public boolean isOwnedBy(LivingEntity pEntity) {
+        return pEntity == this.getOwner();
+    }
+
+    @Nullable
+    public UUID getOwnerUUID() {
+        return this.entityData.get(DATA_OWNERUUID_ID).orElse(null);
+    }
+
+    public void setOwnerUUID(@Nullable UUID pUuid) {
+        this.entityData.set(DATA_OWNERUUID_ID, Optional.ofNullable(pUuid));
+    }
+
+    public void setOwner(LivingEntity pOwner){
+        this.setOwnerUUID(pOwner.getUUID());
+    }
+
+    public boolean isPushable() {
+        return false;
+    }
+
     @Override
     public boolean hurt(DamageSource pSource, float pAmount){
-        if(pSource.getDirectEntity() instanceof Allied  && !(this.owner instanceof Player)) return false;
+        if(pSource.getDirectEntity() == this.getOwner() && ((this.getOwner() != null) && !this.getOwner().isShiftKeyDown())) return false;
+        if(pSource.getDirectEntity() instanceof Allied) return false;
         return super.hurt(pSource, pAmount);
     }
 
     @Override
     protected boolean shouldDropLoot(){
-        return super.shouldDropLoot() && owner == null;
+        return super.shouldDropLoot() && this.getOwner() == null;
     }
 
     @Override
@@ -123,11 +172,7 @@ public abstract class AbstractMinionEntity extends Monster implements TraceableE
     public boolean canAttack(LivingEntity pTarget){
         if(!Utils.Entities.canHitTarget(this, pTarget)) return false;
         boolean flag = !this.isOwnedBy(pTarget) || !isAlliedTo(pTarget);
-        return  super.canAttack(pTarget) && (flag || (owner != null && owner.canAttack(pTarget)));
-    }
-
-    public boolean isOwnedBy(LivingEntity pEntity){
-        return pEntity == this.getOwner();
+        return super.canAttack(pTarget) && (flag || (this.getOwner() != null && this.getOwner().canAttack(pTarget)));
     }
 
     @Nullable
@@ -142,31 +187,5 @@ public abstract class AbstractMinionEntity extends Monster implements TraceableE
     public void setLimitedLife(int pLimitedLifeTicks){
         this.hasLimitedLife = true;
         this.limitedLifeTicks = pLimitedLifeTicks;
-    }
-
-    public class CopyOwnerTargetGoal extends TargetGoal{
-        private final TargetingConditions copyOwnerTargeting = TargetingConditions.forNonCombat().ignoreLineOfSight().ignoreInvisibilityTesting();
-
-        public CopyOwnerTargetGoal(PathfinderMob pMob){
-            super(pMob, false);
-        }
-
-        private LivingEntity getOwnerTarget(){
-            LivingEntity lastHurt = AbstractMinionEntity.this.owner.getLastHurtByMob();
-            if(lastHurt != null){
-                return lastHurt;
-            }
-
-            return AbstractMinionEntity.this.owner.getLastHurtMob();
-        }
-
-        public boolean canUse(){
-            return AbstractMinionEntity.this.owner != null && getOwnerTarget() != null && AbstractMinionEntity.this.canAttack(getOwnerTarget()) && this.canAttack(getOwnerTarget(), this.copyOwnerTargeting);
-        }
-
-        public void start(){
-            AbstractMinionEntity.this.setTarget(getOwnerTarget());
-            super.start();
-        }
     }
 }

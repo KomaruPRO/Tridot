@@ -2,7 +2,9 @@ package pro.komaru.tridot.common.registry.entity;
 
 import net.minecraft.core.*;
 import net.minecraft.nbt.*;
+import net.minecraft.network.syncher.*;
 import net.minecraft.server.level.*;
+import net.minecraft.server.players.*;
 import net.minecraft.world.damagesource.*;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.goal.target.*;
@@ -17,14 +19,13 @@ import javax.annotation.*;
 import java.awt.*;
 import java.util.*;
 
-public abstract class AbstractMultiAttackMinion extends MultiAttackMob implements TraceableEntity, Allied{
-    @Nullable
-    public LivingEntity owner;
+public abstract class AbstractMultiAttackMinion extends MultiAttackMob implements OwnableEntity, Allied{
     @Nullable
     public BlockPos boundOrigin;
     public boolean hasLimitedLife;
     public int limitedLifeTicks;
     public static final Map<EntityType<? extends AbstractMinionEntity>, Color> minionColors = new HashMap<>();
+    protected static final EntityDataAccessor<Optional<UUID>> DATA_OWNERUUID_ID = SynchedEntityData.defineId(AbstractMultiAttackMinion.class, EntityDataSerializers.OPTIONAL_UUID);
 
     protected AbstractMultiAttackMinion(EntityType<? extends MultiAttackMob> pEntityType, Level pLevel){
         super(pEntityType, pLevel);
@@ -46,33 +47,9 @@ public abstract class AbstractMultiAttackMinion extends MultiAttackMob implement
     }
 
     @Override
-    public boolean hurt(DamageSource pSource, float pAmount){
-        if(pSource.getEntity() instanceof Allied  && !(this.owner instanceof Player)) return false;
-        return super.hurt(pSource, pAmount);
-    }
-
-    @Override
-    public boolean isAlliedTo(Entity pEntity){
-        return super.isAlliedTo(pEntity) || pEntity instanceof Allied || (pEntity instanceof LivingEntity target && this.isOwnedBy(target));
-    }
-
-    public boolean canAttack(LivingEntity pTarget){
-        if(!Utils.Entities.canHitTarget(this, pTarget)) return false;
-        boolean flag = !this.isOwnedBy(pTarget) || !isAlliedTo(pTarget);
-        return  super.canAttack(pTarget) && (flag || (owner != null && owner.canAttack(pTarget)));
-    }
-
-    /**
-     * Server sided
-     */
-    public void spawnDisappearParticles(ServerLevel serverLevel){
-    }
-
-    public void spawnParticlesTrail(){
-    }
-
-    public static Color getColor(EntityType<? extends AbstractMinionEntity> entityType){
-        return minionColors.getOrDefault(entityType, Color.WHITE);
+    protected void defineSynchedData(){
+        super.defineSynchedData();
+        this.entityData.define(DATA_OWNERUUID_ID, Optional.empty());
     }
 
     /**
@@ -82,6 +59,20 @@ public abstract class AbstractMultiAttackMinion extends MultiAttackMob implement
         super.readAdditionalSaveData(pCompound);
         if(pCompound.contains("BoundX")){
             this.boundOrigin = new BlockPos(pCompound.getInt("BoundX"), pCompound.getInt("BoundY"), pCompound.getInt("BoundZ"));
+        }
+
+        UUID uuid;
+        if (pCompound.hasUUID("Owner")) {
+            uuid = pCompound.getUUID("Owner");
+        } else {
+            String s = pCompound.getString("Owner");
+            uuid = OldUsersConverter.convertMobOwnerIfNecessary(this.getServer(), s);
+        }
+
+        if (uuid != null) {
+            try {
+                this.setOwnerUUID(uuid);
+            } catch (Throwable ignored){}
         }
 
         if(pCompound.contains("LifeTicks")){
@@ -97,31 +88,85 @@ public abstract class AbstractMultiAttackMinion extends MultiAttackMob implement
             pCompound.putInt("BoundZ", this.boundOrigin.getZ());
         }
 
+        if (this.getOwnerUUID() != null) {
+            pCompound.putUUID("Owner", this.getOwnerUUID());
+        }
+
         if(this.hasLimitedLife){
             pCompound.putInt("LifeTicks", this.limitedLifeTicks);
         }
     }
 
-    @Nullable
-    public LivingEntity getOwner(){
-        return this.owner;
+    /**
+     * Server sided
+     */
+    public void spawnDisappearParticles(ServerLevel serverLevel){
     }
 
-    public void setOwner(LivingEntity pOwner){
-        this.owner = pOwner;
+    public void spawnParticlesTrail(){
     }
 
-    public Team getTeam(){
-        LivingEntity livingentity = this.getOwner();
-        if(livingentity != null){
-            return livingentity.getTeam();
+    public static Color getColor(EntityType<? extends AbstractMinionEntity> entityType){
+        return minionColors.getOrDefault(entityType, Color.WHITE);
+    }
+
+    public boolean isOwned() {
+        return this.getOwner() != null;
+    }
+
+    public Team getTeam() {
+        if (this.isOwned()) {
+            LivingEntity livingentity = this.getOwner();
+            if (livingentity != null) {
+                return livingentity.getTeam();
+            }
         }
 
         return super.getTeam();
     }
 
-    public boolean isOwnedBy(LivingEntity pEntity){
+    public boolean isOwnedBy(LivingEntity pEntity) {
         return pEntity == this.getOwner();
+    }
+
+    @Nullable
+    public UUID getOwnerUUID() {
+        return this.entityData.get(DATA_OWNERUUID_ID).orElse(null);
+    }
+
+    public void setOwnerUUID(@Nullable UUID pUuid) {
+        this.entityData.set(DATA_OWNERUUID_ID, Optional.ofNullable(pUuid));
+    }
+
+    public void setOwner(LivingEntity pOwner){
+        this.setOwnerUUID(pOwner.getUUID());
+    }
+
+    public boolean isPushable() {
+        return false;
+    }
+
+    @Override
+    public boolean hurt(DamageSource pSource, float pAmount){
+        if(pSource.getDirectEntity() == this.getOwner() && ((this.getOwner() != null) && !this.getOwner().isShiftKeyDown())) return false;
+        if(pSource.getDirectEntity() instanceof Allied) return false;
+        return super.hurt(pSource, pAmount);
+    }
+
+    @Override
+    protected boolean shouldDropLoot(){
+        return super.shouldDropLoot() && this.getOwner() == null;
+    }
+
+    @Override
+    public boolean isAlliedTo(Entity pEntity){
+        return super.isAlliedTo(pEntity) || pEntity instanceof Allied || (pEntity instanceof LivingEntity target && this.isOwnedBy(target));
+    }
+
+    public boolean canAttack(LivingEntity pTarget){
+        if(!Utils.Entities.canHitTarget(this, pTarget)) return false;
+        boolean flag = !this.isOwnedBy(pTarget) || !isAlliedTo(pTarget);
+        return super.canAttack(pTarget) && (flag || (this.getOwner() != null && this.getOwner().canAttack(pTarget)));
     }
 
     @Nullable
@@ -136,31 +181,5 @@ public abstract class AbstractMultiAttackMinion extends MultiAttackMob implement
     public void setLimitedLife(int pLimitedLifeTicks){
         this.hasLimitedLife = true;
         this.limitedLifeTicks = pLimitedLifeTicks;
-    }
-
-    public class CopyOwnerTargetGoal extends TargetGoal{
-        private final TargetingConditions copyOwnerTargeting = TargetingConditions.forNonCombat().ignoreLineOfSight().ignoreInvisibilityTesting();
-
-        public CopyOwnerTargetGoal(PathfinderMob pMob){
-            super(pMob, false);
-        }
-
-        private LivingEntity getOwnerTarget(){
-            LivingEntity lastHurt = AbstractMultiAttackMinion.this.owner.getLastHurtByMob();
-            if(lastHurt != null){
-                return lastHurt;
-            }
-
-            return AbstractMultiAttackMinion.this.owner.getLastHurtMob();
-        }
-
-        public boolean canUse(){
-            return AbstractMultiAttackMinion.this.owner != null && getOwnerTarget() != null && AbstractMultiAttackMinion.this.canAttack(getOwnerTarget()) && this.canAttack(getOwnerTarget(), this.copyOwnerTargeting);
-        }
-
-        public void start(){
-            AbstractMultiAttackMinion.this.setTarget(getOwnerTarget());
-            super.start();
-        }
     }
 }
