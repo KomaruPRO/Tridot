@@ -60,8 +60,8 @@ public class Tridot {
 
         IEventBus forgeBus = MinecraftForge.EVENT_BUS;
         DistExecutor.unsafeCallWhenOn(Dist.CLIENT, () -> () -> {
-            forgeBus.addListener(OverlayRender::tick);
-            forgeBus.addListener(OverlayRender::onDrawScreenPost);
+            forgeBus.addListener(OverlayHandler::tickInstances);
+            forgeBus.addListener(OverlayHandler::renderInstances);
             forgeBus.addListener(OverlayRenderItem::onDrawScreenPost);
             forgeBus.addListener(ClientTick::clientTickEnd);
             TridotLibClient.clientInit();
