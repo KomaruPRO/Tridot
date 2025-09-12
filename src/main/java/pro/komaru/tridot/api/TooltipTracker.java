@@ -1,5 +1,7 @@
 package pro.komaru.tridot.api;
 
+import org.jetbrains.annotations.ApiStatus.*;
+
 /**
  * Utility class for tracking the size and position of the most recently rendered tooltip.
  * <p>
@@ -20,6 +22,7 @@ public class TooltipTracker {
      * @param x the X coordinate in screen space
      * @param y the Y coordinate in screen space
      */
+    @Internal
     public static void setPos(int x, int y) {
         xPos = x; yPos = y;
     }
@@ -30,6 +33,7 @@ public class TooltipTracker {
      * @param w the tooltip content width in pixels
      * @param h the tooltip content height in pixels
      */
+    @Internal
     public static void setSize(int w, int h) {
         width = w; height = h;
     }
