@@ -5,8 +5,7 @@ import org.jetbrains.annotations.ApiStatus.*;
 /**
  * Utility class for tracking the size and position of the most recently rendered tooltip.
  * <p>
- * This class is updated by mixins/hooks into Minecraft's {@code TooltipRenderUtil} methods.
- * It stores the tooltip's position (top-left corner) and its dimensions, and provides
+ * Stores the tooltip's position (top-left corner) and its dimensions, and provides
  * accessors for both the raw size and the "real" size including the background border.
  * </p>
  */

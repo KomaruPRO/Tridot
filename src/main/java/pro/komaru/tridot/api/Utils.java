@@ -832,19 +832,43 @@ public class Utils {
                     tooltipList.add(Component.translatable("tooltip.tridot.applies").withStyle(ChatFormatting.GRAY));
                 }
 
-                for (MobEffectInstance mobeffectinstance : effects) {
-                    MutableComponent mutablecomponent = Component.translatable(mobeffectinstance.getDescriptionId());
-                    MobEffect mobeffect = mobeffectinstance.getEffect();
-                    if (mobeffectinstance.getAmplifier() > 0) {
-                        mutablecomponent = Component.literal("").append(Component.translatable("potion.withAmplifier", mutablecomponent, Component.translatable("potion.potency." + mobeffectinstance.getAmplifier())));
-                    }
+                effectLines(effects, tooltipList, duration);
+            }
+        }
 
-                    if (!mobeffectinstance.endsWithin(20)) {
-                        mutablecomponent = Component.literal(" ").append(Component.translatable("potion.withDuration", mutablecomponent, MobEffectUtil.formatDuration(mobeffectinstance, duration)));
-                    }
 
-                    tooltipList.add(mutablecomponent.withStyle(mobeffect.getCategory().getTooltipFormatting()));
+        /**
+         * Adds effect tooltips to list
+         * @param effects Effect list
+         * @param tooltipList Tooltip list
+         * @param duration Duration of effects
+         * @param chance Chance of effects
+         */
+        public static void effectTargetTooltip(ImmutableList<MobEffectInstance> effects, List<Component> tooltipList, float duration, float chance) {
+            if (!effects.isEmpty()) {
+                if (chance > 0 && chance < 1) {
+                    tooltipList.add(Component.translatable("tooltip.tridot.applies_with_chance_target", String.format("%.1f%%", chance * 100)).withStyle(ChatFormatting.GRAY));
+                } else {
+                    tooltipList.add(Component.translatable("tooltip.tridot.applies_to_target").withStyle(ChatFormatting.GRAY));
                 }
+
+                effectLines(effects, tooltipList, duration);
+            }
+        }
+
+        private static void effectLines(ImmutableList<MobEffectInstance> effects, List<Component> tooltipList, float duration){
+            for (MobEffectInstance mobeffectinstance : effects) {
+                MutableComponent mutablecomponent = Component.translatable(mobeffectinstance.getDescriptionId());
+                MobEffect mobeffect = mobeffectinstance.getEffect();
+                if (mobeffectinstance.getAmplifier() > 0) {
+                    mutablecomponent = Component.translatable("potion.withAmplifier", mutablecomponent, Component.translatable("potion.potency." + mobeffectinstance.getAmplifier()));
+                }
+
+                if (!mobeffectinstance.endsWithin(20)) {
+                    mutablecomponent = Component.translatable("potion.withDuration", mutablecomponent, MobEffectUtil.formatDuration(mobeffectinstance, duration));
+                }
+
+                tooltipList.add(Component.literal(" ♦ ").withStyle(mobeffect.getCategory().getTooltipFormatting()).append(mutablecomponent.withStyle(mobeffect.getCategory().getTooltipFormatting())));
             }
         }
 
