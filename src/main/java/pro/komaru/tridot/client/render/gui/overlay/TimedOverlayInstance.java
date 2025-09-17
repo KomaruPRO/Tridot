@@ -1,4 +1,4 @@
-package pro.komaru.tridot.client.render.gui;
+package pro.komaru.tridot.client.render.gui.overlay;
 
 import com.mojang.blaze3d.platform.*;
 import com.mojang.blaze3d.systems.*;
@@ -10,10 +10,9 @@ import net.minecraftforge.api.distmarker.*;
 import net.minecraftforge.client.event.*;
 import net.minecraftforge.event.*;
 import pro.komaru.tridot.common.config.*;
-import pro.komaru.tridot.util.struct.data.*;
 
 @OnlyIn(Dist.CLIENT)
-public class OverlayInstance{
+public class TimedOverlayInstance implements OverlayInstance{
     private ResourceLocation location;
     private boolean isRendered;
     private int showTick;
@@ -22,13 +21,13 @@ public class OverlayInstance{
     public float fadeIn = 20;
     public float fadeOut = 20;
 
-    public OverlayInstance() {
+    public TimedOverlayInstance() {
         if (ClientConfig.ABILITY_OVERLAY.get()) {
             this.isRendered = true;
         }
     }
 
-    public OverlayInstance(ResourceLocation texture, int showTime) {
+    public TimedOverlayInstance(ResourceLocation texture, int showTime) {
         if (ClientConfig.ABILITY_OVERLAY.get()) {
             this.isRendered = true;
             this.setShowTime(showTime);
@@ -42,11 +41,11 @@ public class OverlayInstance{
             if (showTick < totalDuration) {
                 showTick++;
             } else {
-                showTick = 0;
-                isRendered = false;
+                OverlayHandler.killInstance(this);
             }
         }
     }
+
     public void onDraw(RenderGuiOverlayEvent.Post event) {
         Minecraft mc = Minecraft.getInstance();
         GuiGraphics gui = event.getGuiGraphics();
@@ -100,22 +99,22 @@ public class OverlayInstance{
         return alpha;
     }
 
-    public OverlayInstance setTexture(ResourceLocation location) {
+    public TimedOverlayInstance setTexture(ResourceLocation location) {
         this.location = location;
         return this;
     }
 
-    public OverlayInstance setShowTime(int time) {
+    public TimedOverlayInstance setShowTime(int time) {
         this.showTime = time;
         return this;
     }
 
-    public OverlayInstance setFadeIn(float time) {
+    public TimedOverlayInstance setFadeIn(float time) {
         this.fadeIn = time;
         return this;
     }
 
-    public OverlayInstance setFadeOut(float time) {
+    public TimedOverlayInstance setFadeOut(float time) {
         this.fadeOut = time;
         return this;
     }

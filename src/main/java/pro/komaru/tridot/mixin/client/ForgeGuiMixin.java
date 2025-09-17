@@ -24,7 +24,7 @@ public class ForgeGuiMixin{
         RenderSystem.enableBlend();
         int left = width / 2 - 91;
         int top = height - tridot$self().leftHeight;
-        double armor = (float)tridot$self().getMinecraft().player.getAttributeValue(AttributeRegistry.PERCENT_ARMOR.get());
+        float armor = (float)tridot$self().getMinecraft().player.getAttributeValue(AttributeRegistry.PERCENT_ARMOR.get());
         if(armor > 0 && CommonConfig.PERCENT_ARMOR.get()){
             RenderSystem.enableBlend();
             RenderSystem.defaultBlendFunc();
@@ -33,7 +33,7 @@ public class ForgeGuiMixin{
             RenderSystem.setShader(GameRenderer::getPositionTexShader);
 
             RenderSystem.disableBlend();
-            String component = I18n.get("tooltip.tridot.value", armor + "%");
+            String component = I18n.get("tooltip.tridot.value", String.format("%.1f%%", armor));
             guiGraphics.blit(GUI_ICONS_LOCATION, left, top - 1, 34, 9, 9, 9);
             guiGraphics.drawString(tridot$self().getMinecraft().font, component, left + 10, top, Color.WHITE.getRGB());
             tridot$self().leftHeight += 10;

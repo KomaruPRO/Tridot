@@ -11,7 +11,7 @@ import pro.komaru.tridot.api.level.loot.conditions.LootConditionsRegistry;
 import pro.komaru.tridot.api.networking.PacketHandler;
 import pro.komaru.tridot.client.ClientTick;
 import pro.komaru.tridot.client.gfx.*;
-import pro.komaru.tridot.client.render.gui.*;
+import pro.komaru.tridot.client.render.gui.overlay.*;
 import pro.komaru.tridot.common.Events;
 import pro.komaru.tridot.common.commands.*;
 import pro.komaru.tridot.common.config.ClientConfig;
