@@ -10,6 +10,7 @@ import net.minecraftforge.api.distmarker.*;
 import net.minecraftforge.client.event.*;
 import net.minecraftforge.event.*;
 import pro.komaru.tridot.common.config.*;
+import pro.komaru.tridot.util.*;
 
 @OnlyIn(Dist.CLIENT)
 public class TimedOverlayInstance implements OverlayInstance{
@@ -50,6 +51,11 @@ public class TimedOverlayInstance implements OverlayInstance{
         Minecraft mc = Minecraft.getInstance();
         GuiGraphics gui = event.getGuiGraphics();
         if (isRendered) {
+            if(location == null) {
+                Log.error(this + " Location is null");
+                location = new ResourceLocation("missingno");
+            }
+
             gui.pose().pushPose();
             gui.pose().translate(0, 0, -200);
             int width = mc.getWindow().getGuiScaledWidth();

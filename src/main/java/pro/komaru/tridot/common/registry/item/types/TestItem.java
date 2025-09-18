@@ -2,6 +2,7 @@ package pro.komaru.tridot.common.registry.item.types;
 
 import net.minecraft.network.chat.ChatType;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.*;
 import net.minecraft.world.*;
 import net.minecraft.world.entity.player.*;
 import net.minecraft.world.item.*;
@@ -14,6 +15,7 @@ import pro.komaru.tridot.client.gfx.*;
 import pro.komaru.tridot.client.gfx.particle.*;
 import pro.komaru.tridot.client.gfx.particle.data.*;
 import pro.komaru.tridot.client.render.*;
+import pro.komaru.tridot.client.render.gui.overlay.*;
 import pro.komaru.tridot.util.*;
 
 public class TestItem extends Item{
@@ -25,7 +27,6 @@ public class TestItem extends Item{
         ItemStack itemstack = playerIn.getItemInHand(handIn);
         var rand = Tmp.rnd;
         net.minecraft.world.phys.Vec3 pos = new net.minecraft.world.phys.Vec3(playerIn.getX() + (rand.nextDouble() - 0.5f) / 6, playerIn.getY() + 0.4F, playerIn.getZ());
-
         Col particleColor = Col.pink;
         Col particleColorTo = Col.blue;
 

@@ -4,11 +4,15 @@ import com.mojang.blaze3d.platform.*;
 import com.mojang.blaze3d.systems.*;
 import net.minecraft.client.*;
 import net.minecraft.client.gui.*;
+import net.minecraft.client.renderer.texture.*;
 import net.minecraft.resources.*;
 import net.minecraft.util.*;
+import net.minecraftforge.api.distmarker.*;
 import net.minecraftforge.client.event.*;
 import pro.komaru.tridot.common.config.*;
+import pro.komaru.tridot.util.*;
 
+@OnlyIn(Dist.CLIENT)
 public class ClampedOverlayInstance implements OverlayInstance{
     private ResourceLocation location;
     private boolean isRendered;
@@ -24,6 +28,11 @@ public class ClampedOverlayInstance implements OverlayInstance{
         Minecraft mc = Minecraft.getInstance();
         GuiGraphics gui = event.getGuiGraphics();
         if (isRendered) {
+            if(location == null) {
+                Log.error(this + " Location is null");
+                location = new ResourceLocation("missingno");
+            }
+
             gui.pose().pushPose();
             gui.pose().translate(0, 0, -200);
             int width = mc.getWindow().getGuiScaledWidth();
