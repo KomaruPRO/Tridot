@@ -265,7 +265,7 @@ public class Events{
 
             if(abstractBossbar != null){
                 customBossBarActive = true;
-                abstractBossbar.render(ev, event, offset, screenWidth, pGuiGraphics, abstractBossbar, mc);
+                abstractBossbar.render(event, ev, offset, pGuiGraphics, abstractBossbar, mc);
             }
 
             offset += ev.getIncrement();

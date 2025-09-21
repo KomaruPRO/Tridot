@@ -3,8 +3,14 @@ package pro.komaru.tridot.api.render.bossbars;
 import net.minecraft.network.chat.*;
 import net.minecraft.server.level.*;
 import net.minecraft.sounds.*;
+import net.minecraft.world.entity.*;
+import net.minecraft.world.level.*;
+import pro.komaru.tridot.*;
 import pro.komaru.tridot.api.networking.PacketHandler;
-import pro.komaru.tridot.common.networking.packets.UpdateBossbarPacket;
+import pro.komaru.tridot.common.networking.packets.*;
+
+import javax.annotation.*;
+import java.util.*;
 
 public class ServerBossBarEvent extends ServerBossEvent{
     private String id;
@@ -23,7 +29,7 @@ public class ServerBossBarEvent extends ServerBossEvent{
     }
 
     public void setId(String id){
-        if(id != this.id){
+        if(!Objects.equals(id, this.id)){
             this.id = id;
             PacketHandler.sendToAll(new UpdateBossbarPacket(this.getId(), id, bossMusic));
         }
@@ -35,7 +41,7 @@ public class ServerBossBarEvent extends ServerBossEvent{
     }
 
     public void removePlayer(ServerPlayer serverPlayer){
-        PacketHandler.sendNonLocal(new UpdateBossbarPacket(this.getId(), "empty", bossMusic), serverPlayer);
+        PacketHandler.sendNonLocal(new RemoveBossbarPacket(this.getId()), serverPlayer);
         super.removePlayer(serverPlayer);
     }
 }

@@ -3,6 +3,7 @@ package pro.komaru.tridot.common.networking.proxy;
 import net.minecraft.sounds.*;
 import net.minecraft.world.entity.player.*;
 import net.minecraft.world.level.*;
+import pro.komaru.tridot.api.render.bossbars.*;
 
 import java.util.*;
 

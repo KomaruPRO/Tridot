@@ -8,17 +8,7 @@ import pro.komaru.tridot.*;
 import java.util.*;
 import java.util.function.*;
 
-public class UpdateBossbarPacket{
-    private final UUID bossBar;
-    private final String id;
-    private final SoundEvent bossMusic;
-
-    public UpdateBossbarPacket(UUID bossBar, String id, SoundEvent bossMusic){
-        this.bossBar = bossBar;
-        this.id = id;
-        this.bossMusic = bossMusic;
-    }
-
+public record UpdateBossbarPacket(UUID bossBar, String id, SoundEvent bossMusic){
     public static UpdateBossbarPacket decode(FriendlyByteBuf buf){
         return new UpdateBossbarPacket(buf.readUUID(), buf.readUtf(), SoundEvent.createFixedRangeEvent(buf.readResourceLocation(), 16));
     }
@@ -31,10 +21,6 @@ public class UpdateBossbarPacket{
 
     public static void handle(UpdateBossbarPacket msg, Supplier<Context> context){
         context.get().setPacketHandled(true);
-        if(Objects.equals(msg.id, "empty")){
-            Tridot.PROXY.removeBossBarRender(msg.bossBar);
-        }else{
-            Tridot.PROXY.setBossBarRender(msg.bossBar, msg.id, msg.bossMusic);
-        }
+        Tridot.PROXY.setBossBarRender(msg.bossBar, msg.id, msg.bossMusic);
     }
 }

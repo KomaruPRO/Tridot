@@ -7,6 +7,7 @@ import net.minecraft.world.entity.player.*;
 import net.minecraft.world.level.*;
 import net.minecraftforge.api.distmarker.*;
 import pro.komaru.tridot.*;
+import pro.komaru.tridot.api.render.bossbars.*;
 import pro.komaru.tridot.client.sound.*;
 
 import java.util.*;

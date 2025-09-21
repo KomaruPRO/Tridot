@@ -4,6 +4,8 @@ import net.minecraft.client.*;
 import net.minecraft.client.gui.*;
 import net.minecraft.client.gui.components.*;
 import net.minecraft.resources.*;
+import net.minecraft.world.entity.*;
+import net.minecraft.world.level.*;
 import net.minecraftforge.api.distmarker.*;
 import net.minecraftforge.client.event.CustomizeGuiOverlayEvent.*;
 import pro.komaru.tridot.*;
@@ -13,11 +15,15 @@ import java.util.*;
 
 @OnlyIn(Dist.CLIENT)
 public abstract class AbstractBossbar{
-    public static Map<String, AbstractBossbar> bossbars = new HashMap<>(); // maybe move it somewhere else?
-
+    public static Map<String, AbstractBossbar> bossbars = new HashMap<>();
     public boolean rainbow = false;
     private final Col color;
     private final ResourceLocation texture;
+
+    public AbstractBossbar(ResourceLocation tex, Col color){
+        this.texture = tex;
+        this.color = color;
+    }
 
     public AbstractBossbar(ResourceLocation tex){
         this.texture = tex;
@@ -35,7 +41,7 @@ public abstract class AbstractBossbar{
         this.rainbow = rainbow;
     }
 
-    public abstract void render(BossEventProgress ev, LerpingBossEvent event, int offset, int screenWidth, GuiGraphics pGuiGraphics, AbstractBossbar abstractBossbar, Minecraft mc);
+    public abstract void render(LerpingBossEvent currentBossbar, BossEventProgress bossbarEvent, int offset, GuiGraphics pGuiGraphics, AbstractBossbar abstractBossbar, Minecraft mc);
 
     public Col getColor(){
         return color;
