@@ -17,6 +17,7 @@ import net.minecraft.world.phys.*;
 import net.minecraftforge.api.distmarker.*;
 import net.minecraftforge.network.*;
 import org.jetbrains.annotations.*;
+import pro.komaru.tridot.util.Log;
 
 import java.util.*;
 
@@ -42,15 +43,31 @@ public abstract class AbstractTridotArrow extends AbstractArrow{
     public void doPostSpawn(){
     }
 
-    public void tick(){
-        super.tick();
-        if(this.level().isClientSide() && !(this.isInWaterOrBubble() || this.isInWall())){
+    @Override
+    public void tick() {
+        try {
+            super.tick();
+        } catch (Throwable t) {
+            String msg = String.format(
+                    "AbstractTridotArrow crashed! Class=%s, UUID=%s",
+                    this.getClass().getName(),
+                    this.getUUID()
+            );
+
+            Log.getLogger().error(msg, t);
+
+            this.discard();
+            return;
+        }
+
+        if (this.level().isClientSide() && !(this.isInWaterOrBubble() || this.isInWall())) {
             BlockPos below = this.blockPosition().below();
             BlockState state = this.level().getBlockState(below);
-            if (state.is(Blocks.BUBBLE_COLUMN)) return;
-            this.spawnParticlesTrail();
+
+            if (!state.is(Blocks.BUBBLE_COLUMN)) this.spawnParticlesTrail();
         }
     }
+
 
     @Override
     public Packet<ClientGamePacketListener> getAddEntityPacket(){
