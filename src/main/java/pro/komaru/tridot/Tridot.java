@@ -1,14 +1,17 @@
 package pro.komaru.tridot;
 
+import com.mojang.logging.*;
 import net.mehvahdjukaar.dummmmmmy.*;
 import net.minecraft.resources.*;
 import net.minecraft.world.item.*;
 import net.minecraftforge.api.distmarker.*;
 import net.minecraftforge.fml.config.ModConfig.*;
 import net.minecraftforge.registries.*;
+import org.slf4j.*;
 import pro.komaru.tridot.api.interfaces.*;
 import pro.komaru.tridot.api.level.loot.conditions.LootConditionsRegistry;
 import pro.komaru.tridot.api.networking.PacketHandler;
+import pro.komaru.tridot.api.render.bossbars.*;
 import pro.komaru.tridot.client.ClientTick;
 import pro.komaru.tridot.client.gfx.*;
 import pro.komaru.tridot.client.render.gui.overlay.*;
@@ -40,6 +43,7 @@ import java.util.*;
 @Mod("tridot")
 public class Tridot {
     public static final String ID = "tridot";
+    public static final Logger LOGGER = LogUtils.getLogger();
     public static UUID BASE_PROJECTILE_DAMAGE_UUID = UUID.fromString("5334b818-69d4-417e-b4b8-1869d4917e29");
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, ID);
     public static final RegistryObject<Item> TEST = ITEMS.register("test", () -> new TestItem(new Item.Properties().rarity(Rarity.EPIC)));

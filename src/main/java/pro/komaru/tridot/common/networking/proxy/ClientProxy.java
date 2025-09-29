@@ -38,16 +38,4 @@ public class ClientProxy implements ISidedProxy{
             TridotLibClient.BOSS_MUSIC = null;
         }
     }
-
-    public void removeBossBarRender(UUID bossBar){
-        bossbars.remove(bossBar);
-        if(TridotLibClient.BOSS_MUSIC != null){
-            Minecraft.getInstance().getSoundManager().stop(TridotLibClient.BOSS_MUSIC);
-        }
-    }
-
-    public void setBossBarRender(UUID bossBar, String id, SoundEvent bossMusic){
-        bossbars.put(bossBar, id);
-        playSound(bossMusic);
-    }
 }

@@ -10,8 +10,4 @@ public interface ISidedProxy{
     Player getPlayer();
 
     Level getLevel();
-
-    void removeBossBarRender(UUID bossBar);
-
-    void setBossBarRender(UUID bossBar, String id, SoundEvent bossMusic);
 }

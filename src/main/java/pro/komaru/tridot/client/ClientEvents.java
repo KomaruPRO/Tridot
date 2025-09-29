@@ -4,23 +4,20 @@ import net.minecraft.client.*;
 import net.minecraft.util.*;
 import net.minecraft.world.entity.player.*;
 import net.minecraft.world.item.*;
-import net.minecraftforge.api.distmarker.*;
 import net.minecraftforge.client.event.*;
 import net.minecraftforge.event.*;
 import net.minecraftforge.eventbus.api.*;
-import net.minecraftforge.fml.common.*;
-import pro.komaru.tridot.api.render.text.DotText;
-import pro.komaru.tridot.client.gfx.*;
-import pro.komaru.tridot.client.gfx.particle.options.*;
 import pro.komaru.tridot.client.gfx.postprocess.*;
-import pro.komaru.tridot.client.gfx.text.*;
 import pro.komaru.tridot.client.model.render.item.bow.*;
 import pro.komaru.tridot.client.render.gui.particle.*;
 import pro.komaru.tridot.client.render.screenshake.*;
-import pro.komaru.tridot.util.Col;
-import pro.komaru.tridot.util.render.BaseDrawer;
 
 public class ClientEvents {
+
+    @SubscribeEvent
+    public void onDisconnect(ClientPlayerNetworkEvent.LoggingOut e){
+        BossBarsOverlay.reset();
+    }
 
     @SubscribeEvent
     public void clientTick(TickEvent.ClientTickEvent event){

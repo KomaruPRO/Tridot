@@ -17,14 +17,4 @@ public class ServerProxy implements ISidedProxy{
     public Level getLevel(){
         return null;
     }
-
-    @Override
-    public void removeBossBarRender(UUID bossBar){
-
-    }
-
-    @Override
-    public void setBossBarRender(UUID bossBar, String id, SoundEvent bossMusic){
-
-    }
 }

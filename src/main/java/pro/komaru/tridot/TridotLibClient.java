@@ -14,7 +14,6 @@ import pro.komaru.tridot.client.tooltip.*;
 import pro.komaru.tridot.client.sound.LoopedSoundInstance;
 import pro.komaru.tridot.client.sound.TridotSoundInstance;
 import pro.komaru.tridot.client.compatibility.ShadersIntegration;
-import pro.komaru.tridot.common.registry.item.skins.*;
 
 import static pro.komaru.tridot.Tridot.*;
 
@@ -35,6 +34,11 @@ public class TridotLibClient{
 
     @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
     public static class RegistryEvents {
+
+        @SubscribeEvent
+        public static void registerOverlays(RegisterGuiOverlaysEvent event){
+            event.registerAboveAll("boss_bars", BossBarsOverlay.INSTANCE);
+        }
 
         @SubscribeEvent
         public static void clientSetup(FMLClientSetupEvent event) {
