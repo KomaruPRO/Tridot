@@ -12,22 +12,15 @@ import net.minecraftforge.client.event.*;
 import pro.komaru.tridot.common.config.*;
 import pro.komaru.tridot.util.*;
 
-@OnlyIn(Dist.CLIENT)
 public class ClampedOverlayInstance implements OverlayInstance{
     private ResourceLocation location;
-    private boolean isRendered;
     private float current;
     private float max;
-    public ClampedOverlayInstance() {
-        if (ClientConfig.ABILITY_OVERLAY.get()) {
-            this.isRendered = true;
-        }
-    }
 
     public void onDraw(RenderGuiOverlayEvent.Post event) {
         Minecraft mc = Minecraft.getInstance();
         GuiGraphics gui = event.getGuiGraphics();
-        if (isRendered) {
+        if (ClientConfig.ABILITY_OVERLAY.get()) {
             if(location == null) {
                 Log.error(this + " Location is null");
                 location = new ResourceLocation("missingno");

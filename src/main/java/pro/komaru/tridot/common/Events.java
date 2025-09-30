@@ -241,42 +241,6 @@ public class Events{
         }
     }
 
-//    public boolean customBossBarActive;
-//    @SubscribeEvent(priority = EventPriority.HIGHEST)
-//    @OnlyIn(Dist.CLIENT)
-//    public void onBossInfoRender(CustomizeGuiOverlayEvent.BossEventProgress ev){
-//        Minecraft mc = Minecraft.getInstance();
-//        if(ev.isCanceled() || mc.level == null || !ClientConfig.CUSTOM_BOSSBARS.get()) return;
-//        Map<UUID, LerpingBossEvent> events = ((BossHealthOverlayAccessor)mc.gui.getBossOverlay()).getEvents();
-//        if(events.isEmpty()) return;
-//        GuiGraphics pGuiGraphics = ev.getGuiGraphics();
-//        int screenWidth = pGuiGraphics.guiWidth();
-//        int offset = 0;
-//        for(LerpingBossEvent event : events.values()){
-//            String id = ClientProxy.bossbars.get(event.getId());
-//            AbstractBossbar abstractBossbar = AbstractBossbar.bossbars.getOrDefault(id, null);
-//            if(abstractBossbar == null && customBossBarActive) {
-//                ev.setIncrement(18);
-//                drawVanillaBar(pGuiGraphics, screenWidth / 2 - 91, offset, event);
-//                int nameX = screenWidth / 2 - mc.font.width(event.getName()) / 2;
-//                int nameY = offset + 16 - 9;
-//                pGuiGraphics.drawString(mc.font, event.getName(), nameX, nameY, 16777215);
-//            }
-//
-//            if(abstractBossbar != null){
-//                customBossBarActive = true;
-//                abstractBossbar.render(event, ev, offset, pGuiGraphics, abstractBossbar, mc);
-//            }
-//
-//            offset += ev.getIncrement();
-//            if(offset >= pGuiGraphics.guiHeight() / 4) break;
-//        }
-//
-//        if (customBossBarActive) {
-//            ev.setCanceled(true);
-//        }
-//    }
-
     @OnlyIn(Dist.CLIENT)
     private static void drawVanillaBar(GuiGraphics pGuiGraphics, int pX, int offset, BossEvent pBossEvent){
         drawVanillaBar(pGuiGraphics, pX, offset + 16, pBossEvent, 182, 0);

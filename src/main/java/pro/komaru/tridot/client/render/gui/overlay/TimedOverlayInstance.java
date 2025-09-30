@@ -12,33 +12,17 @@ import net.minecraftforge.event.*;
 import pro.komaru.tridot.common.config.*;
 import pro.komaru.tridot.util.*;
 
-@OnlyIn(Dist.CLIENT)
 public class TimedOverlayInstance implements OverlayInstance{
     private ResourceLocation location;
-    private boolean isRendered;
     private int showTick;
     private int showTime;
 
     public float fadeIn = 20;
     public float fadeOut = 20;
 
-    public TimedOverlayInstance() {
-        if (ClientConfig.ABILITY_OVERLAY.get()) {
-            this.isRendered = true;
-        }
-    }
-
-    public TimedOverlayInstance(ResourceLocation texture, int showTime) {
-        if (ClientConfig.ABILITY_OVERLAY.get()) {
-            this.isRendered = true;
-            this.setShowTime(showTime);
-            this.setTexture(texture);
-        }
-    }
-
     public void tick(TickEvent.ClientTickEvent event) {
         int totalDuration = (int) (fadeIn + showTime + fadeOut);
-        if (isRendered) {
+        if (ClientConfig.ABILITY_OVERLAY.get()) {
             if (showTick < totalDuration) {
                 showTick++;
             } else {
@@ -50,7 +34,7 @@ public class TimedOverlayInstance implements OverlayInstance{
     public void onDraw(RenderGuiOverlayEvent.Post event) {
         Minecraft mc = Minecraft.getInstance();
         GuiGraphics gui = event.getGuiGraphics();
-        if (isRendered) {
+        if (ClientConfig.ABILITY_OVERLAY.get()) {
             if(location == null) {
                 Log.error(this + " Location is null");
                 location = new ResourceLocation("missingno");

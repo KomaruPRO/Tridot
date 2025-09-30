@@ -5,7 +5,6 @@ import net.minecraftforge.client.event.*;
 import net.minecraftforge.event.*;
 import pro.komaru.tridot.util.struct.data.*;
 
-@OnlyIn(Dist.CLIENT)
 public class OverlayHandler{
     public static final Seq<OverlayInstance> instanceSeq = Seq.with();
     public static void addInstance(OverlayInstance instance) {
