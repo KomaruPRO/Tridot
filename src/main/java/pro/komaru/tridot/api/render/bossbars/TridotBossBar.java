@@ -31,7 +31,7 @@ public abstract class TridotBossBar{
         this.name = pName;
         this.health = 0.0F;
         this.maxHealth = 0.0F;
-        this.percentage = 1.0F;
+        this.percentage = 0.0F;
     }
 
     public TridotBossBar setType(ResourceLocation typeId) {
