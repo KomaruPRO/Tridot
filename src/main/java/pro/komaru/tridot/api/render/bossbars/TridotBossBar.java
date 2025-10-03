@@ -15,6 +15,7 @@ public abstract class TridotBossBar{
     public float health;
     public float maxHealth;
     public float percentage;
+    public boolean aboutToDie = false;
 
     public Col color = Col.white;
     public SoundEvent bossMusic = SoundEvents.EMPTY;
@@ -54,6 +55,15 @@ public abstract class TridotBossBar{
     public TridotBossBar setName(Component pName) {
         this.name = pName;
         return this;
+    }
+
+    public TridotBossBar setAboutToDie(boolean aboutToDie){
+        this.aboutToDie = aboutToDie;
+        return this;
+    }
+
+    public boolean isAboutToDie(){
+        return aboutToDie;
     }
 
     public TridotBossBar setPercentage(float percentage) {

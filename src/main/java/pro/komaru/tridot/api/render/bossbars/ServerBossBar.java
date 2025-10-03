@@ -62,6 +62,15 @@ public class ServerBossBar extends TridotBossBar{
         return this;
     }
 
+    public ServerBossBar setAboutToDie(boolean aboutToDie){
+        if (aboutToDie != this.aboutToDie) {
+            super.setAboutToDie(aboutToDie);
+            this.broadcast(UpdateBossbarPacket::createUpdatePropertiesPacket);
+        }
+
+        return this;
+    }
+
     public ServerBossBar setDarkenScreen(boolean pDarkenSky) {
         if (pDarkenSky != this.darkenScreen) {
             super.setDarkenScreen(pDarkenSky);

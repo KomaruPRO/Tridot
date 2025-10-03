@@ -55,7 +55,7 @@ public record UpdateBossbarPacket(UUID id, Operation operation){
     }
 
     public static UpdateBossbarPacket createUpdatePropertiesPacket(TridotBossBar pEvent){
-        return new UpdateBossbarPacket(pEvent.getId(), new UpdatePropertiesOperation(pEvent.getType(), pEvent.getTexture(), pEvent.getBossMusic(), pEvent.shouldDarkenScreen(), pEvent.shouldPlayBossMusic(), pEvent.shouldCreateWorldFog(), pEvent.isRainbow()));
+        return new UpdateBossbarPacket(pEvent.getId(), new UpdatePropertiesOperation(pEvent.getType(), pEvent.getTexture(), pEvent.getBossMusic(), pEvent.shouldDarkenScreen(), pEvent.shouldPlayBossMusic(), pEvent.shouldCreateWorldFog(), pEvent.isRainbow(), pEvent.isAboutToDie()));
     }
 
     public void encode(FriendlyByteBuf pBuffer){
@@ -104,7 +104,7 @@ public record UpdateBossbarPacket(UUID id, Operation operation){
         default void updateStyle(UUID uuid, Col color){
         }
 
-        default void updateProperties(UUID uuid, ResourceLocation type, ResourceLocation texture, SoundEvent event, boolean darkenSky, boolean shouldPlayBossMusic, boolean createFog, boolean isRainbow){
+        default void updateProperties(UUID uuid, ResourceLocation type, ResourceLocation texture, SoundEvent event, boolean darkenSky, boolean shouldPlayBossMusic, boolean createFog, boolean isRainbow, boolean aboutToDie){
         }
     }
 
@@ -252,12 +252,13 @@ public record UpdateBossbarPacket(UUID id, Operation operation){
         }
     }
 
-    record UpdatePropertiesOperation(ResourceLocation type, ResourceLocation texture, SoundEvent event, boolean darkenScreen, boolean playMusic, boolean createWorldFog, boolean isRainbow) implements Operation{
+    record UpdatePropertiesOperation(ResourceLocation type, ResourceLocation texture, SoundEvent event, boolean darkenScreen, boolean playMusic, boolean createWorldFog, boolean isRainbow, boolean aboutToDie) implements Operation{
         private UpdatePropertiesOperation(FriendlyByteBuf pBuffer){
             this(
             pBuffer.readResourceLocation(),
             pBuffer.readResourceLocation(),
             SoundEvent.createFixedRangeEvent(pBuffer.readResourceLocation(), 16),
+            pBuffer.readBoolean(),
             pBuffer.readBoolean(),
             pBuffer.readBoolean(),
             pBuffer.readBoolean(),
@@ -269,7 +270,7 @@ public record UpdateBossbarPacket(UUID id, Operation operation){
         }
 
         public void dispatch(UUID pId, Handler pHandler){
-            pHandler.updateProperties(pId, this.type, this.texture, this.event, this.darkenScreen, this.playMusic, this.createWorldFog, this.isRainbow);
+            pHandler.updateProperties(pId, this.type, this.texture, this.event, this.darkenScreen, this.playMusic, this.createWorldFog, this.isRainbow, this.aboutToDie);
         }
 
         public void encode(FriendlyByteBuf pBuffer){
@@ -280,6 +281,7 @@ public record UpdateBossbarPacket(UUID id, Operation operation){
             pBuffer.writeBoolean(this.playMusic);
             pBuffer.writeBoolean(this.createWorldFog);
             pBuffer.writeBoolean(this.isRainbow);
+            pBuffer.writeBoolean(this.aboutToDie);
         }
     }
 

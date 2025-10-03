@@ -54,8 +54,9 @@ public class BossBarsOverlay implements IGuiOverlay {
                 this.updateStyle(bossbar, color);
             }
 
-            public void updateProperties(UUID uuid, ResourceLocation type, ResourceLocation texture, SoundEvent event, boolean darkenSky, boolean shouldPlayBossMusic, boolean createFog, boolean isRainbow){
+            public void updateProperties(UUID uuid, ResourceLocation type, ResourceLocation texture, SoundEvent event, boolean darkenSky, boolean shouldPlayBossMusic, boolean createFog, boolean isRainbow, boolean aboutToDie){
                 ClientBossbar bossbar = events.get(uuid);
+                bossbar.setAboutToDie(aboutToDie);
                 this.updateProperties(bossbar, type, texture, event, darkenSky, shouldPlayBossMusic, createFog, isRainbow);
             }
 
