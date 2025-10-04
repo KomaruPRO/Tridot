@@ -6,22 +6,24 @@ import net.minecraft.util.*;
 import net.minecraft.world.effect.*;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.level.storage.loot.*;
+import net.minecraft.world.level.storage.loot.LootContext.*;
 import net.minecraft.world.level.storage.loot.parameters.*;
 import net.minecraft.world.level.storage.loot.predicates.*;
 import net.minecraftforge.registries.*;
 
 import java.util.*;
 
-public class MobEffectCondition implements LootItemCondition{
+public class MobEffectCondition extends TargetedLootCondition{
     private final MobEffect effect;
 
-    public MobEffectCondition(MobEffect effect){
+    public MobEffectCondition(EntityTarget target, MobEffect effect){
+        super(target);
         this.effect = effect;
     }
 
     @Override
     public boolean test(LootContext lootContext){
-        if(lootContext.getParamOrNull(LootContextParams.THIS_ENTITY) instanceof LivingEntity livingEntity){
+        if(lootContext.getParamOrNull(target.getParam()) instanceof LivingEntity livingEntity){
             return livingEntity.hasEffect(effect);
         }
         return false;
@@ -32,7 +34,7 @@ public class MobEffectCondition implements LootItemCondition{
         return LootConditionsRegistry.MOB_EFFECT_CONDITION.get();
     }
 
-    public static class Serializer implements net.minecraft.world.level.storage.loot.Serializer<MobEffectCondition>{
+    public static class Serializer extends TargetedLootCondition.AbstractSerializer<MobEffectCondition> {
         @Override
         public void serialize(JsonObject json, MobEffectCondition condition, JsonSerializationContext context){
             String key = "";
@@ -43,7 +45,7 @@ public class MobEffectCondition implements LootItemCondition{
         @Override
         public MobEffectCondition deserialize(JsonObject json, JsonDeserializationContext context){
             String str = GsonHelper.getAsString(json, "effect");
-            return new MobEffectCondition(ForgeRegistries.MOB_EFFECTS.getValue(ResourceLocation.of(str, ':')));
+            return new MobEffectCondition(this.getTarget(json), ForgeRegistries.MOB_EFFECTS.getValue(ResourceLocation.of(str, ':')));
         }
     }
 }
