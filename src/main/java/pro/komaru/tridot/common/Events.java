@@ -15,6 +15,7 @@ import net.minecraft.tags.*;
 import net.minecraft.world.*;
 import net.minecraft.world.effect.*;
 import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.item.*;
 import net.minecraft.world.entity.player.*;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.block.state.*;
@@ -25,6 +26,7 @@ import net.minecraftforge.event.TickEvent.*;
 import net.minecraftforge.event.entity.*;
 import net.minecraftforge.event.entity.living.*;
 import net.minecraftforge.event.entity.player.*;
+import net.minecraftforge.event.entity.player.PlayerEvent.*;
 import net.minecraftforge.eventbus.api.*;
 import net.minecraftforge.registries.*;
 import pro.komaru.tridot.*;
@@ -49,6 +51,26 @@ import java.util.stream.*;
 
 public class Events{
     public static final ResourceLocation GUI_ICONS_LOCATION = new ResourceLocation("textures/gui/icons.png");
+
+    @SubscribeEvent
+    public void onPickup(ItemPickupEvent event) {
+        ItemEntity entity = event.getOriginalEntity();
+        ItemStack stack = event.getStack();
+        Player player = event.getEntity();
+
+        Tridot.LOGGER.info("Slot with similar item: {}", player.getInventory().findSlotMatchingItem(stack));
+        Tridot.LOGGER.info("Has similar item: {}", player.getInventory().hasAnyMatching((e) -> e.is(stack.getItem())));
+
+        for(int $$1 = 0; $$1 < player.getInventory().getContainerSize(); ++$$1) {
+            ItemStack $$2 = player.getInventory().getItem($$1);
+            if ($$2.is(stack.getItem())) {
+                Tridot.LOGGER.info("Similar item: {} NBT={}, Slot={}", $$2, $$2.getTag(), $$1);
+            }
+        }
+
+        Tridot.LOGGER.info("Pickup: {} NBT={}", stack, stack.getTag());
+        Tridot.LOGGER.info("Count={}, Damage={}, Item={}", stack.getCount(), stack.getDamageValue(), stack.getItem());
+    }
 
     @SubscribeEvent(priority = EventPriority.HIGH)
     public void onJoinServer(EntityJoinLevelEvent event) {
@@ -197,7 +219,7 @@ public class Events{
     @SubscribeEvent
     public void onTooltip(ItemTooltipEvent e){
         ItemStack itemStack = e.getItemStack();
-        Utils.Items.addSkinTooltip(itemStack, e.getToolTip());
+        if(itemStack.getTag() != null) Utils.Items.addSkinTooltip(itemStack, e.getToolTip());
         if(Utils.isDevelopment){
             Stream<ResourceLocation> itemTagStream = itemStack.getTags().map(TagKey::location);
             if(Minecraft.getInstance().options.advancedItemTooltips){
@@ -238,25 +260,6 @@ public class Events{
                 float reducedDamage = incomingDamage * totalMultiplier;
                 event.setAmount(reducedDamage);
             }
-        }
-    }
-
-    @OnlyIn(Dist.CLIENT)
-    private static void drawVanillaBar(GuiGraphics pGuiGraphics, int pX, int offset, BossEvent pBossEvent){
-        drawVanillaBar(pGuiGraphics, pX, offset + 16, pBossEvent, 182, 0);
-        int i = (int)(pBossEvent.getProgress() * 183.0F);
-        if(i > 0){
-            drawVanillaBar(pGuiGraphics, pX, offset + 16, pBossEvent, i, 5);
-        }
-    }
-
-    @OnlyIn(Dist.CLIENT)
-    private static void drawVanillaBar(GuiGraphics pGuiGraphics, int pX, int pY, BossEvent pBossEvent, int pWidth, int p_281636_){
-        pGuiGraphics.blit(TridotLibClient.VANILLA_LOC, pX, pY, 0, pBossEvent.getColor().ordinal() * 5 * 2 + p_281636_, pWidth, 5);
-        if(pBossEvent.getOverlay() != BossEvent.BossBarOverlay.PROGRESS){
-            RenderSystem.enableBlend();
-            pGuiGraphics.blit(TridotLibClient.VANILLA_LOC, pX, pY, 0, 80 + (pBossEvent.getOverlay().ordinal() - 1) * 5 * 2 + p_281636_, pWidth, 5);
-            RenderSystem.disableBlend();
         }
     }
 }

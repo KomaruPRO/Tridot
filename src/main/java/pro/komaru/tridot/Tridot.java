@@ -3,8 +3,11 @@ package pro.komaru.tridot;
 import com.mojang.logging.*;
 import net.mehvahdjukaar.dummmmmmy.*;
 import net.minecraft.resources.*;
+import net.minecraft.world.entity.item.*;
+import net.minecraft.world.entity.player.*;
 import net.minecraft.world.item.*;
 import net.minecraftforge.api.distmarker.*;
+import net.minecraftforge.event.entity.player.PlayerEvent.*;
 import net.minecraftforge.fml.config.ModConfig.*;
 import net.minecraftforge.registries.*;
 import org.slf4j.*;
@@ -95,6 +98,7 @@ public class Tridot {
 
     @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
     public static class RegistryEvents{
+
         @SubscribeEvent
         public static void attachAttribute(EntityAttributeModificationEvent event) {
             event.add(EntityType.PLAYER, AttributeRegistry.PROJECTILE_DAMAGE.get());

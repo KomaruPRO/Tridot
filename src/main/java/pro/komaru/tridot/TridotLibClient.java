@@ -21,7 +21,6 @@ public class TridotLibClient{
     public static LoopedSoundInstance BOSS_MUSIC;
     public static TridotSoundInstance COOLDOWN_SOUND;
     public static TridotSoundInstance DUNGEON_MUSIC_INSTANCE;
-    public static final ResourceLocation VANILLA_LOC = new ResourceLocation("textures/gui/bars.png");
 
     public static void clientSetup(final FMLClientSetupEvent event){
         ShadersIntegration.init();

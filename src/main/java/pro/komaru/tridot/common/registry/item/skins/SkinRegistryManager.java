@@ -53,11 +53,9 @@ public class SkinRegistryManager {
 
     public static Seq<ItemSkin> getApplicableSkins(ItemStack stack) {
         Seq<ItemSkin> skins = Seq.with();
-        for(ItemSkin skin : getSkins()){
-            if(skin.appliesOn(stack)){
-                skins.add(skin);
-            }
-        }
+        getSkins().forEach(s -> {
+            if(s.appliesOn(stack)) skins.add(s);
+        });
 
         return skins;
     }
