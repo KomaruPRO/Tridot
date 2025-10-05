@@ -52,26 +52,6 @@ import java.util.stream.*;
 public class Events{
     public static final ResourceLocation GUI_ICONS_LOCATION = new ResourceLocation("textures/gui/icons.png");
 
-    @SubscribeEvent
-    public void onPickup(ItemPickupEvent event) {
-        ItemEntity entity = event.getOriginalEntity();
-        ItemStack stack = event.getStack();
-        Player player = event.getEntity();
-
-        Tridot.LOGGER.info("Slot with similar item: {}", player.getInventory().findSlotMatchingItem(stack));
-        Tridot.LOGGER.info("Has similar item: {}", player.getInventory().hasAnyMatching((e) -> e.is(stack.getItem())));
-
-        for(int $$1 = 0; $$1 < player.getInventory().getContainerSize(); ++$$1) {
-            ItemStack $$2 = player.getInventory().getItem($$1);
-            if ($$2.is(stack.getItem())) {
-                Tridot.LOGGER.info("Similar item: {} NBT={}, Slot={}", $$2, $$2.getTag(), $$1);
-            }
-        }
-
-        Tridot.LOGGER.info("Pickup: {} NBT={}", stack, stack.getTag());
-        Tridot.LOGGER.info("Count={}, Damage={}, Item={}", stack.getCount(), stack.getDamageValue(), stack.getItem());
-    }
-
     @SubscribeEvent(priority = EventPriority.HIGH)
     public void onJoinServer(EntityJoinLevelEvent event) {
         Entity entity = event.getEntity();
