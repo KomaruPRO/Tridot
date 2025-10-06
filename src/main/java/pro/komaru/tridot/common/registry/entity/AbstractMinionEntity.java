@@ -170,7 +170,6 @@ public abstract class AbstractMinionEntity extends Monster implements OwnableEnt
     }
 
     public boolean canAttack(LivingEntity pTarget){
-        if(!Utils.Entities.canHitTarget(this, pTarget)) return false;
         boolean flag = !this.isOwnedBy(pTarget) || !isAlliedTo(pTarget);
         return super.canAttack(pTarget) && (flag || (this.getOwner() != null && this.getOwner().canAttack(pTarget)));
     }

@@ -70,6 +70,7 @@ public class ItemStackMixin{
 
             return copied;
         }
+
         return map;
     }
 
