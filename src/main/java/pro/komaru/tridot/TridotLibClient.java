@@ -14,6 +14,8 @@ import pro.komaru.tridot.client.tooltip.*;
 import pro.komaru.tridot.client.sound.LoopedSoundInstance;
 import pro.komaru.tridot.client.sound.TridotSoundInstance;
 import pro.komaru.tridot.client.compatibility.ShadersIntegration;
+import pro.komaru.tridot.common.registry.item.components.*;
+import pro.komaru.tridot.common.registry.item.components.client.*;
 
 import static pro.komaru.tridot.Tridot.*;
 
@@ -33,6 +35,16 @@ public class TridotLibClient{
 
     @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
     public static class RegistryEvents {
+
+        @SubscribeEvent
+        public static void registerComponents(RegisterClientTooltipComponentFactoriesEvent e) {
+            e.register(SeparatorComponent.class, c -> SeparatorClientComponent.create(c.component()));
+            e.register(LineSeparatorComponent.class, c -> LineSeparatorClientComponent.create());
+            e.register(AbilityComponent.class, c -> AbilityClientComponent.create(c.component(), c.icon(), c.paddingTop(), c.iconSize()));
+            e.register(TextComponent.class, c -> TextClientComponent.create(c.component()));
+            e.register(EffectsListComponent.class, c -> EffectListClientComponent.create(c.list(), c.component()));
+            e.register(EmptyComponent.class, c -> EmptyClientComponent.create(c.height()));
+        }
 
         @SubscribeEvent
         public static void registerOverlays(RegisterGuiOverlaysEvent event){
