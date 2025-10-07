@@ -1,8 +1,12 @@
 package pro.komaru.tridot.client;
 
+import com.mojang.datafixers.util.*;
 import net.minecraft.client.*;
+import net.minecraft.client.gui.screens.*;
+import net.minecraft.network.chat.*;
 import net.minecraft.util.*;
 import net.minecraft.world.entity.player.*;
+import net.minecraft.world.inventory.tooltip.*;
 import net.minecraft.world.item.*;
 import net.minecraftforge.client.event.*;
 import net.minecraftforge.event.*;
@@ -11,8 +15,36 @@ import pro.komaru.tridot.client.gfx.postprocess.*;
 import pro.komaru.tridot.client.model.render.item.bow.*;
 import pro.komaru.tridot.client.render.gui.particle.*;
 import pro.komaru.tridot.client.render.screenshake.*;
+import pro.komaru.tridot.common.registry.item.*;
+import pro.komaru.tridot.common.registry.item.components.*;
+import pro.komaru.tridot.util.struct.data.*;
+
+import java.util.*;
 
 public class ClientEvents {
+
+    @SubscribeEvent
+    public static void onTooltipGatherComponents(RenderTooltipEvent.GatherComponents event) {
+        List<Either<FormattedText, TooltipComponent>> elements = event.getTooltipElements();
+        if (event.getItemStack().getItem() instanceof TooltipComponentItem componentItem) {
+            Seq<TooltipComponent> components = componentItem.getTooltips(event.getItemStack());
+            int insertIndex = 1;
+            int componentsCount = 0;
+            for (TooltipComponent component : components){
+                if(component instanceof AbilityComponent) componentsCount++;
+            }
+
+            if (componentsCount > 2 && !Screen.hasShiftDown()) {
+                elements.add(insertIndex, Either.right(new TextComponent(Component.translatable("tooltip.tridot.shift_for_details", Component.translatable("key.keyboard.left.shift").getString()))));
+                return;
+            }
+
+            for (TooltipComponent component : components) {
+                elements.add(insertIndex, Either.right(component));
+                insertIndex++;
+            }
+        }
+    }
 
     @SubscribeEvent
     public void onDisconnect(ClientPlayerNetworkEvent.LoggingOut e){
