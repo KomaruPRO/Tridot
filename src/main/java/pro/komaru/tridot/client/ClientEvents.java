@@ -24,7 +24,7 @@ import java.util.*;
 public class ClientEvents {
 
     @SubscribeEvent
-    public static void onTooltipGatherComponents(RenderTooltipEvent.GatherComponents event) {
+    public void onTooltipGatherComponents(RenderTooltipEvent.GatherComponents event) {
         List<Either<FormattedText, TooltipComponent>> elements = event.getTooltipElements();
         if (event.getItemStack().getItem() instanceof TooltipComponentItem componentItem) {
             Seq<TooltipComponent> components = componentItem.getTooltips(event.getItemStack());
