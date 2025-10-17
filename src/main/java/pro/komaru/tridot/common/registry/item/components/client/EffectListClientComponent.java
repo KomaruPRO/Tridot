@@ -39,14 +39,23 @@ public class EffectListClientComponent implements ClientTooltipComponent{
     @Override
     public int getWidth(Font font) {
         int maxWidth = 0;
-        if(component != null && component != Component.empty()){
+        if(component != null && !component.equals(Component.empty())){
             maxWidth += font.width(component);
         }
 
         for (var entry : effects) {
-            int currentWidth = iconSize + padding + font.width(Component.translatable(entry.getDescriptionId()));
+            MutableComponent mutablecomponent = Component.translatable(entry.getDescriptionId());
+            if(entry.getAmplifier() > 0){
+                mutablecomponent = Component.translatable("potion.withAmplifier", mutablecomponent, Component.translatable("potion.potency." + entry.getAmplifier()));
+            }
+
+            if(!entry.endsWithin(20)){
+                mutablecomponent = Component.translatable("potion.withDuration", mutablecomponent, MobEffectUtil.formatDuration(entry, 1));
+            }
+
+            int currentWidth = iconSize + padding + font.width(mutablecomponent);
             if (currentWidth > maxWidth) {
-                maxWidth = currentWidth + 50;
+                maxWidth = currentWidth + 60;
             }
         }
 
