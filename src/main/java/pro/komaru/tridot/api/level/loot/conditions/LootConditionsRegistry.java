@@ -13,6 +13,7 @@ public class LootConditionsRegistry{
     public static final RegistryObject<LootItemConditionType> LOCAL_DATE_CONDITION = LOOT_CONDITION_TYPES.register("local_date", () -> new LootItemConditionType(new LocalDateCondition.Serializer()));
     public static final RegistryObject<LootItemConditionType> MOB_CATEGORY_CONDITION = LOOT_CONDITION_TYPES.register("mob_category", () -> new LootItemConditionType(new MobCategoryCondition.Serializer()));
     public static final RegistryObject<LootItemConditionType> MOB_EFFECT_CONDITION = LOOT_CONDITION_TYPES.register("mob_effect", () -> new LootItemConditionType(new MobEffectCondition.Serializer()));
+    public static final RegistryObject<LootItemConditionType> ACTIVE_EVENT_CONDITION = LOOT_CONDITION_TYPES.register("active_event", () -> new LootItemConditionType(new EventActiveCondition.Serializer()));
 
     public static void init(IEventBus bus){
         LOOT_CONDITION_TYPES.register(bus);
