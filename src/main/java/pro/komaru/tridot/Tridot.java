@@ -101,11 +101,11 @@ public class Tridot {
 
         @SubscribeEvent
         public static void attachAttribute(EntityAttributeModificationEvent event) {
-            event.add(EntityType.PLAYER, AttributeRegistry.PROJECTILE_DAMAGE.get());
-            event.add(EntityType.PLAYER, AttributeRegistry.PERCENT_ARMOR.get());
-            if(ModList.get().isLoaded("dummmmmmy")) {
-                event.add(Dummmmmmy.TARGET_DUMMY.get(), AttributeRegistry.PERCENT_ARMOR.get());
+            for(var type : event.getTypes()) {
+                event.add(type, AttributeRegistry.PERCENT_ARMOR.get());
             }
+
+            event.add(EntityType.PLAYER, AttributeRegistry.PROJECTILE_DAMAGE.get());
         }
     }
 }

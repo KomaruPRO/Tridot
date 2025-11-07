@@ -19,32 +19,32 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
+import pro.komaru.tridot.common.registry.item.*;
 
 import java.util.List;
 
 public abstract class AbstractProjectile extends AbstractTridotArrow{
-    public boolean velocityBased;
-    public boolean discardOnHit;
+    public boolean velocityBased = true;
+    public boolean discardOnHit = true;
 
     public AbstractProjectile(EntityType<? extends AbstractArrow> pEntityType, Level pLevel){
         super(pEntityType, pLevel);
     }
 
-    public AbstractProjectile(EntityType<? extends AbstractArrow> pEntityType, Level worldIn, LivingEntity thrower, int baseDamage){
+    public AbstractProjectile(EntityType<? extends AbstractArrow> pEntityType, Level worldIn, LivingEntity thrower, double baseDamage){
         super(pEntityType, worldIn, thrower, baseDamage);
     }
 
-    public AbstractProjectile(EntityType<? extends AbstractArrow> pEntityType, Level worldIn, LivingEntity thrower, ItemStack thrownStackIn, int baseDamage){
+    public AbstractProjectile(EntityType<? extends AbstractArrow> pEntityType, Level worldIn, LivingEntity thrower, ItemStack thrownStackIn, double baseDamage){
         super(pEntityType, worldIn, thrower, thrownStackIn, baseDamage);
     }
 
-    public void setVelocityBasedDamage(double baseDamage){
-        this.baseDamage = baseDamage;
-        this.velocityBased = true;
+    public void setVelocityBasedDamage(boolean value){
+        this.velocityBased = value;
     }
 
-    public void setDiscardOnHit(){
-        this.discardOnHit = true;
+    public void setDiscardOnHit(boolean value){
+        this.discardOnHit = value;
     }
 
     public boolean isDiscardOnHit(){
@@ -98,29 +98,30 @@ public abstract class AbstractProjectile extends AbstractTridotArrow{
         }
 
         if(shooter instanceof LivingEntity thrower){
-            boolean flag = entity.getType() == EntityType.ENDERMAN;
-            if(this.isOnFire() && !flag){
-                entity.setSecondsOnFire(5);
+            if(isVelocityBased()){
+                processVelocityDamage(thrower, entity, damagesource);
+            }else{
+                if(thrower instanceof Player plr){
+                    float f = (float)(plr.getAttributes().getValue(AttributeRegistry.PROJECTILE_DAMAGE.get()));
+                    hurt(thrower, entity, damagesource, f);
+                }else{
+                    processVelocityDamage(thrower, entity, damagesource);
+                }
             }
-
-            processVelocityDamage(thrower, entity, damagesource);
         }
-    }
-
-    @Override
-    protected void onHit(HitResult pResult){
-        if(level().isClientSide) return;
-        super.onHit(pResult);
-        if(discardOnHit) discard();
     }
 
     /**
      * Custom damage processing here
      */
     public void hurt(LivingEntity thrower, Entity entity, DamageSource source, float damage){
+        boolean flag = entity.getType() == EntityType.ENDERMAN;
         int k = entity.getRemainingFireTicks();
+        if (this.isOnFire() && !flag) {
+            entity.setSecondsOnFire(5);
+        }
+
         if(entity.hurt(source, damage)){
-            boolean flag = entity.getType() == EntityType.ENDERMAN;
             if(flag){
                 return;
             }
@@ -128,7 +129,6 @@ public abstract class AbstractProjectile extends AbstractTridotArrow{
             if(entity instanceof LivingEntity livingentity){
                 EnchantmentHelper.doPostHurtEffects(livingentity, thrower);
                 EnchantmentHelper.doPostDamageEffects(thrower, livingentity);
-                this.doPostHurtEffects(livingentity);
                 if(this.knockback > 0){
                     double d0 = Math.max(0.0D, 1.0D - livingentity.getAttributeValue(Attributes.KNOCKBACK_RESISTANCE));
                     Vec3 vec3 = this.getDeltaMovement().multiply(1.0D, 0.0D, 1.0D).normalize().scale((double)this.knockback * 0.6D * d0);
@@ -137,6 +137,7 @@ public abstract class AbstractProjectile extends AbstractTridotArrow{
                     }
                 }
 
+                this.doPostHurtEffects(livingentity);
                 if(livingentity != thrower && livingentity instanceof Player && thrower instanceof ServerPlayer serv && !this.isSilent()){
                     serv.connection.send(new ClientboundGameEventPacket(ClientboundGameEventPacket.ARROW_HIT_PLAYER, 0.0F));
                 }
@@ -152,6 +153,11 @@ public abstract class AbstractProjectile extends AbstractTridotArrow{
                         CriteriaTriggers.KILLED_BY_CROSSBOW.trigger(serverplayer, List.of(entity));
                     }
                 }
+
+                this.playSound(this.soundEvent, 1.0F, 1.2F / (this.random.nextFloat() * 0.2F + 0.9F));
+                if (discardOnHit && this.getPierceLevel() <= 0) {
+                    this.discard();
+                }
             }
         }else{
             entity.setRemainingFireTicks(k);
@@ -163,7 +169,7 @@ public abstract class AbstractProjectile extends AbstractTridotArrow{
                     this.spawnAtLocation(this.getPickupItem(), 0.1F);
                 }
 
-                this.discard();
+                if(discardOnHit) this.discard();
             }
         }
     }
