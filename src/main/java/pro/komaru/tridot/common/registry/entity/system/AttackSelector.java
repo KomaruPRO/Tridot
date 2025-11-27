@@ -15,7 +15,7 @@ public class AttackSelector {
 
     /**
      * Selects the best available attack for the current situation.
-     * @param mob The mob that needs to choose an attack.
+     * @param mobEntity The mob that needs to choose an attack.
      * @param target The target of the attack.
      * @return The chosen AttackInstance, or null if no attack is suitable.
      */

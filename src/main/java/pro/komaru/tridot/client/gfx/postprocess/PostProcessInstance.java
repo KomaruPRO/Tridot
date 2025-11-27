@@ -1,7 +1,10 @@
 package pro.komaru.tridot.client.gfx.postprocess;
 
+import net.minecraftforge.api.distmarker.*;
+
 import java.util.function.*;
 
+@OnlyIn(Dist.CLIENT)
 public abstract class PostProcessInstance{
     public float time = 0F;
     public boolean removed;

@@ -30,7 +30,6 @@ public record UpdateBossbarPacket(UUID id, Operation operation){
     public static UpdateBossbarPacket decode(FriendlyByteBuf pBuffer){
         UUID id = pBuffer.readUUID();
         OperationType operationType = pBuffer.readEnum(OperationType.class);
-        Tridot.LOGGER.debug("Received a Bossbar with UUID: {} Operation: {}", id, operationType.name());
         return new UpdateBossbarPacket(id, operationType.reader.apply(pBuffer));
     }
 

@@ -1,6 +1,7 @@
 package pro.komaru.tridot.client.gfx.postprocess;
 
 import com.mojang.blaze3d.preprocessor.*;
+import net.minecraftforge.api.distmarker.*;
 import pro.komaru.tridot.*;
 import net.minecraft.client.*;
 import net.minecraft.resources.*;
@@ -12,6 +13,7 @@ import pro.komaru.tridot.util.*;
 import java.io.*;
 import java.nio.charset.*;
 
+@OnlyIn(Dist.CLIENT)
 public class TridotGlslPreprocessor extends GlslPreprocessor{
 
     public static final TridotGlslPreprocessor PREPROCESSOR = new TridotGlslPreprocessor();

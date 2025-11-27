@@ -1,6 +1,7 @@
 package pro.komaru.tridot.client.gfx.postprocess;
 
 import com.mojang.blaze3d.vertex.*;
+import net.minecraftforge.api.distmarker.*;
 import pro.komaru.tridot.*;
 import net.minecraft.client.*;
 import net.minecraft.client.renderer.*;
@@ -9,6 +10,7 @@ import pro.komaru.tridot.util.*;
 import javax.annotation.*;
 import java.util.*;
 
+@OnlyIn(Dist.CLIENT)
 public abstract class PostProcessInstanceData{
     public static final Minecraft minecraft = Minecraft.getInstance();
     public final List<PostProcessInstance> instances = new ArrayList<>(getMaxInstances());

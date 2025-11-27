@@ -3,8 +3,10 @@ package pro.komaru.tridot.client.gfx.postprocess;
 import com.mojang.blaze3d.vertex.*;
 import net.minecraft.client.renderer.*;
 import net.minecraft.resources.*;
+import net.minecraftforge.api.distmarker.*;
 import pro.komaru.tridot.Tridot;
 
+@OnlyIn(Dist.CLIENT)
 public class GlowPostProcess extends PostProcess{
     public static final GlowPostProcess INSTANCE = new GlowPostProcess();
     public final PostProcessInstanceData data = new GlowPostProcessInstanceData();

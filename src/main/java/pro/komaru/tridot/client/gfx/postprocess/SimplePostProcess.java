@@ -2,7 +2,9 @@ package pro.komaru.tridot.client.gfx.postprocess;
 
 import com.mojang.blaze3d.vertex.*;
 import net.minecraft.resources.*;
+import net.minecraftforge.api.distmarker.*;
 
+@OnlyIn(Dist.CLIENT)
 public class SimplePostProcess extends PostProcess{
     public ResourceLocation resourceLocation;
     public boolean screen = false;

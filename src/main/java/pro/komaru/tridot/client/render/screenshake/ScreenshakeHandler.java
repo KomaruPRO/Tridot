@@ -3,13 +3,17 @@ package pro.komaru.tridot.client.render.screenshake;
 
 import net.minecraft.client.Camera;
 import net.minecraft.client.Minecraft;
+import net.minecraft.core.*;
+import net.minecraft.server.level.*;
 import net.minecraft.util.Mth;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.client.event.ComputeFovModifierEvent;
 import org.jetbrains.annotations.NotNull;
 import pro.komaru.tridot.Tridot;
+import pro.komaru.tridot.api.networking.*;
 import pro.komaru.tridot.client.ClientTick;
 import pro.komaru.tridot.common.config.ClientConfig;
+import pro.komaru.tridot.common.networking.packets.*;
 import pro.komaru.tridot.util.Tmp;
 import pro.komaru.tridot.util.comps.phys.Pos3;
 import pro.komaru.tridot.util.math.ArcRandom;

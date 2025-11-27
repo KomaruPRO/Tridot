@@ -8,6 +8,7 @@ import com.mojang.blaze3d.shaders.*;
 import com.mojang.blaze3d.systems.*;
 import com.mojang.blaze3d.vertex.*;
 import com.mojang.datafixers.util.*;
+import net.minecraftforge.api.distmarker.*;
 import pro.komaru.tridot.*;
 import net.minecraft.client.*;
 import net.minecraft.client.renderer.*;
@@ -23,6 +24,7 @@ import java.util.function.*;
 
 import static com.mojang.blaze3d.platform.GlConst.GL_DRAW_FRAMEBUFFER;
 
+@OnlyIn(Dist.CLIENT)
 public abstract class PostProcess{
     public static final Minecraft minecraft = Minecraft.getInstance();
 

@@ -1,10 +1,12 @@
 package pro.komaru.tridot.client.gfx.postprocess;
 
+import net.minecraftforge.api.distmarker.*;
 import org.joml.*;
 import pro.komaru.tridot.client.ClientTick;
 
 import java.util.function.*;
 
+@OnlyIn(Dist.CLIENT)
 public class GlowPostProcessInstance extends PostProcessInstance{
     public Vector3f center;
     public Vector3f color;

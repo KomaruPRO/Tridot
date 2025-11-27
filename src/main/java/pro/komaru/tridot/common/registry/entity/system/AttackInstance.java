@@ -15,6 +15,7 @@ public abstract class AttackInstance{
 
     public final PathfinderMob mob;
     public int cooldownTimer;
+    public boolean isFinished = false;
 
     public AttackInstance(PathfinderMob mob, float damage, float range, int attackDelay, int attackDuration, int cooldown){
         this.mob = mob;
@@ -33,6 +34,10 @@ public abstract class AttackInstance{
         }
 
         return isWithinAttackRange(target, range);
+    }
+
+    public boolean isFinished() {
+        return isFinished;
     }
 
     public abstract int preference(Entity target);
@@ -61,6 +66,10 @@ public abstract class AttackInstance{
         cooldownTimer = cooldown;
     }
 
+    public int getCooldownTimer(){
+        return cooldownTimer;
+    }
+
     public double getAttackRangeSqr(LivingEntity pEntity, double range) {
         return (mob.getBbWidth() * range * mob.getBbWidth() * range + pEntity.getBbWidth());
     }
@@ -72,6 +81,10 @@ public abstract class AttackInstance{
     public boolean isWithinAttackRange(LivingEntity pEntity, double range) {
         double d0 = this.getPerceivedTargetDistanceSquareForAttack(pEntity);
         return d0 <= this.getAttackRangeSqr(pEntity, range);
+    }
+
+    public boolean canPerformAttack(LivingEntity target) {
+        return isWithinAttackRange(target, range);
     }
 
     public abstract void performAttack();

@@ -51,6 +51,17 @@ public interface AttackSystemMob{
         }
     }
 
+    default void tickSystem() {
+        tickAttacks();
+        tickCooldowns();
+    }
+
+    default void tickAttacks() {
+        if(this.getActiveAttack() != null) {
+            this.getActiveAttack().tick();
+        }
+    }
+
     default void tickCooldowns() {
         this.getAttackSelector().attacks.forEach(attackInstance -> {
           if(attackInstance.cooldownTimer > 0) attackInstance.cooldownTimer--;

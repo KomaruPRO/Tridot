@@ -14,8 +14,9 @@ public class ExecuteAttackGoal extends Goal{
     private AttackInstance chosenAttack;
 
     private enum State { IDLE, PREPARING, EXECUTING }
-    private State currentState = State.IDLE;
+    private State currentState;
     private int timer;
+    private int tryCount;
 
     public ExecuteAttackGoal(PathfinderMob mob) {
         this.mob = mob;
@@ -24,7 +25,11 @@ public class ExecuteAttackGoal extends Goal{
         }
 
         this.attackableMob = (AttackSystemMob) mob;
-        this.setFlags(EnumSet.of(Goal.Flag.MOVE, Goal.Flag.LOOK));
+        this.setFlags(EnumSet.of(Flag.MOVE, Flag.LOOK));
+    }
+
+    public boolean isInterruptable() {
+        return false;
     }
 
     @Override
@@ -66,6 +71,7 @@ public class ExecuteAttackGoal extends Goal{
         this.target = null;
         this.currentState = State.IDLE;
         this.timer = 0;
+        this.tryCount = 0;
     }
 
     @Override
@@ -91,18 +97,25 @@ public class ExecuteAttackGoal extends Goal{
 
                 if (this.timer <= 0) {
                     this.currentState = State.EXECUTING;
-                    this.timer = this.chosenAttack.attackDuration;
-                    this.chosenAttack.performAttack();
+                    if(this.chosenAttack.canPerformAttack(this.target)){
+                        this.timer = this.chosenAttack.attackDuration;
+                        this.chosenAttack.performAttack();
+                        Level level = this.mob.level();
+                        if(level != null){
+                            level.playSound(null, this.mob.blockPosition(), this.chosenAttack.getAttackSound(), SoundSource.HOSTILE, 1.0F, 1.0F);
+                        }
+                    } else {
+                        this.tryCount++;
+                    }
 
-                    Level level = this.mob.level();
-                    if(level != null){
-                        level.playSound(null, this.mob.blockPosition(), this.chosenAttack.getAttackSound(), SoundSource.HOSTILE, 1.0F, 1.0F);
+                    if(tryCount >= 10){
+                        stop();
                     }
                 }
 
                 break;
             case EXECUTING:
-                if (this.timer <= 0) {
+                if (this.timer <= 0 || this.chosenAttack.isFinished()) {
                     stop();
                 }
 
