@@ -1,5 +1,6 @@
 package pro.komaru.tridot.util.math;
 
+import pro.komaru.tridot.util.phys.*;
 import pro.komaru.tridot.util.struct.data.Seq;
 
 public class Mathf {
@@ -40,6 +41,18 @@ public class Mathf {
         double dz = z-z2;
         return Math.sqrt(dx*dx+dy*dy+dz*dz);
     }
+
+    public static float distanceSq(Vec3 vec1, Vec3 vec2) {
+        float dx = vec1.x - vec2.x;
+        float dy = vec1.y - vec2.y;
+        float dz = vec1.z - vec2.z;
+        return dx * dx + dy * dy + dz * dz;
+    }
+
+    public static float distance(Vec3 vec1, Vec3 vec2) {
+        return (float)Math.sqrt(distanceSq(vec1, vec2));
+    }
+
     /**Lerps from one point to another with specified progress*/
     public static float lerp(float from, float to, float dst) {
         return (to-from)*clamp(dst)+from;
