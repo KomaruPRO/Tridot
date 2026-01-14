@@ -42,11 +42,11 @@ public class TridotMeleeAttack extends AttackInstance{
         }
     }
 
-    private double distanceToStoredTargetSqr(LivingEntity target) {
+    public double distanceToStoredTargetSqr(LivingEntity target) {
         return target.distanceToSqr(lastTargetX, lastTargetY, lastTargetZ);
     }
 
-    private void storeTargetPosition() {
+    public void storeTargetPosition() {
         LivingEntity target = mob.getTarget();
         this.lastTargetX = target.getX();
         this.lastTargetY = target.getY();
