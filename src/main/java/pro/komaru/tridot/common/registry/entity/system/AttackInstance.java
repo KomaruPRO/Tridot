@@ -43,11 +43,11 @@ public abstract class AttackInstance{
     public abstract int preference(Entity target);
 
     public SoundEvent getPrepareSound() {
-        return SoundEvents.EMPTY;
+        return null;
     }
 
     public SoundEvent getAttackSound(){
-        return SoundEvents.EMPTY;
+        return null;
     }
 
     public void start(AttackSystemMob systemMob) {

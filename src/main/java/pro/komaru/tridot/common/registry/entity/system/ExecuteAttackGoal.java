@@ -55,7 +55,7 @@ public class ExecuteAttackGoal extends Goal{
         this.chosenAttack.start(attackableMob);
 
         Level level = this.mob.level();
-        if(level != null){
+        if(level != null && this.chosenAttack.getPrepareSound() != null){
             level.playSound(null, this.mob.blockPosition(), this.chosenAttack.getPrepareSound(), SoundSource.HOSTILE, 1.0F, 1.0F);
         }
     }
@@ -101,7 +101,7 @@ public class ExecuteAttackGoal extends Goal{
                         this.timer = this.chosenAttack.attackDuration;
                         this.chosenAttack.performAttack();
                         Level level = this.mob.level();
-                        if(level != null){
+                        if(level != null && this.chosenAttack.getAttackSound() != null){
                             level.playSound(null, this.mob.blockPosition(), this.chosenAttack.getAttackSound(), SoundSource.HOSTILE, 1.0F, 1.0F);
                         }
                     } else {
