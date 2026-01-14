@@ -8,7 +8,7 @@ import pro.komaru.tridot.common.registry.entity.*;
 import pro.komaru.tridot.common.registry.entity.system.*;
 
 public class TridotMeleeAttack extends AttackInstance{
-    private final float speedModifier;
+    public final float speedModifier;
     public int ticksUntilNextPathRecalc;
     public double lastTargetX, lastTargetY, lastTargetZ;
 
