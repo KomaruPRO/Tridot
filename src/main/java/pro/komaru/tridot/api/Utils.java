@@ -58,6 +58,7 @@ import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidType;
 import net.minecraftforge.fml.loading.*;
+import net.minecraftforge.items.*;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.server.ServerLifecycleHooks;
 import org.joml.*;
@@ -887,9 +888,7 @@ public class Utils {
 
         public static void giveLoot(ServerPlayer pPlayer, Collection<ItemStack> pItemStacks){
             for(ItemStack stack : pItemStacks){
-                if(!pPlayer.getInventory().add(stack)){
-                    pPlayer.drop(stack, false);
-                }
+                ItemHandlerHelper.giveItemToPlayer(pPlayer, stack);
             }
         }
 
