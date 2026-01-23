@@ -16,20 +16,27 @@ import javax.annotation.*;
 import java.util.function.Supplier;
 
 public class AddLootModifier extends LootModifier{
-    public static final Supplier<Codec<AddLootModifier>> CODEC = Suppliers.memoize(() -> RecordCodecBuilder.create(inst -> codecStart(inst).and(ResourceLocation.CODEC.fieldOf("loot_table").forGetter(m -> m.lootTable)).apply(inst, AddLootModifier::new)));
+    public static final Supplier<Codec<AddLootModifier>> CODEC = Suppliers.memoize(() ->
+    RecordCodecBuilder.create(inst -> codecStart(inst).and(inst.group(ResourceLocation.CODEC.fieldOf("loot_table").forGetter(m -> m.lootTable),
+    Codec.FLOAT.optionalFieldOf("chance", 1.0F).forGetter((m) -> m.chance))).apply(inst, AddLootModifier::new)));
 
     private final ResourceLocation lootTable;
+    private final float chance;
 
-    public AddLootModifier(LootItemCondition[] conditionsIn, ResourceLocation lootTable) {
+    public AddLootModifier(LootItemCondition[] conditionsIn, ResourceLocation lootTable, float chance) {
         super(conditionsIn);
         this.lootTable = lootTable;
+        this.chance = chance;
     }
 
     @Nonnull
     @Override
     protected ObjectArrayList<ItemStack> doApply(ObjectArrayList<ItemStack> generatedLoot, LootContext context) {
-        LootTable extraLoot = context.getLevel().getServer().getLootData().getLootTable(this.lootTable);
-        extraLoot.getRandomItemsRaw(context, LootTable.createStackSplitter(context.getLevel(), generatedLoot::add));
+        if(context.getRandom().nextFloat() <= chance){
+            LootTable extraLoot = context.getLevel().getServer().getLootData().getLootTable(this.lootTable);
+            extraLoot.getRandomItemsRaw(context, LootTable.createStackSplitter(context.getLevel(), generatedLoot::add));
+        }
+
         return generatedLoot;
     }
 
