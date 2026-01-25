@@ -202,7 +202,7 @@ publishing {
 
     repositories{
         maven{
-            url "https://maven.komaru.ru/repository/maven-releases/"
+            url "https://repo.komaru.studio/#/releases"
             credentials{
                 username "admin"
                 password System.getenv("maventoken")
