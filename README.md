@@ -12,7 +12,7 @@
 To install, add the following code to your `build.gradle`
 ```kotlin
 repositories {
-    maven { url = "https://maven.komaru.ru/repository/maven-releases" }
+    maven { url = "https://repo.komaru.studio/#/releases" }
 }
 
 dependencies {
