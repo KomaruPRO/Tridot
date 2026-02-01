@@ -2,26 +2,40 @@ package pro.komaru.tridot.client;
 
 import com.mojang.datafixers.util.*;
 import net.minecraft.client.*;
+import net.minecraft.client.gui.*;
 import net.minecraft.client.gui.screens.*;
+import net.minecraft.client.resources.language.*;
 import net.minecraft.network.chat.*;
 import net.minecraft.util.*;
 import net.minecraft.world.entity.player.*;
 import net.minecraft.world.inventory.tooltip.*;
 import net.minecraft.world.item.*;
 import net.minecraftforge.client.event.*;
+import net.minecraftforge.client.gui.overlay.*;
 import net.minecraftforge.event.*;
 import net.minecraftforge.eventbus.api.*;
+import org.spongepowered.asm.mixin.*;
 import pro.komaru.tridot.client.gfx.postprocess.*;
 import pro.komaru.tridot.client.model.render.item.bow.*;
 import pro.komaru.tridot.client.render.gui.particle.*;
 import pro.komaru.tridot.client.render.screenshake.*;
+import pro.komaru.tridot.common.config.*;
 import pro.komaru.tridot.common.registry.item.*;
 import pro.komaru.tridot.common.registry.item.components.*;
 import pro.komaru.tridot.util.struct.data.*;
 
 import java.util.*;
 
+import static pro.komaru.tridot.common.Events.GUI_ICONS_LOCATION;
+
 public class ClientEvents {
+
+    @SubscribeEvent
+    public static void handleArmorLevelOverlay(RenderGuiOverlayEvent.Pre e){
+        if (e.getOverlay() == VanillaGuiOverlay.ARMOR_LEVEL.type() && CommonConfig.PERCENT_ARMOR.get()) {
+            e.setCanceled(true);
+        }
+    }
 
     @SubscribeEvent
     public void onTooltipGatherComponents(RenderTooltipEvent.GatherComponents event) {
