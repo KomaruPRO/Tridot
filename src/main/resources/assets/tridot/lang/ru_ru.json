@@ -5,7 +5,7 @@
   "commands.tridot.skin.remove.single": "Облик снят у предмета игрока %s",
   "commands.tridot.skin.remove.multiple": "Облик снят у предмета %s игроков",
   "commands.tridot.skin.unknown": "Неизвестный облик",
-  "tooltip.tridot.total_armor": "Общий процент защиты %s",
+  "tooltip.tridot.total_armor": "Общий процент поглощения урона %s",
   "tooltip.tridot.value": "%s",
   "lore.tridot.skin": "Облик:",
   "enchantment.tridot.radius": "Радиус",
@@ -15,6 +15,7 @@
   "enchantment.tridot.overdrive": "Перегрев",
   "enchantment.tridot.overdrive.desc": "Уменьшает время отката",
   "attribute.tridot.projectile_damage": "Урон от снаряда",
+  "attribute.tridot.percent_armor": "Поглощение урона",
   "tooltip.tridot.applies_with_chance": "Применяется с шансом: %s",
   "tooltip.tridot.applies": "Накладывает: ",
   "tooltip.tridot.special_arrow": "Превращает обычную стрелу в ",
@@ -24,5 +25,7 @@
   "tooltip.tridot.applies_fullkit": "При полном комплекте: ",
   "tooltip.tridot.applies_to_target": "Накладывает на цель: ",
   "tooltip.tridot.applies_to_attacker": "Накладывает на атакующего: ",
-  "tooltip.tridot.applies_with_chance_target": "Накладывает с шансом %s на цель: "
+  "tooltip.tridot.applies_with_chance_target": "Накладывает с шансом %s на цель: ",
+  "tooltip.tridot.shield.block": "Блокирует %s от исходимого урона",
+  "tooltip.tridot.shield.time": "Может быть использовано %s"
 }
