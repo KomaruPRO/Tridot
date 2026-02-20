@@ -31,13 +31,13 @@ public abstract class AbstractTridotArrow extends AbstractArrow{
 
     public AbstractTridotArrow(EntityType<? extends AbstractArrow> pEntityType, Level worldIn, LivingEntity thrower, double baseDamage){
         super(pEntityType, thrower, worldIn);
-        this.baseDamage = baseDamage;
+        this.baseDamage = baseDamage == 0 ? 2 : baseDamage;
     }
 
     public AbstractTridotArrow(EntityType<? extends AbstractArrow> pEntityType, Level worldIn, LivingEntity thrower, ItemStack thrownStackIn, double baseDamage){
         super(pEntityType, thrower, worldIn);
         arrowItem = new ItemStack(thrownStackIn.getItem());
-        this.baseDamage = baseDamage;
+        this.baseDamage = baseDamage == 0 ? 2 : baseDamage;
     }
 
     public void doPostSpawn(){

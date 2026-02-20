@@ -55,15 +55,19 @@ public abstract class AbstractProjectile extends AbstractTridotArrow{
         return velocityBased;
     }
 
-    public void processVelocityDamage(LivingEntity thrower, Entity entity, DamageSource damagesource){
+    public void processVelocityDamage(int max, LivingEntity thrower, Entity entity, DamageSource damagesource){
         double velocity = this.getDeltaMovement().length();
-        int damage = Mth.ceil(Mth.clamp(velocity * this.baseDamage, 0, Integer.MAX_VALUE));
+        int damage = Mth.ceil(Mth.clamp(velocity * this.baseDamage, 0, max));
         if(this.isCritArrow()){
             long j = this.random.nextInt(damage / 2 + 2);
             damage = (int)Math.min(j + (long)damage, 2147483647L);
         }
 
         hurt(thrower, entity, damagesource, damage);
+    }
+
+    public void processVelocityDamage(LivingEntity thrower, Entity entity, DamageSource damagesource){
+        this.processVelocityDamage(Integer.MAX_VALUE, thrower, entity, damagesource);
     }
 
     @Override
