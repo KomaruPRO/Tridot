@@ -6,8 +6,8 @@ import net.minecraft.world.entity.*;
 import net.minecraft.world.level.*;
 import net.minecraft.world.level.block.state.*;
 import net.minecraft.world.level.material.*;
+import net.minecraft.world.phys.*;
 import net.minecraft.world.phys.shapes.*;
-import pro.komaru.tridot.util.phys.Vec3;
 
 import java.util.function.*;
 
@@ -24,8 +24,8 @@ public class RayCastContext{
     public CollisionContext collisionContext = CollisionContext.empty();
 
     public RayCastContext(){
-        this.startPos = Vec3.zero();
-        this.endPos = Vec3.zero();
+        this.startPos = Vec3.ZERO;
+        this.endPos = Vec3.ZERO;
     }
 
     public RayCastContext(Vec3 startPos, Vec3 endPos){

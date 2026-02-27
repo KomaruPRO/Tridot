@@ -1,11 +1,11 @@
 package pro.komaru.tridot.client.render.screenshake;
 
+import net.minecraft.world.phys.*;
 import pro.komaru.tridot.util.Tmp;
 import pro.komaru.tridot.util.math.ArcRandom;
 import pro.komaru.tridot.util.math.Interp;
 import net.minecraft.client.*;
 import net.minecraft.util.*;
-import pro.komaru.tridot.util.phys.Vec3;
 
 public class ScreenshakeInstance{
     public int progress;
@@ -20,7 +20,7 @@ public class ScreenshakeInstance{
     public boolean isFov = false;
     public boolean isFovNormalize = false;
 
-    public Vec3 vector = Vec3.zero();
+    public Vec3 vector = Vec3.ZERO;
 
     public static final ArcRandom random = Tmp.rnd;
 

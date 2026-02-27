@@ -7,6 +7,7 @@ import net.minecraft.core.*;
 import net.minecraft.server.level.*;
 import net.minecraft.util.Mth;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.*;
 import net.minecraftforge.client.event.ComputeFovModifierEvent;
 import org.jetbrains.annotations.NotNull;
 import pro.komaru.tridot.Tridot;
@@ -15,13 +16,11 @@ import pro.komaru.tridot.client.ClientTick;
 import pro.komaru.tridot.common.config.ClientConfig;
 import pro.komaru.tridot.common.networking.packets.*;
 import pro.komaru.tridot.util.Tmp;
-import pro.komaru.tridot.util.comps.phys.Pos3;
 import pro.komaru.tridot.util.math.ArcRandom;
 import pro.komaru.tridot.util.math.Mathf;
 import pro.komaru.tridot.util.math.raycast.RayCast;
 import pro.komaru.tridot.util.math.raycast.RayCastContext;
 import pro.komaru.tridot.util.math.raycast.RayHitResult;
-import pro.komaru.tridot.util.phys.Vec3;
 
 import java.util.ArrayList;
 
@@ -31,8 +30,8 @@ public class ScreenshakeHandler{
     public static float intensityPosition;
     public static float intensityFov;
     public static float intensityFovNormalize;
-    public static Vec3 intensityVector = Vec3.zero();
-    public static Vec3 intensityVectorOld = Vec3.zero();
+    public static Vec3 intensityVector = Vec3.ZERO;
+    public static Vec3 intensityVectorOld = Vec3.ZERO;
 
     public static ArcRandom rand = Tmp.rnd;
 
@@ -44,15 +43,15 @@ public class ScreenshakeHandler{
         }
 
         boolean cameraUpdate = false;
-        Vec3 pos = Vec3.from(camera.getPosition());
+        Vec3 pos = camera.getPosition();
         Vec3 cameraPos = pos;
 
         if(intensityPosition > 0){
-            pos = intensityPosVec(pos).cpy();
+            pos = intensityPosVec(pos);
             cameraUpdate = true;
         }
-        if(!intensityVector.equals(Vec3.zero()) && !intensityVectorOld.equals(Vec3.zero())){
-            pos = intensityVec(pos).cpy();
+        if(!intensityVector.equals(Vec3.ZERO) && !intensityVectorOld.equals(Vec3.ZERO)){
+            pos = intensityVec(pos);
             cameraUpdate = true;
         }
 
@@ -60,34 +59,34 @@ public class ScreenshakeHandler{
             Level level = Tridot.PROXY.getLevel();
             if(level != null){
                 RayHitResult hitResult = RayCast.getHit(level, new RayCastContext(cameraPos, pos).setBlockShape(RayCastContext.Block.VISUAL));
-                double distance = Math.max(0f,cameraPos.cpy().sub(hitResult.getPos()).len() - 0.1f);
+                double distance = Math.max(0f,cameraPos.subtract(hitResult.getPos()).length() - 0.1f);
 
-                float dX = cameraPos.x() - hitResult.getPos().x();
-                float dY = cameraPos.y() - hitResult.getPos().y();
-                float dZ = cameraPos.z() - hitResult.getPos().z();
+                double dX = cameraPos.x() - hitResult.getPos().x();
+                double dY = cameraPos.y() - hitResult.getPos().y();
+                double dZ = cameraPos.z() - hitResult.getPos().z();
 
                 float pitch = (float) (Math.atan2(Math.sqrt(dZ * dZ + dX * dX), dY) + Math.PI);
                 float x = (float) (Math.sin(pitch) * Math.cos(Math.atan2(dZ, dX)) * distance);
                 float y = (float) (Math.cos(pitch) * distance);
                 float z = (float) (Math.sin(pitch) * Math.sin(Math.atan2(dZ, dX)) * distance);
-                pos = cameraPos.cpy().add(x,y,z);
+                pos = cameraPos.add(x,y,z);
             }
 
             camera.setPosition(pos.x(), pos.y(), pos.z());
         }
     }
 
-    private static @NotNull Vec3 intensityVec(Pos3 pos) {
-        return pos.cpypos().vec().add(intensityVectorOld.cpy().lerp(intensityVector,ClientTick.partialTicks)).vec();
+    private static @NotNull Vec3 intensityVec(Vec3 pos) {
+        return pos.add(intensityVectorOld.lerp(intensityVector,ClientTick.partialTicks));
     }
 
-    private static @NotNull Vec3 intensityPosVec(Pos3 pos) {
+    private static @NotNull Vec3 intensityPosVec(Vec3 pos) {
         float angleA = rand.nextFloat() * Mathf.pi * 2f;
         float angleB = rand.nextFloat() * Mathf.pi * 2f;
         float x = (float)(Math.cos(angleA) * Math.cos(angleB)) * randomizeOffset(intensityPosition);
         float y = (float)(Math.sin(angleA) * Math.cos(angleB)) * randomizeOffset(intensityPosition);
         float z = (float)Math.sin(angleB) * randomizeOffset(intensityPosition);
-        return pos.cpypos().vec().add(x,y,z).vec();
+        return pos.add(x,y,z);
     }
 
     public static void fovTick(ComputeFovModifierEvent event){
@@ -125,7 +124,7 @@ public class ScreenshakeHandler{
         float rotation = 0;
         float position = 0;
         float fov = 0;
-        Vec3 vector = Vec3.zero();
+        Vec3 vector = Vec3.ZERO;
         for(ScreenshakeInstance instance : INSTANCES){
             float update = instance.updateIntensity(camera);
             if(instance.isRotation)rotation = apply(instance, rotationNormalize, update);
@@ -145,7 +144,7 @@ public class ScreenshakeHandler{
             if(instance.isVector){
                 Vec3 scaledVector = instance.vector.scale(update * intensity);
                 if (instance.isNormalize) {
-                    vector = vector.add(scaledVector.sub(vector));
+                    vector = vector.add(scaledVector.subtract(vector));
                 } else {
                     vector = vector.add(scaledVector);
                 }

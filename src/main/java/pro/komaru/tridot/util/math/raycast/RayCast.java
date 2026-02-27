@@ -3,9 +3,7 @@ package pro.komaru.tridot.util.math.raycast;
 import net.minecraft.core.*;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.level.*;
-import net.minecraft.world.phys.AABB;
-import net.minecraft.world.phys.BlockHitResult;
-import pro.komaru.tridot.util.phys.Vec3;
+import net.minecraft.world.phys.*;
 
 import java.util.*;
 import java.util.function.*;
@@ -63,12 +61,12 @@ public class RayCast{
             }
 
             BlockPos blockPos = BlockPos.containing(X, Y, Z);
-            BlockHitResult blockHitResult = context.getBlockShape(level.getBlockState(blockPos), level, blockPos).clip(start.mcVec(), end.mcVec(), blockPos);
+            BlockHitResult blockHitResult = context.getBlockShape(level.getBlockState(blockPos), level, blockPos).clip(start, end, blockPos);
             if(blockHitResult != null && blockPosFilter.test(blockPos)){
                 boolean isBlock = !level.getBlockState(blockHitResult.getBlockPos()).isAir();
                 return new RayHitResult(new Vec3(oldX, oldY, oldZ)).setHitPos(new Vec3(X, Y, Z)).setBlockPos(blockHitResult.getBlockPos()).setDirection(blockHitResult.getDirection()).setBlock(isBlock).setEntities(entities);
             }
-            blockHitResult = context.getFluidShape(level.getFluidState(blockPos), level, blockPos).clip(start.mcVec(), end.mcVec(), blockPos);
+            blockHitResult = context.getFluidShape(level.getFluidState(blockPos), level, blockPos).clip(start, end, blockPos);
             if(blockHitResult != null){
                 return new RayHitResult(new Vec3(oldX, oldY, oldZ)).setHitPos(new Vec3(X, Y, Z)).setBlockPos(blockHitResult.getBlockPos()).setDirection(blockHitResult.getDirection()).setBlock(true).setEntities(entities);
             }

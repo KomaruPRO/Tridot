@@ -16,7 +16,9 @@ import pro.komaru.tridot.client.gfx.particle.*;
 import pro.komaru.tridot.client.gfx.particle.data.*;
 import pro.komaru.tridot.client.render.*;
 import pro.komaru.tridot.client.render.gui.overlay.*;
+import pro.komaru.tridot.client.render.screenshake.*;
 import pro.komaru.tridot.util.*;
+import pro.komaru.tridot.util.math.*;
 
 public class TestItem extends Item{
     public TestItem(Properties pProperties){
@@ -30,6 +32,7 @@ public class TestItem extends Item{
         Col particleColor = Col.pink;
         Col particleColorTo = Col.blue;
 
+        ScreenshakeHandler.add(new ScreenshakeInstance(10).intensity(1).fov(true).vec(true).interp(Interp.bounceIn));
         ParticleBuilder.create(TridotParticles.HEART.get())
             .setRenderType(TridotRenderTypes.ADDITIVE_PARTICLE)
 
