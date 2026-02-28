@@ -2,6 +2,7 @@ package pro.komaru.tridot.client.render.gui.overlay;
 
 import net.minecraftforge.api.distmarker.*;
 import net.minecraftforge.client.event.*;
+import net.minecraftforge.client.gui.overlay.*;
 import net.minecraftforge.event.*;
 import pro.komaru.tridot.util.struct.data.*;
 
@@ -15,6 +16,10 @@ public class OverlayHandler{
     }
 
     public static void renderInstances(RenderGuiOverlayEvent.Post event) {
+        if (event.getOverlay() != VanillaGuiOverlay.HOTBAR.type()) {
+            return;
+        }
+
         instanceSeq.forEach((inst) -> inst.onDraw(event));
     }
 
