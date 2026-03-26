@@ -1,4 +1,4 @@
-package stellar.qrix.neoforge.infrastructure.ui.element;
+package pro.komaru.tridot.client.ui.element;
 
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -6,8 +6,8 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.util.FormattedCharSequence;
-import stellar.qrix.neoforge.infrastructure.ui.model.RecomputeLayoutContext;
-import stellar.qrix.neoforge.infrastructure.ui.model.RecomputeMeasurementsContext;
+import pro.komaru.tridot.client.ui.model.RecomputeLayoutContext;
+import pro.komaru.tridot.client.ui.model.RecomputeMeasurementsContext;
 
 import java.util.List;
 

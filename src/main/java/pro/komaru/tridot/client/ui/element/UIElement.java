@@ -1,10 +1,10 @@
-package stellar.qrix.neoforge.infrastructure.ui.element;
+package pro.komaru.tridot.client.ui.element;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
-import stellar.qrix.neoforge.infrastructure.ui.enums.MouseButtonType;
-import stellar.qrix.neoforge.infrastructure.ui.model.RecomputeLayoutContext;
-import stellar.qrix.neoforge.infrastructure.ui.model.RecomputeMeasurementsContext;
+import pro.komaru.tridot.client.ui.enums.MouseButtonType;
+import pro.komaru.tridot.client.ui.model.RecomputeLayoutContext;
+import pro.komaru.tridot.client.ui.model.RecomputeMeasurementsContext;
 
 import java.util.List;
 

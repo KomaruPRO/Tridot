@@ -1,8 +1,8 @@
-package stellar.qrix.neoforge.infrastructure.ui.overlay.render;
+package pro.komaru.tridot.client.ui.overlay.render;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
-import stellar.qrix.neoforge.infrastructure.ui.overlay.OverlayHolder;
+import pro.komaru.tridot.client.ui.overlay.OverlayHolder;
 
 /**
  * Overlay renderer interface, which handles the rendering of different overlay holders.

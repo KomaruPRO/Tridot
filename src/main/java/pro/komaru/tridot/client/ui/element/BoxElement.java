@@ -1,12 +1,12 @@
-package stellar.qrix.neoforge.infrastructure.ui.element;
+package pro.komaru.tridot.client.ui.element;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.Nullable;
 import stellar.qrix.neoforge.QrixNeoforge;
-import stellar.qrix.neoforge.infrastructure.ui.enums.MouseButtonType;
-import stellar.qrix.neoforge.infrastructure.ui.model.TextureSource;
+import pro.komaru.tridot.client.ui.enums.MouseButtonType;
+import pro.komaru.tridot.client.ui.model.TextureSource;
 
 import java.util.function.Consumer;
 import java.util.function.Function;
@@ -112,7 +112,7 @@ public class BoxElement extends BaseElement<BoxElement> {
 
     @Override
     public void renderElement(Minecraft mc, GuiGraphics gui, float pt) {
-        onRender.accept(this);
+        if(onRender != null) onRender.accept(this);
 
         var source = currentTextureSource();
         if (source != null) {

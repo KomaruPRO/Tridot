@@ -1,10 +1,10 @@
-package stellar.qrix.neoforge.infrastructure.ui.overlay;
+package pro.komaru.tridot.client.ui.overlay;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
-import stellar.qrix.neoforge.infrastructure.ui.overlay.interfaces.Overlay;
+import pro.komaru.tridot.client.ui.overlay.interfaces.Overlay;
 
 import java.util.function.Consumer;
 

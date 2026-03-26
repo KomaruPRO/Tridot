@@ -1,10 +1,10 @@
-package stellar.qrix.neoforge.infrastructure.ui.overlay.render;
+package pro.komaru.tridot.client.ui.overlay.render;
 
 import lombok.RequiredArgsConstructor;
 import net.minecraft.client.Minecraft;
 import net.neoforged.neoforge.client.event.RenderGuiEvent;
-import stellar.qrix.neoforge.infrastructure.ui.overlay.OverlayHolder;
-import stellar.qrix.neoforge.infrastructure.ui.overlay.Overlays;
+import pro.komaru.tridot.client.ui.overlay.OverlayHolder;
+import pro.komaru.tridot.client.ui.overlay.Overlays;
 
 /**
  * Handles rendering all of overlays in provided registry by given overlay renderer.

@@ -1,4 +1,4 @@
-package stellar.qrix.neoforge.infrastructure.ui.screen;
+package pro.komaru.tridot.client.ui.screen;
 
 import lombok.NonNull;
 import net.minecraft.client.Minecraft;
@@ -6,10 +6,10 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Renderable;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
-import stellar.qrix.neoforge.infrastructure.ui.element.WindowElement;
-import stellar.qrix.neoforge.infrastructure.ui.enums.MouseButtonType;
-import stellar.qrix.neoforge.infrastructure.ui.model.RecomputeLayoutContext;
-import stellar.qrix.neoforge.infrastructure.ui.model.RecomputeMeasurementsContext;
+import pro.komaru.tridot.client.ui.element.WindowElement;
+import pro.komaru.tridot.client.ui.enums.MouseButtonType;
+import pro.komaru.tridot.client.ui.model.RecomputeLayoutContext;
+import pro.komaru.tridot.client.ui.model.RecomputeMeasurementsContext;
 
 public abstract class UIScreen extends Screen {
     private WindowElement origin;

@@ -1,4 +1,4 @@
-package stellar.qrix.neoforge.infrastructure.ui.model;
+package pro.komaru.tridot.client.ui.model;
 
 import lombok.Builder;
 import lombok.Value;

@@ -1,4 +1,4 @@
-package stellar.qrix.neoforge.infrastructure.ui.enums;
+package pro.komaru.tridot.client.ui.enums;
 
 public enum AlignmentDirection {
     ROW,

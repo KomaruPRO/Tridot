@@ -1,15 +1,15 @@
-package stellar.qrix.neoforge.infrastructure.ui.element;
+package pro.komaru.tridot.client.ui.element;
 
 import lombok.Getter;
 import lombok.Setter;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import stellar.qrix.infrastructure.functional.Pair;
-import stellar.qrix.neoforge.infrastructure.ui.enums.Alignment;
-import stellar.qrix.neoforge.infrastructure.ui.enums.AlignmentDirection;
-import stellar.qrix.neoforge.infrastructure.ui.enums.MouseButtonType;
-import stellar.qrix.neoforge.infrastructure.ui.model.RecomputeLayoutContext;
-import stellar.qrix.neoforge.infrastructure.ui.model.RecomputeMeasurementsContext;
+import pro.komaru.tridot.client.ui.enums.Alignment;
+import pro.komaru.tridot.client.ui.enums.AlignmentDirection;
+import pro.komaru.tridot.client.ui.enums.MouseButtonType;
+import pro.komaru.tridot.client.ui.model.RecomputeLayoutContext;
+import pro.komaru.tridot.client.ui.model.RecomputeMeasurementsContext;
 
 import java.util.Collections;
 import java.util.List;

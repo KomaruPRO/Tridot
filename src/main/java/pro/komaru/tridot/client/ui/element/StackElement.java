@@ -1,8 +1,8 @@
-package stellar.qrix.neoforge.infrastructure.ui.element;
+package pro.komaru.tridot.client.ui.element;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
-import stellar.qrix.neoforge.infrastructure.ui.enums.AlignmentDirection;
+import pro.komaru.tridot.client.ui.enums.AlignmentDirection;
 
 public class StackElement extends BaseElement<StackElement> {
     public StackElement(AlignmentDirection childrenAlignment) {

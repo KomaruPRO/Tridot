@@ -1,11 +1,11 @@
-package stellar.qrix.neoforge.infrastructure.ui.overlay;
+package pro.komaru.tridot.client.ui.overlay;
 
 import lombok.RequiredArgsConstructor;
 import org.jetbrains.kotlin.it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import stellar.qrix.infrastructure.exception.AlreadyDefinedException;
 import stellar.qrix.infrastructure.exception.NotFoundException;
-import stellar.qrix.neoforge.infrastructure.ui.overlay.interfaces.Overlay;
-import stellar.qrix.neoforge.infrastructure.ui.overlay.render.OverlayRenderer;
+import pro.komaru.tridot.client.ui.overlay.interfaces.Overlay;
+import pro.komaru.tridot.client.ui.overlay.render.OverlayRenderer;
 
 import java.util.Map;
 

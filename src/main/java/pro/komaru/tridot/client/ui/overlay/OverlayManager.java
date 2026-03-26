@@ -1,12 +1,11 @@
-package stellar.qrix.neoforge.infrastructure.ui.overlay;
+package pro.komaru.tridot.client.ui.overlay;
 
+import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import lombok.Getter;
-import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.neoforge.client.event.RenderGuiEvent;
-import org.jetbrains.kotlin.it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
-import stellar.qrix.infrastructure.exception.AlreadyDefinedException;
-import stellar.qrix.neoforge.infrastructure.ui.overlay.render.OverlayRenderHook;
-import stellar.qrix.neoforge.infrastructure.ui.overlay.render.OverlayRenderer;
+import net.minecraftforge.client.event.RenderGuiEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import pro.komaru.tridot.client.ui.overlay.render.OverlayRenderHook;
+import pro.komaru.tridot.client.ui.overlay.render.OverlayRenderer;
 
 import java.util.Map;
 
@@ -79,6 +78,6 @@ public class OverlayManager {
         var hook = new OverlayRenderHook(renderer, registry);
 
         if (renderHooks.putIfAbsent(namespaceId, hook) != null)
-            throw new AlreadyDefinedException(OverlayRenderer.class, namespaceId);
+            throw new IllegalStateException("OverlayRenderer already defined for namespace: "+namespaceId);
     }
 }
