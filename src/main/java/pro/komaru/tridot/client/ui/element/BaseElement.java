@@ -4,12 +4,12 @@ import lombok.Getter;
 import lombok.Setter;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
-import stellar.qrix.infrastructure.functional.Pair;
 import pro.komaru.tridot.client.ui.enums.Alignment;
 import pro.komaru.tridot.client.ui.enums.AlignmentDirection;
 import pro.komaru.tridot.client.ui.enums.MouseButtonType;
 import pro.komaru.tridot.client.ui.model.RecomputeLayoutContext;
 import pro.komaru.tridot.client.ui.model.RecomputeMeasurementsContext;
+import pro.komaru.tridot.util.struct.data.Pair;
 
 import java.util.Collections;
 import java.util.List;
@@ -479,7 +479,7 @@ public abstract class BaseElement<T extends BaseElement<T>> implements UIElement
             alignY = freeH;
         else alignY = 0;
 
-        return Pair.of(alignX, alignY);
+        return new Pair<>(alignX, alignY);
     }
 
     @SuppressWarnings("unchecked")
