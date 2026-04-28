@@ -19,6 +19,7 @@ public class TimedOverlayInstance implements OverlayInstance{
 
     public float fadeIn = 20;
     public float fadeOut = 20;
+    public float opacity = 1;
 
     public void tick(TickEvent.ClientTickEvent event) {
         int totalDuration = (int) (fadeIn + showTime + fadeOut);
@@ -45,21 +46,20 @@ public class TimedOverlayInstance implements OverlayInstance{
             int width = mc.getWindow().getGuiScaledWidth();
             int height = mc.getWindow().getGuiScaledHeight();
             float alpha = getAlpha(event);
-            float f = 0.1F;
 
-            renderOverlay(gui, f, alpha, width, height);
+            renderOverlay(gui, alpha, width, height);
             gui.pose().popPose();
         }
     }
 
-    private void renderOverlay(GuiGraphics gui, float f, float alpha, int width, int height){
+    private void renderOverlay(GuiGraphics gui, float alpha, int width, int height){
         RenderSystem.applyModelViewMatrix();
         Lighting.setupFor3DItems();
         RenderSystem.disableDepthTest();
         RenderSystem.depthMask(false);
         RenderSystem.enableBlend();
         RenderSystem.blendFuncSeparate(GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ONE, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ONE);
-        gui.setColor(f * alpha, f * alpha, f * alpha, alpha);
+        gui.setColor(opacity * alpha, opacity * alpha, opacity * alpha, alpha);
         gui.blit(location, 0, 0, 0, 0, 1920, 1080, width, height);
         gui.setColor(1.0F, 1.0F, 1.0F, 1.0F);
         RenderSystem.defaultBlendFunc();
@@ -96,6 +96,11 @@ public class TimedOverlayInstance implements OverlayInstance{
 
     public TimedOverlayInstance setShowTime(int time) {
         this.showTime = time;
+        return this;
+    }
+
+    public TimedOverlayInstance setOpacity(float opacity) {
+        this.opacity = opacity;
         return this;
     }
 

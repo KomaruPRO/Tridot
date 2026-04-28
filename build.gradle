@@ -1,6 +1,3 @@
-import java.nio.file.Files
-import java.nio.file.Paths
-
 buildscript{
     repositories{
         mavenLocal()
@@ -91,7 +88,7 @@ task modrinthUpload {
 group = "pro.komaru"
 version = "${version}"
 base{
-    archivesName = "tridot"
+    archivesName = "Tridot"
 }
 
 repositories{
@@ -102,22 +99,19 @@ repositories{
     maven { url = "https://modmaven.k-4u.nl"}
     maven { url = "https://cursemaven.com" }
     maven { url = "https://maven.blamejared.com" }
+    maven {
+        name = "Modrinth"
+        url = "https://api.modrinth.com/maven"
+    }
 }
 
 dependencies{
     minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
     compileOnly fg.deobf("top.theillusivec4.curios:curios-forge:5.10.0+1.20.1")
-    compileOnly fg.deobf("curse.maven:oculus-581495:5299671")
+    compileOnly fg.deobf("maven.modrinth:oculus:1.20.1-1.7.0")
     compileOnly fg.deobf("curse.maven:mmmmmmmmmmmm-225738:6608233")
     compileOnly fg.deobf("curse.maven:selene-499980:6740431")
-
-    runtimeOnly fg.deobf("mezz.jei:jei-1.20.1-forge:15.8.2.25")
-    runtimeOnly fg.deobf("curse.maven:jade-324717:5493390")
-    runtimeOnly fg.deobf("curse.maven:fusion-connected-textures-854949:5129294")
-    runtimeOnly fg.deobf("curse.maven:configured-457570:5180900")
-    runtimeOnly fg.deobf("curse.maven:model-gap-fix-676136:5200949")
-    runtimeOnly fg.deobf("curse.maven:embeddium-908741:5566632")
 }
 
 java.toolchain.languageVersion = JavaLanguageVersion.of(17)
