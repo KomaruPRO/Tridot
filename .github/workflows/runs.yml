@@ -33,7 +33,7 @@ jobs:
         run: |
           ./gradlew build --stacktrace
       - name: Increment version
-        if: ${{ github.repository == 'KomaruPRO/Tridot' }}
+        if: ${{ github.repository == 'komarustudio/Tridot' }}
         run: |
           # Read the current version
           current_version=$(grep '^version=' gradle.properties | cut -d'=' -f2)
@@ -60,7 +60,7 @@ jobs:
           sed -i "s/^version=.*/version=$new_version/" gradle.properties
           cat gradle.properties
       - name: Commit and Push Version Change
-        if: ${{ github.repository == 'KomaruPRO/Tridot' }}
+        if: ${{ github.repository == 'komarustudio/Tridot' }}
         run: |
           git pull
           git config --global user.email "actions@github.com"
@@ -80,12 +80,12 @@ jobs:
       - name: Publish Maven Version
         env:
           maventoken: ${{ secrets.MAVEN_PASSWORD }}
-        if: ${{ github.repository == 'KomaruPRO/Tridot' }}
+        if: ${{ github.repository == 'komarustudio/Tridot' }}
         run: |
           ./gradlew publish
 
       - name: Create GitHub Release
-        if: ${{ github.repository == 'KomaruPRO/Tridot' }}
+        if: ${{ github.repository == 'komarustudio/Tridot' }}
         uses: softprops/action-gh-release@v2
         with:
           tag_name: ${{ env.TAG_NAME }}
